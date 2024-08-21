@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="imagens/logo-bblt.png" sizes="any">
+    <title> InovaCare</title>
+
+    <!--Link dos ícones da barra de navegação-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!--link do arquivo css-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cg.css">
+    <link rel="stylesheet" href="css/footer.css">
+    
+
+    <!--link do arquivo js-->
+    <script src="js/barra_nav.js"></script>
+    <!-- link do js -->
+    
+    <!--link do js do carrossel 2 - redondo-->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css'>
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="menu">
+
+            <!--barra de navegação-->
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/index">
+                <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <div class="dropdown-content">
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
+                <li><a id="areas-link" class="agendamento" href="/especialidades">Agendamento</a></li>       
+                <li><a class="areas" href="/consultas">Área de consultas</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
+                <article class="texto-icon"><!--perfil--></article>
+            </ul>
+
+
+        </nav>
+
+    </header>
+
+    <section class="voltar">
+        <a href="/especialidades">
+        <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+        </a>
+       </section>
+
+
+    <section class="ttl-cg">
+        <section class="txt-cg">
+            <h3>Clínico Geral</h3>
+        </section>
+    </section>
+
+
+
+
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <p class="nome">Cleber Jr.</p>
+                <p class="idnt">CRM - SP 284692</p>
+                <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+            </section>
+        </section>
+    </section>
+    
+    <section class="overlay" id="overlay">
+        <section class="large-rectangle">
+            <section class="coluna-esq">
+                <img src="imagens/perfil.png" alt="Imagem" class="perfil2">
+                <h2>Sobre</h2>
+                <p>Cleber Jr</p>
+                <p>CRM - SP 284692</p>
+                <section class="barrinha"></section>
+                <h2>Formação</h2>
+                <p>Faculdade</p>
+                <section class="barrinha"></section>
+                <h2>Idiomas</h2>
+                <p>Fluente em inglês</p>
+            </section>
+            <section class="coluna-dir">
+                <section class="slider">
+                    <button class="slider-btn" id="prevBtn">&lt;</button>
+                    <table id="sliderTable">
+                        <tr>
+                            <th>21/08</th>
+                            <th>22/08</th>
+                            <th>23/08</th>
+                            <th>24/08</th>
+                        </tr>
+                        <tr>
+                            <td>10:00</td>
+                            <td>10:00</td>
+                            <td>10:00</td>
+                            <td>10:00</td>
+                        </tr>
+                        <tr>
+                            <td>11:00</td>
+                            <td>11:00</td>
+                            <td>11:00</td>
+                            <td>11:00</td>
+                        </tr>
+                    </table>
+                    <button class="slider-btn" id="nextBtn">&gt;</button>
+                </section>
+                <!-- Botão abaixo da tabela -->
+                 <a href="/consultas">
+                <button id="submitButton" class="submit-btn" >Agendar</button>
+                </a>
+            </section>
+        </section>
+    </section>
+
+    
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle2">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Marina Silva</p>
+                <p class="idnt">CRM - RJ 103456</p>
+                <p class="nota">4,8 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+            </section>
+        </section>
+    </section>
+
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle3">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Jorge Santos</p>
+                <p class="idnt">CRM - RJ 120383</p>
+                <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+            </section>
+        </section>
+    </section>
+
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle4">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Bruno Pacheco</p>
+                <p class="idnt">CRM - SP 612029</p>
+                <p class="nota">5 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+            </section>
+        </section>
+    </section>
+
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle5">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Jéssica Matos</p>
+                <p class="idnt">CRM - SP 389237</p>
+                <p class="nota">4,7 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+            </section>
+        </section>
+    </section>
+
+
+
+    
+    <footer class="footer">
+        <section class="footer-logo">
+            <img src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <ul>
+                <li><a href="#">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/especialidades">Especialidades</a></li>
+                <li><a href="/consultas">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
+    </footer>
+
+    <script src="js/cg.js"></script>
+
+
+
+</body>
+
+</html>

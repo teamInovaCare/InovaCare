@@ -4,20 +4,86 @@
     padding:0;
 }
 
-/* body{
-    min-height:100vh;
-    background-color: rgb(83, 235, 171);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+body{
+    background-color: white;
+} 
 
-} */
+  
+  /* Estilo para o submenu dropdown */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 12px;
+    position: absolute;
+    left: 65px;
+  }
 
-/*alinhar os ícones da barra de nav à direita*/
-nav{
-    display:flex;
-    justify-content: flex-end;   
+  
+  
+  .dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Mostrar o submenu quando o item de menu é hover */
+  .menu ul li:hover .dropdown-content {
+    display: block;
+  }
+  
+
+.barra {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.466);
 }
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.logo {
+    width: 120px;
+    margin-left: 300px;
+    cursor: pointer;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin-left: 230px;
+}
+
+.menu-list-direita {
+    margin-right: 100px;
+}
+
+.menu-list li {
+    margin-right: 30px;
+    font-size: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.menu-list a {
+    color: #20b3b2;
+}
+
 
 /*editando a barra, parte da ul*/
 nav ul{
@@ -29,264 +95,173 @@ nav ul{
     position:relative;
 }
 
-/*editando a barra- parte do li*/
-nav li{
-    height: 60px;
-    
+.icon-perfil {
+    font-size: 32px;
+    margin-left: 20px;
+    color: #20b3b2;
+    cursor: pointer;
 }
 
-/*editando a barra- parte dos links*/
-nav a{
-    height:100%;
-    padding: 0 30px;
-    text-decoration:none;
-    display:flex;
-    align-items: center;
-    color: white;
-    transition: color 0.3s;
-    border: none; /* Remove bordas dos links */
-    outline: none; /* Remove contornos */
-
+.icon-lupa {
+    font-size: 30px;
+    color: #20b3b2;
+    cursor: pointer;
 }
+
+.icon-perfil:hover,
+.icon-lupa:hover {
+    color: #f4a456; /* Cor laranja para hover */
+}
+
+
+
 
 /*aplicando efeito hover na barra- passar o mouse e ficar laranja*/
 nav a:hover{
-    color:#FFA34F;
+    color:#f4a456;
 }
 
-/*editando o sidebar da barra- hamburguer aberto*/
-.sidebar{
-    position:fixed;
-    top:0;
-    right: 0;
-    height: 100vh;
-    width:280px;
-    z-index: 999;
-    background-color:rgba(255, 255, 255, 0.2);
-    box-shadow: -10px 0 10px rgba(0,0,0,0.1);
-    display:none;
-    flex-direction:column;
-    align-items: flex-start;
-    justify-content: flex-start;
-   backdrop-filter: blur(10px);
-   
-
-}
 
 /*ajustando o tamanho dos ícones da barra*/
 .icon {
     font-size: 30px; /* Ajuste conforme necessário */
 }
-/* ________________________ */
 
-/*
-.indicador{
-    width:70px;
-    height:5px;
-    background-color: white;
-    position:absolute;
-    left:0;
-    transition:transform 0.3s ease;
-
-}*/
-/*
-nav ul li.ativo .indicador {
-    transform: translateX(calc(100% * 0));
+.banner-main{
+    position: relative;
 }
 
-nav ul li:nth-child(2).ativo ~ .indicador {
-    transform: translateX(calc(100% * 1));
-}
-
-nav ul li:nth-child(3).ativo ~ .indicador {
-    transform: translateX(calc(100% * 2));
-}
-
-nav ul li:nth-child(4).ativo ~ .indicador {
-    transform: translateX(calc(100% * 3));
-}
-*/
-
-/* __________________ */
-
-/*Bloco - Barra de Navegação*/
-
-nav{
-    margin: 0;
-    padding: 0;
+.banner {
     width: 100%;
-    height: 70px; /* Defina a altura desejada */
-    background-image: url('/imagens/block-nav.jpg');
-    background-size: cover; /* Cobre a largura total*/
-    background-position: top; /* Posiciona no topo */
-    background-repeat: no-repeat;
-    background-color: #4acdbe;
-    /* clip-path: polygon(0 0, 100% 0, 100% 15%, 0 15%); */
-    
 }
 
-/* ______________________ */
 
-
-/*Bloco2 - Barra branca (quem somos...)*/
-
-.nav2{
-
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 25px; /* Defina a altura desejada */
-    background-image: url('/imagens/sua imagem.jpg');
-    background-size: cover; /* Cobre a largura total*/
-    background-position: top; /* Posiciona no topo */
-    background-repeat: no-repeat;
-    background-color: #ffffff;
+.banner-txt{
+    position: absolute;
+    width: 600px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 190px;
 }
 
-/* ______________________ */
 
-/*Ajuste dos links - barra branca*/
-
-.nav2 li{
-    color: #000000; 
-    text-align: left; 
-    margin-left: 20px;
-}
-
-/* ______________________ */
-
-
-/* Imagem de fundo HOME-01 */
-
-header{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 18.1cm; /* Defina a altura desejada */
-    background-image: url('/imagens/New BLOCO.jpg');
-    background-size: cover; /* Cobre a largura total*/
-    background-position: center; /* Posiciona no topo */
-    background-repeat: no-repeat;
-}  
-
-/* _____________________ */
-
-/* Texto1 - Bem Vindo ao Inovacare */
-
-h1 {
-    color: #ffffff;
-    text-align: center;
-    font-size: 80px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-
-h3 {
-    color: #ffffff;
-    text-align: center;
-    hyphens: auto;
-    font-size: 30px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-}
-
-/* _____________________ */
-
-/*Botão - Confira nossos serviços*/
-
-header {
-    justify-content: center; /* Centraliza horizontalmente */
-    text-align: center; /* Centraliza verticalmente */
-    margin: 0;
-}
-
-.botao1 {
-    color: #ffffff; /* Define a cor do texto como preto */
-    background-color: #ff9330; /* Cor de fundo do botão */
-    border: 1px solid #ccc; /* Borda cinza clara */
-    padding: 20px 20px; /* Espaçamento interno do botão */
-    font-size: 20px; /* Tamanho da fonte */
-    cursor: pointer; /* Mostra o cursor de mão ao passar o mouse */
-    border-radius: 5px; /* Bordas arredondadas */
-    text-align: center; /* Garante que o texto dentro do botão esteja centralizado */
-}
-
-.botao1 :hover {
-    background-color: #ffad60; /* Cor de fundo ao passar o mouse */
-}
-
-/* _____________________ */
-
-
-/*Texto2 - Benefícios*/
-
-h2{
-    color: #ff9330;
-    text-align: center;
+.inicia {
+    font-size: 32px;
+    left: 200px;
+    top: 135px;
     font-size: 60px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #003f5c;
 }
 
-.h-text2{
-    color: #000000;
+.inicia1 {
+    font-size: 60px;
+    left: 195px;
+    top: 215px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #003f5c;
+}
+
+.inicia3 {
+    font-size: 35px;
+    left: 195px;
+    top: 250px;
+    font-family: sans-serif;
+    color: #003f5c;
+}
+
+.banner-botao {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    background-color:#f29434;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.banner-botao:hover {
+   background-color: #ff7b00;
+}
+
+
+
+.bnf1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.bnf-txts {
     text-align: center;
-    hyphens: auto;
-    font-size: 40px;
 }
 
-/* ____________________ */
+.bnf-txt1 {
+    font-size: 50px;
+    font-family: sans-serif;
+    color:#003f5c;
+    display: flex; 
+    justify-content: center;
+}
 
-/*Ícones e texto - Benefícios*/
-
-    /* width: 10px;
-    height: 10px;
-    background-image: url('/imagens/icon1-beneficios.webp');
-    background-repeat: no-repeat; */
-
-
-
-.grid-master-bene{
-    display:grid;
-    grid-template-columns: 220px 220px 220px 220px;
-    grid-template-rows: 50px 50px;
-    column-gap: 300px;
-    row-gap: 100px;
-    margin: 100px;
-    padding-left: 10px;
-    
-    
-
-}   
-
-.img-beneficios{
-    height:150px;;
-    width:140px;
-    margin-top: 0.1px;
+.bnf-txt2 {
+    font-size: 25px;
+    color: #f29434;
+    margin-top: 15px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: justify;
+    display: flex;
+    justify-content: center;
 }
 
 
-p{
-    font-size: 12.5px;
-    text-align: left;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+
+
+.bnf2 {
+    display: flex;
+    justify-content: center; /* Centraliza os itens no container */
+    gap: 45px; /* Define a distância entre os retângulos */
+    margin: 60px;
+    }
     
-}
-
-/*
-.grid-esquerda{
-    display:grid;
-    align-items: left;
-    text-align: left;
-
-    
-}
-
-.grid-centro{
-    display:grid;
+.conjunto-bnf {
+    width: 260px; /* Mantém a largura dos retângulos */
+    padding: 20px;
+    border-radius: 8px;
+    background-color:#20b3b383;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    margin-top: 40px;
+    }
+    
+    .beneficio-titulo {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-family: sans-serif;
+        margin-top: 10px;
+    }
+    
+    .img-beneficios {
+        width: 80px;
+        margin-top: 15px;
+    }
+
+
+.bnf2-txt {
+    font-family: sans-serif;
 }
 
-*/
 
 
 
@@ -296,19 +271,32 @@ p{
 /* Títulos - Carrossel 1 & 2 */
 .gridm-carrossel{
     display:grid;
-    grid-template-columns: 320px 320px;
+    grid-template-columns: 670px 670px;
     grid-template-rows: 20px 20px;
     column-gap: 500px;
     row-gap: 90px;  
-    /* margin: 20px;
-    padding-left: 10px; */
 }
 
 .ttl-carrossel{
+    text-align: center;
+    position: relative;
+    font-family:sans-serif;
+    margin-top: 20px;
+    font-size: 60px;
+    left: 600px;
+    margin-top: 100px;
+    width: 700px;
+    color: #003f5c
+}
+.ttl-carrossel2{
+    margin-top:300px;
     font-size: 30px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 40%;
-    margin-right: 40%;
+    position: relative;
+}
+
+.colorido {
+    color: #20b3b2;
 }
 
 
@@ -317,39 +305,37 @@ p{
 /* carrossel 1 - Redondo */
 
 .swiper-width {
-    margin-left: 10px;
-    width: 40%;
+    margin: 0 auto; /* Centraliza o slider */
+    width: 80%; /* Aumenta a largura do slider */
     overflow: hidden;
     text-align: center;
     padding: 50px 0;
-  
-  }
-  
-  .swiper-width .swiper-area {
-    max-width: 1393px;
-    margin: auto;
-  }
-  
-  .swiper-width .swiper-area .swiper-container {
-    margin-left: -50%;
-    width: 200%;
+    margin-top: 100px;
+}
+
+.swiper-width .swiper-area {
+    max-width: 100%; /* Ajusta a largura máxima */
+}
+
+.swiper-width .swiper-area .swiper-container {
+    margin: 0 auto; /* Centraliza o container do swiper */
+    width: 100%; /* Define a largura para 100% */
     position: relative;
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-button-next {
-    right: 32%;
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-button-prev {
-    left: 32%;
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-slide {
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-button-next {
+    right: 5%; /* Ajusta a posição do botão próximo */
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-button-prev {
+    left: 5%; /* Ajusta a posição do botão anterior */
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-slide {
     position: relative;
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-slide span {
-    
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-slide span {
     width: 100%;
     display: block;
     position: relative;
@@ -361,147 +347,73 @@ p{
     margin-top: 0px;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
-  
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-slide img {
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-slide img {
     width: 100%;
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-slide img a {
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-slide img a {
     display: block;
-  }
-  
-  .swiper-width .swiper-area .swiper-container .swiper-slide img a img {
+}
+
+.swiper-width .swiper-area .swiper-container .swiper-slide img a img {
     width: 100%;
-  }
-
-
-
-
-
-/* Carrossel 2 - Quadrado */
-
-.container{
-    padding: 2rem;
 }
 
-.slider-wrapper{
-    position: relative;
-    max-width: 10cm;
-    margin-left: 30cm;
-}
-
-.slider{
+.agnd1 {
     display: flex;
-    height: 300px;
-    width: 10cm;
-    overflow-x: hidden;
-    box-shadow: 0 1.5rem 3rem -0.7rem hsla(0, 0%, 0%, 0.25);
-    border-radius: 0.5rem;
+    justify-content: center;
+    margin-top: 50px;
+    margin-top: 100px;
 }
 
-.slider img{
-    flex: 1 0 100%;
-    height: 300px;
-    width: 500px;
-    scroll-snap-align: start;
-    object-fit: cover;
+.agnd-txts {
+    text-align: center;
 }
 
-.slider-nav{
+.agnd-txt1 {
+    font-size: 50px;
+    font-family: sans-serif;
+    color: #003f5c;
+    display: flex; 
+    justify-content: center;
+}
+
+.agnd-txt2 {
+    font-size: 25px;
+    color: #f29434;
+    margin-top: 15px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-align: justify;
     display: flex;
-    column-gap: 1rem;
-    position: absolute;
-    bottom: 1.25rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.slider-nav a{
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background-color: #fff;
-    opacity: 0.75;
-    transition: opacity ease 250ms;
-}
-
-.slider-nav a:hover{
-    opacity: 1;
-}
-
-
-/* __________________________ */
-
-
-/*Início da formatação das instruçoes de agndaento*/
- 
-/*\edição da imagem das instruções de agendamento*/
- 
- 
-/* .instrucoes-agendamento{ */
- 
-    /* float: left;         Alinha a imagem à esquerda */
-    /* margin-left: -700px;  Move a imagem 30px para a esquerda, ajuste conforme necessário */
-    /* margin-top: -350px;   Move a imagem 20px para cima */
-    /* margin-right: 20px;   */
-   
-   
-/* } */
- 
- 
-/*Edição dos textos e section geral das instruções de agendamento*/
-/* .agendamento-home{
-    text-align: center;
-    font-size: 20px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
- 
-} */
-
-
-
-/* __________________ */
-
-/* Título - Onde atuamos? */
-
-.h-before.footer{
-    color: #ff9330;
-    text-align: center;
-    font-size: 40px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    justify-content: center;
 }
 
 
 
-.h-text3{
-    color: #000000;
-    text-align: center;
-    hyphens: auto;
-    font-size: 30px;
-}
+.agnd2 {
 
-
-/* _____________________ */
-
-
-
-
-/* Footer */
-
-.h-text1{
-    text-align: left;
-}
-
-footer{
-    margin: 0;
-    padding: 0;
+    justify-content: center; /* Centraliza o contêiner das imagens */
     width: 100%;
-    height: 170px; /* Defina a altura desejada */
-    background-image: url('/imagens/block-nav.jpg');
-    background-size: cover; /* Cobre a largura total*/
-    background-position:unset; /* Posiciona no rodapé */
-    background-repeat: no-repeat;
-    background-color: #17B4B5;
+    margin-top: 50px;
+}
+
+.agnd-imgs {
+    display: flex;
+    justify-content: space-between; /* Garante que as imagens fiquem em extremidades opostas */
+    width: 100%; /* O contêiner ocupa toda a largura disponível */
+    max-width: 1200px; /* Limite a largura máxima, se necessário */
+    padding: 0 50px; /* Espaçamento interno */
+    margin-left: 250px;
+}
+
+.instrucao-img {
+   width: 500px;
+}
+
+.telemed-img {
+    width: 350px;
+    height: 350px;
 }

@@ -5,18 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> InovaCare </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="imagens/logo-bblt.png" sizes="any">
+    <title> InovaCare</title>
 
     <!--Link dos ícones da barra de navegação-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!--link do arquivo css-->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer.css">
 
     <!--link do arquivo js-->
-    <script src="js/barra_nav.js"></script> 
+    <script src="js/barra_nav.js"></script>
     <!-- link do js -->
-
+    
     <!--link do js do carrossel 2 - redondo-->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css'>
 
@@ -26,118 +29,110 @@
 
     <header>
 
-        <nav>    
-            
-             <ul ><!--barra de navegação-->
-                 
-                <!--Espaço para a logo-->
-                <li></li><a href="#">Logo</a></li>
-  
-                <!--Botão de pesquisa-->
-                <li><a href="#">
-                    <article class="icon"><i class="bi bi-search"></i></article>
-                    <article class="texto"><!--pesquisa--></article></a>
-                </li>
+        <nav class="menu">
 
-                <!--Botão para acessar o perfil-->
-                <li><a href="#">
-                    <article class="icon"><i class="bi bi-person-circle"></i></article>
-                    <article class="texto"><!--perfil--></article></a>
-                </li>
+            <!--barra de navegação-->
 
-                <!--Botão para abrir o hambúrguer (home,agendadas,histórico, cancelar)-->
-                <li onclick=showSidebar()><a href="#">
-                    <article class="icon"><i class="bi bi-list"></i></article></a>
-                </li>
-                
-                <!--<article class="indicador"></article>-->
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/index">
+                <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <div class="dropdown-content">
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
+                <li><a id="areas-link" class="agendamento" href="/especialidades">Agendamento</a></li>       
+                <li><a class="areas" href="/consultas">Área de consultas</a></li>
             </ul>
 
-            <!--hambúrguer aberto-->
-            <ul class="sidebar">
 
-                <li onclick=hideSidebar()><a href="#"><i class="bi bi-x-lg"></i></a></li><!--botão de fechar hambúrguer-->
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Histórico</a></li>
-                <li><a href="#">Agendadas</a></li>
-                <li><a href="#">Cancelar </a></li>
-
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil" onclick="toggleSidebar()"><i class="bi bi-person-circle"></i></article>
+                <article class="texto-icon"><!--perfil--></article>
             </ul>
 
+
         </nav>
-
-        <!--nav2 - quem somos, áreas abrangentes...-->
-        <nav class="nav2">
-            <li class="li2"></li><a href="#">Quem somos</a></li>
-            <li class="li3"></li><a href="#">Áreas abrangentes</a></li>
-            <li class="li4"></li><a href="#">Contato</a></li>
-            <li class="li5"></li><a href="#">FAQ</a></li>
-            
-        </nav>
-
-        <!--texto1 - bem vindo-->
-        <section>
-            <br><br><br><br>
-    
-            <h1 class="h-title"> Bem Vindo ao InovaCare </h1> <br><br>
-            <h3 class="h-text">Oferecemos atendimento médico e terapêutico através das <br>
-                modalidades de atendimento online domiciliar. Nosso objetivo é <br>
-            promover o acesso aos mais diversos serviços de Saúde. <br><br>
-    
-            Aqui você escolhe o profissional que precisa e nós cuidamos de você! <br>
-            Conectamos profissionais da saúde e pacientes através da tecnologia</h3> <br><br><br>
-    
-            <button class="botao1">Confira nossos seviços</button><br><br>
-        </section>
-
 
     </header>
 
-    <!--texto2/ ícone - benefícios-->   
-    
-    <section><!--Section geral-->
-        <br><br><br><br>
+    <aside id="sidebar">
+        <a href="/" id="sair-link">Sair</a>
+    </aside>
 
-        <h2>Benefícios</h2> 
-        <br><br>
-        <h3 class="h-text2">Ao optar pela InovaCare, você pode contar com diversas vantagens</h3>
+    <script src="js/sidebar.js"></script>
 
+    <section class="barra"> </section>
 
 
-        <section class="grid-master-bene">
+
+    <section class="banner-main">
+        <img class="banner" src="imagens/putini4.png" alt="" srcset="">
+        <article class="banner-txt">
+            <p class="inicia">Atendimento</p>
+            <p class="inicia1">Domiciliar</p>
+            <p class="inicia3">Oferecemos atendimento médico e terapêutico através das
+                modalidades de atendimento online domiciliar.</p>
+        </article>
+        <a href="/especialidades">
+        <button class="banner-botao">Conheça nossos serviços</button>
+        </a>
+    </section>
 
 
-        <section><!--Coluna da esquerda dos benefícios-->
-            <img class="img-beneficios" src="imagens/icon1-beneficios.webp" alt="">
-        <p>Segurança e confidencialidade em </p> <p>todas as consultas e informaçoes</p></section>
 
 
-        <section><!--Coluna do centro dos benefícios-->
+
+    <section class="bnf1">
+        <section class="bnf-txts">
+            <p class="bnf-txt1">Conheça os benefícios ao optar pela InovaCare</p>
+            <p class="bnf-txt2">Entregamos a você a nossa excelência e o cuidado que faz toda a diferença.</p>
+        </section>
+    </section>
+
+
+
+    <section class="bnf2">
+        <section class="conjunto-bnf">
+            <section class="juncao">
+                <img class="img-beneficios" src="imagens/icon1-beneficios.webp" alt="">
+                <h3 class="beneficio-titulo">Segurança</h3>
+                <p class="bnf2-txt">Segurança e confidencialidade em todas as consultas e informações</p>
+            </section>
+        </section>
+
+        <section class="conjunto-bnf">
             <img class="img-beneficios" src="imagens/icon2-beneficios.webp" alt="">
-        <p>Datas e horários que se </p><p> encaixam na sua rotina</p></section>
+            <h3 class="beneficio-titulo">Flexibilidade</h3>
+            <p class="bnf2-txt">Datas e horários que se encaixam na sua rotina</p>
+        </section>
 
-
-        <section><!--Coluna da direita dos benefícios-->
-        <img class="img-beneficios" src="imagens/icon3-beneficios.webp" alt="">
-        <p>Atendimento personalizado com</p><p>profissionais qualificados</p></section>
-
-
+        <section class="conjunto-bnf">
+            <img class="img-beneficios" src="imagens/icon3-beneficios.webp" alt="">
+            <h3 class="beneficio-titulo">Atendimento</h3>
+            <p class="bnf2-txt">Atendimento personalizado com profissionais qualificados</p>
+        </section>
     </section>
 
-    </section>
+
 
 
     <!-- Títulos - Carrossel 1 & 2 -->
     <section class="gridm-carrossel">
 
         <section> <!--título carrosel1 - redondo-->
-            <h2 class="ttl-carrossel"> Confira nossos serviços </h2>
+            <h2 class="ttl-carrossel"> Confira nossos <span class="colorido">serviços</span> </h2>
         </section>
-        
-        <section> <!--título carrosel2 - quadrado-->
-            <h2 class="ttl-carrossel"> Profissionais melhor avaliados </h2>
-        </section>
-    
+
     </section>
 
 
@@ -146,154 +141,129 @@
     <!-- Carrossel 2 - Redondo -->
 
     <section class="swiper-width">
-      
+
         <section class="swiper-area">
-    
+
             <section class="swiper-container">
-        
-              <section class="swiper-wrapper">
-                <section class="swiper-slide"><img src="imagens/carrossel1/carrossel.png" alt="foto-1" /></section>
-                <section class="swiper-slide"><img src="imagens/carrossel1/carrossel2.png" alt="foto-2" /></section>
-                <section class="swiper-slide"><img src="imagens/carrossel1/carrossel3.png" alt="foto-3" /></section>
-                <section class="swiper-slide"><img src="imagens/carrossel1/carrossel4.png" alt="foto-4" /></section>
-                <section class="swiper-slide"><img src="imagens/carrossel1/carrossel5.png" alt="foto-5" /></section>
-              </section>
-        
-              <!-- Add Pagination -->
-              <section class="swiper-button-next"></section>
-              <section class="swiper-button-prev"></section>
-        
+
+                <section class="swiper-wrapper">
+                    <section class="swiper-slide"><img src="imagens/carrossel1/1.png" alt="foto-1" />
+                    </section>
+                    <section class="swiper-slide"><img src="imagens/carrossel1/2.png" alt="foto-2" />
+                    </section>
+                    <section class="swiper-slide"><img src="imagens/carrossel1/3.png" alt="foto-3" />
+                    </section>
+                    <section class="swiper-slide"><img src="imagens/carrossel1/4.png" alt="foto-4" />
+                    </section>
+                    <section class="swiper-slide"><img src="imagens/carrossel1/5.png" alt="foto-5" />
+                    </section>
+                    <section class="swiper-slide"><img src="imagens/carrossel1/6.png" alt="foto-6" />
+                    </section>
+                </section>
+
+                <!-- Add Pagination -->
+                <section class="swiper-button-next"></section>
+                <section class="swiper-button-prev"></section>
+
             </section><!--swiper-container-->
-    
+
         </section><!--swiper-area-->
-    
-      </section>
-    
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+
+    </section>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.js'></script>
-    
+
     <script>
-    
-    var swiper = new Swiper('.swiper-container', {
-    
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev',
-      slidesOffsetBefore: 0,
-      speed: 800,
-      spaceBetween: '-3%',
-      slidesPerView: 4,
-      centeredSlides: true,
-      paginationClickable: true,
-      effect: 'coverflow',
-      coverflow: {
-        rotate: 0,
-        stretch: 0,
-        depth: 50,
-        modifier: 3,
-        slideShadows : false
-      },
-      loop: true,
-      simulateTouch: true,
-      mousewheelControl: false
-    
-    });
-    
-    $(document).ready(function(){
-      
-      $('.swiper-wrapper .swiper-slide:not(.swiper-slide-active)').on('click', function(e){
-        e.preventDefault();
-        swiper.slideTo($(this).index());
-        return false;
-      });
-    
-    });
-    
+
+        var swiper = new Swiper('.swiper-container', {
+
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesOffsetBefore: 0,
+            speed: 800,
+            spaceBetween: '-3%',
+            slidesPerView: 4,
+            centeredSlides: true,
+            paginationClickable: true,
+            effect: 'coverflow',
+            coverflow: {
+                rotate: 0,
+                stretch: 0,
+                depth: 50,
+                modifier: 3,
+                slideShadows: false
+            },
+            loop: true,
+            simulateTouch: true,
+            mousewheelControl: false
+
+        });
+
+        $(document).ready(function () {
+
+            $('.swiper-wrapper .swiper-slide:not(.swiper-slide-active)').on('click', function (e) {
+                e.preventDefault();
+                swiper.slideTo($(this).index());
+                return false;
+            });
+
+        });
+
     </script>
 
-    <!-- Fim do Carrossel 2 - Redondo -->
-
-
-
-
-
-    <!-- Carrossel2 - Quadrado -->
-    <section class="container">
-
-        <section class="slider-wrapper">
-
-            <section class="slider">
-
-                <img id="slide-1" src="imagens/carrossel2/profissional.png" alt="">
-                <img id="slide-2" src="imagens/carrossel2/profissional2.png" alt="">
-                <img id="slide-3" src="imagens/carrossel2/profissional3.png" alt="">
-                <img id="slide-4" src="imagens/carrossel2/profissional4.png" alt="">
-                <img id="slide-5" src="imagens/carrossel2/profissional5.png" alt="">
-
-            </section>
-
-
-
-            <section class="slider-nav"> <!-- Barra de Navegaçao -->
-
-                <a href="#slide-1"></a>
-                <a href="#slide-2"></a>
-                <a href="#slide-3"></a>
-                <a href="#slide-4"></a>
-                <a href="#slide-5"></a>
-
-                
-            </section>
-
-
-
-
-
-            
+    <section class="agnd1">
+        <section class="agnd-txts">
+            <p class="agnd-txt1">Como funciona o agendamento</p>
+            <p class="agnd-txt2">Veja como é simples fazer o agendamento de suas consultas na modalidade que desejar</p>
         </section>
-
-        <!--Instruçoes de agendamento da home- depois do carrossel da home-->
-        <!-- <section class="agendamento-home">
- 
-            <h2>Como funciona o agendamento</h2><br>
- 
-            <p class="txt-instrucoes"><strong>Veja como é simples fazer o agendamento de</strong> </p>
-            <p><strong>suas consultas na modalidade que desejar</strong> </p><br><br>
- 
-       
-            <img class= "instrucoes-agendamento" src="imagens/instrucoes-agenda1-home.png"> -->
- 
-           <!--<section>
-            <img class="instrucoes-agendamento2" src="imagens/instrucoes-agendamento7.png">
-       
-           </section>-->
- 
     </section>
-        
-        
-        <!--Texto - Onde atuamos-->
-        <section>
-            <br><br><br><br><br><br><br><br><br><br>
 
-            <h2 class="h-before.footer">Quais as regiões atendemos?</h2>
 
-            <h3 class="h-text3"> Nós atendemos por todo o Brasil, conectando profissionais de outros estados com você, no conforto de sua casa, com a tecnologia.</h3>
-
-        </section>
 
 
     </section>
 
+    <!--Instruçoes de agendamento da home- depois do carrossel da home-->
 
-    <footer>
-        <h3 class="h-text1">Contato: </h3> 
-        
-        <br><br>
 
-        <h3 class="h-text1">contato@inocacare.com.br</h3>
-        <h3 class="h-text1">+55 (11) 4002-8922 </h3>
+    <section class="agnd2">
+        <section class="agnd-imgs">
+            <img class="instrucao-img" src="imagens/instrucao2.1.png" alt="Instruções">
+            <img class="telemed-img" src="imagens/telemed1.png" alt="Telemedicina">
+        </section>
+    </section>
+
+
+
+
+    <footer class="footer">
+        <a href="/index">
+        <section class="footer-logo">
+            <img src="imagens/logo-bblt.png" alt="Logo da Empresa">
+        </a>
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <ul>
+                <li><a href="#">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/especialidades">Especialidades</a></li>
+                <li><a href="/consultas">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
     </footer>
-                
+
 </body>
 
 

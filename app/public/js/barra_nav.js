@@ -30,3 +30,5 @@ function updateIndicator() {
 
 links.forEach(link => link.addEventListener("click", ativarLink));
 
+
+

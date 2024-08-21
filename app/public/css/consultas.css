@@ -1,0 +1,315 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background-color: white;
+    font-family: sans-serif;
+} 
+
+  
+  /* Estilo para o submenu dropdown */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 12px;
+    position: absolute;
+    left: 65px;
+  }
+
+  
+  
+  .dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Mostrar o submenu quando o item de menu é hover */
+  .menu ul li:hover .dropdown-content {
+    display: block;
+  }
+  
+
+.barra {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.466);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+    width: 120px;
+    margin-left: 300px;
+    cursor: pointer;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin-left: 230px;
+}
+
+.menu-list-direita {
+    margin-right: 100px;
+}
+
+.menu-list li {
+    margin-right: 30px;
+    font-size: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.menu-list a {
+    color: #328d84;
+}
+
+
+/*editando a barra, parte da ul*/
+nav ul{
+    width: 100%;
+    list-style:none;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    position:relative;
+}
+
+.icon-perfil {
+    font-size: 32px;
+    margin-left: 20px;
+    color: #109ea6;
+    cursor: pointer;
+}
+
+.icon-lupa {
+    font-size: 30px;
+    color: #109ea6;
+    cursor: pointer;
+}
+
+.icon-perfil:hover,
+.icon-lupa:hover {
+    color: #ff7f50; /* Cor laranja para hover */
+}
+
+
+
+
+/*aplicando efeito hover na barra- passar o mouse e ficar laranja*/
+nav a:hover{
+    color:#FFA34F;
+}
+
+
+/*ajustando o tamanho dos ícones da barra*/
+.icon {
+    font-size: 30px; /* Ajuste conforme necessário */
+}
+
+.voltar {
+    margin-left: 60px;
+    margin-top: 60px;
+}
+
+.botao-voltar {
+    width: 50px;
+    cursor: pointer;
+}
+
+
+.ttl-consultas {
+    margin-left: 300px;
+    margin-top: 40px;
+}
+
+.ttl-consultas h3 {
+    font-size: 45px;
+    font-family: sans-serif;
+    color: #f29434;
+}
+
+
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1500px;
+    height: 900px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: relative;
+    margin-top: 100px;
+}
+
+.tabs {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+}
+
+.tab {
+    margin-right: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-block;
+}
+
+.tab.active-tab {
+    color: #073470;
+    text-decoration: underline;
+}
+
+.retangulo-container {
+    display: none;
+    margin-top: 60px;
+}
+
+
+.retang1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.retangCg {
+    box-sizing: border-box;
+    background: #ebebeb;
+    border-radius: 16px;
+    margin-top: 20px;
+    width: 1300px;
+    cursor: pointer;
+    padding: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.content {
+    display: flex;
+    align-items: center; /* Alinha a imagem e os textos ao centro verticalmente */
+}
+
+.perfil1 {
+    width: 110px;
+    height: 110px;
+    margin-right: 20px; /* Espaçamento entre a imagem e os textos */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column; /* Empilha os textos verticalmente */
+}
+
+.text-container p {
+    margin-bottom: 10px;
+}
+
+.expandable-content {
+    display: none;
+    padding: 20px;
+    background: #ebebeb;
+    border-top: 1px solid #ddd;
+}
+
+.expandable-content h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #003f5c;
+}
+
+.retangCg.expanded .expandable-content {
+    display: block;
+    margin-top: 20px;
+}
+
+.retangCg.expanded {
+    height: auto;
+}
+
+
+.nota-img {
+    width: 15px;
+}
+
+
+.info-sections {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-coluna-esq {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-img {
+    width: 20px;
+    object-fit: cover;
+}
+
+.avalia-img {
+    width: 15px;
+    object-fit: cover;
+    margin-bottom: 4px;
+    margin-left: -5px;
+}
+
+.info-coluna-dir {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.cancelar-consulta {
+    padding: 10px 20px;
+    background-color: #f29434;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cancelar-consulta:hover {
+    background-color: #ff7b00;
+}
+
+.ttl-nota {
+    color: #003f5c;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+}

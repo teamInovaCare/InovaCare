@@ -1,0 +1,75 @@
+body {
+    background-image: url('../imagens/rayssa-fundo.jpeg'); 
+    background-size: cover; /* Faz a imagem cobrir todo o fundo da página */
+    background-position: center; /* Centraliza a imagem no fundo */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    height: 1000px;
+}
+
+.voltar {
+    margin-left: 60px;
+    margin-top: 60px;
+}
+
+.botao-voltar {
+    width: 50px;
+    cursor: pointer;
+}
+
+.ttl-especialidades {
+    margin-left: 300px;
+    margin-top: 40px;
+}
+
+.txt-especialidades {
+    font-size: 45px;
+    font-family: sans-serif;
+}
+
+
+.especialidades {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaçamento entre os retângulos */
+    padding: 20px;
+    margin-left: 130px;
+}
+
+
+.retangulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border-radius: 8px; /* Bordas arredondadas */
+    background-color: #f9f9f9; /* Cor de fundo dos retângulos */
+    width: 500px;
+    height: 40px;
+    cursor: pointer;
+
+}
+
+.imagem-esquerda {
+    width: 60px; 
+    height: auto;
+    margin-right: 35px; /* Espaço entre a imagem esquerda e o texto */
+    margin-bottom: 5px;
+}
+
+.texto {
+    flex-grow: 1;
+    text-align: left; /* Alinha o texto à esquerda */
+    font-size: 20px;
+    color: #333; /* Cor do texto */
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+.imagem-direita {
+    width: 20px; 
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+}

@@ -1,0 +1,351 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: white;
+}
+
+  
+  /* Estilo para o submenu dropdown */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 12px;
+    position: absolute;
+    left: 65px;
+  }
+
+  
+  
+  .dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Mostrar o submenu quando o item de menu é hover */
+  .menu ul li:hover .dropdown-content {
+    display: block;
+  }
+  
+
+.barra {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 0, 0, 0.466);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+    width: 120px;
+    margin-left: 300px;
+    cursor: pointer;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin-left: 230px;
+}
+
+.menu-list-direita {
+    margin-right: 100px;
+}
+
+.menu-list li {
+    margin-right: 30px;
+    font-size: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.menu-list a {
+    color: #328d84;
+}
+
+
+/*editando a barra, parte da ul*/
+nav ul{
+    width: 100%;
+    list-style:none;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    position:relative;
+}
+
+.icon-perfil {
+    font-size: 32px;
+    margin-left: 20px;
+    color: #109ea6;
+    cursor: pointer;
+}
+
+.icon-lupa {
+    font-size: 30px;
+    color: #109ea6;
+    cursor: pointer;
+}
+
+.icon-perfil:hover,
+.icon-lupa:hover {
+    color: #ff7f50; /* Cor laranja para hover */
+}
+
+
+
+
+/*aplicando efeito hover na barra- passar o mouse e ficar laranja*/
+nav a:hover{
+    color:#FFA34F;
+}
+
+
+/*ajustando o tamanho dos ícones da barra*/
+.icon {
+    font-size: 30px; /* Ajuste conforme necessário */
+}
+
+
+
+.voltar {
+    margin-left: 60px;
+    margin-top: 60px;
+}
+
+.botao-voltar {
+    width: 50px;
+    cursor: pointer;
+}
+
+
+
+
+.ttl-cg {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    
+
+}
+
+.ttl-cg h3 {
+    font-size: 55px;
+    color: #003f5c;
+    font-family: sans-serif;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+.retangulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 65px;
+}
+
+.small-rectangle {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    width: 1300px;
+    height: 150px;
+    border-radius: 16px;
+}
+
+.perfil1 {
+    width: 110px;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+
+.infos {
+    margin-left: 15px;
+}
+
+.infos p {
+    margin-bottom: 10px; /* Ajuste o valor conforme necessário */
+}
+
+.infos p:last-child {
+    margin-bottom: 0; /* Remove o espaço extra após o último parágrafo */
+}
+
+.rectangle-text {
+    font-size: 18px;
+}
+
+.idnt {
+    font-size: 15px;
+}
+
+.nota {
+    display: flex;
+    align-items: center;
+}
+
+.nota-img {
+    width: 15px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    margin-left: 5px; /* Espaçamento entre a nota e a imagem */
+    margin-bottom: 3px;
+}
+
+
+
+.barrinha {
+    background-color: black;
+    width: 250px;
+    height: 0.5px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    z-index: 999;
+}
+
+.large-rectangle {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 850px;
+    height: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-family: sans-serif;
+}
+
+.perfil2 {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+
+.coluna-esq {
+    margin-left: 50px;
+}
+
+.coluna-esq p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.coluna-esq h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #003f5c;
+}
+
+.coluna-esq, .coluna-dir {
+    flex: 1;
+    min-width: 200px;
+}
+
+
+
+.coluna-dir {
+    display: flex;
+    flex-direction: column; /* Organiza os itens verticalmente */
+    justify-content: flex-start; /* Alinha os itens ao início da coluna */
+    align-items: center; /* Centraliza os itens na coluna */
+    margin-top: 220px;
+}
+
+.slider {
+    display: flex;
+    align-items: center;
+}
+
+.slider-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.slider-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#sliderTable {
+    margin: 0 10px;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+#sliderTable th, #sliderTable td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+#sliderTable th {
+    background-color: #f2f2f2;
+}
+
+.submit-btn {
+    margin-top: 20px; /* Espaçamento entre a tabela e o botão */
+    padding: 10px 20px;
+    background-color: #f29434;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.submit-btn:hover {
+    background-color: #ff7b00;
+}
+
+
+#sliderTable td.selected {
+    background-color: #d1e7dd;
+    color: #20b3b383;
+}
