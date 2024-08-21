@@ -2,6 +2,19 @@
     margin:0;
     padding:0;
 }
+
+.voltar {
+    margin-left: 60px;
+    margin-top: 60px;
+    position: absolute;
+}
+
+.botao-voltar {
+    width: 50px;
+    cursor: pointer;
+    position: absolute;
+}
+
 .Singup{
     background-image: linear-gradient(178.98deg,  rgba(16, 157, 166, 1),  rgba(23, 180, 181, 0.97), 
     rgba(47, 255, 230, 0.85));
