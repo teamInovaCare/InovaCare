@@ -29,37 +29,40 @@
     <header>
 
         <nav class="menu">
+    <!--barra de navegação-->
+    <!--Espaço para a logo-->
+    <section class="menu-logo">
+        <a href="/">
+            <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+        </a>
+    </section>
 
-            <!--barra de navegação-->
+    <!-- Ícone de menu hamburguer para telas pequenas -->
+    <section class="hamburger-icon">
+        <i class="bi bi-list"></i>
+    </section>
 
-            <!--Espaço para a logo-->
-            <section class="menu-logo">
-                <a href="/">
-                    <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                </a>
-            </section>
+    <!--Botão de pesquisa e menu-->
+    <ul class="menu-list">
+        <li class="dropdown">
+            <a class="sobre" href="#">Sobre</a>
+            <div class="dropdown-content">
+                <a href="#">Quem somos</a>
+                <a href="#">Contato</a>
+                <a href="#">FAQ</a>
+            </div>
+        </li>
+        <li><a id="areas-link" class="agendamento" href="#">Agendamento</a></li>
+        <li><a class="areas" href="/singup">Área de consultas</a></li>
+    </ul>
 
-            <!--Botão de pesquisa-->
-            <ul class="menu-list">
-                <li class="dropdown">
-                    <a class="sobre" href="#">Sobre</a>
-                    <div class="dropdown-content">
-                        <a href="#">Quem somos</a>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
-                <li><a id="areas-link" class="agendamento" href="#">Agendamento</a></li>
-                <li><a class="areas" href="/singup">Área de consultas</a></li>
-            </ul>
+    <ul class="menu-list-direita">
+        <article class="icon-lupa"><i class="bi bi-search"></i></article>
+        <article class="texto-icon"><!--pesquisa--></article>
+        <a href="/singup"><button class="entrar">Entrar</button></a>
+    </ul>
+</nav>
 
-
-            <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <a href="/singup"><button class="entrar">Entrar</button></a>
-            </ul>
-
-
-        </nav>
 
     </header>
 

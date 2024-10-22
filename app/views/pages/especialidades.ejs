@@ -30,7 +30,7 @@
 
     <header>
 
-        <nav class="menu">
+        <nav class="menu desktop">
 
             <!--barra de navegação-->
 
@@ -63,9 +63,42 @@
 
         </nav>
 
+        <nav class="menu mobile">
+
+            <!--barra de navegação-->
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/index">
+                    <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+           
+
+
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
+                <article class="texto-icon"><!--perfil--></article>
+                <button class="hamburguer">
+                    <div class="linha"></div>
+                    <div class="linha"></div>
+                    <div class="linha"></div>                  
+                </button>
+            </ul>
+
+        </nav>
+
     </header>
 
     <section class="barra"> </section>
+
+    <main>
+
+    
 
     <section class="voltar">
         <a href="/index">
@@ -77,62 +110,64 @@
         <h3 class="txt-especialidades">Especialidades</h3>
     </section>
 
-    <section class="especialidades">
-
-    </section>
+   
 
     <section class="especialidades">
         <a href="/cg">
             <div class="retangulo">
-                <img class="imagem-esquerda" src="imagens/logo-bblt.png" alt="Imagem 1">
+                <img class="imagem-esquerda" src="imagens/logo-borboleta.png" alt="Imagem 1">
                 <p class="texto">Clínico Geral</p>
                 <img class="imagem-direita" src="imagens/seta-direita.png" alt="Imagem 2">
+            
             </div>
         </a>
 
         <div class="retangulo">
-            <img class="imagem-esquerda" src="imagens/logo-bblt.png" alt="Imagem 3">
+            <img class="imagem-esquerda" src="imagens/logo-borboleta.png" alt="Imagem 3">
             <p class="texto">Fisioterapeuta</p>
             <img class="imagem-direita" src="imagens/seta-direita.png" alt="Imagem 4">
         </div>
 
         <div class="retangulo">
-            <img class="imagem-esquerda" src="imagens/logo-bblt.png" alt="Imagem 3">
+            <img class="imagem-esquerda" src="imagens/logo-borboleta.png" alt="Imagem 3">
             <p class="texto">Fonoaudiólogo</p>
             <img class="imagem-direita" src="imagens/seta-direita.png" alt="Imagem 4">
         </div>
 
         <div class="retangulo">
-            <img class="imagem-esquerda" src="imagens/logo-bblt.png" alt="Imagem 3">
+            <img class="imagem-esquerda" src="imagens/logo-borboleta.png" alt="Imagem 3">
             <p class="texto">Nutricionista</p>
             <img class="imagem-direita" src="imagens/seta-direita.png" alt="Imagem 4">
         </div>
 
         <div class="retangulo">
-            <img class="imagem-esquerda" src="imagens/logo-bblt.png" alt="Imagem 3">
+            <img class="imagem-esquerda" src="imagens/logo-borboleta.png" alt="Imagem 3">
             <p class="texto">Psicólogo</p>
             <img class="imagem-direita" src="imagens/seta-direita.png" alt="Imagem 4">
         </div>
 
         <div class="retangulo">
-            <img class="imagem-esquerda" src="imagens/logo-bblt.png" alt="Imagem 3">
+            <img class="imagem-esquerda" src="imagens/logo-borboleta.png" alt="Imagem 3">
             <p class="texto">Enfermeiro</p>
             <img class="imagem-direita" src="imagens/seta-direita.png" alt="Imagem 4">
         </div>
     </section>
 
-
+</main>
 
     <footer class="footer">
+
         <section class="footer-logo">
-            <img src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
             <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
                 atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
             </p>
         </section>
 
         <section class="footer-links">
-            <ul>
+            <h3 class="ttl-links">Explorar</h3>
+            <ul class="links">
                 <li><a href="#">Quem somos</a></li>
                 <li><a href="#">FAQ</a></li>
                 <li><a href="/especialidades">Especialidades</a></li>
@@ -144,6 +179,7 @@
             <h3 class="ttl-contato">Contato</h3>
             <p class="nmr-contato">(11) 4002-8922</p>
         </section>
+
     </footer>
 
 </body>

@@ -3,7 +3,13 @@ body {
     background-size: cover; /* Faz a imagem cobrir todo o fundo da página */
     background-position: center; /* Centraliza a imagem no fundo */
     background-repeat: no-repeat; /* Evita que a imagem se repita */
-    height: 1000px;
+}
+
+main {
+    height: calc(100vh - 74.95px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .voltar {
@@ -17,7 +23,7 @@ body {
 }
 
 .ttl-especialidades {
-    margin-left: 300px;
+    margin-left: 260px;
     margin-top: 40px;
 }
 
@@ -30,7 +36,7 @@ body {
 .especialidades {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espaçamento entre os retângulos */
+    gap: 35px; /* Espaçamento entre os retângulos */
     padding: 20px;
     margin-left: 130px;
 }
@@ -49,9 +55,33 @@ body {
 
 }
 
+    @media screen and (max-width:768px) {
+        .ttl-especialidades {
+            text-align: center;
+            margin: 0;
+        }
+
+        .especialidades {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Espaçamento entre os retângulos */
+            padding: 20px;
+            align-items: center;   
+            margin-left: 0;
+        }
+
+        .botao-voltar {
+            position: absolute;       
+            top: 70px;    
+        }
+
+        main {
+            position: relative;
+        }
+    }
+
 .imagem-esquerda {
-    width: 60px; 
-    height: auto;
+    width: 35px; 
     margin-right: 35px; /* Espaço entre a imagem esquerda e o texto */
     margin-bottom: 5px;
 }
@@ -73,3 +103,4 @@ body {
 a {
     text-decoration: none;
 }
+
