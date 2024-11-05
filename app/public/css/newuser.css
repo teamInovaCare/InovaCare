@@ -10,8 +10,8 @@ body{
 } 
 
   
-  /* Estilo para o submenu dropdown */
-  .dropdown-content {
+ /* Estilo para o submenu dropdown */
+ .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -44,17 +44,55 @@ body{
 }
 
 .menu {
-    display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 10px;
     background-color: white;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.menu.desktop {
+    display: flex;
+}
+
+.menu.mobile {
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    .menu.desktop {
+        display: none;
+    }
+    
+    .menu.mobile {
+        display: flex;
+    }
+
+    .menu.mobile .logo {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .menu-logo-mobile {
+        display: none;
+        
+    }
+
+    .menu-logo-tm {
+        display: block;
+    }
+
+
+}
+
+.menu-logo-tm {
+    display: none;
 }
 
 .logo {
     width: 120px;
-    margin-left: 300px;
     cursor: pointer;
 }
 
@@ -62,15 +100,31 @@ body{
     list-style: none;
     padding: 0;
     display: flex;
-    margin-left: 230px;
+    gap: 30px;
 }
 
 .menu-list-direita {
-    margin-right: 100px;
+    display: flex;
+    gap: 15px;
+}
+
+.hamburguer {
+    border: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.linha {
+    width: 38px;
+    height: 7px;
+    background-color: #20b3b2;
+    border-radius: 100px;
+
 }
 
 .menu-list li {
-    margin-right: 30px;
     font-size: 20px;
 }
 
@@ -87,12 +141,28 @@ body{
 
 /*editando a barra, parte da ul*/
 nav ul{
-    width: 100%;
     list-style:none;
     display:flex;
     justify-content: flex-end;
     align-items: center;
     position:relative;
+}
+
+.icon-perfil {
+    font-size: 32px;
+    color: #20b3b2;
+    cursor: pointer;
+}
+
+.icon-lupa {
+    font-size: 30px;
+    color: #20b3b2;
+    cursor: pointer;
+}
+
+.icon-perfil:hover,
+.icon-lupa:hover {
+    color: #f4a456; /* Cor laranja para hover */
 }
 
 .entrar {
@@ -108,21 +178,6 @@ nav ul{
 .entrar:hover {
    background-color: #ff7b00;
 }
-
-
-.icon-lupa {
-    font-size: 30px;
-    color: #20b3b2;
-    cursor: pointer;
-    margin-right: 20px;
-}
-
-.icon-perfil:hover,
-.icon-lupa:hover {
-    color: #f4a456; /* Cor laranja para hover */
-}
-
-
 
 
 /*aplicando efeito hover na barra- passar o mouse e ficar laranja*/

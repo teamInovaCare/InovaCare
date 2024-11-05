@@ -28,41 +28,69 @@
 
     <header>
 
-        <nav class="menu">
-    <!--barra de navegação-->
-    <!--Espaço para a logo-->
-    <section class="menu-logo">
-        <a href="/">
-            <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-        </a>
-    </section>
+        <nav class="menu desktop">
 
-    <!-- Ícone de menu hamburguer para telas pequenas -->
-    <section class="hamburger-icon">
-        <i class="bi bi-list"></i>
-    </section>
+            <!--barra de navegação-->
 
-    <!--Botão de pesquisa e menu-->
-    <ul class="menu-list">
-        <li class="dropdown">
-            <a class="sobre" href="#">Sobre</a>
-            <div class="dropdown-content">
-                <a href="#">Quem somos</a>
-                <a href="#">Contato</a>
-                <a href="#">FAQ</a>
-            </div>
-        </li>
-        <li><a id="areas-link" class="agendamento" href="#">Agendamento</a></li>
-        <li><a class="areas" href="/singup">Área de consultas</a></li>
-    </ul>
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/index">
+                    <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                </a>
+            </section>
 
-    <ul class="menu-list-direita">
-        <article class="icon-lupa"><i class="bi bi-search"></i></article>
-        <article class="texto-icon"><!--pesquisa--></article>
-        <a href="/singup"><button class="entrar">Entrar</button></a>
-    </ul>
-</nav>
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <div class="dropdown-content">
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
+                <li><a id="areas-link" class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="areas" href="/consultas">Área de consultas</a></li>
+            </ul>
 
+
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
+                <article class="texto-icon"><!--perfil--></article>
+                <a href="/singup"><button class="entrar">Entrar</button></a>
+            </ul>
+
+        </nav>
+
+        <nav class="menu mobile">
+
+            <!--barra de navegação-->
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/index">
+                    <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+           
+
+
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
+                <article class="texto-icon"><!--perfil--></article>
+                <button class="hamburguer">
+                    <div class="linha"></div>
+                    <div class="linha"></div>
+                    <div class="linha"></div>                  
+                </button>
+                <a href="/singup"><button class="entrar">Entrar</button></a>
+            </ul>
+
+        </nav>
 
     </header>
 
@@ -235,21 +263,22 @@
 
 
     <footer class="footer">
-        <a href="/">
-            <section class="footer-logo">
-                <img src="imagens/logo-bblt.png" alt="Logo da Empresa">
-        </a>
-        <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
-            atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
-        </p>
+
+        <section class="footer-logo">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
         </section>
 
         <section class="footer-links">
-            <ul>
+            <h3 class="ttl-links">Explorar</h3>
+            <ul class="links">
                 <li><a href="#">Quem somos</a></li>
                 <li><a href="#">FAQ</a></li>
-                <li><a href="#">Especialidades</a></li>
-                <li><a href="/singup">Consultas</a></li>
+                <li><a href="/especialidades">Especialidades</a></li>
+                <li><a href="/consultas">Consultas</a></li>
             </ul>
         </section>
 
@@ -257,6 +286,7 @@
             <h3 class="ttl-contato">Contato</h3>
             <p class="nmr-contato">(11) 4002-8922</p>
         </section>
+
     </footer>
 
 </body>

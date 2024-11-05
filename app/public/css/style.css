@@ -73,6 +73,23 @@ body{
     }
 }
 
+@media screen and (max-width:360px) {
+    .menu-logo-mobile {
+        display: none;
+        
+    }
+
+    .menu-logo-tm {
+        display: block;
+    }
+
+
+}
+
+.menu-logo-tm {
+    display: none;
+}
+
 .logo {
     width: 120px;
     cursor: pointer;
