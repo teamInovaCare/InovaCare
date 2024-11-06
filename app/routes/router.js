@@ -75,4 +75,36 @@ router.get('/cadastro_inicial', function(req,res){
     }
   );
 
+router.get('/cadastro_localizacao', function(req,res){
+    res.render('pages/cadastro_localizacao', { "erros": null, "valores": {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":""},"retorno":null });  
+})
+
+router.post(
+  "/cadastro_localizacao_validacao",
+  body("cep")
+  .custom((value) => {
+    if (validarCEP(value)){
+      return true
+    } else {
+      throw new Error("Cep Inválido")
+    }
+  }),
+  body("uf").isLength({min:2,max:2}).withMessage("UF inválido."),
+  body("endereco").isLength({min:2,max:100}).withMessage("Endereço inválido."),
+  body("bairro").isLength({min:2,max:100}).withMessage("Bairro inválido."),
+  body("cidade").isLength({min:2,max:100}).withMessage("Cidade inválido."),
+
+  function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.render("pages/cadastro_localizacao", { "erros": errors, "valores":req.body,"retorno":null});
+    } else {
+
+      return res.render("pages/cadastro_dados", { "erros": null, "valores":req.body,"retorno":req.body});
+    }
+  }
+);
+
+
 module.exports = router;
