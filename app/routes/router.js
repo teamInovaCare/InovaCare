@@ -106,5 +106,34 @@ router.post(
   }
 );
 
+router.get('/cadastro_dados', function(req,res){
+  res.render('pages/cadastro_dados', { "erros": null, "valores": {"email":"","senha":"","repsenha":"", "repemail":""},"retorno":null });  
+})
+
+router.post(
+  "/cadastro_dados_validacao",
+  body("email").isEmail().withMessage("Email inválido."),
+  body("senha").isStrongPassword().withMessage("Senha muito fraca!"),
+
+  body("repsenha").custom((value, { req }) => {
+      return value === req.body.senha;
+  }).withMessage("Senhas estão diferentes"),
+
+  body("repemail").custom((value, { req }) => {
+      return value === req.body.email;
+  }).withMessage("Emails estão diferentes"),
+
+  function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.render("pages/cadastro_dados", { "erros": errors, "valores":req.body,"retorno":null});
+    }
+
+      return res.render("pages/home", { "erros": null, "valores":req.body,"retorno":req.body});
+  }
+);
+
+
 
 module.exports = router;
