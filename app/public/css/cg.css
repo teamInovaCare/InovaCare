@@ -349,3 +349,13 @@ a {
     background-color: #d1e7dd;
     color: #20b3b383;
 }
+
+.menu-logo-mobile{
+    width: 100%;
+}
+
+@media screen and (max-width:768px) {
+    .small-rectangle {
+        width: 90%;
+    }
+}
