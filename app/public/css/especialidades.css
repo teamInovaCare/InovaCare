@@ -61,6 +61,10 @@ main {
             margin: 0;
         }
 
+        .txt-especialidades{
+            font-size: 35px;
+        }
+
         .especialidades {
             display: flex;
             flex-direction: column;
@@ -73,6 +77,20 @@ main {
         .botao-voltar {
             position: absolute;       
             top: 70px;    
+        }
+
+        .retangulo{
+            width: 90%;
+        }
+
+        .retanguloCg{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            align-items: center;
+            margin-left: 0;
+            width: 100%;
         }
 
         main {
@@ -104,3 +122,6 @@ a {
     text-decoration: none;
 }
 
+.menu-logo-mobile{
+    width: 90%;
+}
