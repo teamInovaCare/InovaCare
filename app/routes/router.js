@@ -36,7 +36,7 @@ router.post(
         console.log(errors);
         return res.render("pages/singup", { "erros": errors, "valores":req.body,"retorno":null});
     }
-        return res.render("pages/home", { "erros": null, "valores":req.body,"retorno":req.body});
+        return res.render("pages/index", { "erros": null, "valores":req.body,"retorno":req.body});
     }
 );
 
