@@ -23,7 +23,21 @@ router.get("/index", function (req, res) {
 });
 
 router.get("/singup", function (req, res) {
-    res.render("pages/singup.ejs")
+    res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });
 });
+
+router.post(
+    "/singup_post",
+    body("email").isEmail().withMessage("Email inválido."),
+    body("senha").isStrongPassword().withMessage("Senha muito fraca!"),
+    function (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log(errors);
+        return res.render("pages/singup", { "erros": errors, "valores":req.body,"retorno":null});
+    }
+        return res.render("pages/home", { "erros": null, "valores":req.body,"retorno":req.body});
+    }
+);
 
 module.exports = router;
