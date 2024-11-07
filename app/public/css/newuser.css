@@ -197,6 +197,7 @@ nav a:hover{
 
 .banner {
     width: 100%;
+    object-fit: cover;
 }
 
 
@@ -464,6 +465,7 @@ nav a:hover{
     margin-top: 50px;
 }
 
+
 .agnd-imgs {
     display: flex;
     justify-content: space-between; /* Garante que as imagens fiquem em extremidades opostas */
@@ -481,4 +483,68 @@ nav a:hover{
     width: 350px;
     height: 350px;
 }
+.banner-txt2{
+    display: none;
+}
 
+@media (max-width: 925px){
+    .ttl-carrossel{
+        text-align: center;
+        position: relative;
+        font-family:sans-serif;
+        margin-top: 20px;
+        font-size: 45px;
+        left: 25px;
+        margin-top: 100px;
+        width: 700px;
+        color: #003f5c;
+    }
+    .agnd-imgs {
+        flex-direction: column;
+        width: 100%; /* O contêiner ocupa toda a largura disponível */
+        margin-left: 100px;
+        max-width: 540px;
+    }
+    .agnd-txt2{
+        margin: 30px;
+    }
+    .bnf-txt2 {
+        margin: 30px;
+    }
+    .banner-txt{
+        display: none;
+    }
+    .banner-txt2{
+        display: block;
+    }
+    .banner-txt2{
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px){
+    .ttl-carrossel {
+        text-align: center;
+        position: relative;
+        font-family: sans-serif;
+        margin-top: 20px;
+        font-size: 40px;
+        left: 20px;
+        margin-top: 100px;
+        width: 470px;
+        color: #003f5c;
+    }
+    .agnd-imgs {
+        flex-direction: column;
+        width: 100%;
+        margin-left: 20px;
+        max-width: 540px;
+        padding: 0;
+    }
+    .gridm-carrossel {
+        display: none;
+    }
+    .bnf2{
+        flex-wrap: wrap;
+    }
+}
