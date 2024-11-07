@@ -9,122 +9,6 @@ body{
 } 
 
   
-  /* Estilo para o submenu dropdown */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
-    border-radius: 12px;
-    position: absolute;
-    left: 65px;
-  }
-
-  
-  
-  .dropdown-content a {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  /* Mostrar o submenu quando o item de menu é hover */
-  .menu ul li:hover .dropdown-content {
-    display: block;
-  }
-  
-
-.barra {
-    width: 100%;
-    height: 2px;
-    background-color: rgba(0, 0, 0, 0.466);
-}
-
-.menu {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.logo {
-    width: 120px;
-    margin-left: 300px;
-    cursor: pointer;
-}
-
-.menu-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    margin-left: 230px;
-}
-
-.menu-list-direita {
-    margin-right: 100px;
-}
-
-.menu-list li {
-    margin-right: 30px;
-    font-size: 20px;
-}
-
-.menu a {
-    text-decoration: none;
-    font-weight: bold;
-    font-family: sans-serif;
-}
-
-.menu-list a {
-    color: #328d84;
-}
-
-
-/*editando a barra, parte da ul*/
-nav ul{
-    width: 100%;
-    list-style:none;
-    display:flex;
-    justify-content: flex-end;
-    align-items: center;
-    position:relative;
-}
-
-.icon-perfil {
-    font-size: 32px;
-    margin-left: 20px;
-    color: #109ea6;
-    cursor: pointer;
-}
-
-.icon-lupa {
-    font-size: 30px;
-    color: #109ea6;
-    cursor: pointer;
-}
-
-.icon-perfil:hover,
-.icon-lupa:hover {
-    color: #ff7f50; /* Cor laranja para hover */
-}
-
-
-
-
-/*aplicando efeito hover na barra- passar o mouse e ficar laranja*/
-nav a:hover{
-    color:#FFA34F;
-}
-
-
-/*ajustando o tamanho dos ícones da barra*/
-.icon {
-    font-size: 30px; /* Ajuste conforme necessário */
-}
 
 .voltar {
     margin-left: 60px;
@@ -138,8 +22,7 @@ nav a:hover{
 
 
 .ttl-consultas {
-    margin-left: 300px;
-    margin-top: 40px;
+    text-align: center;
 }
 
 .ttl-consultas h3 {
@@ -156,7 +39,7 @@ main {
 }
 
 .container {
-    width: 1500px;
+    width: 80%;
     height: 900px;
     background-color: white;
     padding: 20px;
@@ -195,6 +78,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    width: 100%;
 }
 
 .retangCg {
@@ -202,7 +86,7 @@ main {
     background: #ebebeb;
     border-radius: 16px;
     margin-top: 20px;
-    width: 1300px;
+    width: 80%;
     cursor: pointer;
     padding: 20px;
     overflow: hidden;
@@ -292,6 +176,7 @@ main {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    gap: 5px;
 }
 
 .cancelar-consulta {
@@ -312,4 +197,14 @@ main {
     color: #003f5c;
     margin-top: 20px;
     border-top: 1px solid #ddd;
+}
+
+@media screen and (max-width:768px) {
+    .container {
+        width: 95%;
+    }
+
+    .retangCg {
+        width: 100%;
+    }
 }

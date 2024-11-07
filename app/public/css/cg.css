@@ -12,122 +12,6 @@ body {
 }
 
   
-  /* Estilo para o submenu dropdown */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 1;
-    border-radius: 12px;
-    position: absolute;
-    left: 65px;
-  }
-
-  
-  
-  .dropdown-content a {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  /* Mostrar o submenu quando o item de menu é hover */
-  .menu ul li:hover .dropdown-content {
-    display: block;
-  }
-  
-
-.barra {
-    width: 100%;
-    height: 2px;
-    background-color: rgba(0, 0, 0, 0.466);
-}
-
-.menu {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: white;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.logo {
-    width: 120px;
-    margin-left: 300px;
-    cursor: pointer;
-}
-
-.menu-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    margin-left: 230px;
-}
-
-.menu-list-direita {
-    margin-right: 100px;
-}
-
-.menu-list li {
-    margin-right: 30px;
-    font-size: 20px;
-}
-
-.menu a {
-    text-decoration: none;
-    font-weight: bold;
-    font-family: sans-serif;
-}
-
-.menu-list a {
-    color: #328d84;
-}
-
-
-/*editando a barra, parte da ul*/
-nav ul{
-    width: 100%;
-    list-style:none;
-    display:flex;
-    justify-content: flex-end;
-    align-items: center;
-    position:relative;
-}
-
-.icon-perfil {
-    font-size: 32px;
-    margin-left: 20px;
-    color: #109ea6;
-    cursor: pointer;
-}
-
-.icon-lupa {
-    font-size: 30px;
-    color: #109ea6;
-    cursor: pointer;
-}
-
-.icon-perfil:hover,
-.icon-lupa:hover {
-    color: #ff7f50; /* Cor laranja para hover */
-}
-
-
-
-
-/*aplicando efeito hover na barra- passar o mouse e ficar laranja*/
-nav a:hover{
-    color:#FFA34F;
-}
-
-
-/*ajustando o tamanho dos ícones da barra*/
-.icon {
-    font-size: 30px; /* Ajuste conforme necessário */
-}
 
 
 
@@ -242,7 +126,7 @@ a {
     backdrop-filter: blur(10px);
     z-index: 999;
 }
-
+ 
 .large-rectangle {
     background-color: #fff;
     padding: 20px;
@@ -251,21 +135,31 @@ a {
     height: 600px;
     overflow-y: auto;
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
     font-family: sans-serif;
 }
-
+ 
+.coluna-esq, .coluna-dir {
+    flex: 1;
+    padding: 20px;
+}
+ 
+.coluna-esq {
+    border-right: 1px solid #ddd;
+}
+ 
 .perfil2 {
     width: 150px;
     margin-bottom: 20px;
 }
-
-
-.coluna-esq {
-    margin-left: 50px;
+ 
+.barrinha {
+    width: 50px;
+    height: 2px;
+    background-color: #ff7f50;
+    margin: 10px 0;
 }
-
+ 
 .coluna-esq p {
     font-size: 16px;
     line-height: 1.5;
@@ -282,14 +176,8 @@ a {
     min-width: 200px;
 }
 
-
-
 .coluna-dir {
-    display: flex;
-    flex-direction: column; /* Organiza os itens verticalmente */
-    justify-content: flex-start; /* Alinha os itens ao início da coluna */
-    align-items: center; /* Centraliza os itens na coluna */
-    margin-top: 220px;
+    margin-top:20%;
 }
 
 .slider {
@@ -298,54 +186,113 @@ a {
 }
 
 .slider-btn {
-    background-color: #333;
-    color: #fff;
+    background-color: #109ea6;
+    color: white;
     border: none;
-    padding: 10px;
+    padding: 8px 12px;
     cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
 }
 
+
+ 
 .slider-btn:disabled {
-    background-color: #ccc;
+    background-color: #FFA34F;
     cursor: not-allowed;
 }
 
 #sliderTable {
-    margin: 0 10px;
     width: 100%;
-    transition: transform 0.3s ease;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 10px;
+    margin-bottom: 15px;
 }
-
-#sliderTable th, #sliderTable td {
-    border: 1px solid #333;
+ 
+#sliderTable th,
+#sliderTable td {
     padding: 10px;
-    text-align: left;
+    border: 1px solid #ffffff;
+    font-family: sans-serif;
+    border-radius: 5px;
 }
-
+ 
 #sliderTable th {
-    background-color: #f2f2f2;
+    background-color: #109ea6;
+    color: white;
 }
 
-.submit-btn {
-    margin-top: 20px; /* Espaçamento entre a tabela e o botão */
-    padding: 10px 20px;
+#sliderTable td {
     background-color: #f29434;
+}
+ 
+#sliderTable tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+ 
+.slider-btn {
+    background-color: #109ea6;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 8px 12px;
     cursor: pointer;
     font-size: 16px;
-    display: block;
-    text-align: center;
-    margin-top: 50px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
+ 
 
+ 
+.submit-btn {
+    background-color:#f29434;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+ 
 .submit-btn:hover {
-    background-color: #ff7b00;
+    background-color: #f29434;
 }
 
 
 #sliderTable td.selected {
-    background-color: #d1e7dd;
-    color: #20b3b383;
+    background-color: #FFA34F;
+    color: white;
 }
+
+.tabela-tablet {
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+    
+    .retangulo{
+        width: 90%;
+    } 
+
+    .perfis {
+       flex-direction: column;
+       align-items: center;
+       display: flex;
+    }
+
+    .large-rectangle {
+        flex-direction: column;        
+    }
+
+    .coluna-dir {
+        margin: 0;
+    }
+
+    .coluna-esq {
+        border: none;
+    }
+}  
+    

@@ -80,6 +80,18 @@ main {
         }
     }
 
+    @media screen and (max-width:520px) {
+       
+        .retangulo {
+            width: 90%;
+        }
+
+        .especialidades a {
+            width: 100%;
+        }
+    }
+
+
 .imagem-esquerda {
     width: 35px; 
     margin-right: 35px; /* Espaço entre a imagem esquerda e o texto */
