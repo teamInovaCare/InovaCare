@@ -526,6 +526,15 @@ nav a:hover{
         display: block;
         width: 30%;
     }
+
+    .bnf-txt1 {
+        font-size: 25px;
+     }
+
+     .bnf-txt2 {
+        font-size: 10px;
+    } 
+
 }
 
 @media screen and (max-width:640px) {
@@ -533,6 +542,8 @@ nav a:hover{
         display: none;
     }
 }
+
+
 
 .profile-dropdown {
     display: none; /* Inicialmente oculto */
