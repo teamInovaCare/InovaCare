@@ -70,13 +70,19 @@ main {
             flex-direction: column;
             gap: 20px; /* Espaçamento entre os retângulos */
             padding: 20px;
-            align-items: center;   
+            align-items: center;
             margin-left: 0;
+        }
+
+        .especialidades a {
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .botao-voltar {
             position: absolute;       
-            top: 70px;    
+            top: 40px;    
         }
 
         .retangulo{

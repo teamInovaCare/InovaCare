@@ -1,5 +1,8 @@
 var express = require("express");
 var router = express.Router();
+const { body, validationResult} = require("express-validator")
+var {validarCPF, isValidDate, validarCEP} = require
+("../helpers/validacoes");
 
 
 router.get("/", function (req, res) {
@@ -21,6 +24,7 @@ router.get("/consultas", function (req, res) {
 router.get("/index", function (req, res) {
     res.render("pages/index.ejs")
 });
+
 
 router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });

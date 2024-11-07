@@ -208,3 +208,10 @@ main {
         width: 100%;
     }
 }
+
+@media screen and (max-width:460px) {
+    
+    .info-coluna-dir {
+        flex-wrap: wrap;
+    }
+}

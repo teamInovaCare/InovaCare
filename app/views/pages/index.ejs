@@ -56,48 +56,53 @@
             <ul class="menu-list-direita">
                 <article class="icon-lupa"><i class="bi bi-search"></i></article>
                 <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
+                <a href="#"><article class="icon-perfil"><i class="bi bi-person-circle"></i></article></a>
                 <article class="texto-icon"><!--perfil--></article>
             </ul>
 
         </nav>
 
         <nav class="menu mobile">
-
-            <!--barra de navegação-->
-
-            <!--Espaço para a logo-->
             <section class="menu-logo">
                 <a href="/index">
                     <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                 </a>
+                <a href="/index">
+                    <img class="logo3" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
             </section>
-
-            <!--Botão de pesquisa-->
-           
-
-
+    
             <ul class="menu-list-direita">
                 <article class="icon-lupa"><i class="bi bi-search"></i></article>
                 <article class="texto-icon"><!--pesquisa--></article>
                 <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
                 <article class="texto-icon"><!--perfil--></article>
-                <button class="hamburguer">
+                
+                <!-- Botão do menu hambúrguer -->
+                <button class="hamburguer" onclick="toggleMenu()">
                     <div class="linha"></div>
                     <div class="linha"></div>
                     <div class="linha"></div>                  
                 </button>
+                
+                <!-- Menu suspenso do hambúrguer -->
+                <div id="hamburger-menu" class="hamburger-menu-content">
+                    <a href="/especialidades">Agendamento</a>
+                    <a href="/consultas">Área de consultas</a>
+                    <a href="/">Sair</a>
+                </div>
             </ul>
-
         </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
 
     </header>
 
-    <aside id="sidebar">
-        <a href="/" id="sair-link">Sair</a>
-    </aside>
-
-    <script src="js/sidebar.js"></script>
 
     <section class="barra"> </section>
 
@@ -171,7 +176,8 @@
             <section class="swiper-container">
 
                 <section class="swiper-wrapper">
-                    <section class="swiper-slide"><img src="imagens/carrossel1/1.png" alt="foto-1" />
+                    <section class="swiper-slide">
+                        <a href="/cg"><img src="imagens/carrossel1/1.png" alt="foto-1" /></a>
                     </section>
                     <section class="swiper-slide"><img src="imagens/carrossel1/2.png" alt="foto-2" />
                     </section>

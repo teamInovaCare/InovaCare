@@ -267,7 +267,6 @@ nav a:hover{
     margin-top: 15px;
     font-weight: bold;
     font-family: sans-serif;
-    text-align: justify;
     display: flex;
     justify-content: center;
 }
@@ -281,6 +280,7 @@ nav a:hover{
     justify-content: center; /* Centraliza os itens no container */
     gap: 45px; /* Define a distância entre os retângulos */
     margin: 60px;
+    flex-wrap: wrap;
     }
     
 .conjunto-bnf {
@@ -452,22 +452,21 @@ nav a:hover{
 .agnd-imgs {
     display: flex;
     justify-content: space-between; /* Garante que as imagens fiquem em extremidades opostas */
-    width: 100%; /* O contêiner ocupa toda a largura disponível */
     max-width: 1200px; /* Limite a largura máxima, se necessário */
     padding: 0 50px; /* Espaçamento interno */
-    margin-left: 250px;
+    flex-wrap: wrap;
 }
 
 .instrucao-img {
-   width: 500px;
+   width: 40%;
 }
 
 .telemed-img {
-    width: 350px;
-    height: 350px;
+    width: 30%;
+    height: 30%;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:1160px) {
     .agnd-imgs {
         margin: 0; 
         flex-wrap: wrap;
@@ -485,5 +484,52 @@ nav a:hover{
 
     .banner-txt {
         left: 40px;
+    }
+}
+
+.hamburger-menu-content {
+    display: none; /* Esconde por padrão */
+    position: absolute;
+    top: 55px; /* Ajuste conforme necessário */
+    right: 00px; /* Ajuste conforme necessário */
+    left: 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    padding: 10px 20px;
+    min-width: 160px;
+}
+
+.hamburger-menu-content a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 0;
+    font-weight: bold;
+}
+
+.hamburger-menu-content a:hover {
+    color: #f4a456; /* Efeito hover */
+}
+
+.logo3 {
+    display: none;
+}
+
+@media screen and (max-width:500px) {
+    .logo {
+        display: none;
+    }
+
+    .logo3 {
+        display: block;
+        width: 30%;
+    }
+}
+
+@media screen and (max-width:640px) {
+    .inicia, .inicia1 {
+        display: none;
     }
 }
