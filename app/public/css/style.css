@@ -533,3 +533,26 @@ nav a:hover{
         display: none;
     }
 }
+
+.profile-dropdown {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    top: 40px; /* Ajuste conforme necessário */
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    min-width: 60px;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.profile-dropdown a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+    font-size: 15px
+}
+
+

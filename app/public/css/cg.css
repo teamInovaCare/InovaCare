@@ -225,6 +225,7 @@ a {
 
 #sliderTable td {
     background-color: #f29434;
+    cursor: pointer;
 }
  
 #sliderTable tr:nth-child(even) {
