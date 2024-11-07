@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cadastroAuxiliar.css">
+    <link rel="stylesheet" href="/css/cadastroDA.css">
+    <script src="js/validacao-login.js"></script>
+    <title> InovaCare </title>
+</head>
+<body class="Singup">
+    <%
+    let  erroValidacao =  {"email":"", "senha":"", "repsenha":"", "repemail":""};
+    let  msgErro =  {"email":"", "senha":"","repsenha":"", "repemail":""};
+    if(erros) {
+        erros.errors.forEach(function(erro) {
+            if (erro.path == "email") {
+                erroValidacao.email = "erro",
+                msgErro.email = erro.msg
+            }
+            if (erro.path == "senha") {
+                erroValidacao.senha = "erro",
+                msgErro.senha = erro.msg
+            }
+            if (erro.path == "repsenha") {
+                erroValidacao.repsenha = "erro",
+                msgErro.repsenha = erro.msg
+            }
+            if (erro.path == "repemail") {
+                erroValidacao.repemail = "erro",
+                msgErro.repemail = erro.msg
+            }
+        })
+    }; %>
+
+    <form id="loginForm" class="loginForm" method="post" action="/cadastro_dados_validacao">
+
+    <div class="retang-3"></div>
+    <header class="bem-vindo1"> Crie sua conta</header>
+
+    <main class="faca-login1"> Preencha com suas informações </main>
+
+    <img src="/imagens/fundo-singup.jpg" class="fundo-singup">
+    <img src="/imagens/logo-singup.png" class="logo-singup">
+
+        <label for="email" class="Email">Insira seu E-mail</label>
+            <input type="text" id="emaild" placeholder="E-mail" class="emaild" name="email" value="<%= valores.email %>" class="<%= erroValidacao.email %>">
+            <span class="spanerroE"><%= msgErro.email %></span>
+
+        <label for="repemail" class="repEmail">Confirme seu E-mail</label>
+            <input type="text" id="repemaild" placeholder="E-mail" class="repemaild" name="repemail" value="<%= valores.repemail %>" class="<%= erroValidacao.repemail %>">
+            <span class="spanerroCE"><%= msgErro.repemail %></span>
+
+        <label for="senha" class="Senhaa">Insira sua senha</label>
+            <input type="text" id="senhad" placeholder="Senha" class="senhad" name="senha" value="<%= valores.senha %>" class="<%= erroValidacao.senha %>">
+            <span class="spanerroD"><%= msgErro.senha %></span>
+
+        <label for="repsenha" class="repSenha">Cofirme sua senha</label>
+            <input type="text" id="repsenhad" placeholder="Senha" class="repsenhad" name="repsenha" value="<%= valores.repsenha %>" class="<%= erroValidacao.repsenha %>">
+            <span class="spanerroCS"><%= msgErro.repsenha %></span>
+
+
+
+    <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >
+
+</form>
+<p class="msg-cadastre"><a class="cadastre1" href="/cadast1">Sou Profissional</a></p>
+
+<p class="msg-singup">A InovaCare é uma plataforma que oferece atendimento médico e terapêutico
+    através das modalidades do atendimento online e domiciliar.
+</p>
+</body>
+</html>

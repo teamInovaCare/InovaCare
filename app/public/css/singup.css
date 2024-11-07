@@ -21,6 +21,369 @@
     height: 1080px;
     position: relative;
     overflow: hidden; 
+    display: flex;
+}
+.retang-1{
+  background: #ffffff;
+  border-radius: 75px;
+  width: 1088px;
+  height: 1080px;
+  position: absolute;
+  left: 938px;
+  top: 0px;
+}
+.bem-vindo{
+    color: #109ea6;
+    text-align: left;
+    font-family: "Roboto-Regular",sans-serif ;
+    font-size:  57px;
+    line-height: 64px;
+    letter-spacing:  -0.25px;
+    font-weight:  400;
+    position: absolute;
+    left: 1306px;
+    top: 179px;
+    width: 328px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-text-stroke: 2px #109ea6;
+}
+.faca-login{
+    color: #6b6b6b;
+    text-align: left;
+    font-family:  "Roboto-Regular", sans-serif;
+    font-size:  36px;
+    line-height: 44px;
+    font-weight: 400;
+    position: absolute;
+    left: 1196px;
+    top: 237px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+} 
+.Entrar{
+    background: linear-gradient(180deg,rgba(240, 114, 74, 1) 0%,
+        rgba(255, 163, 79, 1) 100%);;
+    border-radius: 15px;
+    width: 250px;
+    height: 84px;
+    position: absolute;
+    left: 1322px;
+    top: 794px;
+    color: #ffffff;
+    text-align: center;
+    font-family: "Roboto-Bold", sans-serif;
+    align-items: center;
+    justify-content: flex-start;
+    outline: none;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+}
+.emaild{
+    color: #8b8b8b;
+    text-align: start;
+    font-family: "Roboto-Regular",sans-serif;
+    font-size:  24px;
+    line-height:  32px;
+    font-weight:  400;
+    position: absolute;
+    left: 1180px;
+    top: 480px;
+    width: 82px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #eaeaea;
+    padding-left: 0.65rem;
+    border-radius: 15px;
+    width: 566px;
+    height: 69px;
+    position: absolute;
+    left: 1154px;
+    top: 465px;
+    border: 0;
+}
+.E-mail{
+    color: #109ea6;
+    text-align: left;
+    font-family:"Roboto-Regular", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+    position: absolute;
+    left: 1174px;
+    top: 423px;
+    width: 206px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.password{
+    color: #8b8b8b;
+    text-align: left;
+    font-family: "Roboto-Regular",sans-serif;
+    font-size:  24px;
+    line-height:  32px;
+    font-weight:  400;
+    position: absolute;
+    left: 1174px;
+    top: 619px;
+    width: 206px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #eaeaea;
+    padding-left: 0.65rem;
+    border-radius: 15px;
+    width: 566px;
+    height: 69px;
+    position: absolute;
+    left: 1154px;
+    top: 603px;
+    border: 0;
+}
+.Senha{
+    color: #109ea6;
+    text-align: left;
+    font-family:"Roboto-Regular", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+    position: absolute;
+    left: 1174px;
+    top: 560px;
+    width: 206px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.cadastre{
+    text-decoration: none;
+    color: #109ea6;
+}
+.msg-cadastre{
+    color: #6b6b6b;
+    text-align: center;
+    font-family: "Roboto-Medium", sans-serif;
+    font-size: 22px;
+    line-height: 25px;
+    position: absolute;
+    left: 1283px;
+    top: 885px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+.msg-singup{
+    color: #000000;
+    text-align: center;
+    font-family: "Roboto-Medium", sans-serif;
+    font-size: 24px;
+    line-height: 25px;
+    font-weight: 500;
+    position: absolute;
+    left: 208px;
+    top: 820px;
+    width: 540px;
+    height: 128px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-singup{
+    width: 30.52%;
+  height: 36.2%;
+  position: absolute;
+  right: 59.84%;
+  left: 9.64%;
+  bottom: 39.17%;
+  top: 24.63%;
+  overflow: hidden;
+}
+.spanerro{
+    position: absolute;
+    left: 1162px;
+    top: 540px;
+    color: red;
+    font-size: 18px;
+}
+.spanerroS{
+    position: absolute;
+    left: 1162px;
+    top: 675px;
+    color: red;
+    font-size: 18px;
+}
+.error {
+    color: red;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    font-family: "Roboto-Medium", sans-serif;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 4px; /* Garante que a mensagem apareça abaixo do campo */
+  font-family: "Roboto-Medium", sans-serif;
+}
+
+@media (max-width: 925px){
+    .retang-1{
+        width: 90%;
+        height:90%;
+        justify-content: center;
+        top: 5%;
+        left: 5%;
+    }
+    .Entrar{
+        left: 32%;
+    }
+    .msg-cadastre{
+        left: 26%;
+    }
+    .msg-singup{
+        top: 140%;
+        font-size: 26px;
+    }
+    .logo-singup{
+        height: auto;
+        left: 35%;
+        top: 20%;
+        display: none;
+    }
+    .fundo-singup{
+        height: 100%;
+        width: 100%;
+    }
+    .bem-vindo{
+        left: 32%;
+        top: 13%;
+    }
+    .faca-login{
+        font-size: 30px;
+        left: 21%;
+        top: 17%;
+    }
+    .E-mail{
+        top: 30%;
+        left: 20%;
+    }
+    .emaild{
+        top: 35%;
+        left: 20%;
+        width: 60%;
+    }
+    .Senha{
+        top: 50%;
+        left: 20%;
+    }
+    .password{
+        top: 55%;
+        left: 20%;
+        width: 60%;
+    }
+    .spanerro{
+        font-size: 24px;
+        font-family:"Roboto-Medium", sans-serif;
+        left: 21%;
+        top: 42%;
+    }
+    .spanerroS{
+        font-size: 24px;
+        font-family:"Roboto-Medium", sans-serif;
+        left: 21%;
+        top: 62%;
+    }
+
+}@media (max-width: 600px){
+    .retang-1{
+        width: 120%;
+        height: 100%;
+        top: 0%;
+        left: 0%;
+        border-radius: 0;
+    }
+    .Entrar{
+        left: 30%;
+    }
+    .msg-cadastre{
+        left: 23%;
+    }
+    .msg-singup{
+        display: none;
+        top: 140%;
+        font-size: 26px;
+    }
+    .logo-singup{
+        height: auto;
+        left: 35%;
+        top: 20%;
+        display: none;
+    }
+    .fundo-singup{
+        height: 120%;
+        width: 100%;
+    }
+    .bem-vindo{
+        font-size: 32;
+        left: 33%;
+        top: 13%;
+    }
+    .faca-login{
+        font-size: 26px;
+        left: 21%;
+        top: 17%;
+    }
+    .E-mail{
+        top: 30%;
+        left: 20%;
+    }
+    .emaild{
+        width: 80%;
+        top: 35%;
+        left: 20%;
+    }
+    .Senha{
+        top: 50%;
+        left: 20%;
+    }
+    .password{
+        width: 80%;
+        top: 55%;
+        left: 20%;
+    }
+    .spanerro{
+        font-size: 24px;
+        font-family:"Roboto-Medium", sans-serif;
+        left: 21%;
+        top: 42%;
+    }
+    .spanerroS{
+        font-size: 24px;
+        font-family:"Roboto-Medium", sans-serif;
+        left: 21%;
+        top: 62%;
+    }
+}
+
+/* .Singup{
+    background-image: linear-gradient(178.98deg,  rgba(16, 157, 166, 1),  rgba(23, 180, 181, 0.97), 
+    rgba(47, 255, 230, 0.85));
+    height: 1080px;
+    position: relative;
+    overflow: hidden; 
 }
 .retang-1{
     background: #ffffff;
@@ -165,8 +528,6 @@
     justify-content: flex-start;
 }
 
-
-
 .logo-singup{
     width: 30.52%;
   height: 36.2%;
@@ -176,4 +537,4 @@
   bottom: 39.17%;
   top: 24.63%;
   overflow: hidden;
-}
+} */

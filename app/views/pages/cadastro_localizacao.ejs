@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cadastroAuxiliar.css">
+    <link rel="stylesheet" href="/css/cadastroLO.css">
+    <script src="js/validacao-login.js"></script>
+    <title> InovaCare </title>
+</head>
+<body class="Singup">
+    <%
+    var cssErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":""}  
+    var msgErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":""}
+    if(erros) {
+
+    erros.errors.forEach(function(itemErro){
+        if (itemErro.path  == "cep"){
+            cssErro.cep = "erro";
+            msgErro.cep = itemErro.msg;                
+        }  
+        if (itemErro.path  == "uf"){
+            cssErro.uf = "erro";
+            msgErro.uf = itemErro.msg;                
+        }  
+        if (itemErro.path  == "endereco"){
+            cssErro.endereco = "erro";
+            msgErro.endereco = itemErro.msg;                
+        }  
+        if (itemErro.path  == "bairro"){
+            cssErro.bairro = "erro";
+            msgErro.bairro = itemErro.msg;                
+        }  
+        if (itemErro.path  == "cidade"){
+            cssErro.cidade = "erro";
+            msgErro.cidade = itemErro.msg;                
+        }  
+    }); 
+    }; %>
+
+    <form id="loginForm" class="loginForm" method="post" action="/cadastro_localizacao_validacao">
+
+    <div class="retang-3"></div>
+    <header class="bem-vindo1"> Crie sua conta</header>
+
+    <main class="faca-login1"> Preencha com suas informações </main>
+
+    <img src="/imagens/fundo-singup.jpg" class="fundo-singup">
+    <img src="/imagens/logo-singup.png" class="logo-singup">
+
+        <label for="endereco" class="Endereco">Endereço</label>
+            <input type="text" id="enderecod" placeholder="Endereço" class="enderecod" name="endereco" value="<%= valores.endereco %>" class="<%= cssErro.endereco %>">
+            <span class="spanerroN"><%= msgErro.endereco %></span>
+
+        <label for="bairro" class="Bairro">Bairro</label>
+            <input type="text" id="bairro" placeholder="Bairro" class="bairrod" name="bairro" value="<%= valores.bairro %>" class="<%= cssErro.bairro %>">
+            <span class="spanerroC"><%= msgErro.bairro %></span>
+
+        <label for="cidade" class="Cidade">Cidade</label>
+            <input type="text" id="cidade" placeholder="Cidade" class="cidaded" name="cidade" value="<%= valores.cidade %>" class="<%= cssErro.cidade %>">
+            <span class="spanerroCI"><%= msgErro.cidade %></span>
+
+        <label for="cep" class="Cep">CEP</label>
+            <input type="text" id="cep" placeholder="CEP" class="cepd" name="cep" value="<%= valores.cep %>" class="<%= cssErro.cep %>">
+            <span class="spanerroD"><%= msgErro.cep %></span>
+
+        <label for="uf" class="Uf">UF</label>
+            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>">
+            <span class="spanerroU"><%= msgErro.uf %></span>
+
+    <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >
+
+</form>
+<p class="msg-cadastre"><a class="cadastre1" href="/home">Sou Profissional</a></p>
+
+<p class="msg-singup">A InovaCare é uma plataforma que oferece atendimento médico e terapêutico
+    através das modalidades do atendimento online e domiciliar.
+</p>
+</body>
+</html>
