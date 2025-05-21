@@ -25,6 +25,10 @@ router.get("/index", function (req, res) {
     res.render("pages/index.ejs")
 });
 
+router.get("/homepro", function (req, res) {
+    res.render("pages/homepro.ejs")
+});
+
 
 router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });
