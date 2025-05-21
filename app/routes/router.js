@@ -26,7 +26,7 @@ router.get("/index", function (req, res) {
 });
 
 router.get("/homepro", function (req, res) {
-    res.render("pages/homepro.ejs")
+    res.render("pages/homepro.ejs");
 });
 
 
