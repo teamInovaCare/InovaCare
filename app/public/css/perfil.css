@@ -6,6 +6,17 @@
 
 }
 
+.ttl-perfil {
+    text-align: center;
+}
+
+.ttl-perfil h3 {
+    font-size: 45px;
+    font-family: sans-serif;
+    color: #f29434;
+}
+
+
 .bg-perfil {
     background-color: #109EA640;
     width: 80%;
