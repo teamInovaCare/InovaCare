@@ -1,0 +1,64 @@
+
+
+.voltar {
+    margin-left: 3%;
+    margin-top: 3%;
+
+}
+
+.bg-perfil {
+    background-color: #109EA640;
+    width: 80%;
+    min-height: 31.25rem;  /* garante que seja visível */
+    color: white;
+    margin: auto;
+    display: flex;
+    padding: 3% 5% 0;
+ }
+
+
+ .esq-bg-perfil {
+    width: 20%;
+}
+
+.esq-bg-perfil img {
+    width: 100%;
+    height: auto;
+}
+
+.dir-bg-perfil {
+    width: 50%;
+    margin-left: 10%;
+}
+
+.infos {
+    .conjunto:nth-of-type(4) {
+        margin-top: 10%;
+    }
+}
+
+.conjunto {
+    margin-bottom: 3%;
+    font-family: arial;
+}
+
+.ttl-campo {
+    color: black;
+    font-size: 0.938rem;
+    margin-bottom: 1%;
+}
+
+
+.campo {
+    background-color: #F4F4F4;
+    border-radius: 20px;
+    min-height: auto; 
+    padding: 0.5rem 1rem;
+    color: black;
+    font-size: 20px;
+}
+
+
+ 
+ 
+ 

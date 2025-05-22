@@ -29,6 +29,10 @@ router.get("/homepro", function (req, res) {
     res.render("pages/homepro.ejs");
 });
 
+router.get("/perfil", function (req, res) {
+  res.render("pages/perfil.ejs");
+});
+
 
 router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });
