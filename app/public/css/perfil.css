@@ -3,7 +3,10 @@
 .voltar {
     margin-left: 3%;
     margin-top: 3%;
+}
 
+.voltar img{
+    width: 2.5%;
 }
 
 .ttl-perfil {
@@ -25,9 +28,19 @@
     margin: auto;
     display: flex;
     padding: 3% 5% 0;
+    margin-top: 5%;
+    flex-direction: column;
+    align-items: center;
  }
 
+ .top {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    
+ }
 
+ 
  .esq-bg-perfil {
     width: 20%;
 }
@@ -66,8 +79,106 @@
     min-height: auto; 
     padding: 0.5rem 1rem;
     color: black;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
+
+.bot {
+    color: black;
+    background-color: #F4F4F4;
+    padding: 1rem;
+    border-radius: 10px;
+    margin: auto;
+    width: 80%;
+    display: flex;
+    font-family: arial;
+    font-size: 0.875rem;
+}
+
+.txt-historico {
+    margin: auto;
+}
+
+
+
+.seta-img {
+    width: 30%;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Classe para aplicar rotação */
+  .seta-img.rotate {
+    transform: rotate(90deg); /* vira para baixo */
+  }
+
+.info-extra {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    width: 80%;
+    background-color: #f4f4f4;
+    color: black;
+    padding: 0 1rem;
+    font-family: arial;
+  }
+  
+  .info-extra p{
+   margin-bottom: 1.5%;
+  }
+
+  .info-extra.show {
+    max-height: 500px; /* suficiente para mostrar tudo */
+    opacity: 1;
+    padding: 1rem;
+  }
+
+  .historico-container {
+    background-color: #F4F4F4;
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 80%;
+    margin: 3% auto;
+    font-family: arial;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+  }
+  
+  .bot-historico {
+    margin-top: 1%;
+    display: flex;
+    color: #00000080;
+
+  }
+
+  @media (max-width: 500px) {
+
+    .voltar img {
+        width: 10%;
+    }
+
+    .top {
+      flex-direction: column;
+      align-items: center; /* centraliza o conteúdo */
+    }
+  
+    .esq-bg-perfil,
+    .dir-bg-perfil {
+      width: 100%; /* ocupa toda a largura */
+      margin-left: 0; /* remove espaçamento lateral */
+    }
+  
+    .dir-bg-perfil {
+      margin-top: 1rem; /* espaço entre a imagem e os campos */
+    }
+  
+    .esq-bg-perfil img {
+      width: 50%; /* reduz o tamanho da imagem para caber bem */
+      max-width: 150px;
+    }
+
+    
+  }
+  
 
 
  

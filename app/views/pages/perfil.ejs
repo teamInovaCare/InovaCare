@@ -144,47 +144,115 @@
         </section>
 
         <section class="bg-perfil">
-            <section class="esq-bg-perfil">
-                <img src="imagens/foto-perfil.png" alt="" srcset="">
-            </section>
-            <section class="dir-bg-perfil">
-                <section class="infos">
-                    <section class="conjunto">
-                        <section class="ttl-campo">Nome:</section>
-                        <section class="campo">Kelly Alves</section>
-                    </section>
+            <section class="top">
+                <section class="esq-bg-perfil">
+                    <img src="imagens/foto-perfil.png" alt="" srcset="">
+                </section>
+                <section class="dir-bg-perfil">
+                    <section class="infos">
+                        <section class="conjunto">
+                            <section class="ttl-campo">Nome:</section>
+                            <section class="campo">Kelly Alves</section>
+                        </section>
 
-                    <section class="conjunto">
-                        <section class="ttl-campo">Data de nascimento:</section>
-                        <section class="campo">19/09/1975</section>
-                    </section>
+                        <section class="conjunto">
+                            <section class="ttl-campo">Data de nascimento:</section>
+                            <section class="campo">19/09/1975</section>
+                        </section>
 
-                    <section class="conjunto">
-                        <section class="ttl-campo">CPF:</section>
-                        <section class="campo">265.647.658-51</section>
-                    </section>
-                    
-                    <section class="conjunto">
-                        <section class="ttl-campo">E-mail:</section>
-                        <section class="campo">kellyalves367@gmail.com</section>
-                    </section>
+                        <section class="conjunto">
+                            <section class="ttl-campo">CPF:</section>
+                            <section class="campo">265.647.658-51</section>
+                        </section>
 
-                    <section class="conjunto">
-                        <section class="ttl-campo">Senha:</section>
-                        <section class="campo">********</section>
-                    </section>
+                        <section class="conjunto">
+                            <section class="ttl-campo">E-mail:</section>
+                            <section class="campo">kellyalves367@gmail.com</section>
+                        </section>
 
-                    <section class="conjunto">
-                        <section class="ttl-campo">Endereço:</section>
-                        <section class="campo">Rua Vitório Tognólio, 814, Jardim das Laranjeiras - Pirassununga - SP</section>
-                    </section>
+                        <section class="conjunto">
+                            <section class="ttl-campo">Senha:</section>
+                            <section class="campo">********</section>
+                        </section>
 
+                        <section class="conjunto">
+                            <section class="ttl-campo">Endereço:</section>
+                            <section class="campo">Rua Vitório Tognólio, 814, Jardim das Laranjeiras - Pirassununga - SP
+                            </section>
+                        </section>
+
+                    </section>
                 </section>
             </section>
-        </section>
+            <section class="historico-container">
+                <section class="bot" onclick="toggleInfoExtra()">
+                    <section class="txt-historico">
+                        <h2>Histórico de Consultas</h2>
+                    </section>
+                    <section class="seta-historico">
+                        <img src="imagens/seta-direita.png" alt="" class="seta-img">
+                    </section>
+                </section>
+
+                <section class="info-extra" id="infoExtra">
+                    <p><strong>Idade:</strong> <br>49 anos 1 mês e 11 dias</p>
+                    <p><strong> Sexo:</strong> <br>Feminino</p>
+                    <p><strong>Possui alguma doença crônica?</strong><br> Não</p>
+                    <p><strong>Medicamento contínuo?</strong> <br>Não</p>
+                    <p><strong>Alergias:</strong> <br>APLV IgE mediada</p>
+                    <p><strong>Cirurgia?</strong> <br>Não</p>
+                    <section class="bot-historico">
+                        <p>Documento visível apenas para profissionais</p>
+                    </section>
+                </section>
+                
+            </section>
+
+
+
+
+
         </section>
 
+
     </main>
+
+    <footer class="footer">
+
+        <section class="footer-logo">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <h3 class="ttl-links">Explorar</h3>
+            <ul class="links">
+                <li><a href="#">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/singup">Especialidades</a></li>
+                <li><a href="/singup">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
+
+    </footer>
+
+    <script>
+        function toggleInfoExtra() {
+            const extra = document.getElementById("infoExtra");
+            const seta = document.querySelector(".seta-img");
+
+            extra.classList.toggle("show");
+            seta.classList.toggle("rotate");
+        }
+    </script>
 
 </body>
 

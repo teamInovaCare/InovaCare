@@ -531,10 +531,28 @@ nav a:hover{
 
 }
 
+.banner-main {
+    img:nth-of-type(2){
+        display: none;
+    }
+}
+
 @media screen and (max-width:640px) {
     .inicia, .inicia1 {
         display: none;
     }
+
+    .banner-main {
+        img:nth-of-type(2){
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .banner {
+        display: none;
+    }
+    
 }
 
 
