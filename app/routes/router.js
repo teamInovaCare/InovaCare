@@ -33,6 +33,10 @@ router.get("/perfil", function (req, res) {
   res.render("pages/perfil.ejs");
 });
 
+router.get("/teste", function (req, res) {
+  res.render("pages/teste.ejs");
+});
+
 
 router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });

@@ -12,13 +12,11 @@ body{
   /* Estilo para o submenu dropdown */
   .dropdown-content {
     display: none;
-    position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     z-index: 1;
     border-radius: 12px;
     position: absolute;
-    left: 65px;
   }
 
   
@@ -527,7 +525,9 @@ nav a:hover{
         width: 30%;
     }
 
-    
+    .banner-botao {
+        font-size: 0.813rem;
+    }    
 
 }
 
@@ -537,9 +537,30 @@ nav a:hover{
     }
 }
 
-@media screen and (max-width:640px) {
+ @media screen and (max-width:640px) {
+
     .inicia, .inicia1 {
         display: none;
+
+    }
+
+    /*
+    .inicia, .inicia1 {   
+    position: relative;  
+    color: #fff;
+    font-size: 3rem;
+    top: -12rem;
+    left: auto;
+    }
+
+
+    .inicia3 {
+        position: relative;
+        display: block;
+        color: #fff;
+        font-size: 1.563rem;
+        left: auto;
+        top: -9.375rem;
     }
 
     .banner-main {
@@ -552,8 +573,8 @@ nav a:hover{
     .banner {
         display: none;
     }
-    
-}
+    */
+} 
 
 
 

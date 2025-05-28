@@ -73,20 +73,20 @@
                     <img class="logo3" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
-    
+
             <ul class="menu-list-direita">
                 <article class="icon-lupa"><i class="bi bi-search"></i></article>
                 <article class="texto-icon"><!--pesquisa--></article>
                 <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
                 <article class="texto-icon"><!--perfil--></article>
-                
+
                 <!-- Botão do menu hambúrguer -->
                 <button class="hamburguer" onclick="toggleMenu()">
                     <div class="linha"></div>
                     <div class="linha"></div>
-                    <div class="linha"></div>                  
+                    <div class="linha"></div>
                 </button>
-                
+
                 <!-- Menu suspenso do hambúrguer -->
                 <div id="hamburger-menu" class="hamburger-menu-content">
                     <a href="/especialidades">Agendamento</a>
@@ -121,7 +121,7 @@
 
     <section class="perfis">
 
-        <section class="retangulo">
+        <section id="smallRectangle" class="retangulo">
             <section class="small-rectangle" id="smallRectangle">
                 <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
                 <section class="infos">
@@ -129,113 +129,131 @@
                     <p class="idnt">CRM - SP 284692</p>
                     <p>R$ 180,00</p>
                     <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    </section>
-                    <section class="tabela-tablet">
-                       
                 </section>
-                
+                <section class="tabela-tablet">
+
+                </section>
+
             </section>
         </section>
 
         <section class="overlay" id="overlay">
-            <section class="large-rectangle">
-                <section class="coluna-esq">
-                    <img src="imagens/perfil.png" alt="Imagem" class="perfil2">
-                    <h2>Sobre</h2>
-                    <p>Cleber Jr</p>
-                    <p>CRM - SP 284692</p>
-                    <section class="barrinha"></section>
-                    <h2>Formação</h2>
-                    <p>Faculdade</p>
-                    <section class="barrinha"></section>
-                    <h2>Idiomas</h2>
-                    <p>Fluente em inglês</p>
-                </section>
-                <section class="coluna-dir">
-                    <section class="slider">
-                        <button class="slider-btn" id="prevBtn">&lt;</button>
-                        <table id="sliderTable">
-                            <tr>
-                                <th>21/08</th>
-                                <th>22/08</th>
-                                <th>23/08</th>
-                                <th>24/08</th>
-                            </tr>
-                            <tr>
-                                <td>10:00</td>
-                                <td>10:00</td>
-                                <td>10:00</td>
-                                <td>10:00</td>
-                            </tr>
-                            <tr>
-                                <td>11:00</td>
-                                <td>11:00</td>
-                                <td>11:00</td>
-                                <td>11:00</td>
-                            </tr>
-                        </table>
-                        <button class="slider-btn" id="nextBtn">&gt;</button>
+            <section class="overlay-content">
+                <section class="large-rectangle">
+                    <section class="coluna-esq">
+                        <img src="imagens/perfil.png" alt="Imagem" class="perfil2">
+                        <h2>Sobre</h2>
+                        <p>Cleber Jr</p>
+                        <p>CRM - SP 284692</p>
+                        <section class="barrinha"></section>
+                        <h2>Formação</h2>
+                        <p>Faculdade</p>
+                        <section class="barrinha"></section>
+                        <h2>Idiomas</h2>
+                        <p>Fluente em inglês</p>
                     </section>
-                    <!-- Botão abaixo da tabela -->
-                    <a href="/consultas">
-                        <button id="submitButton" class="submit-btn">Agendar</button>
-                    </a>
+                    <section class="coluna-dir">
+
+                        <section id="step1" style="display: none;" class="etapa1">
+                            <h2>Escolha a modalidade</h2>
+                            <img src="imagens/pczin.png" alt="Imagem">
+                            <button id="confirmStep1" class="submit-btn">Confirmar</button>
+                        </section>
+
+                        <section id="step2" style="display: none;">
+
+                            <section class="voltar-overlay">
+                                
+                                    <img id="voltarSeta" class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+                             
+                            </section>
+
+                        <section class="slider">
+                            <button class="slider-btn" id="prevBtn">&lt;</button>
+                            <table id="sliderTable">
+                                <tr>
+                                    <th>21/08</th>
+                                    <th>22/08</th>
+                                    <th>23/08</th>
+                                    <th>24/08</th>
+                                </tr>
+                                <tr>
+                                    <td>10:00</td>
+                                    <td>10:00</td>
+                                    <td>10:00</td>
+                                    <td>10:00</td>
+                                </tr>
+                                <tr>
+                                    <td>11:00</td>
+                                    <td>11:00</td>
+                                    <td>11:00</td>
+                                    <td>11:00</td>
+                                </tr>
+                            </table>
+                            <button class="slider-btn" id="nextBtn">&gt;</button>
+                        </section>
+                        <!-- Botão abaixo da tabela -->
+                        <a href="/consultas">
+                            <button id="submitButton" class="submit-btn">Agendar</button>
+                        </a>
+                    </section>
                 </section>
             </section>
         </section>
+    </section>
 
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle2">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="info-cima"></section>
-                    <p class="nome">Marina Silva</p>
-                    <p class="idnt">CRM - RJ 103456</p>
-                    <p>R$ 120,00</p>
-                    <p class="nota">4,8 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                </section>
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle2">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Marina Silva</p>
+                <p class="idnt">CRM - RJ 103456</p>
+                <p>R$ 120,00</p>
+                <p class="nota">4,8 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
             </section>
         </section>
+    </section>
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle3">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="info-cima"></section>
-                    <p class="nome">Jorge Santos</p>
-                    <p class="idnt">CRM - RJ 120383</p>
-                    <p>R$ 180,00</p>
-                    <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                </section>
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle3">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Jorge Santos</p>
+                <p class="idnt">CRM - RJ 120383</p>
+                <p>R$ 180,00</p>
+                <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
             </section>
         </section>
+    </section>
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle4">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="info-cima"></section>
-                    <p class="nome">Bruno Pacheco</p>
-                    <p class="idnt">CRM - SP 612029</p>
-                    <p>R$ 210,00</p>
-                    <p class="nota">5 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                </section>
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle4">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Bruno Pacheco</p>
+                <p class="idnt">CRM - SP 612029</p>
+                <p>R$ 210,00</p>
+                <p class="nota">5 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
             </section>
         </section>
+    </section>
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle5">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="info-cima"></section>
-                    <p class="nome">Jéssica Matos</p>
-                    <p class="idnt">CRM - SP 389237</p>
-                    <p>R$ 80,00</p>
-                    <p class="nota">4,7 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                </section>
+    <section class="retangulo">
+        <section class="small-rectangle" id="smallRectangle5">
+            <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
+            <section class="infos">
+                <section class="info-cima"></section>
+                <p class="nome">Jéssica Matos</p>
+                <p class="idnt">CRM - SP 389237</p>
+                <p>R$ 80,00</p>
+                <p class="nota">4,7 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
             </section>
         </section>
+    </section>
 
     </section>
 
