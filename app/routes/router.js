@@ -37,6 +37,14 @@ router.get("/teste", function (req, res) {
   res.render("pages/teste.ejs");
 });
 
+router.get("/prontuario", function (req, res) {
+  res.render("pages/prontuario.ejs");
+});
+
+router.get("/prontugeral", function (req, res) {
+  res.render("pages/prontugeral.ejs");
+});
+
 
 router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });

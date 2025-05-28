@@ -240,6 +240,55 @@
     top: 0px;
 }
 
+.retang-3{
+    background: #ffffff;
+    border-radius: 75px;
+    width: 1088px;
+    height: 1080px;
+    position: absolute;
+    left: 938px;
+    top: 0px;
+}
+.bem-vindo1 {
+    color: #109ea6;
+    text-align: left;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 57px;
+    line-height: 64px;
+    letter-spacing: -0.25px;
+    font-weight: 400;
+    position: absolute;
+    left: 1255px;
+    top: 179px;
+    width: 366px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-text-stroke: 2px #109ea6;
+}
+.faca-login1{
+    color: #6b6b6b;
+    text-align: left;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 36px;
+    line-height: 44px;
+    width: 525px;
+    font-weight: 400;
+    position: absolute;
+    left: 1173px;
+    top: 237px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.cadastre1{
+    text-decoration: none;
+    color: #109ea6;
+    position: relative;
+    left: 55%;
+}
+
 @media (max-width: 925px){
     .retang-3{
         width: 90%;
@@ -258,3 +307,4 @@
         border-radius: 0;
     }
 }
+

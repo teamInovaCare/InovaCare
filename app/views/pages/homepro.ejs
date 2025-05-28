@@ -227,9 +227,17 @@
             },
             loop: true,
             simulateTouch: true,
-            mousewheelControl: false
+            mousewheelControl: false,
 
-        });
+            breakpoints: {
+                767: {
+                slidesPerView: 3
+            },
+            1023: {
+                slidesPerView: 4
+            }
+        } 
+    });
 
         $(document).ready(function () {
 

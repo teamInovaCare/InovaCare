@@ -36,6 +36,12 @@
         })
     }; %>
 
+    <section class="voltar">
+        <a href="/cadastro_localizacao">
+            <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+        </a>
+    </section>
+
     <form id="loginForm" class="loginForm" method="post" action="/cadastro_dados_validacao">
 
     <div class="retang-3"></div>
@@ -58,7 +64,7 @@
             <input type="text" id="senhad" placeholder="Senha" class="senhad" name="senha" value="<%= valores.senha %>" class="<%= erroValidacao.senha %>">
             <span class="spanerroD"><%= msgErro.senha %></span>
 
-        <label for="repsenha" class="repSenha">Cofirme sua senha</label>
+        <label for="repsenha" class="repSenha">Confirme sua senha</label>
             <input type="text" id="repsenhad" placeholder="Senha" class="repsenhad" name="repsenha" value="<%= valores.repsenha %>" class="<%= erroValidacao.repsenha %>">
             <span class="spanerroCS"><%= msgErro.repsenha %></span>
 

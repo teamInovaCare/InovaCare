@@ -51,7 +51,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 65px;
+    margin-top: 20px;
 }
 
 .small-rectangle {
@@ -60,7 +60,7 @@ a {
     padding: 10px;
     cursor: pointer;
     background-color: #f2f2f2;
-    width: 75%;
+    width: 1300px;
     height: 150px;
     border-radius: 16px;
 }
@@ -113,45 +113,6 @@ a {
     margin-bottom: 20px;
 }
 
-.etapa1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    height: 100%;
-}
-
-.etapa1 h2 {
-    margin-bottom: 5%;
-}
-
-.etapa1 img {
-    width: 20%; 
-    cursor: pointer;
-}
-
-.etapa1 button {
-    margin-top: 10%;
-}
-
-.titulo-step1 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 20px;
-    font-size: 24px;
-    color: #003f5c;
-}
-
-.imagem-step1 {
-    width: 50%;
-    margin: auto;
-    margin-top: 80px;
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-
 .overlay {
     position: fixed;
     top: 0;
@@ -170,7 +131,7 @@ a {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 100%;
+    width: 850px;
     height: 600px;
     overflow-y: auto;
     display: flex;
@@ -212,9 +173,12 @@ a {
 
 .coluna-esq, .coluna-dir {
     flex: 1;
+    min-width: 200px;
 }
 
-
+.coluna-dir {
+    margin-top:20%;
+}
 
 .slider {
     display: flex;
@@ -308,28 +272,79 @@ a {
     display: none;
 }
 
-@media screen and (max-width:768px) {  
 
-    .large-rectangle {  
-        flex-direction: column;  
-        width: 80%;
-        margin: auto;    
-    }
-
-    .coluna-esq {
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .etapa1 img {
-        width: 15%;
-    }
-
-
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
 
-/*
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #20b3b2;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#container-medicos {
+    display: flex;
+    justify-content: flex-start;
+    gap: 32px;
+     margin-bottom: 8px;
+    margin-top: 18px;
+    max-width: 1300px;            
+    margin-left: auto;
+    margin-right: auto;
+     width: 100%;
+}
+
 @media screen and (max-width:768px) {
     
     .retangulo{
@@ -343,9 +358,7 @@ a {
     }
 
     .large-rectangle {
-        flex-direction: column;    
-        width: 80%;
-        margin: auto;    
+        flex-direction: column;        
     }
 
     .coluna-dir {
@@ -355,5 +368,12 @@ a {
     .coluna-esq {
         border: none;
     }
-}  
-    
+
+     #container-medicos {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+

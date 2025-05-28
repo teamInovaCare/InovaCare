@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/prontuario.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <title> InovaCare </title>
+</head>
+
+<body>
+
+    <header>
+        <nav class="menu desktop">
+
+            <!--barra de navegação-->
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/index">
+                    <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <div class="dropdown-content">
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
+                <li><a id="areas-link" class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="areas" href="/consultas">Área de consultas</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil" onclick="toggleProfileMenu()">
+                    <i class="bi bi-person-circle"></i>
+                    <div id="profile-dropdown" class="profile-dropdown">
+                        <a href="/">Sair</a>
+                    </div>
+                </article>
+                <article class="texto-icon"><!--perfil--></article>
+            </ul>
+
+            <script>
+                function toggleProfileMenu() {
+                    const profileDropdown = document.getElementById("profile-dropdown");
+                    profileDropdown.style.display = profileDropdown.style.display === "block" ? "none" : "block";
+                }
+
+                // Fecha o menu ao clicar fora dele
+                window.addEventListener("click", function (event) {
+                    const profileDropdown = document.getElementById("profile-dropdown");
+                    const iconPerfil = document.querySelector(".icon-perfil");
+                    if (!iconPerfil.contains(event.target)) {
+                        profileDropdown.style.display = "none";
+                    }
+                });
+            </script>
+
+        </nav>
+
+        <nav class="menu mobile">
+            <section class="menu-logo">
+                <a href="/index">
+                    <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                </a>
+                <a href="/index">
+                    <img class="logo3" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-list-direita">
+                <article class="icon-lupa"><i class="bi bi-search"></i></article>
+                <article class="texto-icon"><!--pesquisa--></article>
+                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
+                <article class="texto-icon"><!--perfil--></article>
+
+                <!-- Botão do menu hambúrguer -->
+                <button class="hamburguer" onclick="toggleMenu()">
+                    <div class="linha"></div>
+                    <div class="linha"></div>
+                    <div class="linha"></div>
+                </button>
+
+                <!-- Menu suspenso do hambúrguer -->
+                <div id="hamburger-menu" class="hamburger-menu-content">
+                    <a href="/especialidades">Agendamento</a>
+                    <a href="/consultas">Área de consultas</a>
+                    <a href="/">Sair</a>
+                </div>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+    </header>
+
+    <main>
+
+        <section class="voltar">
+            <a href="/index">
+                <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+            </a>
+        </section>
+
+        <h1>Prontuários e Receitas</h1>
+        <section class="card" aria-label="Dados do Paciente">
+        <header class="card-header">
+            <figure class="avatar-figure">
+                <img src="imagens/pfp-prontuario.png" alt="Foto Paciente" class="avatar" />
+            </figure>
+        <address>
+            <strong>Paciente:</strong> Amélia Viana Peixoto<br>
+            <strong>Modalidade:</strong> online
+        </address>
+        <aside class="card-header-right">
+          <span><strong>Data:</strong> 05/04/2025</span><br>
+          <span><strong>Horário:</strong> 15:45</span>
+        </aside>
+      </header>
+      <button class="main-btn" onclick="window.location.href='/prontugeral'">Prontuário</button>
+      <section class="download-info" aria-label="Baixar modelos">
+        <img src="download.svg" alt="Baixar">
+        <span>Clique aqui para baixar os modelos que serão anexados</span>
+      </section>
+
+    <section class="actions">
+    <label for="receita" class="input-label">Anexar Receita Médica</label>
+    <input type="file" id="receita" name="receita" class="input-file" accept="application/pdf" />
+
+    <figure id="preview-receita" style="display:none; margin-top:8px;">
+        <figcaption id="caption-receita"></figcaption>
+    </figure>
+
+    <label for="pedido-exame" class="input-label">Anexar pedido de exame</label>
+    <input type="file" id="pedido-exame" name="pedido-exame" class="input-file" accept="application/pdf" />
+
+    <figure id="preview-exame" style="display:none; margin-top:8px;">
+        <figcaption id="caption-exame"></figcaption>
+    </figure>
+    </section>
+
+    <script>
+    document.getElementById('receita').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('preview-receita');
+    const caption = document.getElementById('caption-receita');
+    if (file) {
+        preview.style.display = 'block';
+        caption.textContent = file.name + (file.type === 'application/pdf' ? ' (PDF selecionado)' : '');
+    } else {
+        preview.style.display = 'none';
+        caption.textContent = '';
+    }
+    });
+    document.getElementById('pedido-exame').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('preview-exame');
+    const caption = document.getElementById('caption-exame');
+    if (file) {
+        preview.style.display = 'block';
+        caption.textContent = file.name + (file.type === 'application/pdf' ? ' (PDF selecionado)' : '');
+    } else {
+        preview.style.display = 'none';
+        caption.textContent = '';
+    }
+    });
+    </script>
+
+    </section>
+  </main>
+
+    <footer class="footer">
+
+        <section class="footer-logo">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <h3 class="ttl-links">Explorar</h3>
+                <li><a href="#">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/singup">Especialidades</a></li>
+                <li><a href="/singup">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
+
+    </footer>
+
+    <script>
+        function toggleInfoExtra() {
+            const extra = document.getElementById("infoExtra");
+            const seta = document.querySelector(".seta-img");
+
+            extra.classList.toggle("show");
+            seta.classList.toggle("rotate");
+        }
+    </script>
+
+</body>
+
+</html>
