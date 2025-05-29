@@ -53,19 +53,19 @@
     <img src="/imagens/logo-singup.png" class="logo-singup">
 
         <label for="email" class="Email">Insira seu E-mail</label>
-            <input type="text" id="emaild" placeholder="E-mail" class="emaild" name="email" value="<%= valores.email %>" class="<%= erroValidacao.email %>">
+            <input type="text" id="emaild" placeholder="E-mail" class="emaild" name="email" value="<%= valores.email %>" class="<%= erroValidacao.email %>" required>
             <span class="spanerroE"><%= msgErro.email %></span>
 
         <label for="repemail" class="repEmail">Confirme seu E-mail</label>
-            <input type="text" id="repemaild" placeholder="E-mail" class="repemaild" name="repemail" value="<%= valores.repemail %>" class="<%= erroValidacao.repemail %>">
+            <input type="text" id="repemaild" placeholder="E-mail" class="repemaild" name="repemail" value="<%= valores.repemail %>" class="<%= erroValidacao.repemail %>" required>
             <span class="spanerroCE"><%= msgErro.repemail %></span>
 
         <label for="senha" class="Senhaa">Insira sua senha</label>
-            <input type="text" id="senhad" placeholder="Senha" class="senhad" name="senha" value="<%= valores.senha %>" class="<%= erroValidacao.senha %>">
+            <input type="text" id="senhad" placeholder="Senha" class="senhad" name="senha" value="<%= valores.senha %>" class="<%= erroValidacao.senha %>" minlength="8" maxlength="16" required>
             <span class="spanerroD"><%= msgErro.senha %></span>
 
         <label for="repsenha" class="repSenha">Confirme sua senha</label>
-            <input type="text" id="repsenhad" placeholder="Senha" class="repsenhad" name="repsenha" value="<%= valores.repsenha %>" class="<%= erroValidacao.repsenha %>">
+            <input type="text" id="repsenhad" placeholder="Senha" class="repsenhad" name="repsenha" value="<%= valores.repsenha %>" class="<%= erroValidacao.repsenha %>" minlength="8" maxlength="16" required>
             <span class="spanerroCS"><%= msgErro.repsenha %></span>
 
 

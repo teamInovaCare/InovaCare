@@ -58,23 +58,23 @@
     <img src="/imagens/logo-singup.png" class="logo-singup">
 
         <label for="endereco" class="Endereco">Endereço</label>
-            <input type="text" id="enderecod" placeholder="Endereço" class="enderecod" name="endereco" value="<%= valores.endereco %>" class="<%= cssErro.endereco %>">
+            <input type="text" id="enderecod" placeholder="Endereço" class="enderecod" name="endereco" value="<%= valores.endereco %>" class="<%= cssErro.endereco %>" required>
             <span class="spanerroN"><%= msgErro.endereco %></span>
 
         <label for="bairro" class="Bairro">Bairro</label>
-            <input type="text" id="bairro" placeholder="Bairro" class="bairrod" name="bairro" value="<%= valores.bairro %>" class="<%= cssErro.bairro %>">
+            <input type="text" id="bairro" placeholder="Bairro" class="bairrod" name="bairro" value="<%= valores.bairro %>" class="<%= cssErro.bairro %>" required>
             <span class="spanerroC"><%= msgErro.bairro %></span>
 
         <label for="cidade" class="Cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="Cidade" class="cidaded" name="cidade" value="<%= valores.cidade %>" class="<%= cssErro.cidade %>">
+            <input type="text" id="cidade" placeholder="Cidade" class="cidaded" name="cidade" value="<%= valores.cidade %>" class="<%= cssErro.cidade %>" required>
             <span class="spanerroCI"><%= msgErro.cidade %></span>
 
         <label for="cep" class="Cep">CEP</label>
-            <input type="text" id="cep" placeholder="CEP" class="cepd" name="cep" value="<%= valores.cep %>" class="<%= cssErro.cep %>">
+            <input type="text" id="cep" placeholder="CEP" class="cepd" name="cep" value="<%= valores.cep %>" class="<%= cssErro.cep %>" required>
             <span class="spanerroD"><%= msgErro.cep %></span>
 
         <label for="uf" class="Uf">UF</label>
-            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>">
+            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>" required>
             <span class="spanerroU"><%= msgErro.uf %></span>
 
     <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >

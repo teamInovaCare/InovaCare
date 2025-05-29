@@ -230,6 +230,41 @@
     color: red;
     font-size: 18px;
 }
+.spanerroCI{
+    position: absolute;
+    left: 1475px;
+    top: 580px;
+    color: red;
+    font-size: 18px;
+}
+.spanerroU{
+    position: absolute;
+    left: 1475px;
+    top: 715px;
+    color: red;
+    font-size: 18px;
+}
+.spanerroD{
+    position: absolute;
+    left: 1175px;
+    top: 715px;
+    color: red;
+    font-size: 18px;
+}
+.spanerroC{
+    position: absolute;
+    left: 1175px;
+    top: 580px;
+    color: red;
+    font-size: 18px;
+}
+.spanerroN{
+    position: absolute;
+    left: 1175px;
+    top: 442px;
+    color: red;
+    font-size: 18px;
+}
 .retang-3{
     background: #ffffff;
     border-radius: 75px;
