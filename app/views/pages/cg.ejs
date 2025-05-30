@@ -207,51 +207,69 @@ renderizarMedicos(medicos);
         </section>
 
         <section class="overlay" id="overlay">
-            <section class="large-rectangle">
-                <section class="coluna-esq">
-                    <img src="imagens/perfil.png" alt="Imagem" class="perfil2">
-                    <h2>Sobre</h2>
-                    <p>Cleber Jr</p>
-                    <p>CRM - SP 284692</p>
-                    <section class="barrinha"></section>
-                    <h2>Formação</h2>
-                    <p>Faculdade</p>
-                    <section class="barrinha"></section>
-                    <h2>Idiomas</h2>
-                    <p>Fluente em inglês</p>
-                </section>
-                <section class="coluna-dir">
-                    <section class="slider">
-                        <button class="slider-btn" id="prevBtn">&lt;</button>
-                        <table id="sliderTable">
-                            <tr>
-                                <th>21/08</th>
-                                <th>22/08</th>
-                                <th>23/08</th>
-                                <th>24/08</th>
-                            </tr>
-                            <tr>
-                                <td>10:00</td>
-                                <td>10:00</td>
-                                <td>10:00</td>
-                                <td>10:00</td>
-                            </tr>
-                            <tr>
-                                <td>11:00</td>
-                                <td>11:00</td>
-                                <td>11:00</td>
-                                <td>11:00</td>
-                            </tr>
-                        </table>
-                        <button class="slider-btn" id="nextBtn">&gt;</button>
+            <section class="overlay-content">
+                <section class="large-rectangle">
+                    <section class="coluna-esq">
+                        <img src="imagens/perfil.png" alt="Imagem" class="perfil2">
+                        <h2>Sobre</h2>
+                        <p>Cleber Jr</p>
+                        <p>CRM - SP 284692</p>
+                        <section class="barrinha"></section>
+                        <h2>Formação</h2>
+                        <p>Faculdade</p>
+                        <section class="barrinha"></section>
+                        <h2>Idiomas</h2>
+                        <p>Fluente em inglês</p>
                     </section>
-                    <!-- Botão abaixo da tabela -->
-                    <a href="/consultas">
-                        <button id="submitButton" class="submit-btn">Agendar</button>
-                    </a>
+                    <section class="coluna-dir">
+
+                        <section id="step1" style="display: none;" class="etapa1">
+                            <h2>Escolha a modalidade</h2>
+                            <img src="imagens/pczin.png" alt="Imagem">
+                            <button id="confirmStep1" class="submit-btn">Confirmar</button>
+                        </section>
+
+                        <section id="step2" style="display: none;">
+
+                            <section class="voltar-overlay">
+                                
+                                    <img id="voltarSeta" class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+                             
+                            </section>
+
+                        <section class="slider">
+                            <button class="slider-btn" id="prevBtn">&lt;</button>
+                            <table id="sliderTable">
+                                <tr>
+                                    <th>21/08</th>
+                                    <th>22/08</th>
+                                    <th>23/08</th>
+                                    <th>24/08</th>
+                                </tr>
+                                <tr>
+                                    <td>10:00</td>
+                                    <td>10:00</td>
+                                    <td>10:00</td>
+                                    <td>10:00</td>
+                                </tr>
+                                <tr>
+                                    <td>11:00</td>
+                                    <td>11:00</td>
+                                    <td>11:00</td>
+                                    <td>11:00</td>
+                                </tr>
+                            </table>
+                            <button class="slider-btn" id="nextBtn">&gt;</button>
+                        </section>
+                        <!-- Botão abaixo da tabela -->
+                        <a href="/consultas">
+                            <button id="submitButton" class="submit-btn">Agendar</button>
+                        </a>
+                    </section>
                 </section>
             </section>
         </section>
+    </section>
 
 
         <section class="retangulo">
