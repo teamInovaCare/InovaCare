@@ -25,9 +25,19 @@ router.get("/index", function (req, res) {
     res.render("pages/index.ejs")
 });
 
-router.get("/homepro", function (req, res) {
+router.get("/homepro", function (req, res) {//home do profissional
     res.render("pages/homepro.ejs");
 });
+
+router.get("/cadastro_prof", function (req, res) {//cadastro do profissional
+    res.render("pages/cadastro_prof.ejs");
+});
+
+router.get("/login_prof", function (req, res) {//login do profissional
+    res.render("pages/login_prof.ejs");
+});
+
+
 
 router.get("/perfil", function (req, res) {
   res.render("pages/perfil.ejs");
@@ -37,11 +47,11 @@ router.get("/teste", function (req, res) {
   res.render("pages/teste.ejs");
 });
 
-router.get("/prontuario", function (req, res) {
+router.get("/prontuario", function (req, res) {//prontuario profissional
   res.render("pages/prontuario.ejs");
 });
 
-router.get("/prontugeral", function (req, res) {
+router.get("/prontugeral", function (req, res) {//prontuario profissional
   res.render("pages/prontugeral.ejs");
 });
 

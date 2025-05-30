@@ -74,7 +74,7 @@
             <span class="spanerroD"><%= msgErro.cep %></span>
 
         <label for="uf" class="Uf">UF</label>
-            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>" required>
+            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>" maxlength="2" required>
             <span class="spanerroU"><%= msgErro.uf %></span>
 
     <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >
