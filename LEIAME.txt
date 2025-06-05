@@ -5,5 +5,7 @@ e digite:
 
 **** npm install
 
+**** npm install express-session
 
+**** npm install mysql2 --save
 
