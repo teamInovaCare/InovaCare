@@ -9,3 +9,5 @@ e digite:
 
 **** npm install mysql2 --save
 
+
+**** npm install bcryptjs --save

@@ -61,7 +61,7 @@ router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });
 });
 
-router.post(
+/*router.post(
     "/singup_post",
     body("email").isEmail().withMessage("Email inválido."),
     body("senha").isStrongPassword().withMessage("Senha muito fraca!"),
@@ -73,12 +73,17 @@ router.post(
     }
         return res.render("pages/index", { "erros": null, "valores":req.body,"retorno":req.body});
     }
-);
+);*/
+
+router.post("/singup_post", usuarioController.validalogin, 
+    (req,res)=>{
+        usuarioController.login(req,res);
+    }
+)
 
 router.get('/cadastro_inicial', function(req,res){
     res.render('pages/cadastro_inicial', { "erros": null, "valores": {"nome":"","cpf":"","data":"",},"retorno":null });  
 })
-
 
 
 router.post("/cadastro_inicial_validacao", usuarioController.validacaduser, 

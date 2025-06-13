@@ -141,8 +141,79 @@ const bcrypt = require('bcryptjs');
     
   },
 
-  
 
+
+
+    validalogin: [
+    body("email").isEmail().withMessage("Email inválido."),
+    body("senha").isStrongPassword().withMessage("Senha inválida!"),
+
+   ],
+
+
+    login: async (req,res) => {
+      const errors = validationResult(req);
+      if(!errors.isEmpty()){
+        console.log(errors);
+        return res.render("pages/singup", {"erros": errors, "valores":req.body, "retorno": null});
+      }else {
+        var email_usuario = req.body.email;
+        var senha_digitada = req.body.senha;
+
+      };
+
+      try{
+        let resultSelect = await usuarioModel.selectusermail(email_usuario, senha_digitada);
+        if(resultSelect.success){/**LOGIN OKAY GAROTA! */
+          console.log(resultSelect);
+          res.render("pages/index");
+
+        }else{/**LOGIN FALHOU GATA - ou deu ruim no email ou na senha- precisa criar um objeto de erro customizado */
+          
+          let customErrors = {
+            errors:[
+              {
+                path: resultSelect.message.includes("senha")? "senha": "email",
+                msg: resultSelect.message
+              }
+            ]
+          };
+          return res.render("pages/singup", {"erros": customErrors, "valores": req.body, "retorno": null});
+        }
+
+      }catch(errors){
+        console.log("Erro ao efetuar o login", errors);
+    return res.render("pages/singup", {
+      "errors": {
+        errors: [{ path: "email", msg: "Erro interno no servidor" }]
+      },
+      "valores": req.body,
+      "retorno": null
+    });
+  }
+}
+
+    
+
+   /**OLHA O EXEMPLOOOOOO GAROROTAAAAAAA 
+    * 
+    * try{
+      let resultInsert = await usuarioModel.create(dadosFormulario);
+      if(resultInsert){
+        console.log(resultInsert);
+        res.render("pages/index");
+      }else {
+        res.render("pages/cadastro_dados",{"erros": errors, "valores": req.body, "retorno": null} )
+      }
+
+    }catch(errors){
+      console.log("Erro no cadastro" + errors);
+      return false
+
+    }
+   */
+
+   
 };
 
   module.exports= usuarioController;
