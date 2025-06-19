@@ -13,8 +13,8 @@
 </head>
 <body class="Singup">
     <%
-    var cssErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":""}  
-    var msgErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":""}
+    var cssErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":"", "numero":"", "complemento":""}  
+    var msgErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":"", "numero":"", "complemento":""}
     if(erros) {
 
     erros.errors.forEach(function(itemErro){
@@ -38,18 +38,25 @@
             cssErro.cidade = "erro";
             msgErro.cidade = itemErro.msg;                
         }  
+        if (itemErro.path  == "numero"){
+            cssErro.numero = "erro";
+            msgErro.numero = itemErro.msg;                
+        }  
+        if (itemErro.path  == "complemento"){
+            cssErro.complemento = "erro";
+            msgErro.complemento = itemErro.msg;                
+        }  
     }); 
     }; %>
 
+    <form id="loginForm" class="loginForm" method="post" action="/cadastro_localizacao_validacao">
     <section class="voltar">
         <a href="/cadastro_inicial">
             <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
         </a>
-    </section>
+    </section>
+    <section class="retang-3"></section>
 
-    <form id="loginForm" class="loginForm" method="post" action="/cadastro_localizacao_validacao">
-
-    <div class="retang-3"></div>
     <header class="bem-vindo1"> Crie sua conta</header>
 
     <main class="faca-login1"> Preencha com suas informações </main>
@@ -57,25 +64,36 @@
     <img src="/imagens/fundo-singup.jpg" class="fundo-singup">
     <img src="/imagens/logo-singup.png" class="logo-singup">
 
+    
+
+
         <label for="endereco" class="Endereco">Endereço</label>
             <input type="text" id="enderecod" placeholder="Endereço" class="enderecod" name="endereco" value="<%= valores.endereco %>" class="<%= cssErro.endereco %>" required>
-            <span class="spanerroN"><%= msgErro.endereco %></span>
+            <section class="spanerroN"><%= msgErro.endereco %></section>
 
         <label for="bairro" class="Bairro">Bairro</label>
-            <input type="text" id="bairro" placeholder="Bairro" class="bairrod" name="bairro" value="<%= valores.bairro %>" class="<%= cssErro.bairro %>" required>
-            <span class="spanerroC"><%= msgErro.bairro %></span>
+            <input type="text" id="bairro" placeholder="Bairro" class="bairrod" name="bairro" value="<%= valores.bairro %>" class="<%= cssErro.bairro %>"required>
+            <section class="spanerroC"><%= msgErro.bairro %></section>
 
         <label for="cidade" class="Cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="Cidade" class="cidaded" name="cidade" value="<%= valores.cidade %>" class="<%= cssErro.cidade %>" required>
-            <span class="spanerroCI"><%= msgErro.cidade %></span>
+            <input type="text" id="cidade" placeholder="Cidade" class="cidaded" name="cidade" value="<%= valores.cidade %>" class="<%= cssErro.cidade %>"required>
+            <section class="spanerroCI"><%= msgErro.cidade %></section>
 
         <label for="cep" class="Cep">CEP</label>
-            <input type="text" id="cep" placeholder="CEP" class="cepd" name="cep" value="<%= valores.cep %>" class="<%= cssErro.cep %>" required>
-            <span class="spanerroD"><%= msgErro.cep %></span>
+            <input type="text" id="cep" placeholder="CEP" class="cepd" name="cep" value="<%= valores.cep %>" class="<%= cssErro.cep %>"required>
+            <section class="spanerroD"><%= msgErro.cep %></section>
 
         <label for="uf" class="Uf">UF</label>
-            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>" maxlength="2" required>
-            <span class="spanerroU"><%= msgErro.uf %></span>
+            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>"required>
+            <section class="spanerroU"><%= msgErro.uf %></section>
+        
+        <label for="numero" class="Numero">Número</label>
+            <input type="text" id="numero" placeholder="Número" class="numerod" name="numero" value="<%= valores.numero %>" class="<%= cssErro.numero %>"required>
+            <section class="spanerroNM"><%= msgErro.numero %></section>
+
+        <label for="complemento" class="complemento">Complemento</label>
+            <input type="text" id="complemento" placeholder="Complemento" class="complementod" name="complemento" value="<%= valores.complemento %>" class="<%= cssErro.complemento %>"required>
+            <section class="spanerroCMP"><%= msgErro.complemento %></section>
 
     <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >
 

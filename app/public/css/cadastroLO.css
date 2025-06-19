@@ -1,4 +1,4 @@
-    /* CADASTRO LOCALIZAÇÃO */
+/* CADASTRO LOCALIZAÇÃO */
 .enderecod{
     color: #8b8b8b;
     text-align: start;
@@ -19,7 +19,7 @@
     height: 69px;
     position: absolute;
     left: 1154px;
-    top: 369px;
+    top: 430px;
     border: 0;
 }
 .Endereco{
@@ -31,7 +31,7 @@
     font-weight: 400;
     position: absolute;
     left: 1174px;
-    top: 330px;
+    top: 390px;
     width: 306px;
     height: 39px;
     display: flex;
@@ -45,9 +45,8 @@
     font-size: 24px;
     line-height: 32px;
     font-weight: 400;
-    position: absolute;
     left: 1154px;
-    top: 365px;
+    top: 640px;
     width: 82px;
     height: 39px;
     display: flex;
@@ -80,7 +79,7 @@
     height: 69px;
     position: absolute;
     left: 1154px;
-    top: 505px;
+    top: 545px;
     border: 0;
 }
 .Bairro{
@@ -92,7 +91,7 @@
     font-weight: 400;
     position: absolute;
     left: 1174px;
-    top: 470px;
+    top: 510px;
     width: 306px;
     height: 39px;
     display: flex;
@@ -119,7 +118,7 @@
     height: 69px;
     position: absolute;
     left: 1460px;
-    top: 505px;
+    top: 545px;
     border: 0;
 }
 .Cidade{
@@ -131,7 +130,7 @@
     font-weight: 400;
     position: absolute;
     left: 1480px;
-    top: 470px;
+    top: 510px;
     width: 306px;
     height: 39px;
     display: flex;
@@ -147,7 +146,7 @@
     font-weight: 400;
     position: absolute;
     left: 1174px;
-    top: 605px;
+    top: 265px;
     width: 306px;
     height: 39px;
     display: flex;
@@ -174,7 +173,7 @@
     height: 69px;
     position: absolute;
     left: 1154px;
-    top: 640px;
+    top: 305px;
     border: 0;
 }
 .ufd{
@@ -197,7 +196,7 @@
     height: 69px;
     position: absolute;
     left: 1460px;
-    top: 640px;
+    top: 305px;
     border: 0;
 }
 .Uf{
@@ -209,26 +208,90 @@
     font-weight: 400;
     position: absolute;
     left: 1480px;
-    top: 605px;
+    top: 265px;
     width: 306px;
     height: 39px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
-.spanerroCI{
+.Numero{
+    color: #109ea6;
+    text-align: left;
+    font-family:"Roboto-Regular", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
     position: absolute;
-    left: 1475px;
-    top: 580px;
-    color: red;
-    font-size: 18px;
+    left: 1174px;
+    top: 620px;
+    width: 306px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
-.spanerroU{
+.numerod{
+        color: #8b8b8b;
+    text-align: start;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
     position: absolute;
-    left: 1475px;
-    top: 715px;
-    color: red;
-    font-size: 18px;
+    width: 82px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #eaeaea;
+    padding-left: 0.65rem;
+    border-radius: 15px;
+    width: 260px;
+    height: 69px;
+    position: absolute;
+    left: 1154px;
+    top: 660px;
+    border: 0;
+}
+.complemento{
+    color: #109ea6;
+    text-align: left;
+    font-family:"Roboto-Regular", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+    position: absolute;
+    left: 1480px;
+    top: 620px;
+    width: 306px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.complementod{
+    color: #8b8b8b;
+    text-align: start;
+    font-family: "Roboto-Regular", sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+    position: absolute;
+    width: 82px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #eaeaea;
+    padding-left: 0.65rem;
+    border-radius: 15px;
+    width: 260px;
+    height: 69px;
+    position: absolute;
+    left: 1460px;
+    top: 660px;
+    border: 0;
 }
 .spanerroCI{
     position: absolute;
@@ -264,64 +327,6 @@
     top: 442px;
     color: red;
     font-size: 18px;
-}
-.retang-3{
-    background: #ffffff;
-    border-radius: 75px;
-    width: 1088px;
-    height: 1080px;
-    position: absolute;
-    left: 938px;
-    top: 0px;
-}
-
-.retang-3{
-    background: #ffffff;
-    border-radius: 75px;
-    width: 1088px;
-    height: 1080px;
-    position: absolute;
-    left: 938px;
-    top: 0px;
-}
-.bem-vindo1 {
-    color: #109ea6;
-    text-align: left;
-    font-family: "Roboto-Regular", sans-serif;
-    font-size: 57px;
-    line-height: 64px;
-    letter-spacing: -0.25px;
-    font-weight: 400;
-    position: absolute;
-    left: 1255px;
-    top: 179px;
-    width: 366px;
-    height: 27px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    -webkit-text-stroke: 2px #109ea6;
-}
-.faca-login1{
-    color: #6b6b6b;
-    text-align: left;
-    font-family: "Roboto-Regular", sans-serif;
-    font-size: 36px;
-    line-height: 44px;
-    width: 525px;
-    font-weight: 400;
-    position: absolute;
-    left: 1173px;
-    top: 237px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-.cadastre1{
-    text-decoration: none;
-    color: #109ea6;
-    position: relative;
-    left: 55%;
 }
 
 @media (max-width: 925px){

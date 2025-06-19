@@ -41,7 +41,7 @@
 
     <form id="loginForm" class="loginForm" method="post" action="/cadastro_inicial_validacao">
 
-    <div class="retang-2"></div>
+    <section class="retang-2"></section>
     <header class="bem-vindo1"> Crie sua conta</header>
 
     <main class="faca-login1"> Preencha com suas informações </main>
@@ -51,15 +51,15 @@
 
         <label for="nome" class="Nome">Insira seu nome completo</label>
             <input type="text" id="nomed" placeholder="Nome" class="nomed" name="nome" value="<%= valores.nome %>" class="<%= cssErro.nome %>" required>
-            <span class="spanerroNO"><%= msgErro.nome %></span>
+            <section class="spanerroNO"><%= msgErro.nome %></section>
 
         <label for="cpf" class="Cpf">Insira seu CPF</label>
             <input type="text" id="cpf" placeholder="CPF" class="cpfd" name="cpf" value="<%= valores.cpf %>" class="<%= cssErro.cpf %>" maxlenght= "11" required>
-            <span class="spanerroC"><%= msgErro.cpf %></span>
+            <section class="spanerroC"><%= msgErro.cpf %></section>
 
         <label for="data" class="Data">Data de nascimento</label>
             <input type="date" id="data" placeholder="DD/MM/AAAA" class="datad" name="data" value="<%= valores.data %>" class="<%= cssErro.data %>" required>
-            <span class="spanerroD"><%= msgErro.data %></span>
+            <section class="spanerroD"><%= msgErro.data %></section>
 
     <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >
 
