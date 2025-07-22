@@ -1,0 +1,103 @@
+.form-address {
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto; /* Centraliza horizontalmente */
+        padding: 0 20px; /* Margens laterais uniformes */
+        box-sizing: border-box;
+        margin-top: 4vh;
+    }
+   
+    .form-address .row {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 12px;
+        gap: 12px; /* Espaçamento consistente */
+    }
+   
+    .form-address .label-input {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+    }
+   
+    /* Campos pareados com largura igual */
+    .form-address .label-input:not(.full-width) {
+        flex-basis: calc(50% - 6px); /* Considera o gap */
+    }
+   
+    .form-address .full-width {
+        flex: 0 0 100%;
+    }
+   
+    /* Estilo dos inputs mantendo o design original */
+    .form-address .label-input input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        border-radius: 10px;
+        background-color: #ecf0f1;
+        border: none;
+    }
+   
+    /* Ajuste para ícones e alinhamento */
+    .form-address .label-input {
+        display: flex;
+        align-items: center;
+        background-color: #ecf0f1;
+        border-radius: 10px;
+        padding: 0 10px;
+    }
+   
+    .form-address .icon-modify {
+        margin-right: 8px;
+        color: #7f8c8d;
+    }
+   
+    /* Botão com margens equilibradas e centralziadas*/
+   
+    /* Responsividade aprimorada para ficar um embaixo do outro no mobile*/
+    @media screen and (max-width: 768px) {
+        .form-address {
+            padding: 0 15px;
+        }
+       
+        .form-address .row {
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+       
+        .form-address .label-input:not(.full-width),
+        .form-address .label-input {
+            flex-basis: 100%;
+        }
+    }
+ 
+ 
+    /*Voltar*/
+ 
+    /* Estilo para a linha dos botões */
+/* Container dos botões - versão aprimorada */
+ 
+/*.buttons-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 180px));
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin: 30px auto 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+ 
+.btn-voltar{
+    background-color: black;
+}
+ 
+ 
+ 
+ 
+/**/

@@ -18,7 +18,7 @@ const usuarioModel = {
                 VALUES (?, ?, ?, ?, ?, ?, ?)`,
                 [
                     dadosFormulario.tipo || 'paciente',
-                    dadosFormulario.status || 'ativo',
+                    dadosFormulario.status || 'pendente',
                     dadosFormulario.nome_usuario,
                     dadosFormulario.email_usuario,
                     dadosFormulario.senha_usuario,

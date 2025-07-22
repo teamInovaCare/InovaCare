@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/cadastroAuxiliar.css">
-    <link rel="stylesheet" href="/css/cadastroLO.css">
-    <script src="js/validacao-login.js"></script>
-    <title> InovaCare </title>
+    <link rel="stylesheet" href="css/estilo3.css">
+    <link rel="stylesheet" href="css/cad_column.css">
+    
+    <!--viaCep-->
+    <script src="/js/mascaraCep.js"></script>
+    <script src="/js/viaCep.js"></script>
+   
+   
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+   
+    <title>Cadastro0 2</title>
 </head>
-<body class="Singup">
+<body>
+ 
+    <!--Bloco de EJS para mensagens de erro-->
+ 
     <%
-    var cssErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":"", "numero":"", "complemento":""}  
-    var msgErro = {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":"", "numero":"", "complemento":""}
+    var cssErro = {"cep":"", "endereco":"", "bairro":"", "cidade":"", "numero":"", "uf":"", "complemento":""}  
+    var msgErro = {"cep":"", "endereco":"", "bairro":"", "cidade":"", "numero":"", "uf":"", "complemento":""}
     if(erros) {
-
+ 
     erros.errors.forEach(function(itemErro){
         if (itemErro.path  == "cep"){
             cssErro.cep = "erro";
             msgErro.cep = itemErro.msg;                
-        }  
-        if (itemErro.path  == "uf"){
-            cssErro.uf = "erro";
-            msgErro.uf = itemErro.msg;                
         }  
         if (itemErro.path  == "endereco"){
             cssErro.endereco = "erro";
@@ -42,66 +45,135 @@
             cssErro.numero = "erro";
             msgErro.numero = itemErro.msg;                
         }  
+        if (itemErro.path  == "uf"){
+            cssErro.uf = "erro";
+            msgErro.uf = itemErro.msg;                
+        }  
         if (itemErro.path  == "complemento"){
             cssErro.complemento = "erro";
             msgErro.complemento = itemErro.msg;                
         }  
-    }); 
+    });
     }; %>
-
-    <form id="loginForm" class="loginForm" method="post" action="/cadastro_localizacao_validacao">
-    <section class="voltar">
-        <a href="/cadastro_inicial">
-            <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
-        </a>
+ 
+    <!--Fim do bloco de EJS-->
+ 
+    <section class="container"><!--Container geral -->
+ 
+ 
+        <section class="content first-content"> <!--Primeiro container- Descrição da esquerda-->
+ 
+            <section class="first-column"><!--Primeira coluna - Coluna da esquerda-->
+ 
+                <h2 class="title title-primary">Preencha suas <br> informações de endereço</h2><!--Título-->
+                <p class="descricao descricao-primary">Encontre o profissional mais próximo do seu lar</p><!--descrição-->
+               
+                <button id="voltar" class="btn btn-primeira">Voltar</button>
+               
+ 
+            </section><!--Conteúdo colorido-->
+ 
+ 
+            <!--Editar os links para ficar dentro do HREF-->
+            <section class="second-column"><!--Coluna da direita com o cadastro-->
+             
+ 
+                <form class="form form-address" method="post" action="/cadastro_localizacao_validacao">
+ 
+                    <!-- Primeira linha - CEP e Endereço -->
+                    <section class="row"><!--Classe row CSS3 para deixar um do lado do outro-->
+ 
+                        <label class="label-input" for="cep">
+ 
+                            <i class="fa-regular fa-user icon-modify"></i>
+                            <input type="text" id="cep" placeholder="CEP" name="cep" value="<%= valores.cep %>" class=" <%= cssErro.cep %>" onblur="pesquisacep(this.value);" onkeyup="mascaraCep(event)" required>
+                            <section class="spanerroDL"><%= msgErro.cep %></section>
+ 
+                        </label>
+                       
+                        <label class="label-input" for="endereco">
+ 
+                            <i class="fa-regular fa-id-card icon-modify"></i>
+                            <input type="text" id="endereco" placeholder="Endereço" name="endereco" value="<%= valores.endereco %>" class=" <%= cssErro.endereco %>"  readonly >
+                            <section class="spanerroNL"><%= msgErro.endereco %></section> >
+ 
+                        </label>
+ 
+                    </section>
+   
+                    <!-- Segunda linha - Bairro e Cidade -->
+                    <section class="row">
+ 
+                        <label class="label-input" for="bairro">
+ 
+                            <i class="fa-regular fa-calendar icon-modify"></i>
+                            <input type="text" id="bairro" placeholder="Bairro" name="bairro" value="<%= valores.bairro %>" class=" <%= cssErro.bairro %>"  readonly>
+                            <section class="spanerroCL"><%= msgErro.bairro %></section>
+ 
+                        </label>
+                       
+                        <label class="label-input" for="cidade">
+ 
+                            <i class="fa-regular fa-calendar icon-modify"></i>
+                            <input type="text" id="cidade" placeholder="Cidade" name="cidade" value="<%= valores.cidade %>" class=" <%= cssErro.cidade %>"  readonly>
+                            <section class="spanerroCIL"><%= msgErro.cidade %></section>
+ 
+                        </label>
+ 
+                    </section>
+ 
+   
+                    <!-- Terceira linha - Número e UF -->
+                    <section class="row">
+ 
+                        <label class="label-input" for="numero">
+ 
+                            <i class="fa-regular fa-calendar icon-modify"></i>
+                            <input type="text" id="numero" placeholder="Número" name="numero" value="<%= valores.numero %>" class=" <%= cssErro.numero %>" required>
+                            <section class="spanerroNML"><%= msgErro.numero %></section>
+ 
+                        </label>
+                       
+                        <label class="label-input" for="uf">
+ 
+                            <i class="fa-regular fa-calendar icon-modify"></i>
+                            <input type="text" id="uf" placeholder="UF" name="uf" value="<%= valores.uf %>" class=" <%= cssErro.uf %>"  readonly>
+                            <section class="spanerroUL"><%= msgErro.uf %></section>
+ 
+                        </label>
+ 
+                    </section>
+   
+                    <!-- Quarta linha - Complemento (Vai ocupar toda a linha class full-width) -->
+                    <section class="row">
+ 
+                        <label class="label-input full-width" for="complemento">
+ 
+                            <i class="fa-regular fa-calendar icon-modify"></i>
+                            <input type="text" id="complemento" placeholder="Complemento" name="complemento" value="<%= valores.complemento %>" class=" <%= cssErro.complemento %>">
+                            <section class="spanerroCMPL"><%= msgErro.complemento %></section> >
+ 
+                        </label>
+ 
+                    </section>
+ 
+                   
+                       
+                    <button type="submit" class="btn btn-segunda">Avançar</button>
+                   
+                   
+                </form>
+            </section><!--Fim da coluna da direita CADASTRO-->
+ 
+ 
+ 
+ 
+        </section>
+ 
+ 
+ 
+       
     </section>
-    <section class="retang-3"></section>
-
-    <header class="bem-vindo1"> Crie sua conta</header>
-
-    <main class="faca-login1"> Preencha com suas informações </main>
-
-    <img src="/imagens/fundo-singup.jpg" class="fundo-singup">
-    <img src="/imagens/logo-singup.png" class="logo-singup">
-
-    
-
-
-        <label for="endereco" class="Endereco">Endereço</label>
-            <input type="text" id="enderecod" placeholder="Endereço" class="enderecod" name="endereco" value="<%= valores.endereco %>" class="<%= cssErro.endereco %>" required>
-            <section class="spanerroN"><%= msgErro.endereco %></section>
-
-        <label for="bairro" class="Bairro">Bairro</label>
-            <input type="text" id="bairro" placeholder="Bairro" class="bairrod" name="bairro" value="<%= valores.bairro %>" class="<%= cssErro.bairro %>"required>
-            <section class="spanerroC"><%= msgErro.bairro %></section>
-
-        <label for="cidade" class="Cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="Cidade" class="cidaded" name="cidade" value="<%= valores.cidade %>" class="<%= cssErro.cidade %>"required>
-            <section class="spanerroCI"><%= msgErro.cidade %></section>
-
-        <label for="cep" class="Cep">CEP</label>
-            <input type="text" id="cep" placeholder="CEP" class="cepd" name="cep" value="<%= valores.cep %>" class="<%= cssErro.cep %>"required>
-            <section class="spanerroD"><%= msgErro.cep %></section>
-
-        <label for="uf" class="Uf">UF</label>
-            <input type="text" id="uf" placeholder="UF" class="ufd" name="uf" value="<%= valores.uf %>" class="<%= cssErro.uf %>"required>
-            <section class="spanerroU"><%= msgErro.uf %></section>
-        
-        <label for="numero" class="Numero">Número</label>
-            <input type="text" id="numero" placeholder="Número" class="numerod" name="numero" value="<%= valores.numero %>" class="<%= cssErro.numero %>"required>
-            <section class="spanerroNM"><%= msgErro.numero %></section>
-
-        <label for="complemento" class="complemento">Complemento</label>
-            <input type="text" id="complemento" placeholder="Complemento" class="complementod" name="complemento" value="<%= valores.complemento %>" class="<%= cssErro.complemento %>"required>
-            <section class="spanerroCMP"><%= msgErro.complemento %></section>
-
-    <input type="submit" class="Entrar" id="enviar_login" value="Avançar ➜" >
-
-</form>
-<p class="msg-cadastre"><a class="cadastre1" href="/home">Sou Profissional</a></p>
-
-<p class="msg-singup">A InovaCare é uma plataforma que oferece atendimento médico e terapêutico
-    através das modalidades do atendimento online e domiciliar.
-</p>
+   
 </body>
 </html>

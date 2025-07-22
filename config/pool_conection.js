@@ -1,4 +1,4 @@
-/*var mysql= require("mysql2");
+var mysql= require("mysql2");
 
 
 const pool = mysql.createPool({
@@ -19,13 +19,13 @@ pool.getConnection((err, conn) => {
         console.log("Conectado ao SGBD!")
 })
 
-module.exports = pool.promise()*/
+module.exports = pool.promise()
 
 
 /*ESTAMOS CONECTADOS!!! REPITO: ESTAMOS CONECTADOS!!!*/ 
 
 
-const mysql = require('mysql2')
+/*const mysql = require('mysql2')
 
 try {
     var pool = mysql.createConnection({
@@ -41,4 +41,4 @@ try {
     console.log(e);
 }
  
-module.exports = pool.promise();
+module.exports = pool.promise();*/
