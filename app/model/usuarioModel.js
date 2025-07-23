@@ -52,7 +52,8 @@ const usuarioModel = {
         } catch (erro) {
             if (connection) await connection.rollback();
             console.error('Erro no model:', erro);
-            throw erro; // Propaga o erro para o controller
+            throw erro;
+            // Propaga o erro para o controller
         } finally {
             if (connection) connection.release();/*libera o pool- evita que osistema trava*/
         }

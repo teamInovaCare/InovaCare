@@ -57,7 +57,7 @@ router.get("/prontugeral", function (req, res) {//prontuario profissional
 });
 
 
-router.get("/singup", function (req, res) {
+/*router.get("/singup", function (req, res) {
     res.render("pages/singup", {"erros":null, "valores":{"email":"","senha":""},"retorno":null });
 });
 

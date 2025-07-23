@@ -11,7 +11,7 @@
 </head>
 <body>
  
-    <!--EJS para mensagens de erro-->
+    <!--EJS para mensagens de erro
     <%
     var cssErro = {"nome":"","cpf":"", "data":""}  
     var msgErro = {"nome":"","cpf":"", "data":""}
@@ -32,9 +32,55 @@
         }
     });
     }; %>
-    <!--Fim do EJS-->
+    Fim do EJS-->
+
+    <%
+        var cssErro = {"nome":"","cpf":"", "data":""}  
+        var erroValidacao = {"email":"","senha":""}
+        var msgErro = {"nome":"","cpf":"", "data":"", "email":"", "senha":""}
+        if(erros) {
+            erros.errors.forEach(function(erro) {
+                if (erro.path == "nome") {
+                    cssErro.nome = "erro";
+                    msgErro.nome = erro.msg;
+                }  
+                if (erro.path == "cpf") {
+                    cssErro.cpf = "erro";
+                    msgErro.cpf = erro.msg;                
+                }  
+                if (erro.path == "data") {
+                    cssErro.data = "erro";
+                    msgErro.data = erro.msg;                
+                }
+                if (erro.path == "email") {
+                    erroValidacao.email = "erro";
+                    msgErro.email = erro.msg;
+                }
+                if (erro.path == "senha") {
+                    erroValidacao.senha = "erro";
+                    msgErro.senha = erro.msg;
+                }
+            });
+        };
+        %>
+
  
-    <section class="container"><!--Container geral -->
+    <!--Fim do Ejs do LOGIN-->
+
+
+    <% 
+    
+    var manterLoginVisivel = false;
+    if(erros) {
+        erros.errors.forEach(function(erro) {
+            if (erro.path == "email" || erro.path == "senha") {
+                manterLoginVisivel = true;
+            }
+        });
+    }
+    %>
+ 
+    <section class="container" <%= manterLoginVisivel ? 'entrar-js' : '' %>"><!--Container geral -->
  
  
         <section class="content first-content"> <!--Primeiro container- aparição inical para login-->
@@ -52,7 +98,7 @@
             <section class="second-column"><!--Coluna da direita com o cadastro-->
  
                 <section class="alinha">
-                    <a href="home.html" class="back-arrow">
+                    <a href="/newuser" class="back-arrow">
                         <i class="fas fa-arrow-left"></i>
                        
                     </a>
@@ -130,7 +176,7 @@
             <section class="second-column"><!--Coluna da direita com o cadastro-->
  
                 <section class="alinha">
-                    <a href="home.html" class="back-arrow">
+                    <a href="/newuser.ejs" class="back-arrow">
                         <i class="fas fa-arrow-left"></i>
                        
                     </a>
@@ -154,18 +200,21 @@
  
                 <p class="descricao descricao-second">Faça login com o e-mail e senha</p>
  
-                <form class="form" action="">
+                <form class="form" method="post" action="/singup_post">
  
-                    <label class="label-input" for="">
+                    <label class="label-input" for="email">
                         <i class="fa-solid fa-envelope"></i>
-                        <input type="email" placeholder="Email" name="email" id="emailid"  required>
+                        <input type="email" placeholder="Email" name="email" id="email" value="<%= valores.email %>" class="<%= erroValidacao.email %>" required>
+                        <section id="emailError" class="error"><%= msgErro.email %></section>
  
  
                     </label>
  
-                    <label class="label-input"  for="">
+                    <label class="label-input"  for="senha">
+ 
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Senha" name="senha" id="senhaid" required>
+                        <input type="password" placeholder="Senha" name="senha" id="senha" value="<%= valores.senha %>" class="<%= erroValidacao.senha %>" required>
+                        <section  class="spanerroS"><%= msgErro.senha %></section>
  
                     </label>
  
@@ -177,7 +226,7 @@
  
  
                 </form>
- 
+
             </section><!--Conteúdo dos campos-->
  
  

@@ -155,7 +155,7 @@ const bcrypt = require('bcryptjs');
       const errors = validationResult(req);
       if(!errors.isEmpty()){
         console.log(errors);
-        return res.render("pages/singup", {"erros": errors, "valores":req.body, "retorno": null});
+        return res.render("pages/cadastro_inicial", {"erros": errors, "valores":req.body, "retorno": null});
       }else {
         var email_usuario = req.body.email;
         var senha_digitada = req.body.senha;
@@ -178,12 +178,12 @@ const bcrypt = require('bcryptjs');
               }
             ]
           };
-          return res.render("pages/singup", {"erros": customErrors, "valores": req.body, "retorno": null});
+          return res.render("pages/cadastro_inicial", {"erros": customErrors, "valores": req.body, "retorno": null});
         }
 
       }catch(errors){
         console.log("Erro ao efetuar o login", errors);
-    return res.render("pages/singup", {
+    return res.render("pages/cadastro_inicial", {
       "errors": {
         errors: [{ path: "email", msg: "Erro interno no servidor" }]
       },
