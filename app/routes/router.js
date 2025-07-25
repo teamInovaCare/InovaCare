@@ -34,6 +34,24 @@ router.get("/cadastro_prof", function (req, res) {//cadastro do profissional
     res.render("pages/cadastro_prof.ejs");
 });
 
+router.get("/cadprof_inicial", function (req, res) {//cadastro do profissional
+    res.render("pages/cadprof_inicial.ejs");
+});
+
+router.get("/cadprof_especialista", function (req, res) {//cadastro do profissional
+    res.render("pages/cadprof_especialista.ejs");
+});
+
+router.get("/cadprof_local", function (req, res) {//cadastro do profissional
+    res.render("pages/cadprof_local.ejs");
+});
+
+router.get("/cadprof_dados", function (req, res) {//cadastro do profissional
+    res.render("pages/cadprof_dados.ejs");
+});
+
+
+
 router.get("/login_prof", function (req, res) {//login do profissional
     res.render("pages/login_prof.ejs");
 });
