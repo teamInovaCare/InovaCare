@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/cad_column.css"><!--Colunas uma do lado da outra -- class row-->
    
     <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script><!--Acesso aos ícones-->
+
+     
    
     <title>Cadastro0 2</title>
 </head>
@@ -89,7 +91,7 @@
  
  
                     <section class="row"><!--campos de senha ficam na mesma section para criar um grid e deixar um do lado do outro cad_column.css-->
-                        <label class="label-input" for="senha">
+                        <label class="label-input senha" for="senha">
  
                             <i class="fa-solid fa-lock"></i>
                             <input type="password" placeholder="Senha" name="senha" id="senhad" value="<%= valores.senha %>" class="<%= erroValidacao.senha %>"  required>
@@ -132,8 +134,8 @@
     </section>
  
  
- 
-    <script src="js/senha_forte.js"></script>   
+  <script src="js/senha_forte.js"></script>
+      
    
 </body>
 </html>
