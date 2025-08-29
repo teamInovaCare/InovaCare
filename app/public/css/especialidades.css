@@ -402,7 +402,7 @@ main {
 
 
 .imagem-esquerda {
-    width: 35px; 
+    width: 50px; /* tamanho dos novos ícones */
     margin-right: 35px; /* Espaço entre a imagem esquerda e o texto */
     margin-bottom: 5px;
 }
