@@ -59,68 +59,25 @@ const usuarioModel = {
         }
     },
 
-    /**LOGIN DO USUÁRIO 1- PACIENTE */
-
-
-    /*const usuarioModel = {
-    //metodo para retornar todo os registros da entidade usuario
-    findAll: async () => {
-        try {
-            const [resultados, estrutura] = await
-                pool.query("SELECT * FROM usuario u, tipo_usuario t " +
-                    + " where t.id_tipo_usuario = u.tipo_usuario and u.status_usuario =1;");
-            console.log(resultados);
-            console.log(estrutura);
-            return resultados;
-        } catch (erro) {
-            console.log(erro);
-            return false;
-        }
-
-    },*/
-
-
-    /**findId: async (id) => {
-        try {
-            const [linhas,campos] = await pool.query('SELECT * FROM tarefas WHERE status_tarefa = 1 and id_tarefa = ?',[id] )
-            return linhas;
-        } catch (error) {
-            return error;
-        }
-    }, */
-
-
-    selectusermail: async(email_usuario, senha_digitada)=>{
-        try{
-            const[usuarios]= await pool.query('select id_usuario, senha_usuario from usuarios where email_usuario = ? ', [email_usuario]);
-            
-            if(usuarios.length === 0){/**Verifica se o email existe no array criado - método lenght */
-                return {success:false, message: 'Usuário não encontrado'};
-            }
-
-            const usuario = usuarios[0];/**percorre o array e pega o primeiro resultado encontrado */
-            const senhaCorreta = await bcrypt.compare(senha_digitada, usuario.senha_usuario);/**Uso o bcrypt.compare para comparar a senha digitada pelo usuário com a senha armazenada no hash no meu banco --- pq a senha está criptografada */
-
-            if(!senhaCorreta){/**o contrário - se não é senha correta */
-                return{success: false, message:'Senha incorreta'};
-            }
-
-            return {
-                success: true,
-                message: 'Login realizado com sucesso',
-                user: {id: usuario.id_usuario, email: email_usuario}
-            }
-
-        }catch(error){
-            console.log(error)
-            return {success:false, message: 'Erro durante o login'};
-        }
-    }
-
     
+
+    /**Select no banco para buscar o usuário pelo email */
+     findUserEmail: async (camposForm) => {
+            try {
+                const [resultados] = await pool.query(
+                    "SELECT * FROM usuarios WHERE email_usuario = ?",
+                    [camposForm.email_usuario]
+                )
+                return resultados;
+            } catch (error) {
+                console.log(error);
+                return error;
+            }
+        },
+
 };
 
-
+    
 
 
 

@@ -11,28 +11,7 @@
 </head>
 <body>
  
-    <!--EJS para mensagens de erro
-    <%
-    var cssErro = {"nome":"","cpf":"", "data":""}  
-    var msgErro = {"nome":"","cpf":"", "data":""}
-    if(erros) {
- 
-    erros.errors.forEach(function(itemErro){
-        if (itemErro.path  == "nome"){
-            cssErro.nome = "erro";
-            msgErro.nome = itemErro.msg;
-        }  
-        if (itemErro.path  == "cpf"){
-            cssErro.cpf = "erro";
-            msgErro.cpf = itemErro.msg;                
-        }  
-        if (itemErro.path  == "data"){
-            cssErro.data = "erro";
-            msgErro.data = itemErro.msg;                
-        }
-    });
-    }; %>
-    Fim do EJS-->
+   
 
     <%
         var cssErro = {"nome":"","cpf":"", "data":""}  
@@ -98,7 +77,7 @@
             <section class="second-column"><!--Coluna da direita com o cadastro-->
  
                 <section class="alinha">
-                    <a href="/newuser" class="back-arrow">
+                    <a href="/" class="back-arrow">
                         <i class="fas fa-arrow-left"></i>
                        
                     </a>
@@ -176,7 +155,7 @@
             <section class="second-column"><!--Coluna da direita com o cadastro-->
  
                 <section class="alinha">
-                    <a href="/newuser.ejs" class="back-arrow">
+                    <a href="/.ejs" class="back-arrow">
                         <i class="fas fa-arrow-left"></i>
                        
                     </a>
@@ -188,14 +167,6 @@
                
                 <h2 class="title title-second">Efetuar login</h2>
  
- 
-                <section class="social-media">
-                    <ul class="lista social-media">
-                       <!--Face--> <li class="item-social-media"><i class="fa-brands fa-facebook-f"></i><a href></a></li>
-                        <!--Google--><li class="item-social-media"><i class="fa-brands fa-google"></i><a href></a></li>
-                        <!--<li>Linkedin<a href>#</a></li>-->
-                    </ul>
-                </section>
  
  
                 <p class="descricao descricao-second">Faça login com o e-mail e senha</p>

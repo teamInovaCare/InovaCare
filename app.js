@@ -11,6 +11,13 @@ app.use(session({
   cookie: { secure: false }
 }));
 
+app.use((req, res, next) => {
+    if (req.session.logado === undefined) {
+        req.session.logado = 0;
+    }
+    next();
+});
+
 app.use(express.static("app/public"));
 app.set("view engine", "ejs");
 app.set("views", "./app/views");
