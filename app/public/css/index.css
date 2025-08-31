@@ -1,0 +1,543 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: white;
+  font-family: arial;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.img-banner {
+  position: relative;
+  width: 100%;
+
+}
+
+.img-banner img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.banner-mobile {
+  position: relative;
+  width: 100%;
+  display: none;
+}
+
+.img-banner-mobile img {
+  width: 100%;
+}
+
+.banner-tablet {
+  display: none;
+}
+
+@media screen and (max-width:999px) {
+  .img-banner {
+    display: none;
+  }
+
+  .banner-tablet {
+    display: block;
+  }
+
+  .banner-tablet img {
+    width: 100%;
+  }
+
+}
+
+@media screen and (max-width:600px) {
+  .banner {
+    display: none;
+  }
+
+  .banner-mobile {
+    display: block;
+    width: 100%;
+  }
+
+  .img-banner-mobile {
+    width: 100%;
+  }
+
+}
+
+.banner-btn {
+  font-family: arial;
+  position: absolute;
+  bottom: 11%;
+  left: 4%;
+  padding: 12px 24px;
+  background-color: #fda238;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: clamp(1rem, 4vw, 2.5rem);
+}
+
+.btn-mobile {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 32px;   
+  background-color: #fda238;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;  
+  font-weight: bold;
+  font-size: clamp(1.2rem, 5vw, 2.5rem); 
+  white-space: nowrap
+}
+
+.ttl-banner {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 4.5rem;
+  width: 40%;
+  text-align: left;
+}
+
+.stick-banner {
+  position: absolute;
+  width: 10%;
+  height: 0.5%;
+  top: 43%;
+  background-color: #0d4e52;
+}
+
+.img-banner h2 {
+  position: absolute;
+  top: 46%;
+  left: 30%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  width: 50%;
+  text-align: left;
+}
+
+.stick2-banner {
+  position: absolute;
+  width: 15%;
+  height: 0.5%;
+  top: 54%;
+  left: 35%;
+  background-color: #0d4e52;
+}
+
+.img-banner h3 {
+  position: absolute;
+  top: 60%;
+  left: 27%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  width: 45%;
+  text-align: left;
+}
+
+.botoes-banner {
+  position: absolute;
+  top: 85%;
+  left: 5%;
+}
+
+.botao1-banner {
+  padding: 10px 25px;
+  background-color: #20a3a1;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 2.188rem;
+  font-weight: bold;
+}
+
+.botao2-banner {
+  padding: 10px 25px;
+  background-color: #fda238;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  font-size: 2.188rem;
+  font-weight: bold;
+}
+
+.beneficios {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.beneficios-topo h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: #1f9298;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.beneficios-topo p {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: #f28c28;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.cartoes {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: clamp(80px, 10vw, 80px);
+}
+
+.cartao {
+  background-color: #fff;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  padding: 40px 25px 25px;
+  width: 20%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  position: relative;
+  text-align: left;
+}
+
+.icone {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -60px;
+  left: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.icone img {
+  width: 50%;
+}
+
+.cartao h3 {
+  margin-top: 10%;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: bold;
+  color: #1f9298;
+}
+
+.cartao p {
+  font-size: 1.5rem;
+  margin-top: 10%;
+  color: #333;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .cartoes {
+    flex-direction: column;
+    /* um acima do outro */
+    align-items: center;
+    /* centraliza na coluna */
+    margin-top: 0;
+  }
+
+  .cartao {
+    width: 80%;
+    margin-top: 3%;
+  }
+
+  .cartao h3 {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  .cartao p {
+    margin: 5%;
+  }
+
+  .icone {
+    left: clamp(20px, 5vw, 25px);
+    /* ajusta posição horizontal */
+    top: clamp(-40px, -5vw, -50px);
+    /* ajusta posição vertical */
+  }
+}
+
+.motivo {
+  background-color: #8fdcdb;
+  display: flex;
+  justify-content: center;
+  /* centraliza horizontalmente */
+  align-items: center;
+  /* centraliza verticalmente */
+  gap: 2rem;
+  /* espaço entre pergunta e resposta */
+  color: #fff;
+  padding: 5% 5%;
+  text-align: center;
+  /* garante centralização do texto dentro dos blocos */
+}
+
+.pergunta {
+  flex: 1;
+  max-width: 600px;
+}
+
+.resposta {
+  flex: 1;
+  max-width: 700px;
+}
+
+.motivo h2 {
+  font-size: 5rem;
+  text-align: left;
+}
+
+.motivo p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+@media (max-width: 1024px) {
+  .motivo {
+    flex-direction: column;
+    align-items: center;
+    /* centraliza os itens na vertical */
+    text-align: center;
+    /* centraliza o texto */
+  }
+
+  .motivo h2 {
+    font-size: clamp(2rem, 3.5vw, 5rem);
+    text-align: center;
+  }
+
+  .pergunta,
+  .resposta {
+    width: 70%;
+    /* ocupam toda a largura disponível */
+  }
+
+  .motivo p {
+    width: 80%;
+    text-align: center;
+  }
+
+  .resposta {
+    display: flex;
+    justify-content: center;
+    /* centraliza horizontalmente */
+    width: 100%;
+  }
+
+
+}
+
+
+
+.ttl-depoimentos {
+  text-align: center;
+  background-color: #f9fafb;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ttl-depoimentos h2 {
+  color: #1f9298;
+  font-weight: bold;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+.ttl-depoimentos p {
+  color: #f7943d;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+
+.servicos {
+  margin-top: 5%;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.ttl-servicos h2 {
+  color: #1f9298;
+  font-weight: bold;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  margin-bottom: 3%;
+}
+
+.all-conjuntos {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.conjunto-servicos {
+  border: 2px solid #dadada;
+  border-radius: 10px;
+  width: 10%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.conjunto-servicos img {
+  width: 60%;
+  margin-bottom: 15px;
+}
+
+.conjunto-servicos p {
+  font-weight: bold;
+  color: #389989;
+  margin: 0;
+  font-size: clamp(0.6rem, 1.5vw, 1rem);
+  text-align: center;
+  box-shadow: 0px 0px 20px 0px rgba(92, 115, 160, 0.07);
+}
+
+
+
+
+.introdu-passos {
+  text-align: center;
+  padding: 40px 20px;
+
+}
+
+.passos-ttl span {
+  hyphens: auto;
+  word-break: break-word;
+}
+
+.introdu-passos h2 {
+  color: #1f9298;
+  font-weight: bold;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+.introdu-passos p {
+  color: #f7943d;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.passos {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  /* espaço entre os passos */
+  width: 700px;
+  position: relative;
+}
+
+/* Linha vertical que liga os quadrados */
+.steps::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  /* centraliza em relação ao quadrado */
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #F5A152;
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+  /* fica acima da linha */
+}
+
+.diamond {
+  width: 50px;
+  height: 50px;
+  background: #F5A152;
+  transform: rotate(45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Número reto dentro do quadrado */
+.diamond span {
+  transform: rotate(-45deg);
+  display: inline-block;
+}
+
+.step-text {
+  flex: 1;
+}
+
+.step-text h3 {
+  margin: 0;
+  color: #1f9298;
+}
+
+.step-text p {
+  margin: 5px 0 0;
+}
+
+.finalizacao {
+  text-align: center;
+  margin-top: 5%;
+}
+
+.finalizacao h2 {
+  color: #1f9298;
+  font-weight: bold;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+.finalizacao p {
+  color: #f7943d;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-top: 5px;
+  font-weight: bold;
+}

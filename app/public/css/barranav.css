@@ -1,0 +1,270 @@
+a {
+  color: #109EA6;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.logo {
+  height: 8vh;
+  width: auto;
+}
+
+/* Logo para desktop (padrão) */
+.logo-desktop {
+  display: block;
+}
+
+.logo-tablet,
+.logo-mobile {
+  display: none;
+}
+
+/* Logo para tablet */
+@media (max-width: 999px) and (min-width: 601px) {
+  .logo-desktop,
+  .logo-mobile {
+    display: none;
+  }
+  
+  .logo-tablet {
+    display: block;
+    height: 5.5vh;
+    vertical-align: middle;
+  }
+}
+
+/* Logo para mobile */
+@media (max-width: 600px) {
+  .logo-desktop,
+  .logo-tablet {
+    display: none;
+  }
+  
+  .logo-mobile {
+    display: block;
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  background: #fff;
+  height: 10vh;
+  position: relative;
+  z-index: 100;
+}
+
+main {
+  background: url("bg.jpg") no-repeat center center;
+  background-size: cover;
+  min-height: 90vh;
+}
+
+.menu-list, .menu-list-direita {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-list li, .menu-list-direita li {
+  letter-spacing: 3px;
+  margin-left: 32px;
+}
+
+.menu-list .dropdown {
+  position: relative;
+}
+
+.menu-list-direita {
+  align-items: center;
+  gap: 15px;
+}
+
+.mobile-menu {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-lupa, .icon-perfil {
+  background: none;
+  border: none;
+  color: #109EA6;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.hamburguer {
+  width: 30px;
+  height: 4px;
+  background: #109EA6;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  display: block !important;
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.hamburguer::before,
+.hamburguer::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 4px;
+  background: #109EA6;
+  left: 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.hamburguer::before {
+  top: -10px;
+}
+
+.hamburguer::after {
+  top: 10px;
+}
+
+  .dropdown-content {
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+    border-radius: 12px;
+    position: absolute;
+  }
+
+  .dropdown-content a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .menu-list .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+.hamburger-menu-content {
+  display: none;
+  position: absolute;
+  top: 10vh;
+  right: 20px;
+  width: 250px;
+  background: #fff;
+  list-style: none;
+  margin: 0;
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .hamburger-menu-content {
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+.hamburger-menu-content li {
+  padding: 10px 20px;
+}
+
+.hamburger-menu-content .dropdown-content {
+  position: static;
+  display: none;
+  background: #f5f5f5;
+  margin: 5px 0;
+  border-radius: 6px;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.hamburger-menu-content .dropdown-content li {
+  padding: 5px 15px;
+  text-align: center;
+}
+
+.hamburger-menu-content .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media (max-width: 999px) {
+  .menu-desktop {
+    display: none;
+  }
+  .mobile-menu {
+    display: flex;
+  }
+}
+
+.menu-list.active {
+  transform: translateX(0);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-menu.active .line1 {
+  transform: rotate(-45deg) translate(-8px, 8px);
+}
+
+.mobile-menu.active .line2 {
+  opacity: 0;
+}
+
+.mobile-menu.active .line3 {
+  transform: rotate(45deg) translate(-5px, -7px);
+}
+
+.btn-entrar {
+  background: #F5A152;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn-entrar:hover {
+  background: #e8934a;
+  opacity: 1;
+}
+
+.btn-entrar-mobile {
+  background: #F5A152;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
