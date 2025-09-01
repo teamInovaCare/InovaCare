@@ -30,15 +30,15 @@
 <body>
 
     <header>
-
-        <nav class="menu desktop">
-
-            <!--barra de navegação-->
+        <!--barra de navegação-->
+        <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/index">
-                    <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                <a href="/homepaciente.html">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
@@ -46,12 +46,14 @@
             <ul class="menu-list">
                 <li class="dropdown">
                     <a class="sobre" href="#">Sobre</a>
-                    <div class="dropdown-content">
+                    <section class="dropdown-content">
                         <a href="#">Quem somos</a>
                         <a href="#">Contato</a>
                         <a href="#">FAQ</a>
-                <li><a id="areas-link" class="agendamento" href="/especialidades">Agendamento</a></li>
-                <li><a class="areas" href="/consultas">Área de consultas</a></li>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/">Agendamento</a></li>
+                <li><a class="consultas" href="/">Área de Consultas</a></li>
             </ul>
 
 
@@ -64,35 +66,33 @@
 
         </nav>
 
-        <nav class="menu mobile">
+        <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/index">
-                    <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                </a>
-                <a href="/index">
-                    <img class="logo3" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                <a href="/homepaciente.html">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
-    
-            <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
-                <article class="texto-icon"><!--perfil--></article>
-                
-                <!-- Botão do menu hambúrguer -->
-                <button class="hamburguer" onclick="toggleMenu()">
-                    <div class="linha"></div>
-                    <div class="linha"></div>
-                    <div class="linha"></div>                  
-                </button>
-                
-                <!-- Menu suspenso do hambúrguer -->
-                <div id="hamburger-menu" class="hamburger-menu-content">
-                    <a href="/especialidades">Agendamento</a>
-                    <a href="/consultas">Área de consultas</a>
-                    <a href="/">Sair</a>
-                </div>
+
+            <ul class="menu-actions">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button></li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Quem somos</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Agendamento</a></li>
+                <li><a href="/">Área de Consultas</a></li>
             </ul>
         </nav>
 
@@ -103,6 +103,8 @@
             }
         </script>
 
+
+        <!--barra de navegação - fim ^^^ -->
     </header>
 
     <section class="voltar">
