@@ -204,7 +204,7 @@ body {
 .cartoes {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 40px;
   flex-wrap: wrap;
   margin-top: clamp(80px, 10vw, 80px);
 }
@@ -244,6 +244,7 @@ body {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   font-weight: bold;
   color: #1f9298;
+  text-align: left;
 }
 
 .cartao p {
@@ -268,8 +269,9 @@ body {
   }
 
   .cartao h3 {
-    text-align: center;
+    text-align: left;
     margin-top: 60px;
+    margin-left: 5%;
   }
 
   .cartao p {
@@ -331,7 +333,11 @@ body {
 
   .motivo h2 {
     font-size: clamp(2rem, 3.5vw, 5rem);
-    text-align: center;
+    text-align: left;
+  }
+
+  .pergunta {
+    margin-left: 10%;
   }
 
   .pergunta,
@@ -342,7 +348,11 @@ body {
 
   .motivo p {
     width: 80%;
-    text-align: center;
+    text-align: left;
+  }
+
+  .resposta {
+    margin-left: 10%;
   }
 
   .resposta {
@@ -370,6 +380,7 @@ body {
   color: #1f9298;
   font-weight: bold;
   font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-top: 5%;
 }
 
 .ttl-depoimentos p {
