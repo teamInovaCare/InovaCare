@@ -87,8 +87,8 @@ body {
 
 .btn-mobile {
   position: absolute;
-  bottom: 10%;
-  left: 50%;
+  bottom: 18%;
+  left: 46%;
   transform: translateX(-50%);
   padding: 16px 32px;   
   background-color: #fda238;

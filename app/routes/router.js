@@ -11,8 +11,8 @@ const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUs
 const usuarioController = require("../controllers/usuarioController");
 
 
-router.get("/", function (req, res) {/**usuário sme login */
-    res.render("pages/newuser")
+router.get("/", function (req, res) {/**página inicial */
+    res.render("pages/index", {autenticado: req.session.autenticado || false, login: req.session.logado || 0})
 });
  
 router.get("/especialidades", function (req, res) {/**listagem das especialidades - botão agendamento */
