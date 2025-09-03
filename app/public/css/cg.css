@@ -638,14 +638,17 @@ a {
   
   #container-medicos {
       display: flex;
-      justify-content: flex-start;
       gap: 32px;
-       margin-bottom: 8px;
+      margin-bottom: 8px;
       margin-top: 18px;
       max-width: 1300px;            
       margin-left: auto;
       margin-right: auto;
-       width: 100%;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      flex-direction: row;
   }
 
 @media screen and (max-width:768px) {  
@@ -664,6 +667,20 @@ a {
     .etapa1 img {
         width: 15%;
     }
+    .infos{
+        font-size: 14px;
+    }
+      .container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 
 
     /* hebert */
@@ -678,12 +695,11 @@ a {
      }
 
      #container-medicos {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     }
-
-
 }
 
 
@@ -714,4 +730,45 @@ a {
         border: none;
     }
 }  
+    */
+
+@media screen and (max-width: 400px) {
+    #container-medicos {
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
     
+    .container {
+        font-size: 22px;
+        padding-left: 25px;
+        margin-bottom: 8px;
+  }
+    
+  .checkmark {
+      height: 18px;
+      width: 18px;
+  }
+  .infos {
+      font-size: 12px;
+        
+  }
+  .container .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  #container-medicos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+
+}
