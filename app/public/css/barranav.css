@@ -58,6 +58,7 @@ nav {
   height: 10vh;
   position: relative;
   z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 main {
@@ -157,6 +158,7 @@ main {
     padding: 10px 20px;
     text-decoration: none;
     color: #333;
+    text-align: left;
   }
   
   .menu-list .dropdown:hover .dropdown-content {
@@ -201,7 +203,7 @@ main {
 
 .hamburger-menu-content .dropdown-content li {
   padding: 5px 15px;
-  text-align: center;
+  text-align: left;
 }
 
 .hamburger-menu-content .dropdown:hover .dropdown-content {
@@ -260,6 +262,34 @@ main {
 }
 
 .btn-entrar-mobile {
+  background: #F5A152;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-sair {
+  background: #F5A152;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  text-align: center;
+  display: inline-block;
+  min-width: 60px;
+}
+
+.btn-sair:hover {
+  background: #e8934a;
+  opacity: 1;
+}
+
+.btn-sair-mobile {
   background: #F5A152;
   color: white;
   padding: 6px 12px;
