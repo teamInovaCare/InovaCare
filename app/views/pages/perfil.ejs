@@ -51,8 +51,12 @@
 
             <ul class="menu-list-direita">
                 <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button></li>
-                <li><a href="/" class="btn-sair">Sair</a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/" class="btn-sair">Sair</a>
+                    </section>
+                </li>
             </ul>
 
         </nav>
@@ -68,13 +72,17 @@
 
             <ul class="menu-actions">
                 <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
             <!-- Menu suspenso do hambúrguer -->
             <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li><a href="/" class="btn-sair-mobile">Sair</a></li>
                 <li class="dropdown">
                     <a href="#">Sobre</a>
                     <ul class="dropdown-content">
