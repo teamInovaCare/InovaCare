@@ -58,6 +58,19 @@ router.get("/cadprof_dados", function (req, res) {//cadastro do profissional-ema
 });
 
 
+ /**CONFIGURAÇÃOD E AGENDA DO PROFISSIONAL */
+
+router.get("/config_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
+    res.render("pages/config_agenda_prof.ejs");
+});
+
+ /**VISUALIZAÇÃO DA AGENDA DO PROFISISONAL */
+
+ router.get("/home_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
+    res.render("pages/home_agenda_prof.ejs");
+});
+
+
 
 router.get("/login_prof", function (req, res) {//login do profissional-
     res.render("pages/login_prof.ejs");
