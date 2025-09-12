@@ -1,0 +1,510 @@
+/*Estilização da página de visualização da agenda do profissional*/
+
+
+body{
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+    color: #343a40;
+    /* Espaçamento entre as linhas */
+    line-height: 1.6;
+    min-height: 100vh;
+    /* padding-bottom: 2rem; */
+   
+}
+
+ /* Estilos para o botão de voltar como seta */
+        .container-titulo {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .bt-voltar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: #f8f9fa;
+            border-radius: 50%;
+            color: #343a40;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid #e9ecef;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 1rem;
+        }
+
+        .bt-voltar:hover {
+            background-color: #109EA6;
+            color: white;
+            border-color: #109EA6;
+            transform: translateX(-5px);
+        }
+
+        .bt-voltar i {
+            font-size: 1.5rem;
+        }
+
+        .titulo-com-seta {
+            flex: 1;
+            text-align: center;
+            margin: 0;
+            margin-right: 10%;
+        }
+
+        /*responsividade do botão de voltar*/
+        @media (max-width: 768px) {
+            .container-titulo {
+                padding: 0 1rem;
+                margin: 1.5rem auto 0;
+            }
+
+            .bt-voltar {
+                width: 40px;
+                height: 40px;
+                margin-right: 0.8rem;
+            }
+
+            .bt-voltar i {
+                font-size: 1.2rem;
+            }
+
+            .titulo-com-seta {
+                font-size: 1.8rem;
+            }
+        }
+        
+ 
+.container-geral {
+ 
+    /*Estabeleço um tamanho limite para a página*/
+    max-width: 1200px;
+ 
+    /*Margim superior e inferior de 2 rem e laterais alinhadas AUTOmaticamente a partir do tamanho limite que eu defini*/
+    margin: 2rem auto;
+ 
+    padding: 0 1.5rem;
+}
+ 
+/*Título geral do topo da página*/
+.titulo-geral {
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+    /*espessura da pletra - varia de 100 em 100 e dá o tom de negrito*/
+    position: relative;
+    /*se eu determinar o elemento como relative e os outros absolutw (relative elemtno pai e os outros filhos que se alinhama partir dele) ou posso ir deslocando o relative se eu usar atributos top, bottom etc... Ele sozingo não tem efeito
+    */
+    padding-bottom: 1rem;
+    margin-top: 1rem;
+}
+ 
+ 
+/*Traço que fica embaixo do título*/
+.titulo-geral::after {
+    content: '';
+    /* cria o pseudo-elemento-- só existe no CSS e não no HTML */
+    position: absolute;
+    /* posiciona de forma absoluta */
+    bottom: 0;
+    /* encostado embaixo do título */
+    left: 50%;
+    /* começa no meio do título */
+    transform: translateX(-50%);
+    /* serve para mover o elemento na horizontal em relação à sua posição atual. */
+    width: 100px;
+    /* largura da barrinha */
+    height: 4px;
+    /* altura da barrinha */
+    background: #e8934a;
+    /* cor vinda de uma variável CSS */
+    border-radius: 2px;
+    /* cantos levemente arredondados */
+}
+ 
+/*Bloco que abrange as seções de cada configuração*/
+ 
+.bloco-section {
+    background: white;
+    /* border-radius: var(--border-radius); */
+    padding: 2rem;
+    margin-bottom: 2rem;
+    /* box-shadow: var(--box-shadow); */
+    transition: var(--transition);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+ 
+ 
+/*Títulod as seções*/
+.primary-title {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+ 
+/*Estilização dos ícones - BEFORE */
+.fa-calendar-day:before {
+    content: "\f783";
+    color: #109EA6;
+}
+ 
+ 
+.fa-solid.fa-gear{
+    content: "\f783";
+    color: #109EA6;
+}
+ 
+.info-box {
+    background-color: #E8F4F5;
+    border-left: 4px solid #109EA6;
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+}
+ 
+/*ícone do box*/
+.info-box i {
+    color: #109EA6;
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+}
+ 
+ 
+ 
+/*Campo de seleção do dia da semana*/
+.select-container {
+    position: relative;
+    max-width: 400px;
+}
+ 
+/*Caixa de seleção do dia da semana*/
+#idsemanadiahome {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: 2px solid #bfc2c5;
+    border-radius: 12px;
+    background-color: white;
+    font-size: 1rem;
+    color: #343a40;
+    appearance: none;
+    /*Tira a estilização do campo input que o navegador costuma dar */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+ 
+/*Símbolo de clicar - seta para baixo estilizada */
+.select-container::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    /*vou posicionar em relação ao elemento pai (SELECT CONTAINER É RELATIVO)*/
+    top: 50%;
+    right: 1.5rem;
+    transform: translateY(-50%);
+    /*POSICIONO verticalmente para cima*/
+    color: #109EA6;
+    pointer-events: none;
+}
+ 
+/*Estilo ao clicar no campo*/
+#idsemanadiahome:focus {
+    outline: none;
+    border-color: #109EA6;
+    box-shadow: 0 0 0 3px rgba(16, 158, 166. 0.2);
+ 
+}
+ 
+/*Botão de Criar agenda + botão de buscar*/
+ 
+.btn-avancar {
+    background-color: #f5a152;;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s easevar(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+ 
+.btn-avancar:hover {
+ background-color: #109EA6;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+ 
+ 
+ 
+/*Container geral do filtro*/
+.bloco-filtro{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 2rem;
+    flex-wrap: wrap;
+   
+   
+}
+ 
+ 
+/*Cada bloco de filtro (segunda, terça, quarta...)*/
+.container-filtro{
+ 
+    border: 1px solid #eaebec;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    min-height: 40vh;
+   min-width: 28%;
+    padding: 1rem;
+   
+   
+   
+    /* flex:1; */
+   
+ 
+}
+ 
+/* flex-grow: 1; → permite que o item cresça para ocupar o espaço disponível no container.
+ 
+flex-shrink: 1; → permite que o item encolha se não houver espaço suficiente.
+ 
+flex-basis: 0; → define que o tamanho inicial do item é 0, e ele vai crescer proporcionalmente ao espaço disponível.
+ 
+Utilizar apenas flex indica que cada propriedade flex terá auqle valor*/
+ 
+ 
+ 
+/*Formatação do texto dentro do bloco de filtro*/
+.text-filtro{
+    text-align: center;
+    background-color: #109EA6;
+    color: #fff;
+    border-radius: 12px;
+    padding: 0.5rem;
+ 
+}
+ 
+ 
+ 
+ 
+/*Conteúdos trazidos pelos filtros*/
+.info-agenda{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    margin: 1rem ;
+    justify-content: left;
+   
+}
+ 
+/*H2 das informações trazidas pelo info*/
+.text-infogenda{
+    margin: 0.5rem;
+    font-size: 1rem;
+}
+ 
+ 
+/*Container das pausas que agrega as tabelas*/
+.info-pausa{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+ 
+ 
+/*estilização específica do título das paudas*/
+#text-pausas{
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+   
+}
+ 
+ 
+/*tabela geral*/
+ 
+table {
+    border-collapse: collapse; /* remove espaço entre as bordas */
+    font-family: Arial, sans-serif; /* fonte da tabela */
+    font-weight: 700;
+ 
+   
+   
+}
+ 
+/* Estilo das células */
+ 
+/*Título e conteúdos- cada bloco*/
+ 
+   th, td {
+    border: 1px solid #25cdd6;
+    /* border-radius: 6px; */
+    padding: 3vh;
+    /* text-align: left; */
+ 
+}      /* alinhamento do texto */
+ 
+ 
+ 
+ 
+/* Estilo do cabeçalho */
+thead {
+    background-color:#109EA6 ;
+    border-radius: 12px;
+    opacity: 90%;
+    color: #fff;
+   
+       
+   
+}
+ 
+/*corpo da tabela - abriga os dados*/
+tbody{
+    background-color: #dceef0;
+    border-radius: 12px;
+    color: #4d4d4d;
+ 
+ 
+}
+ 
+ 
+/* Efeito ao passar o mouse */
+/* tbody tr:hover {
+    background-color: #109EA6;
+} */
+ 
+ 
+.agrupa-btn{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    margin: 1.5rem auto;
+ 
+}
+.btn-filtro{
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    width: 8rem;
+    border-radius: 12px;
+    /* border: 1px solid #f5a152; */
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    background-color: #f5a152;
+ 
+}
+ 
+.btn-filtro:hover{
+    background-color: #109EA6;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+ 
+ 
+ 
+/*RESPONSIVIDADE*/
+ 
+/*RESPONSIVIDADE*/
+@media (max-width: 768px) {
+    .titulo-geral {
+        font-size: 2rem;
+    }
+ 
+ 
+    .bloco-section {
+        padding: 1.5rem;
+    }
+ 
+    .primary-title {
+        font-size: 1.3rem;
+    }
+ 
+    .bloco-filtro{
+        justify-content: center;
+    }
+
+    .container-filtro{
+ 
+    
+    min-width: 90%;
+    
+   
+   
+   
+    /* flex:1; */
+   
+ 
+}
+ 
+   
+ 
+}
+ 
+ 
+
+ 
+@media (max-width: 992px) {
+
+    .bloco-filtro{
+        justify-content: center;
+    }
+
+    .container-filtro{
+ 
+    
+    min-width: 90%;
+    
+   
+   
+   
+    /* flex:1; */
+   
+ 
+}
+   
+ 
+   
+}
+ 
+ 
+ 
+@media (max-width: 670px) {
+    .bloco-filtro{
+        justify-content: center;
+    }
+}
+ 
+ 
+@media (max-width: 380px) {
+    .bloco-filtro{
+        justify-content: center;
+    }
+ 
+ 
+   
+ 
+}
+ 

@@ -16,29 +16,21 @@
     <link rel="stylesheet" href="css/perfil.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/footer.css">
-
-
-    <!--link do arquivo js-->
-    <script src="js/barra_nav.js"></script>
-    <!-- link do js -->
-
-    <!--link do js do carrossel 2 - redondo-->
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css'>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/barranav.css">
 </head>
 
 <body>
 
-    <header>
-
-        <nav class="menu desktop">
-
-            <!--barra de navegação-->
+        <!--barra de navegação - início -->
+        <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/index">
-                    <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
@@ -46,74 +38,61 @@
             <ul class="menu-list">
                 <li class="dropdown">
                     <a class="sobre" href="#">Sobre</a>
-                    <div class="dropdown-content">
+                    <section class="dropdown-content">
                         <a href="#">Quem somos</a>
                         <a href="#">Contato</a>
                         <a href="#">FAQ</a>
-                <li><a id="areas-link" class="agendamento" href="/especialidades">Agendamento</a></li>
-                <li><a class="areas" href="/consultas">Área de consultas</a></li>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/">Agendamento</a></li>
+                <li><a class="consultas" href="/">Área de Consultas</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil" onclick="toggleProfileMenu()">
-                    <i class="bi bi-person-circle"></i>
-                    <div id="profile-dropdown" class="profile-dropdown">
-                        <a href="/">Sair</a>
-                    </div>
-                </article>
-                <article class="texto-icon"><!--perfil--></article>
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/" class="btn-sair">Sair</a>
+                    </section>
+                </li>
             </ul>
-
-            <script>
-                function toggleProfileMenu() {
-                    const profileDropdown = document.getElementById("profile-dropdown");
-                    profileDropdown.style.display = profileDropdown.style.display === "block" ? "none" : "block";
-                }
-
-                // Fecha o menu ao clicar fora dele
-                window.addEventListener("click", function (event) {
-                    const profileDropdown = document.getElementById("profile-dropdown");
-                    const iconPerfil = document.querySelector(".icon-perfil");
-                    if (!iconPerfil.contains(event.target)) {
-                        profileDropdown.style.display = "none";
-                    }
-                });
-            </script>
 
         </nav>
 
-        <nav class="menu mobile">
+        <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/index">
-                    <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                </a>
-                <a href="/index">
-                    <img class="logo3" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
-            <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
-                <article class="texto-icon"><!--perfil--></article>
+            <ul class="menu-actions">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
 
-                <!-- Botão do menu hambúrguer -->
-                <button class="hamburguer" onclick="toggleMenu()">
-                    <div class="linha"></div>
-                    <div class="linha"></div>
-                    <div class="linha"></div>
-                </button>
-
-                <!-- Menu suspenso do hambúrguer -->
-                <div id="hamburger-menu" class="hamburger-menu-content">
-                    <a href="/especialidades">Agendamento</a>
-                    <a href="/consultas">Área de consultas</a>
-                    <a href="/">Sair</a>
-                </div>
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Quem somos</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Agendamento</a></li>
+                <li><a href="/">Área de Consultas</a></li>
             </ul>
         </nav>
 
@@ -124,10 +103,9 @@
             }
         </script>
 
-    </header>
 
+        <!--barra de navegação - fim ^^^ -->
 
-    <section class="barra"> </section>
 
     <main>
 
@@ -149,39 +127,38 @@
                     <img src="imagens/foto-perfil.png" alt="" srcset="">
                 </section>
                 <section class="dir-bg-perfil">
-                    <section class="infos">
+                    <form class="infos">
                         <section class="conjunto">
                             <section class="ttl-campo">Nome:</section>
-                            <section class="campo">Kelly Alves</section>
+                            <input type="text" class="campo" value="Kelly Alves" readonly>
                         </section>
 
                         <section class="conjunto">
                             <section class="ttl-campo">Data de nascimento:</section>
-                            <section class="campo">19/09/1975</section>
+                            <input type="text" class="campo" value="19/09/1975" readonly>
                         </section>
 
                         <section class="conjunto">
                             <section class="ttl-campo">CPF:</section>
-                            <section class="campo">265.647.658-51</section>
+                            <input type="text" class="campo" value="265.647.658-51" readonly>
                         </section>
 
                         <section class="conjunto">
                             <section class="ttl-campo">E-mail:</section>
-                            <section class="campo">kellyalves367@gmail.com</section>
+                            <input type="email" class="campo" value="kellyalves367@gmail.com" readonly>
                         </section>
 
                         <section class="conjunto">
                             <section class="ttl-campo">Senha:</section>
-                            <section class="campo">********</section>
+                            <input type="password" class="campo" value="********" readonly>
                         </section>
 
                         <section class="conjunto">
                             <section class="ttl-campo">Endereço:</section>
-                            <section class="campo">Rua Vitório Tognólio, 814, Jardim das Laranjeiras - Pirassununga - SP
-                            </section>
+                            <input type="text" class="campo" value="Rua Vitório Tognólio, 814, Jardim das Laranjeiras - Pirassununga - SP" readonly>
                         </section>
 
-                    </section>
+                    </form>
                 </section>
             </section>
             <section class="historico-container">
@@ -194,17 +171,41 @@
                     </section>
                 </section>
 
-                <section class="info-extra" id="infoExtra">
-                    <p><strong>Idade:</strong> <br>49 anos 1 mês e 11 dias</p>
-                    <p><strong> Sexo:</strong> <br>Feminino</p>
-                    <p><strong>Possui alguma doença crônica?</strong><br> Não</p>
-                    <p><strong>Medicamento contínuo?</strong> <br>Não</p>
-                    <p><strong>Alergias:</strong> <br>APLV IgE mediada</p>
-                    <p><strong>Cirurgia?</strong> <br>Não</p>
+                <form class="info-extra" id="infoExtra">
+                    <section class="conjunto">
+                        <section class="ttl-campo">Idade:</section>
+                        <input type="text" class="campo" value="49 anos 1 mês e 11 dias" readonly>
+                    </section>
+                    
+                    <section class="conjunto">
+                        <section class="ttl-campo">Sexo:</section>
+                        <input type="text" class="campo" value="Feminino" readonly>
+                    </section>
+                    
+                    <section class="conjunto">
+                        <section class="ttl-campo">Possui alguma doença crônica?</section>
+                        <input type="text" class="campo" value="Não" readonly>
+                    </section>
+                    
+                    <section class="conjunto">
+                        <section class="ttl-campo">Medicamento contínuo?</section>
+                        <input type="text" class="campo" value="Não" readonly>
+                    </section>
+                    
+                    <section class="conjunto">
+                        <section class="ttl-campo">Alergias:</section>
+                        <input type="text" class="campo" value="APLV IgE mediada" readonly>
+                    </section>
+                    
+                    <section class="conjunto">
+                        <section class="ttl-campo">Cirurgia?</section>
+                        <input type="text" class="campo" value="Não" readonly>
+                    </section>
+                    
                     <section class="bot-historico">
                         <p>Documento visível apenas para profissionais</p>
                     </section>
-                </section>
+                </form>
                 
             </section>
 

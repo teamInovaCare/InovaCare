@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração de agenda</title>
+
+    <!-- Link dos ícones fontawesome -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+    <!-- LINK DOS ICONES DA BARRA NAV -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!--link do arquivo js-->
+    <link rel="stylesheet" href="css/barranav.css">
+
+
+    <!--link do arquivo css da NAV e do footer-->
+
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link rel="stylesheet" href="css/barranav.css">
+
+
+    <!-- CSS da página de agenda -->
+    <link rel="stylesheet" href="/css/agendaconfig_prof.css">
+
+
+
+</head>
+
+</head>
+
+<body>
+
+    <header>
+        <!--barra de navegação - início -->
+        <nav class="menu-desktop">
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <section class="dropdown-content">
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/">Agendamento</a></li>
+                <li><a class="consultas" href="/">Área de Consultas</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/" class="btn-sair">Sair</a>
+                    </section>
+                </li>
+            </ul>
+
+        </nav>
+
+        <nav class="mobile-menu">
+            <section class="menu-logo">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-actions">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Quem somos</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Agendamento</a></li>
+                <li><a href="/">Área de Consultas</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+
+        <!--barra de navegação - fim ^^^ -->
+
+    </header>
+
+
+
+     
+
+    <!-- ------------------------------------------------------------- -->
+
+
+    <!-- titulo geral da página + botão de voltar -->
+
+    <section class="container-titulo">
+        <a href="/home_agenda_prof" class="bt-voltar">
+            <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+            <!-- ou -->
+
+        </a>
+        <h2 class="titulo-geral titulo-com-seta">Configurações de agenda</h2>
+
+    </section>
+
+
+
+
+
+    <!-- Sessão que abrange toda a página -->
+    <section class="container-geral">
+
+        <form action="" method="post">
+
+            
+
+            <!-- ------------------------------------------------------------- -->
+
+            <!-- Seleção do dia da semana -->
+            <section class="form-section">
+
+                <!-- Título da seção de modalidade com ícone estilizado -->
+                <h2 class="primary-title"><i class="fas fa-calendar-day"></i>Selecione o dia da semana</h2>
+                
+                <!-- Legenda informativa explicando para o usuário -->
+                <section class="info-box">
+
+                    <i class="fas fa-circle-info"></i>
+                    <p>As configurações de agenda funcionam a partir de uma predefinição para o dia da semana. Escolha um dia e defina horários de trabalho, preço e modalidade de atendimento.</p>
+
+                </section>
+
+
+                <!-- Caixa de seleção para a escolha do dia da semana -->
+                <section class="select-container">
+
+                    <select id="idsemanadia" name="semanadia" required="">
+
+                        <option value="" disabled="" selected="" hidden="">Selecione o dia da semana</option><!--Legenda da caixa de seleção-->
+
+                        <option value="Domingo">Domingo</option>
+                        <option value="Segunda-Feira">Segunda-Feira</option>
+                        <option value="Terça-Feira">Terça-Feira</option>
+                        <option value="Quarta-Feira">Quarta-Feira</option>
+                        <option value="Quinta-Feira">Quinta-Feira</option>
+                        <option value="Sexta-Feira">Sexta-Feira</option>
+                        <option value="Sábado">Sábado</option>
+                    </select>
+
+                </section>
+
+            </section>
+
+
+            <!-- ------------------------------------------------------------------------ -->
+
+            <!-- Seleção da modalidade -->
+             <section class="form-section">
+
+                <!-- Título da sessão de modalidade de atendimento com ícone -->
+                <h2 class="primary-title"><i class="fas fa-laptop-house"></i> Modalidade de Atendimento</h2>
+
+                <!-- Legenda explciativa para o usuário -->
+                <p class="subtext">Selecione como você deseja realizar seus atendimentos</p>
+
+
+                <!-- Container geral das modalidades para a escolha - bloco todo -->
+                <section class="modalidade-container">
+
+                    <!-- Bloco de escolha do ONLINE -->
+                    <section class="modalidade-option">
+
+                        <!-- Botão de rádio -->
+                        <input type="radio" id="online" name="modalidade" value="Online" class="modalidade-input">
+
+                        <!-- Formato que vai aparecer para o usuário - ÍCONE  -->
+                        <label for="online" class="modalidade-label">
+                            <i class="fas fa-desktop modalidade-icon"></i>
+                            Online
+                        </label>
+                    </section>
+
+                    
+                    <!-- Bloco de escolha do DOMICILIAR -->
+                    <section class="modalidade-option">
+
+                        <!-- Botão de rádio -->
+                        <input type="radio" id="domiciliar" name="modalidade" value="Domiciliar" class="modalidade-input">
+
+                        <!-- Formato que vai aparecer para o usuário - ÍCONE  -->
+                        <label for="domiciliar" class="modalidade-label">
+                            <i class="fas fa-house modalidade-icon"></i>
+                            Domiciliar
+                        </label>
+                    </section>
+
+                
+                </section>
+
+            </section>
+
+            <!-- ------------------------------------------------------------- -->
+
+
+            <!-- Horário de trabalho -->
+            <section class="form-section">
+
+                <!-- Título do bloco de horário de trabalho -->
+                <h2 class="primary-title"><i class="fas fa-clock"></i> Horário de Trabalho</h2>
+
+                <!-- Legenda para o usuário -->
+                <p class="subtext">Defina o horário de início e término do seu expediente</p>
+
+
+                <!-- Bloco geral para o horáriod e trabalho -->
+                <section class="horario-container">
+
+                    <!-- Horário de início -->
+                    <section class="time-input-group">
+                        <label for="hr_inicio" class="time-label">Horário de Início</label>
+                        <input type="time" id="hr_inicio" name="hrinicio" class="time-input" required="">
+                    </section>
+
+
+                    <!-- Horário de término -->
+                    <section class="time-input-group">
+                        <label for="hr_fim" class="time-label">Horário de Término</label>
+                        <input type="time" id="hr_fim" name="hrfim" class="time-input" required="">
+                    </section>
+
+                </section>
+            </section>
+
+
+
+
+            <!-- ------------------------------------------------------------- -->
+
+            <!-- Pausas de trabalho -->
+            <section class="form-section">
+
+                <!-- Título do horário de pausa -->
+                <h2 class="primary-title"><i class="fas fa-coffee"></i> Configuração de Pausas</h2>
+
+                <!-- Legenda para auxiliar o usuário -->
+                <p class="subtext">Adicione intervalos do dia em que você não estará disponível para atendimento</p>
+
+                <!-- As pausas serão adicionas aqui a partir de um JS --- De acorod com a interação do usuário com o botão de adicionar -->
+               <section class="container-hora" id="pausas-container">
+
+
+                        <!-- As pausas serão adicionadas aqui -->
+
+                        <!-- <section class="hora">
+                            <label class="hora-label" for="hrinicio">Horário de Início</label>
+                            <input type="text" name="hrinicio" id="hr_inicio" required>
+                        </section>
+
+                        <section class="hora">
+                            <label class="hora-label" for="hrfim">Horário de Término</label>
+                            <input type="text" name="hrfim" id="hrfim" required>
+                        </section> -->
+
+
+
+
+                    </section>
+
+
+                <!-- Botão que vai acionar as pausas -->
+                <button type="button" id="adicionar-pausa" class="btn-adicionar">
+                    <i class="fas fa-plus"></i> Adicionar Pausa
+                </button>
+
+            </section>
+
+            <!-- Envio das informações -->
+            <input type="submit" class="btn-avancar" value="Confirmar"></input>
+
+        </form>
+
+    </section>
+
+    <footer class="footer">
+
+        <section class="footer-logo">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <h3 class="ttl-links">Explorar</h3>
+            <ul class="links">
+                <li><a href="#">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/especialidades">Especialidades</a></li>
+                <li><a href="/consultas">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
+
+    </footer>
+
+    <script src="js/config_agenda_prof.js"></script>
+
+
+
+</body>
+
+</html>
