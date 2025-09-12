@@ -46,3 +46,59 @@ document.addEventListener('DOMContentLoaded', () => {
     retangCg3.addEventListener('click', toggleExpand);
     retangCg4.addEventListener('click', toggleExpand);
 });
+
+
+/* Avaliar Profissional */
+
+const popup = document.getElementById("popup");
+    const estrelas = document.querySelectorAll(".star");
+    const commentBox = document.getElementById("comment-box");
+    let avaliacao = 0;
+
+    function abrirPopup() {
+      popup.style.display = "flex";
+    }
+
+    function fecharPopup() {
+      popup.style.display = "none";
+      limpar();
+    }
+
+    function limpar() {
+      estrelas.forEach(e => e.classList.remove("selected"));
+      avaliacao = 0;
+      commentBox.style.display = "none";
+      document.getElementById("comentario").value = "";
+    }
+
+    estrelas.forEach((estrela, index) => {
+      estrela.addEventListener("click", () => {
+        avaliacao = index + 1;
+        atualizarEstrelas(avaliacao);
+        commentBox.style.display = "block";
+      });
+    });
+
+    function atualizarEstrelas(valor) {
+      estrelas.forEach((estrela, i) => {
+        estrela.classList.toggle("selected", i < valor);
+      });
+    }
+
+    function enviar() {
+      const comentario = document.getElementById("comentario").value.trim();
+
+      if (avaliacao === 0) {
+        alert("Por favor, selecione uma avaliação.");
+        return;
+      }
+
+      if (!comentario) {
+        alert("Por favor, escreva um comentário.");
+        return;
+      }
+
+      // Aqui você pode enviar para backend com fetch/AJAX, etc.
+      alert(`Avaliação: ${avaliacao} estrela(s)\nComentário: ${comentario}`);
+      fecharPopup();
+    }
