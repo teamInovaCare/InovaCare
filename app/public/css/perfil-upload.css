@@ -1,0 +1,79 @@
+.foto-perfil-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.foto-perfil-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #109EA640;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn-alterar-foto {
+    background-color: #109EA6;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-alterar-foto:hover {
+    background-color: #003f5c;
+}
+
+.btn-salvar {
+    background-color: #F5A152;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    height: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #e8934a;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0 30px 0;
+}
+
+.btn-editar {
+    background-color: #F5A152;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    height: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #e8934a;
+}
+
+.btn-editar.cancelar {
+    background: none;
+    color: #109EA6;
+}
