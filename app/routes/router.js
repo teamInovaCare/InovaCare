@@ -82,8 +82,8 @@ router.get("/perfil", function (req, res) {//perfil do paciente
   res.render("pages/perfil.ejs");
 });
 
-router.get("/teste", function (req, res) {
-  res.render("pages/teste.ejs");
+router.get("/agenda", function (req, res) {
+  res.render("pages/agenda.ejs");
 });
 
 router.get("/prontuario", function (req, res) {//prontuario profissional
@@ -93,6 +93,7 @@ router.get("/prontuario", function (req, res) {//prontuario profissional
 router.get("/prontugeral", function (req, res) {//prontuario profissional
   res.render("pages/prontugeral.ejs");
 });
+
 
 
 /**Validação do login, autenticação e "cartão de visita do usuário" */
