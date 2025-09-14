@@ -256,7 +256,7 @@ if (btnConfirmarEndereco) {
                 cep,
                 complemento
             });
-            confirmDomiciliarLink.href = "/confirmar?" + params.toString();
+            confirmDomiciliarLink.href = "/consultas?" + params.toString();
         }
 
         // garante que inputs fiquem bloqueados ao ir para a tela final
