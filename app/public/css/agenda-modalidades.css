@@ -1,0 +1,455 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+main {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+    color: #343a40;
+    /* Espaçamento entre as linhas */
+    line-height: 1.6;
+    min-height: 100vh;
+    /* padding-bottom: 2rem; */
+}
+
+/* Estilos para o botão de voltar como seta */
+.container-titulo {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.bt-voltar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    color: #343a40;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 1rem;
+}
+
+.bt-voltar:hover {
+    background-color: #109EA6;
+    color: white;
+    border-color: #109EA6;
+    transform: translateX(-5px);
+}
+
+.bt-voltar i {
+    font-size: 1.5rem;
+}
+
+.titulo-com-seta {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    margin-right: 10%;
+}
+
+/*Responsividadde do botãod e voltar*/
+@media (max-width: 768px) {
+    .container-titulo {
+        padding: 0 1rem;
+        margin: 1.5rem auto 0;
+    }
+
+    .bt-voltar {
+        width: 40px;
+        height: 40px;
+        margin-right: 0.8rem;
+    }
+
+    .bt-voltar i {
+        font-size: 1.2rem;
+    }
+
+    .titulo-com-seta {
+        font-size: 1.8rem;
+    }
+}
+
+/*Container q/* === CONTAINER PRINCIPAL === */
+.container-geral {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+/* === TÍTULO === */
+.titulo-geral {
+    font-size: 2rem;
+    color: #343a40;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.titulo-geral::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: #e8934a;
+    border-radius: 2px;
+}
+
+/* === ÍCONES === */
+.fa-calendar-day:before {
+    content: "\f783";
+    color: #109EA6;
+}
+
+.fa-clock:before {
+    content: "\f017";
+    color: #109EA6;
+}
+
+.fa-map-marker-alt:before {
+    color: #109EA6;
+}
+
+/* === SEÇÕES === */
+.form-section {
+    background: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.primary-title {
+    font-size: 1.5rem;
+    color: #343a40;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subtext {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+/* === BOTÃO === */
+.btn-avancar {
+    display: block;
+    margin: 2.5rem auto;
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f5a152, #e8934a);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(232, 147, 74, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Hover com efeito de "levantar" */
+.btn-avancar:hover {
+    background: linear-gradient(135deg, #e8934a, #f5a152);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(232, 147, 74, 0.4);
+}
+
+/* Clique (efeito de pressionar) */
+.btn-avancar:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(232, 147, 74, 0.2);
+}
+
+/* Foco com outline suave para acessibilidade */
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .btn-avancar {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+/* Container das datas e horários */
+.datas-disponiveis,
+.horarios-disponiveis {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* Espaço entre os botões */
+}
+
+/* Estilização dos labels como botões */
+.datas-disponiveis label,
+.horarios-disponiveis label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #109EA6;
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    color: #343a40;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 90px;
+    text-align: center;
+}
+
+/* Remove o input radio padrão */
+.datas-disponiveis input[type="radio"],
+.horarios-disponiveis input[type="radio"] {
+    display: none;
+}
+
+/* Quando o radio estiver selecionado, aplica estilo no label inteiro */
+label.ativo {
+    background-color: #109EA6;
+    color: #fff;
+    border-color: #109EA6;
+}
+
+
+/* Efeito hover nos botões */
+.datas-disponiveis label:hover,
+.horarios-disponiveis label:hover {
+    background-color: #e0f0f3;
+    border-color: #109EA6;
+}
+
+.form-section.horarios {
+    display: none;
+}
+
+
+/* MODAL */
+
+/* Fundo escuro */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none; /* Escondido por padrão */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: aparecer 0.3s ease;
+}
+
+.modal-content h2 {
+    text-align: center;
+}
+
+.modal-content p {
+    font-weight: bold;
+}
+
+@keyframes aparecer {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+
+.modal-header h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #343a40;
+    text-align: center;
+}
+
+/* Body */
+.modal-body p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+/* Footer com botões */
+.modal-footer {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+
+/* Botões */
+
+.modal-actions {
+    text-align: center;
+}
+
+.btn-voltar-modal {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background: #f25c52;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+
+.btn-confirmar-modal {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f5a152, #e8934a);
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-confirmar-modal:hover, .btn-voltar-modal:hover {
+    transform: translateY(-2px);
+}
+
+
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+    .titulo-geral {
+        font-size: 2rem;
+    }
+
+    .form-section {
+        padding: 1.5rem;
+    }
+
+    .primary-title {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 569px) {
+
+    .datas-disponiveis,
+    .horarios-disponiveis {
+        justify-content: center;
+    }
+
+    .modal-content {
+        width: 75%;
+    }
+}
+
+
+/* ------------------------------------------------ */
+/* Seção de endereço */
+/* ------------------------------------------------ */
+.form-section.endereco {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-section.endereco h2.primary-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.campos-endereco {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* dois campos por linha */
+    gap: 15px 20px; /* espaçamento entre linhas e colunas */
+}
+
+.campos-endereco label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.campos-endereco input[type="text"] {
+    padding: 8px 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campos-endereco input[type="text"]:focus {
+    border-color: #4a90e2; /* cor de destaque ao focar */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+
+.btn-alterar-endereco {
+    font-family: Segoe UI;
+    display: inline-block;
+    padding: 11px 19px;          
+    background-color: #e8934a;   
+    color: #fff;
+    border: none;
+    border-radius: 12px;         
+    cursor: pointer;
+    font-size: 1rem;            
+    font-weight: 500;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+.btn-alterar-endereco:hover {
+    background-color: #FF7F00;   
+    transform: translateY(-1px);
+}
+
+.btn-alterar-endereco:active {
+    background-color: #cc5c00;   
+    transform: translateY(0);
+}
+
+
+@media screen and (max-width: 600px) {
+    .campos-endereco {
+        grid-template-columns: 1fr; /* uma coluna só */
+    }
+}
+

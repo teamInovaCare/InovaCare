@@ -1,20 +1,20 @@
 var express = require("express");
 var router = express.Router();
-const { body, validationResult} = require("express-validator")
-var {validarCPF, isValidDate, validarCEP} = require
-("../helpers/validacoes");
+const { body, validationResult } = require("express-validator")
+var { validarCPF, isValidDate, validarCEP } = require
+    ("../helpers/validacoes");
 
 
-/*autenticação*/ 
+/*autenticação*/
 const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../model/autenticador_middleware");
 
 const usuarioController = require("../controllers/usuarioController");
 
 
 router.get("/", function (req, res) {/**página inicial */
-    res.render("pages/index", {autenticado: req.session.autenticado || false, login: req.session.logado || 0})
+    res.render("pages/index", { autenticado: req.session.autenticado || false, login: req.session.logado || 0 })
 });
- 
+
 router.get("/especialidades", function (req, res) {/**listagem das especialidades - botão agendamento */
     res.render("pages/especialidades.ejs")
 });
@@ -28,9 +28,9 @@ router.get("/consultas", function (req, res) {/**Minhas consultas */
 });
 
 
-/*autenticação- usuário está logado? Função do Middle*/ 
-router.get("/index", verificarUsuAutenticado, function (req, res) {/*usuário logado*/ 
-  res.render("pages/index", {autenticado: req.session.autenticado, login: req.session.logado,} );
+/*autenticação- usuário está logado? Função do Middle*/
+router.get("/index", verificarUsuAutenticado, function (req, res) {/*usuário logado*/
+    res.render("pages/index", { autenticado: req.session.autenticado, login: req.session.logado, });
 });
 
 router.get("/homepro", function (req, res) {//home do profissional
@@ -58,15 +58,15 @@ router.get("/cadprof_dados", function (req, res) {//cadastro do profissional-ema
 });
 
 
- /**CONFIGURAÇÃOD E AGENDA DO PROFISSIONAL */
+/**CONFIGURAÇÃOD E AGENDA DO PROFISSIONAL */
 
 router.get("/config_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
     res.render("pages/config_agenda_prof.ejs");
 });
 
- /**VISUALIZAÇÃO DA AGENDA DO PROFISISONAL */
+/**VISUALIZAÇÃO DA AGENDA DO PROFISISONAL */
 
- router.get("/home_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
+router.get("/home_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
     res.render("pages/home_agenda_prof.ejs");
 });
 
@@ -79,62 +79,70 @@ router.get("/login_prof", function (req, res) {//login do profissional-
 
 
 router.get("/perfil", function (req, res) {//perfil do paciente
-  res.render("pages/perfil.ejs");
+    res.render("pages/perfil.ejs");
 });
 
 router.get("/agenda", function (req, res) {
-  res.render("pages/agenda.ejs");
+    res.render("pages/agenda.ejs");
+});
+
+router.get("/agenda-online", function (req, res) {
+    res.render("pages/agenda-online.ejs");
+});
+
+router.get("/agenda-domiciliar", function (req, res) {
+    res.render("pages/agenda-domiciliar.ejs");
 });
 
 router.get("/prontuario", function (req, res) {//prontuario profissional
-  res.render("pages/prontuario.ejs");
+    res.render("pages/prontuario.ejs");
 });
 
 router.get("/prontugeral", function (req, res) {//prontuario profissional
-  res.render("pages/prontugeral.ejs");
+    res.render("pages/prontugeral.ejs");
 });
 
 
 
 /**Validação do login, autenticação e "cartão de visita do usuário" */
 router.post(
-  "/singup_post",
-  usuarioController.validalogin,
-  gravarUsuAutenticado,
-  function (req, res) {
-    usuarioController.logar(req, res);
-  });
+    "/singup_post",
+    usuarioController.validalogin,
+    gravarUsuAutenticado,
+    function (req, res) {
+        usuarioController.logar(req, res);
+    });
 
-router.get('/cadastro_inicial', function(req,res){// cadastro inicial do paciente- GET
-    res.render('pages/cadastro_inicial', { "erros": null, "valores": {"nome":"","cpf":"","data":"",},"retorno":null });  
+router.get('/cadastro_inicial', function (req, res) {// cadastro inicial do paciente- GET
+    res.render('pages/cadastro_inicial', { "erros": null, "valores": { "nome": "", "cpf": "", "data": "", }, "retorno": null });
 })
 
 
 router.post("/cadastro_inicial_validacao", usuarioController.validacaduser, //cadastro incial -post
-    (req,res)=>{
-        usuarioController.cadastroinicial(req,res);
+    (req, res) => {
+        usuarioController.cadastroinicial(req, res);
     }
 )
 
 
-router.get("/cadastro_localizacao", function(req,res){//cadastro endereço do paciente -- 
-    res.render('pages/cadastro_localizacao', { "erros": null, "valores": {"cep":"", "uf":"", "endereco":"", "bairro":"", "cidade":""},"retorno":null });  
+router.get("/cadastro_localizacao", function (req, res) {//cadastro endereço do paciente -- 
+    res.render('pages/cadastro_localizacao', { "erros": null, "valores": { "cep": "", "uf": "", "endereco": "", "bairro": "", "cidade": "" }, "retorno": null });
 })
 
 router.post("/cadastro_localizacao_validacao", usuarioController.validacadlocal,//post cad_paciente_endereço
-    (req,res) => {
-        usuarioController.cadastrolocal(req,res);
+    (req, res) => {
+        usuarioController.cadastrolocal(req, res);
     }
 )
 
 
-router.get("/cadastro_dados", function(req,res){//cad_paciente_email e senha_get
-  res.render('pages/cadastro_dados', { "erros": null, "valores": {"email":"","senha":"","repsenha":"", "repemail":""},"retorno":null });  
+router.get("/cadastro_dados", function (req, res) {//cad_paciente_email e senha_get
+    res.render('pages/cadastro_dados', { "erros": null, "valores": { "email": "", "senha": "", "repsenha": "", "repemail": "" }, "retorno": null });
 })
 
 router.post("/cadastro_dados_validacao", usuarioController.validacadfinal,//cad_paciente_post_email e senha
-    (req,res) =>{
-        usuarioController.cadastrofinal(req,res);
+    (req, res) => {
+        usuarioController.cadastrofinal(req, res);
     }
 )
 

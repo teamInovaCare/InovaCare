@@ -2,12 +2,13 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agenda</title>
+
   <link rel="stylesheet" href="css/barranav.css">
   <link rel="stylesheet" href="css/agenda.css">
   <link rel="stylesheet" href="css/footer.css">
-  <title>Agenda</title>
 </head>
 
 <body>
@@ -88,12 +89,10 @@
 
   </header>
 
-  <main>
 
+  <main>
     <section class="btn-voltar">
-      <a href="/cg">
-        <img src="imagens/arrows.png" alt="" srcset="">
-      </a>
+      <a href="/cg"><img src="imagens/arrows.png" alt="Voltar"></a>
     </section>
 
     <section class="ttl-agendamento">
@@ -104,10 +103,7 @@
       <!-- Coluna Esquerda -->
       <section class="agenda-l">
         <section class="left-top">
-          <section class="foto-perfil">
-            <img src="imagens/perfil-medico.png" alt="Foto do médico">
-          </section>
-
+          <section class="foto-perfil"><img src="imagens/perfil-medico.png" alt="Foto do médico"></section>
           <section class="info-perfil">
             <h3>Dr. Cleber J.</h3>
             <p><img src="imagens/star.png" alt="">4,9</p>
@@ -118,12 +114,10 @@
         </section>
 
         <section class="left-mid">
-          <p>
-            Graduado em Medicina pela Universidade Federal do Rio de Janeiro (UFRJ), com conclusão em 2021. Ao longo da
+          <p>Graduado em Medicina pela Universidade Federal do Rio de Janeiro (UFRJ), com conclusão em 2021. Ao longo da
             graduação, realizou estágios em diversas áreas da medicina, com ênfase em Clínica Médica, Atenção Primária à
             Saúde e Medicina da Família. Participou de projetos de extensão voltados à promoção da saúde e prevenção de
             doenças em comunidades vulneráveis.
-
           </p>
         </section>
 
@@ -135,186 +129,81 @@
 
       <!-- Coluna Direita (estados) -->
       <section class="agenda-r">
+
         <!-- ESTADO INICIAL -->
         <section class="estado-inicial">
-          <section class="comentarios comentarios-inline">
+          <section class="comentarios">
             <h4>Principais comentários:</h4>
             <section class="comentario">
-              <img src="imagens/user.png" alt="Foto do paciente">
+              <img src="imagens/user.png" alt="Paciente">
               <section>
-                <p><img src="imagens/star.png" alt=""><strong>5,0</strong></p>
+                <p><img src="imagens/star.png" alt=""> <strong>5,0</strong></p>
                 <p>Profissional excelente!</p>
               </section>
             </section>
 
             <section class="comentario">
-              <img src="imagens/user.png" alt="Foto do paciente">
+              <img src="imagens/user.png" alt="Paciente">
               <section>
-                <p><img src="imagens/star.png" alt=""><strong>4,9</strong></p>
+                <p><img src="imagens/star.png" alt=""> <strong>4,9</strong></p>
                 <p>Atendimento humanizado e eficiente!</p>
               </section>
             </section>
             <a href="#">Ler mais comentários</a>
           </section>
-          <button class="btn-agendar">Agendar</button>
+
+          <button class="btn-agendar" id="btnAgendar">Agendar</button>
         </section>
 
-        <!-- ESTADO DE AGENDAMENTO: ESCOLHA -->
-        <section class="estado-agendamento" style="display: none;">
+        <!-- ESTADO AGENDAMENTO (AGORA SÓ 1) -->
+        <section class="estado-agendamento" aria-hidden="true">
           <h4 class="ttl-estado">Qual tipo de atendimento você procura?</h4>
+
           <section class="opcoes-atendimento">
-            <button class="opcao" data-tipo="online">Online</button>
-            <button class="opcao" data-tipo="domiciliar">Domiciliar</button>
-          </section>
-          <section class="botoes-navegacao">
-            <button class="btn-voltar-estado">Voltar</button>
-            <button class="btn-confirmar">Confirmar</button>
-          </section>
-        </section>
+            <!-- Mantive a estrutura com input + label (label AFTER input para usar + selector) -->
+            <section class="modalidade-option">
+              <input type="radio" id="online" name="modalidade" value="online" class="modalidade-input">
+              <label for="online" class="modalidade-label">
+                Online
+              </label>
+            </section>
 
-        <!-- ESTADO DE AGENDAMENTO: DATAS (substitui input date) -->
-        <section class="estado-calendario" style="display: none;">
-          <h4 class="ttl-estado">Selecione a Data</h4>
-          <section class="datas-disponiveis">
-            <label class="data"><input type="radio" name="data" value="2025-10-17"><span>17/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-18"><span>18/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-19"><span>19/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-20"><span>20/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-21"><span>21/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-22"><span>22/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-23"><span>23/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-24"><span>24/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-25"><span>25/10/2025</span></label>
-            <label class="data"><input type="radio" name="data" value="2025-10-26"><span>26/10/2025</span></label>
+            <section class="modalidade-option">
+              <input type="radio" id="domiciliar" name="modalidade" value="domiciliar" class="modalidade-input">
+              <label for="domiciliar" class="modalidade-label">
+                Domiciliar
+              </label>
+            </section>
           </section>
 
           <section class="botoes-navegacao">
-            <button class="btn-voltar-estado2">Voltar</button>
-            <button class="btn-proximo">Próximo</button>
+            <button type="button" class="btn-voltar-estado" id="btnVoltarTipo">Voltar</button>
+            <button type="button" class="btn-confirmar" id="btnConfirmarTipo">Confirmar</button>
           </section>
         </section>
 
-        <!-- ESTADO DE AGENDAMENTO: HORÁRIOS -->
-        <section class="estado-horarios" style="display: none;">
-          <h4 class="ttl-estado">Selecione um dos horários disponíveis:</h4>
+      </section> <!-- .agenda-r -->
+    </section> <!-- .background-agenda -->
 
-          <section class="horarios-disponiveis">
-            <label class="horario"><input type="radio" name="horario" value="08:30"><span>08:30</span></label>
-            <label class="horario"><input type="radio" name="horario" value="09:30"><span>09:30</span></label>
-            <label class="horario"><input type="radio" name="horario" value="11:40"><span>11:40</span></label>
-            <label class="horario"><input type="radio" name="horario" value="13:00"><span>13:00</span></label>
-            <label class="horario"><input type="radio" name="horario" value="15:30"><span>15:30</span></label>
-            <label class="horario"><input type="radio" name="horario" value="16:00"><span>16:00</span></label>
-            <label class="horario"><input type="radio" name="horario" value="18:00"><span>18:00</span></label>
-            <label class="horario"><input type="radio" name="horario" value="18:40"><span>18:40</span></label>
-            <label class="horario"><input type="radio" name="horario" value="20:00"><span>20:00</span></label>
-          </section>
-
-          <section class="botoes-navegacao">
-            <button class="btn-voltar-estado3">Voltar</button>
-            <button class="btn-proximo-horario">Próximo</button>
-          </section>
+    <!-- comentários para mobile (movidos para fora do card) -->
+    <section class="comentarios comentarios-mobile" aria-hidden="true">
+      <h4>Principais comentários:</h4>
+      <section class="comentario">
+        <img src="imagens/user.png" alt="Paciente">
+        <section>
+          <p><img src="imagens/star.png" alt=""> <strong>5,0</strong></p>
+          <p>Profissional excelente!</p>
         </section>
-
-        <!-- CONFIRMAÇÃO ONLINE -->
-        <section class="estado-confirmacao-online" style="display: none;">
-          <h4 class="ttl-estado">Confirmar agendamento (Online)</h4>
-          <section class="mensagem-confirmacao">
-            <p class="texto-confirmacao"></p>
-          </section>
-
-          <section class="botoes-confirmacao">
-            <button class="btn-voltar-estado4">Voltar</button>
-            <a class="confirmar-link" href="/consultas" target="_self">Confirmar</a>
-          </section>
-        </section>
-
-        <!-- CONFIRMAÇÃO DOMICILIAR -->
-        <section class="estado-confirmacao-domiciliar" style="display: none;">
-          <h4 class="ttl-estado">Confirme o endereço cadastrado:</h4>
-
-          <section class="endereco-form">
-            <form>
-              <section class="form-grid">
-                <section class="form-group">
-                  <label for="cep">CEP</label>
-                  <input type="text" id="cep" name="cep" placeholder="CEP">
-                </section>
-                <section class="form-group">
-                  <label for="uf">UF</label>
-                  <input type="text" id="uf" name="uf" placeholder="UF">
-                </section>
-
-                <section class="form-group full">
-                  <label for="endereco">Endereço</label>
-                  <input type="text" id="endereco" name="endereco" placeholder="Endereço">
-                </section>
-
-                <section class="form-group">
-                  <label for="bairro">Bairro</label>
-                  <input type="text" id="bairro" name="bairro" placeholder="Bairro">
-                </section>
-                <section class="form-group">
-                  <label for="cidade">Cidade</label>
-                  <input type="text" id="cidade" name="cidade" placeholder="Cidade">
-                </section>
-
-                <section class="form-group">
-                  <label for="numero">Número</label>
-                  <input type="text" id="numero" name="numero" placeholder="Número">
-                </section>
-                <section class="form-group">
-                  <label for="complemento">Complemento</label>
-                  <input type="text" id="complemento" name="complemento" placeholder="Complemento">
-                </section>
-              </section>
-
-              <section class="form-buttons">
-                <button type="button" class="alterar">Alterar</button>
-                <button type="submit" class="confirmar-form">Confirmar</button>
-              </section>
-
-              <button type="button" class="btn-voltar-estado6">Voltar</button>
-            </form>
-          </section>
-
-        </section>
-
-        <section class="estado-confirmacao-domiciliar-final" style="display: none;">
-          <h4 class="ttl-estado">Confirmar agendamento (Domiciliar)</h4>
-          <section class="mensagem-confirmacao">
-            <p class="texto-confirmacao-domiciliar"></p>
-          </section>
-
-          <section class="botoes-confirmacao">
-            <button class="btn-voltar-estado7">Voltar</button>
-            <a class="confirmar-link-domiciliar" href="/consultas" target="_self">Confirmar</a>
-          </section>
-        </section>
-
-
       </section>
-
-      <section class="comentarios comentarios-mobile">
-        <h4>Principais comentários:</h4>
-        <section class="comentario">
-          <img src="imagens/user.png" alt="Foto do paciente">
-          <section>
-            <p><img src="imagens/star.png" alt=""><strong>5,0</strong></p>
-            <p>Profissional excelente!</p>
-          </section>
+      <section class="comentario">
+        <img src="imagens/user.png" alt="Paciente">
+        <section>
+          <p><img src="imagens/star.png" alt=""> <strong>4,9</strong></p>
+          <p>Atendimento humanizado e eficiente!</p>
         </section>
-
-        <section class="comentario">
-          <img src="imagens/user.png" alt="Foto do paciente">
-          <section>
-            <p><img src="imagens/star.png" alt=""><strong>4,9</strong></p>
-            <p>Atendimento humanizado e eficiente!</p>
-          </section>
-        </section>
-        <a href="#">Ler mais comentários</a>
       </section>
-
+      <a href="#">Ler mais comentários</a>
+    </section>
   </main>
 
   <footer class="footer">
@@ -344,8 +233,9 @@
 
   </footer>
 
-
   <script src="js/agenda.js"></script>
+
+
 </body>
 
 </html>

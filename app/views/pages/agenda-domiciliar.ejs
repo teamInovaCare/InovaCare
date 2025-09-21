@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Domiciliar</title>
+
+    <!-- Link dos ícones fontawesome -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+    <!-- LINK DOS ICONES DA BARRA NAV -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!--link do arquivo js-->
+    <link rel="stylesheet" href="css/barranav.css">
+
+
+    <!--link do arquivo css da NAV e do footer-->
+
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link rel="stylesheet" href="css/barranav.css">
+
+
+    <!-- CSS da página de agenda -->
+    <link rel="stylesheet" href="css/agenda-modalidades.css">
+
+
+
+</head>
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="menu-desktop">
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <section class="dropdown-content">
+                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a>
+                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a>
+                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
+                <li><a class="sou-profissional" href="/cadprof_inicial">Sou Profissional</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><a href="/cadastro_inicial" class="btn-entrar">Entrar</a></li>
+            </ul>
+
+        </nav>
+
+        <nav class="mobile-menu">
+            <section class="menu-logo">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-actions">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li><a href="/cadastro_inicial" class="btn-entrar-mobile">Entrar</a></li>
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a></li>
+                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a></li>
+                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/especialidades">Agendamento</a></li>
+                <li><a href="/consultas">Área de Consultas</a></li>
+                <li><a href="/cadprof_inicial">Sou Profissional</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+    </header>
+
+
+    <!-- titulo geral da página + botão de voltar -->
+
+    <section class="container-titulo">
+        <a href="/agenda" class="bt-voltar">
+            <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+            <!-- ou -->
+
+        </a>
+        <h2 class="titulo-geral titulo-com-seta">Agendamento Domiciliar</h2>
+
+    </section>
+
+
+
+
+
+    <!-- Sessão que abrange toda a página -->
+    <section class="container-geral">
+        <form action="" method="post">
+
+            <!-- Seção de seleção de datas -->
+            <section class="form-section">
+                <h2 class="primary-title"><i class="fas fa-calendar-day"></i> Selecione o dia da consulta</h2>
+
+                <section class="datas-disponiveis">
+                    <label><input type="radio" name="data" value="2025-09-21"><span>21/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-22"><span>22/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-23"><span>23/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-24"><span>24/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-25"><span>25/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-26"><span>26/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-27"><span>27/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-28"><span>28/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-29"><span>29/09/2025</span></label>
+                    <label><input type="radio" name="data" value="2025-09-30"><span>30/09/2025</span></label>
+                </section>
+            </section>
+
+            <!-- Seção de horários -->
+            <section class="form-section horarios">
+                <h2 class="primary-title"><i class="fas fa-clock"></i> Selecione o horário da consulta</h2>
+
+                <section class="horarios-disponiveis">
+                    <label><input type="radio" name="horario" value="08:00"><span>08:00</span></label>
+                    <label><input type="radio" name="horario" value="09:00"><span>09:00</span></label>
+                    <label><input type="radio" name="horario" value="10:00"><span>10:00</span></label>
+                    <label><input type="radio" name="horario" value="11:00"><span>11:00</span></label>
+                    <label><input type="radio" name="horario" value="12:00"><span>12:00</span></label>
+                    <label><input type="radio" name="horario" value="13:00"><span>13:00</span></label>
+                    <label><input type="radio" name="horario" value="14:00"><span>14:00</span></label>
+                    <label><input type="radio" name="horario" value="15:00"><span>15:00</span></label>
+                    <label><input type="radio" name="horario" value="16:00"><span>16:00</span></label>
+                    <label><input type="radio" name="horario" value="17:00"><span>17:00</span></label>
+                </section>
+            </section>
+
+            <section class="form-section endereco">
+                <h2 class="primary-title"><i class="fas fa-map-marker-alt"></i> Informações do endereço</h2>
+
+                <section class="campos-endereco">
+                    <label>CEP: <input type="text" name="cep" id="cep" required disabled></label>
+                    <label>UF: <input type="text" name="uf" id="uf" maxlength="2" required disabled></label>
+                    <label>Endereço: <input type="text" name="endereco" id="endereco" required disabled></label>
+                    <label>Bairro: <input type="text" name="bairro" id="bairro" required disabled></label>
+                    <label>Cidade: <input type="text" name="cidade" id="cidade" required disabled></label>
+                    <label>Número: <input type="text" name="numero" id="numero" required disabled></label>
+                    <label>Complemento: <input type="text" name="complemento" id="complemento" disabled></label>
+
+
+                </section>
+                <button type="button" class="btn-alterar-endereco">Alterar Endereço</button>
+
+            </section>
+
+            <!-- Envio do formulário -->
+            <input type="button" class="btn-avancar" value="Confirmar">
+
+            <!-- Modal -->
+            <section id="modal" class="modal">
+                <section class="modal-content">
+                    <h2>Confirmação da Consulta</h2>
+
+                    <form id="form-agendamento" method="POST" action="/salvar-agendamento">
+                        <section class="modal-body">
+                            <p>Médico: <span id="modal-medico"></span></p>
+                            <p>Data: <span id="modal-data"></span></p>
+                            <p>Horário: <span id="modal-horario"></span></p>
+                            <p>CEP: <span id="modal-cep"></span></p>
+                            <p>UF: <span id="modal-uf"></span></p>
+                            <p>Endereço: <span id="modal-endereco"></span></p>
+                            <p>Bairro: <span id="modal-bairro"></span></p>
+                            <p>Cidade: <span id="modal-cidade"></span></p>
+                            <p>Número: <span id="modal-numero"></span></p>
+                            <p>Complemento: <span id="modal-complemento"></span></p>
+                            <p>Preço: <span id="modal-preco"></span></p>
+                        </section>
+
+                        <!-- Inputs ocultos -->
+                        <input type="hidden" name="medico" id="input-medico">
+                        <input type="hidden" name="data" id="input-data">
+                        <input type="hidden" name="horario" id="input-horario">
+                        <input type="hidden" name="preco" id="input-preco">
+                        <input type="hidden" name="cep" id="input-cep">
+                        <input type="hidden" name="uf" id="input-uf">
+                        <input type="hidden" name="endereco" id="input-endereco">
+                        <input type="hidden" name="bairro" id="input-bairro">
+                        <input type="hidden" name="cidade" id="input-cidade">
+                        <input type="hidden" name="numero" id="input-numero">
+                        <input type="hidden" name="complemento" id="input-complemento">
+
+                        <section class="modal-footer">
+                            <button type="button" id="modal-voltar" class="btn-voltar-modal">Voltar</button>
+                            <input type="submit" value="Confirmar" class="btn-confirmar-modal">
+                        </section>
+                    </form>
+                </section>
+            </section>
+
+
+
+
+        </form>
+    </section>
+
+
+
+
+    <footer class="footer">
+
+        <section class="footer-logo">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <h3 class="ttl-links">Explorar</h3>
+            <ul class="links">
+                <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/especialidades">Especialidades</a></li>
+                <li><a href="/consultas">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
+
+    </footer>
+
+
+    <script src="js/agenda-domiciliar.js"></script>
+
+</body>
+
+</html>
