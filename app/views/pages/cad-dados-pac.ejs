@@ -13,17 +13,72 @@
 
     <!-- Cadastro do email e senha do paciente -->
 
-    <!-- CSS -->
+    <!-- Simple Notify -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
-
-    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+    <script src="js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
 
 
     <title>Cadastro de dados</title>
 </head>
 
 <body>
+
+     <!-- EJS para as mensagens de erro + quebra de linha + simple Notify -->
+
+
+    <% 
+    let msgErro="";
+    let avisoErro = {"email":"", "confirmaemail":"", "senha":"", "confirmasenha":""};
+    if(erros){
+        erros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "email"){
+                avisoErro.email = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "confirmaemail"){
+                avisoErro.confirmaemail = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.senha = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+
+            if(itemErro.path == "confirmasenha"){
+                avisoErro.confirmasenha = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
 
 
 
@@ -76,7 +131,7 @@
                         <label for="email" class="label-input">
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                            <input type="email" placeholder="E-mail" name="email" id="email" required>
+                            <input type="email" placeholder="E-mail" name="email" id="email" value=" <%= valores.email %>" required>
                         </label>
                     </section>
 
@@ -88,7 +143,7 @@
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                             <input type="email" placeholder="Confirme seu E-mail" name="confirmaemail"
-                                id="confirmaemail" required>
+                                id="confirmaemail" value=" <%= confirmaemail.email %>" required>
                         </label>
                     </section>
 

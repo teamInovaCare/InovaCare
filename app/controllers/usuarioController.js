@@ -1,8 +1,8 @@
 const usuarioModel = require("../model/usuarioModel");
 const { body, validationResult } = require("express-validator");
-var { validarCPF,  validarCEP,converterParaMysql,
-    isValidDate,
-    isMaiorDeIdade } = require("../helpers/validacoes");
+var { validarCPF, validarCEP, converterParaMysql,
+  isValidDate,
+  isMaiorDeIdade } = require("../helpers/validacoes");
 const bcrypt = require('bcryptjs');
 
 
@@ -26,20 +26,20 @@ const usuarioController = {
         }
       }),
     body('dt_nasc')
-    .custom((value) => {
-      // 1. Converter para formato MySQL
-      const dataMysql = converterParaMysql(value);
+      .custom((value) => {
+        // 1. Converter para formato MySQL
+        const dataMysql = converterParaMysql(value);
 
-      // 2. Validar se a data existe
-      if (!dataMysql || !isValidDate(dataMysql)) {
-        throw new Error("Data de nascimento inválida");
-      }
-      // 3. Validar se é maior de idade
-      if (!isMaiorDeIdade(dataMysql)) {
-        throw new Error("O usuário deve ser maior de idade");
-      }
-      return true; // passou nas duas validações
-    })
+        // 2. Validar se a data existe
+        if (!dataMysql || !isValidDate(dataMysql)) {
+          throw new Error("Data de nascimento inválida");
+        }
+        // 3. Validar se é maior de idade
+        if (!isMaiorDeIdade(dataMysql)) {
+          throw new Error("O usuário deve ser maior de idade");
+        }
+        return true; // passou nas duas validações
+      })
   ],
 
   /**Armazenamento dos campos */
@@ -51,11 +51,19 @@ const usuarioController = {
     /**Se a lista de erros não está vazia */
     if (!errors.isEmpty()) {
       console.log(errors);
-      return res.render("pages/cad-inicial-pac", { "erros": errors, "valores": req.body, "retorno": null });
+      return res.render("pages/cad-inicial-pac", { 
+      erros: errors,
+      dadosNotificacao:{
+      titulo: "Erro ao inserir os dados!",
+      mensagem: "Verifique os valores digitados!",
+      tipo: "error",
+    }, 
+    
+      valores: req.body, }); 
 
     }
 
-  
+
 
     /**Se não tem erros armazena os dados */
     req.session.dadosPac = {
@@ -68,27 +76,30 @@ const usuarioController = {
     }
 
     /**Renderiza a próxima etapa do cadastro */
-    return res.render("pages/cad-local-pac", { "erros": null, "valores": req.body, "retorno": req.body });
-
+    return res.render("pages/cad-local-pac", { 
+      erros: errors,
+      dadosNotificacao:null,
+    
+      valores: req.body, });
 
   },
 
 
-  validaCadLocal: [
+validaCadLocal: [
 
-    /**validação cad-local-paciente*/
+  /**validação cad-local-paciente*/
 
-    body("cep")
-      .custom((value) => {
-        if (validarCEP(value)) {
-          return true
-        } else {
-          throw new Error("Cep Inválido")
-        }
-      }),
-    body("complemento").isLength({ min: 3, max: 100 }).withMessage("Complemento inválido.")
+  body("cep")
+    .custom((value) => {
+      if (validarCEP(value)) {
+        return true
+      } else {
+        throw new Error("Cep Inválido")
+      }
+    }),
+  body("complemento").isLength({ min: 3, max: 100 }).withMessage("Complemento inválido.")
 
-  ],
+],
 
   cadLocalPac: async (req, res) => {
 
@@ -98,7 +109,15 @@ const usuarioController = {
     if (!errors.isEmpty()) {
 
       /**Se a lista nãoe stiver vazia */
-      return res.render("pages/cad-local-pac", { "erros": errors, "valores": req.body, "retorno": null });
+      return res.render("pages/cad-local-pac", { 
+      erros: errors,
+      dadosNotificacao:{
+      titulo: "Erro ao inserir os dados!",
+      mensagem: "Verifique os valores digitados!",
+      tipo: "error",
+    }, 
+    
+      valores: req.body, }); 
 
     }
 
@@ -117,111 +136,116 @@ const usuarioController = {
 
     /**Próxima etapa do cadastro */
 
-    return res.render("pages/cad-dados-pac", { "erros": null, "valores": req.body, "retorno": req.body });
+    return res.render("pages/cad-dados-pac", { 
+      erros: errors,
+      dadosNotificacao:null,
+    
+      valores: req.body, });
+
 
   },
 
 
-  /**Etapa Final da validação */
+    /**Etapa Final da validação */
 
-  validaCadDados: [
+    validaCadDados: [
 
-    /**Validação form cadastro_dados */
+      /**Validação form cadastro_dados */
 
-    body("email").isEmail().withMessage("E-mail inválido!"),
+      body("email").isEmail().withMessage("E-mail inválido!"),
 
-    body("confirmaemail").custom((value, { req }) => {
-      return value === req.body.email;
-    }).withMessage("Emails estão diferentes"),
+      body("confirmaemail").custom((value, { req }) => {
+        return value === req.body.email;
+      }).withMessage("Emails estão diferentes"),
 
-    body("senha").isStrongPassword().withMessage("Senha muito fraca!"),
+      body("senha").isStrongPassword().withMessage("Senha muito fraca!"),
 
-    body("confirmasenha").custom((value, { req }) => {
-      return value === req.body.senha;
-    }).withMessage("Senhas estão diferentes"),
+      body("confirmasenha").custom((value, { req }) => {
+        return value === req.body.senha;
+      }).withMessage("Senhas estão diferentes"),
 
-  ],
+    ],
 
-  /**Inserção dos dados no Banco + Requisição do Model */
+      /**Inserção dos dados no Banco + Requisição do Model */
 
-  cadDadosPac: async (req, res) => {
+      cadDadosPac: async (req, res) => {
 
-    /**Erros da validação */
-    const errors = validationResult(req);
+        /**Erros da validação */
+        const errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
+        if (!errors.isEmpty()) {
 
-      /**Se a lista não está vazia */
+          /**Se a lista não está vazia */
 
-      return res.render("pages/cad-dados-pac", { "erros": errors, "valores": req.body, "resultado": null });
-    }
+          return res.render("pages/cad-dados-pac", { "erros": errors, "valores": req.body, "resultado": null });
+        }
 
-    /**Antes de passar os dados preciso criptografar a senha */
-    const salt = await bcrypt.genSalt(10);
-    const novaSenha = await bcrypt.hash(req.body.senha, salt);
-
-
-    /**Se não há erros, vou criar a constante final que irá ser passada para o model */
+        /**Antes de passar os dados preciso criptografar a senha */
+        const salt = await bcrypt.genSalt(10);
+        const novaSenha = await bcrypt.hash(req.body.senha, salt);
 
 
-
-    const dadosUsuarioPac = {
-
-      /**Dados armazenados nas sessions */
-      ...req.session.dadosPac,
-      "email_usuario": req.body.email,
-      "senha_usuario": novaSenha,
-
-    }
-
-    try {
-      let InsertPacResult = await usuarioModel.createPac(dadosUsuarioPac);
-
-      /**Se existir resultado positivo no cadastro */
-     
-
- 
-        res.render("pages/logado-user-pac", { "erros": null, "valores": req.body, "resultado": req.body });
-
-     
-
-
-    } catch (errors) {
-      console.log("Erro no cadastro" + errors);
-      res.render("pages/cad-dados-pac", { "erros": errors, "valores": req.body, "resultado": null });
-
-      return false
-    }
-
-  },
+        /**Se não há erros, vou criar a constante final que irá ser passada para o model */
 
 
 
-  /**VALIDAÇÃO DO LOGIN */
+        const dadosUsuarioPac = {
+
+          /**Dados armazenados nas sessions */
+          ...req.session.dadosPac,
+          "email_usuario": req.body.email,
+          "senha_usuario": novaSenha,
+
+        }
+
+        try {
+          let InsertPacResult = await usuarioModel.createPac(dadosUsuarioPac);
+
+          /**Se existir resultado positivo no cadastro */
 
 
-  validalogin: [
-    body("email").isEmail().withMessage("Email inválido."),
-    body("senha").isStrongPassword().withMessage("Senha inválida!"),
 
-  ],
+          res.render("pages/logado-user-pac", { "erros": null, "valores": req.body, "resultado": req.body });
 
 
 
-  logar: async (req, res) => {
-    const erros = validationResult(req);
-    if (!erros.isEmpty()) {
 
-      return res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
-    }
-    if (req.session.autenticado.autenticado != null) {
-      console.log(req.session.autenticado)
-      res.render("pages/index");
+        } catch (errors) {
+          console.log("Erro no cadastro" + errors);
+          res.render("pages/cad-dados-pac", { "erros": errors, "valores": req.body, "resultado": null });
 
-    } else {
-      res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
-    }
-  },
+          return false
+        }
+
+      },
+
+
+
+        /**VALIDAÇÃO DO LOGIN */
+
+
+        validalogin: [
+          body("email").isEmail().withMessage("Email inválido."),
+          body("senha").isStrongPassword().withMessage("Senha inválida!"),
+
+        ],
+
+
+
+          logar: async (req, res) => {
+            const erros = validationResult(req);
+            if (!erros.isEmpty()) {
+
+              return res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
+            }
+            if (req.session.autenticado.autenticado != null) {
+              console.log(req.session.autenticado)
+              res.render("pages/index");
+
+            } else {
+              res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
+            }
+          },
 };
 
 

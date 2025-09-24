@@ -11,12 +11,13 @@
     <!-- Link dos ícones -->
     <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
 
-    <!-- CSS -->
+    <!-- Simple Notify -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
-
-    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+    <script src="js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
 
+    
     <!--viaCep-->
     <script src="/js/mascaraCep.js"></script>
     <script src="/js/viaCep.js"></script>
@@ -26,6 +27,53 @@
 </head>
 
 <body>
+
+     <!-- EJS para as mensagens de erro + quebra de linha + simple Notify -->
+
+
+    <% 
+    let msgErro="";
+    let avisoErro = {"cep":"","complemento":""};
+    if(erros){
+        erros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "cep"){
+                avisoErro.cep = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+
+            if(itemErro.path == "complemento"){
+                avisoErro.complemento = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
 
 
 
@@ -82,7 +130,7 @@
 
                             <i class="fa-regular fa-user icon-modify" aria-hidden="true"></i>
                             <input type="text" placeholder="Cep" name="cep" id="cep" onblur="pesquisacep(this.value);"
-                                onkeyup="mascaraCep(event)" required>
+                                onkeyup="mascaraCep(event)" value=" <%= valores.cep %>" class="<%= avisoErro.cep %>" required>
                         </label>
 
 
@@ -90,7 +138,7 @@
                         <label for="endereco" class="label-input">
 
                             <i class="fa-regular fa-id-card icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Endereço" name="endereco" id="endereco" readonly>
+                            <input type="text" placeholder="Endereço" name="endereco" id="endereco" value=" <%= valores.endereco %>" readonly>
 
                         </label>
 
@@ -107,7 +155,7 @@
                         <label for="bairro" class="label-input">
 
                             <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Bairro" name="bairro" id="bairro" readonly>
+                            <input type="text" placeholder="Bairro" name="bairro" id="bairro" value=" <%= valores.bairro %>" readonly>
 
                         </label>
 
@@ -115,7 +163,7 @@
                         <label for="cidade" class="label-input">
 
                             <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Cidade" name="cidade" id="cidade" readonly>
+                            <input type="text" placeholder="Cidade" name="cidade" id="cidade" value=" <%= valores.cidade %>" readonly>
                         </label>
 
                     </section>
@@ -129,14 +177,14 @@
                         <label for="numero" class="label-input">
 
                             <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Número" name="numero" id="numero" required>
+                            <input type="text" placeholder="Número" name="numero" id="numero" value=" <%= valores.numero %>" required>
                         </label>
 
                         <!-- Label que abriga o input para o uf -->
                         <label for="uf" class="label-input">
 
                             <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="UF" name="uf" id="uf" readonly>
+                            <input type="text" placeholder="UF" name="uf" id="uf" value=" <%= valores.uf %>" readonly>
                         </label>
 
                     </section>
@@ -150,7 +198,7 @@
                     <label for="complemento" class="label-input">
 
                         <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                        <input type="text" placeholder="Complemento" name="complemento" id="complemento">
+                        <input type="text" placeholder="Complemento" name="complemento" id="complemento" value="<%= valores.complemento %>"  class="<%= avisoErro.complemento %>"">
                     </label>
 
                 </section>

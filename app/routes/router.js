@@ -6,6 +6,7 @@ var  {validarCPF, validarCEP, validarConselho, validarUf, converterParaMysql,
     isMaiorDeIdade} = require("../helpers/validacoes");
 
 
+
 /*autenticação*/
 const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../model/autenticador_middleware");
 
@@ -13,18 +14,24 @@ const usuarioController = require("../controllers/usuarioController");
 
 
 router.get("/", function (req, res) {/**página inicial */
-    res.render("pages/index", { autenticado: req.session.autenticado || false, login: req.session.logado || 0 })
+    res.render("pages/index")
 });
 
+// , { autenticado: req.session.autenticado || false, login: req.session.logado || 0 }
+
 router.get("/logado-user-pac", function (req, res) {/**página logado */
-    res.render("pages/logado-user-pac.ejs", { autenticado: req.session.autenticado || false, login: req.session.logado || 0 })
+    res.render("pages/logado-user-pac.ejs")
 });
+
+// , { autenticado: req.session.autenticado || false, login: req.session.logado || 0 }
 
 
 /*autenticação- usuário está logado? Função do Middle*/
 router.get("/index", verificarUsuAutenticado, function (req, res) {/*usuário logado*/
-    res.render("pages/index", { autenticado: req.session.autenticado, login: req.session.logado, });
+    res.render("pages/index");
 });
+
+// , { autenticado: req.session.autenticado, login: req.session.logado, }
 
 
 
@@ -76,11 +83,15 @@ router.get("/login-pac", function (req, res) {
 // cadastro inicial do paciente
 /**GET */
 router.get('/cad-inicial-pac', function (req, res) {
-    res.render("pages/cad-inicial-pac.ejs");
+    res.render("pages/cad-inicial-pac.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {nome: "", cpf: "", dt_nasc:""},
+    });
 })
 /**Post */
 router.post("/cad-inicial-pac", usuarioController.validaCadInicial,
-      (req,res)=> {
+       (req,res)=> {
         usuarioController.cadIncialPac(req,res);
 
 });
@@ -90,7 +101,11 @@ router.post("/cad-inicial-pac", usuarioController.validaCadInicial,
 //cadastro endereço do paciente -- 
 /**GET */
 router.get("/cad-local-pac", function (req, res) {
-    res.render("pages/cad-local-pac.ejs");
+    res.render("pages/cad-local-pac.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {cep: "", complemento: ""},
+    });
 });
 /**Post */
 router.post("/cad-local-pac", usuarioController.validaCadLocal,

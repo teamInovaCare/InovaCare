@@ -7,16 +7,16 @@ require("dotenv").config();
 app.use(session({
   secret: process.env.session_secret, // Defina isso no seu .env
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: { secure: false }
 }));
 
-app.use((req, res, next) => {
-    if (req.session.logado === undefined) {
-        req.session.logado = 0;
-    }
-    next();
-});
+// app.use((req, res, next) => {
+//     if (req.session.logado === undefined) {
+//         req.session.logado = 0;
+//     }
+//     next();
+// });
 
 app.use(express.static("app/public"));
 app.set("view engine", "ejs");
