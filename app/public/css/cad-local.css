@@ -1,0 +1,362 @@
+/* CSS DAS TELAAS DE CADASTRO DO ENDEREÇO - PROFISISONAL E PACIENTE */
+
+/*Definir tamanmhos gerais do corpo da página*/
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*no body sempre adicionar o tamanho da página*/
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+    padding: 20px;
+}
+ 
+/* Container do botão de voltar - DENTRO do container */
+.container-titulo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.bt-voltar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    color: #343a40;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bt-voltar:hover {
+    background-color: #109EA6;
+    color: white;
+    border-color: #109EA6;
+    transform: translateX(-5px);
+}
+
+.bt-voltar i {
+    font-size: 1.5rem;
+}
+
+/* Ajuste para o container-esquerda ter posição relativa */
+.container-esquerda {
+    position: relative;
+}
+
+/* Ajustes de responsividade */
+@media (max-width: 900px) {
+    .container-titulo {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .bt-voltar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .bt-voltar i {
+        font-size: 1.2rem;
+    }
+    
+    .bt-voltar:hover {
+        transform: none; /* Remove movimento em mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .container-titulo {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .bt-voltar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .bt-voltar i {
+        font-size: 1rem;
+    }
+}
+ 
+/*Colocar o container direita e o esquerda lado a lado*/
+.container-geral {
+    display: flex;
+    width: 70%;
+    max-width: 100%;
+    min-height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    /*Tudo que passar do tamanhod a minha caixa eu oculto com um hidden*/
+ 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+ 
+/*estilos de container comuns aos dois*/
+.container {
+    display: flex;
+    flex-direction: column;
+    /* padding: 40px; */
+}
+ 
+ 
+ 
+/*Container da DIREITA*/
+.container-esquerda {
+    
+    flex: 1.4;
+    background: white;
+    justify-content: center;
+    align-items: center;
+}
+ 
+ 
+/*Título principal dos dois containers*/
+.primary-title {
+    font-size: 2rem;
+    /* margin-bottom: 5vh; */
+    color: #333;
+    font-weight: 700;
+    transform: translateY(-20px);
+}
+ 
+ 
+ 
+/*Cor e estilo dos ícones dos campos de input*/
+.fa-regular,
+.far {
+    font-weight: 400;
+    color: gray;
+}
+ 
+ 
+/*Formulário do lado direito*/
+.form-log {
+    /* display: flex; */
+    /* width: 100%; */
+    /* max-width: 320px; */
+    margin: 3vh;
+    justify-content: center;
+    transform: translateY(-10%);
+}
+ 
+/*section que abriga os blocos de cada campo do form*/
+.container-label-form {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1vh;
+    gap: 1vh;
+    /* justify-content: center;*/
+}
+ 
+ 
+/*label que abriga o input*/
+.label-input {
+    display: flex;
+    align-items: center;
+    /* min-width: 60%; */
+    padding: 5px;
+    justify-content: center;
+    gap: 1.5vh;
+    background-color: #f5f7fa;
+    border-radius: 12px;
+ 
+}
+ 
+/*Campo input do formulário + label+ ícone -- Estou acessando o input que está dentro da label que possui essa class*/
+.label-input input {
+    outline: none;
+    padding: 10px 0;
+    font-size: 16px;
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+ 
+.complemento {
+    width: 30vh;
+}
+ 
+ 
+/*Container da ESQUERDA - colorido descritivo*/
+.container-direita {
+    position: relative;
+    flex: 1.2;
+    /*controlo o espaçod e ocupação*/
+ 
+    /*Gradiente para a página - definir as cores*/
+    background: linear-gradient(180deg,  #94e6e4, #1f9298);
+ 
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+ 
+ 
+/*Texto do lado ESQUERDO*/
+.container-direita .primary-title {
+    color: white;
+    font-size: 2rem;
+}
+ 
+/*parágrafo do lado direito*/
+.container-direita p {
+    margin-bottom: 3vh;
+    font-size: 1rem;
+ 
+}
+ 
+ 
+/*Estilo do link do btn - Tag a dentro da class btn*/
+.btn a {
+    text-decoration: none;
+    color: #fff;
+}
+ 
+ 
+/*Botão cadastrar do lado direito - Link para a página*/
+.btn {
+ 
+    padding: 10px;
+    font-size: 0.8rem;
+    /* width: 30%; */
+    font-weight: 700;
+    cursor: pointer;
+   background-color: #f5a152;
+    border-radius: 10px;
+    border: none;
+    border-radius: 16px;
+ 
+ 
+}
+ 
+/*Botão de entrar-posicionamento*/
+.btn-local {
+    display: flex;
+    justify-content: center;
+ 
+}
+ 
+ 
+ 
+ 
+ 
+/*Botão de entrar - submit*/
+input[type="submit"] {
+    padding-top: 1vh;
+    padding: 10px;
+    font-size: 16px;
+    width: 40%;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #f5a152;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    text-align: center;
+ 
+}
+ 
+input[type="submit"]:hover {
+    background-color: #fff;
+    color: #f5a152;
+    border: solid 1px #f5a152;
+}
+ 
+ 
+ 
+ 
+/*RESPONSIVIDADE*/
+
+@media (max-width: 1024px) {
+
+    .body {
+    width: 100%;
+    padding: 0;
+}
+
+    .text {
+        margin-top: 0;
+        padding: 1vh;
+    }
+
+    .label-input{
+        gap: 0.5vh;
+    }
+}
+
+ 
+ 
+@media (max-width: 900px) {
+    .container-geral {
+        flex-direction: column;
+        width: 100%;
+        max-width: 450px;
+    }
+ 
+    .container-direita {
+        order: -1;
+        min-height: 40vh;
+    }
+ 
+    .container-esquerda {
+        padding: 30px 20px;
+    }
+ 
+    .text {
+        margin-top: 0;
+    }
+ 
+   
+}
+ 
+@media (max-width: 480px) {
+    .container {
+        padding: 25px 15px;
+    }
+ 
+    .primary-title {
+        font-size: 24px;
+    }
+ 
+    .container-direita .primary-title {
+        font-size: 26px;
+    }
+ 
+    .container-label-form {
+        display: flex;
+        flex-direction: column;
+    }
+ 
+    .label-input {
+       
+        padding: 2%;
+        gap: 1vh;
+       
+    }
+ 
+    .label-input input {
+   
+    width: 25vh;
+   
+}
+ 
+    .btn-local {
+   
+    transform: translateY(-25px);
+}
+}

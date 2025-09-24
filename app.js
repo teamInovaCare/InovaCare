@@ -24,10 +24,15 @@ app.set("views", "./app/views");
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
+/**Acesso a Router */
 var rotas = require("./app/routes/router");
+var rotasProf = require("./app/routes/routerProf");
 var perfilRoutes = require("./app/routes/perfil");
+
+/**URLs */
 app.use("/", rotas);
 app.use("/perfil", perfilRoutes);
+app.use("/profissional", rotasProf);
 
 app.listen(port, () => {
   console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`);

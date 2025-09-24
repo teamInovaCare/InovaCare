@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link do CSS -->
+    <link rel="stylesheet" a href="css/cad-local.css">
+
+    <!-- Link dos ícones -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+
+    <!--viaCep-->
+    <script src="/js/mascaraCep.js"></script>
+    <script src="/js/viaCep.js"></script>
+
+    <!-- Cadastro do endereço do paciente -->
+    <title>Endereço</title>
+</head>
+
+<body>
+
+
+
+    <!-- Container gerald a página -->
+
+    <section class="container-geral">
+
+
+        <!-- Bloco da direita colorido ou com imagem -->
+        <section class="container container-direita">
+
+            <!-- Botão de voltar -->
+            <section class="container-titulo">
+                <a href="/cad-inicial-pac" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+                    <!-- ou -->
+
+                </a>
+
+
+            </section>
+
+
+            <section class="text">
+                <h2 class="primary-title">Bem-vindo a InovaCare!</h2>
+                <p>Gostaria de trabalhar conosco? Acesse a área do profissional</p>
+
+                <button class="btn"><a href="/profissional/login-prof">Sou Profissional</a></button>
+            </section>
+
+        </section>
+
+
+
+        <!-- Bloco da esquerda com o form de login -->
+        <section class="container container-esquerda">
+
+            <!-- Título e subtítulo da página -->
+            <h2 class="primary-title">Endereço</h2>
+
+
+
+
+            <form action="/cad-local-pac" method="post">
+
+                <!-- Formulário de login -->
+                <section class="form-log ">
+
+                    <!-- Bloco de formulário -->
+                    <section class="container-label-form">
+
+                        <!-- Label que abriga o input para o cep -->
+                        <label for="cep" class="label-input">
+
+                            <i class="fa-regular fa-user icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Cep" name="cep" id="cep" onblur="pesquisacep(this.value);"
+                                onkeyup="mascaraCep(event)" required>
+                        </label>
+
+
+                        <!-- Label que abriga o input para o endereco -->
+                        <label for="endereco" class="label-input">
+
+                            <i class="fa-regular fa-id-card icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Endereço" name="endereco" id="endereco" readonly>
+
+                        </label>
+
+                    </section>
+
+
+
+
+
+                    <!-- Bloco de formulário -->
+                    <section class="container-label-form">
+
+                        <!-- Label que abriga o input para a bairro  -->
+                        <label for="bairro" class="label-input">
+
+                            <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Bairro" name="bairro" id="bairro" readonly>
+
+                        </label>
+
+                        <!-- Label que abriga o input para o cidade -->
+                        <label for="cidade" class="label-input">
+
+                            <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Cidade" name="cidade" id="cidade" readonly>
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- Bloco de formulário -->
+                    <section class="container-label-form">
+
+                        <!-- Label que abriga o input para o numero -->
+                        <label for="numero" class="label-input">
+
+                            <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Número" name="numero" id="numero" required>
+                        </label>
+
+                        <!-- Label que abriga o input para o uf -->
+                        <label for="uf" class="label-input">
+
+                            <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="UF" name="uf" id="uf" readonly>
+                        </label>
+
+                    </section>
+
+
+
+                    <!-- Bloco de formulário -->
+                    <!-- <section class="container-label-form complemento"> -->
+
+                    <!-- Label que abriga o input para o complemento -->
+                    <label for="complemento" class="label-input">
+
+                        <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
+                        <input type="text" placeholder="Complemento" name="complemento" id="complemento">
+                    </label>
+
+                </section>
+
+                <!-- Enviar form -->
+                <section class="btn-local"><input type="submit" class="btn-confirmar" value="Entrar"></section>
+
+
+            </form>
+
+
+
+
+
+
+
+        </section>
+
+
+
+    </section>
+
+
+</body>
+
+</html>

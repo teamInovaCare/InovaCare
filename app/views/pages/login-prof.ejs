@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link do CSS -->
+    <link rel="stylesheet" a href="../css/login.css">
+
+    <!-- Link dos ícones -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+
+    <title>Login profisisonal</title>
+</head>
+
+<body>
+
+
+
+    <!-- Container gerald a página -->
+
+    <section class="container-geral">
+
+        <!-- Bloco da esquerda com o form de login -->
+        <section class="container container-esquerda">
+
+            <!-- Botão de voltar -->
+            <section class="container-titulo">
+                <a href="/profissional/homeprof" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+                    <!-- ou -->
+
+                </a>
+
+
+            </section>
+
+            <!-- Título e subtítulo da página -->
+            <h2 class="primary-title">Efetuar Login</h2>
+            <p class="sub-title">Faça login com seu e-mail e senha</p>
+
+
+            <!-- Formulário de login -->
+            <section class="form-log">
+
+                <form action="/profissional/login-prof" method="post">
+
+                    <section class="container-label-form">
+                        <!-- Label que abriga o input para o email -->
+                        <label for="email" class="label-input">
+
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <input type="email" placeholder="Email" name="email" id="email" required>
+                        </label>
+                    </section>
+
+
+                    <section class="container-label-form">
+                        <!-- Label que abriga o input para a senha -->
+                        <label for="senha" class="label-input">
+
+                            <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                            <input type="password" placeholder="Senha" name="senha" id="senha" required>
+
+                            <!-- Ocultar ou mostrar a senha -->
+                            <article class="oculta-senha-icon" onclick="mostrarSenha('senha', this)">
+                                <i class="fas fa-eye"></i>
+                            </article>
+
+                        </label>
+                    </section>
+
+
+                    <section class="link-btn"> <!-- Esqueci a senha -->
+                        <a class="mudar-senha" href="#">Esqueceu sua senha?</a>
+
+
+                        <!-- Enviar form -->
+                        <input type="submit" class="btn-confirmar" value="Entrar">
+
+                    </section>
+
+                </form>
+
+            </section>
+
+
+        </section>
+
+        <!-- Bloco da direita colorido ou com imagem -->
+        <section class="container container-direita">
+
+            <section class="text">
+                <h2 class="primary-title">Bem-vindo a área do profisisonal!</h2>
+                <p>Ainda não tem conta? Cadastre-se agora mesmo!</p>
+
+                <button class="btn"><a href="/profissional/cad-inicial-prof">Cadastrar</a></button>
+            </section>
+
+        </section>
+
+
+
+
+
+
+
+    </section>
+
+
+
+    <!-- JS com não pode copiar e colar + confirma email e senha + verifica Senha Forte -->
+    <script src="js/senha_forte.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link do CSS -->
+    <link rel="stylesheet" a href="css/cad-inicial.css">
+
+    <!-- Link dos ícones -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+
+
+    <title>Identificacao</title>
+    <!-- Cadstro inicial do paciente - nome, CPF etc -->
+</head>
+
+<body>
+
+
+
+    <!-- Container gerald a página -->
+
+    <section class="container-geral">
+
+
+        <!-- Bloco da direita colorido ou com imagem -->
+        <section class="container container-direita">
+
+            <!-- Botão de voltar -->
+            <section class="container-titulo">
+                <a href="/login-pac" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+                    <!-- ou -->
+
+                </a>
+
+
+            </section>
+
+            <section class="text">
+                <h2 class="primary-title">Bem-vindo a InovaCare!</h2>
+                <p>Gostaria de trabalhar conosco? Acesse a área do profissional</p>
+
+                <button class="btn"><a href="/profissional/login-prof">Sou Profissional</a></button>
+            </section>
+
+        </section>
+
+
+
+        <!-- Bloco da esquerda com o form de login -->
+        <section class="container container-esquerda">
+
+            <!-- Título e subtítulo da página -->
+            <h2 class="primary-title">Cadastre-se no site</h2>
+            <p class="sub-title">Dados iniciais</p>
+
+
+            <!-- Formulário de login -->
+            <section class="form-log">
+
+                <form action="/cad-inicial-pac" method="post">
+
+                    <!-- Bloco de formulário -->
+                    <section class="container-label-form">
+
+                        <!-- Label que abriga o input para o nome -->
+                        <label for="nome" class="label-input">
+
+                            <i class="fa-regular fa-user icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Nome completo" name="nome" id="nome" required>
+                        </label>
+
+                    </section>
+
+
+                    <!-- Bloco de formulário -->
+                    <section class="container-label-form">
+
+                        <!-- Label que abriga o input para o CPF -->
+                        <label for="cpf" class="label-input">
+
+                            <i class="fa-regular fa-id-card icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Digite seu CPF" name="cpf" id="cpf" required>
+
+                        </label>
+
+                    </section>
+
+
+                    <!-- Bloco de formulário -->
+                    <section class="container-label-form">
+
+                        <!-- Label que abriga o input para a dt_nasc  -->
+                        <label for="dt_nasc" class="label-input">
+
+                            <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
+                            <input type="text" placeholder="Data de nascimento" name="dt_nasc" id="dt_nasc" required>
+
+                        </label>
+
+                    </section>
+
+
+                    <section class="link-btn"> <!-- Esqueci a senha -->
+                        <a class="mudar-senha" href="#">Já possui uma conta?</a>
+
+
+                        <!-- Enviar form -->
+                        <input type="submit" class="btn-confirmar" value="Entrar">
+
+                    </section>
+
+                </form>
+
+            </section>
+
+
+        </section>
+
+
+
+
+
+
+
+    </section>
+
+    <script src="js/mascara-form.js"></script>
+    <!-- <script src="js/valida-data.js"></script> -->
+
+
+
+
+
+
+
+</body>
+
+</html>

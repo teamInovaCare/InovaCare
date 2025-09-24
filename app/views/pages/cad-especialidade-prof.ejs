@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link do CSS -->
+    <link rel="stylesheet" a href="../css/cad-especialidade.css">
+
+    <!-- Link dos ícones -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+    <!-- Cadastro do email e senha do profissional -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+
+
+    <title>Especialidade</title>
+</head>
+
+<body>
+
+
+
+    <!-- Container geral da página -->
+
+    <section class="container-geral">
+
+
+        <!-- Bloco ESQUERDA colorido ou com imagem -->
+        <section class="container container-direita">
+
+            <!-- Botão de voltar -->
+            <section class="container-titulo">
+                <a href="/profissional/cad-inicial-prof" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+                    <!-- ou -->
+
+                </a>
+
+
+            </section>
+
+            <section class="text">
+                <h2 class="primary-title">Bem-vindo a área do profissional!</h2>
+                <p>Na Inovacare, você faz suas regras de trabalho!</p>
+
+                <button class="btn"><a href="/index">Área do paciente</a></button>
+            </section>
+
+        </section>
+
+
+
+        <!-- Bloco da DIREITA com o form de login -->
+        <section class="container container-esquerda">
+
+            <!-- Título e subtítulo da página -->
+            <h2 class="primary-title">Selecione sua especialidade</h2>
+
+
+
+
+            <!-- Formulário que pega a especialidade do profisisonal- Após a seleção, o JS identifica o tipo de especialdiade selecionada e mostra o campo espeífico de registro daquela especialidade -->
+            <form action="/profissional/cad-especialidade-prof" method="post">
+
+
+
+                <!-- Select da especialdiade -->
+                <select id="idespecialidadeprof" name="especialidadeprof" required>
+
+                    <!-- Campo escrito por padrão sem valor algum -->
+                    <option value="" disabled="" selected="" hidden="">Selecione sua especialidade </option>
+
+                    <!--Campo legenda-- -->
+                    <option value="1">Clínico geral</option>
+                    <option value="2">Fisioterapeuta</option>
+                    <option value="3">Fonoaudiólogo</option>
+                    <option value="4">Nutricionista</option>
+                    <option value="5">Psicólogo</option>
+                    <option value="6">Enfermeiro</option>
+                    <option value="7">Terapeuta Ocupacional</option>
+
+                </select>
+
+
+                <!-- Campo oculto que aparece via JS de acordo com o que foi selecionado  -->
+
+                <!-- CRM -->
+                <section id="crm-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu CRM" name="rg_prof" id="crm" disabled>
+                    </label>
+                </section>
+
+
+                <!-- rg_prof -->
+
+                <section id="crp-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu CRP" name="rg_prof" id="crp" disabled>
+                    </label>
+                </section>
+
+
+                <!-- rg_prof -->
+                <section id="crefito-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu CREFITO" name="rg_prof" id="crefito" disabled>
+                    </label>
+                </section>
+
+
+                <!-- rg_prof -->
+                <section id="crfa-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu CRFA" name="rg_prof" id="crfa" disabled>
+                    </label>
+                </section>
+
+
+                <!-- rg_prof -->
+                <section id="coren-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu COREN" name="rg_prof" id="coren" disabled>
+                    </label>
+                </section>
+
+
+                <!-- rg_prof -->
+                <section id="crn-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu CRN" name="rg_prof" id="crn" disabled>
+                    </label>
+                </section>
+
+                <!-- rg_prof -->
+                <section id="to-container" class="registro-container">
+                    <label class="label-input">
+                        <i class="fa-solid fa-id-card" aria-hidden="true"></i>
+                        <input type="text" placeholder="Digite seu CREFITO" name="rg_prof" id="to-crefito" disabled>
+                    </label>
+                </section>
+
+
+                <!-- Enviar form -->
+                <section class="btn-local"><input type="submit" class="btn-confirmar" value="Entrar"></section>
+
+
+            </form>
+
+
+            <!-- JS para ocultar ou mostrar os campos -->
+            <script src="/js/oculto.js"></script>
+
+
+        </section>
+
+
+
+    </section>
+
+
+</body>
+
+</html>

@@ -1,335 +1,133 @@
-/*use bmxfca7secp7bnudzhk7;*/
-
-
-
-CREATE TABLE usuarios(
-
-    id_usuario INT unsigned PRIMARY KEY AUTO_INCREMENT  NOT NULL,
-
-    tipo_usuario enum('paciente', 'profissional', 'adm') not null default 'paciente',
-
-    status_usuario enum('ativo', 'inativo', 'pendente', 'banido') not null default 'ativo',
-
-    nome_usuario VARCHAR(100) NOT NULL,
-
-    email_usuario VARCHAR(50) NOT NULL UNIQUE,
-
-    senha_usuario varchar(10) NOT NULL,
-
-    cpf_usuario CHAR(11) NOT NULL UNIQUE,
-
-    foto_usuario varchar(255)
-
+create table usuarios(
+    ID_USUARIO INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    TIPO_USUARIO CHAR(1) NOT NULL,
+    STATUS_USUARIO CHAR(1) NOT NULL,
+    NOME_USUARIO VARCHAR(70) NOT NULL,
+    EMAIL_USUARIO VARCHAR(35) UNIQUE NOT NULL,
+    CPF_USUARIO CHAR(11) UNIQUE NOT NULL,
+    SENHA_USUARIO CHAR(6) NOT NULL,
+    FOTO_USUARIO VARCHAR(255)
 );
 
-alter table usuarios
-modify column senha_usuario varchar(70) not null;
-
-alter table usuarios
-modify column cpf_usuario varchar(14) not null unique;
-
-
-
-
-
-create table adm(
-
-    id_adm int unsigned PRIMARY KEY AUTO_INCREMENT not null,
-
-    fk_id_usuario  int unsigned not null,
-
-    FOREIGN KEY(fk_id_usuario) references usuarios(id_usuario)
-
+create table ADMINISTRADOR(
+    ID_ADM INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    ID_USUARIO INT UNSIGNED NOT NULL,	-- foreign key
+    FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS (ID_USUARIO) -- relacionamento entre os campos chaves (primária e estrangeira)
 );
 
-
-
-CREATE TABLE pacientes(
-
-    id_paciente INT unsigned PRIMARY KEY AUTO_INCREMENT  NOT NULL,
-
+create table pacientes(
+    id_paciente INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     dt_nasc_paciente DATE NOT NULL,
-
-    logradouro_paciente varchar(200),
-
-    bairro_paciente varchar(50),
-
-    cidade_paciente varchar(50),
-
+    logradouro_paciente varchar(100), /*endereço - rua- avenida*/
+    num_resid_paciente varchar(6) not null, /*num do tipo A123 se for apartamento*/
+    complemento_paciente varchar(50), /*ALTERAR NOMENCLATURA NO BACK*/
+    bairro_paciente varchar(30),
+    cidade_paciente varchar(30),
     uf_paciente char(2),
-
-    complemento varchar(200),
-
-    cep char(8) not null,
-
-    fk_id_usuario  int unsigned not null,
-
-    foreign key(fk_id_usuario) references usuarios(id_usuario)  
-
+    cep_paciente char(8) not null, /*ALTERAR NO BACK A NOMENCLATURA*/
+    ID_USUARIO INT UNSIGNED NOT NULL,	-- foreign key
+    FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS (ID_USUARIO) -- relacionamento entre os campos chaves (primária e estrangeira)
+	-- TEMPORARIO latitude_paciente decimal(9,6) null,
+	-- TEMPORARIO longitude_paciente decimal(9,6) null
 );
 
-alter table pacientes
-modify column cep varchar(9);
-
-
-
-create table info_paciente(
-
-    id_info_paciente int unsigned primary key AUTO_INCREMENT not null,
-
-    fk_id_paciente int unsigned not null,
-
-    doença text,
-
-    medicamento_cont text,
-
-    alergia text,
-
-    cirurgia text,
-
-   
-
-    FOREIGN key(fk_id_paciente) references pacientes(id_paciente)
-
+create table informacao_paciente(
+    ID_INFO_PACIENTE INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    DIAGNOSTICO_PACIENTE varchar(1000),
+    medicamento_cont varchar(500),
+    alergia varchar(150),
+    cirurgia CHAR(1),
+    ID_PACIENTE INT UNSIGNED NOT NULL,	-- foreign key
+    FOREIGN KEY (ID_PACIENTE) REFERENCES PACIENTES (ID_PACIENTE) -- relacionamento entre os campos chaves (primária e estrangeira)
 );
-
 
 
 create table especialidades(
-
-    id_especialidade int unsigned primary key AUTO_INCREMENT not null,
-
-    nome_especialidade varchar(45) not null,
-
-    tipo_registro varchar(8) not null
-
+    ID_ESPECIALIDADE INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    NOME_ESPECIALIDADE VARCHAR(40) UNIQUE NOT NULL,
+    TIPO_REGISTRO VARCHAR(8) UNIQUE NOT NULL
 );
-
 
 
 create table especialistas(
-
-    id_especialista int unsigned primary key AUTO_INCREMENT not null,
-
-    fk_id_especialidade int unsigned not null,
-
-    fk_id_usuario int unsigned not null,
-
-    numregistro_especialidade int not null,
-
-    logradouro_especialista varchar(200),
-
-    bairro_especialista varchar(50),
-
-    cidade_especialista varchar(50),
-
-    uf_especialista char(2),
-
-    complemento varchar(200),
-
-    cep_especialista char(8) not null,
-
-    FOREIGN key (fk_id_especialidade) references especialidades(id_especialidade),
-
-    FOREIGN KEY (fk_id_usuario) references usuarios(id_usuario)
-
+    ID_ESPECIALISTA INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    DT_NASC_ESPECIALISTA DATE NOT NULL,
+    LOGRADOURO_ESPECIALISTA varchar(100), /*endereço - rua- avenida*/
+    NUM_RES_ESPECIALISTA varchar(6) not null, /*num do tipo A123 se for apartamento*/
+    COMPLEMENTO_ESPECIALISTA varchar(50), /*ALTERAR NOMENCLATURA NO BACK*/
+    BAIRRO_ESPECIALISTA varchar(30),
+    CIDADE_ESPECIALISTA varchar(30),
+    UF_ESPECIALISTA char(2),
+    CEP_ESPECIALISTA char(8) not null, /*ALTERAR NO BACK A NOMENCLATURA*/
+    ID_ESPECIALIDADE INT UNSIGNED NOT NULL,	-- foreign key
+    ID_USUARIO INT UNSIGNED NOT NULL,	-- foreign key
+    FOREIGN KEY (ID_USUARIO) REFERENCES USUARIOS (ID_USUARIO), -- relacionamento entre os campos chaves (primária e estrangeira)
+    FOREIGN KEY (ID_ESPECIALIDADE) REFERENCES ESPECIALIDADES (ID_ESPECIALIDADE) -- relacionamento entre os campos chaves (primária e estrangeira)
+	-- TEMPORARIO latitude_ESPECIALISTA decimal(9,6) null,
+	-- TEMPORARIO longitude_ESPECIALISTA decimal(9,6) null
 );
 
 
-
-
-
-
-create table info_especialista(
-
-    info_especialista int unsigned primary key AUTO_INCREMENT not null,
-
-    fk_id_especialista int unsigned not null,
-
-    descricao text,
-
-    FOREIGN KEY(fk_id_especialista) REFERENCES especialistas(id_especialista)
-
+create table locais(
+   ID_LOCAL INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+   CIDADE_LOCAL VARCHAR(40) UNIQUE NOT NULL
 );
 
 
-
-
-
- /*
-
-create table LOCALIDADE(
-
-   id_local int unsigned AUTO_INCREMENT primary key not null,
-
-   nome_local varchar(50) unique
-
+create table especialista_local(
+    ID_ESPECIALISTA INT UNSIGNED NOT NULL,	-- foreign key
+    ID_LOCAL INT UNSIGNED NOT NULL,	-- foreign key
+    FOREIGN KEY (ID_ESPECIALISTA) REFERENCES ESPECIALISTAS (ID_ESPECIALISTA), -- relacionamento entre os campos chaves (primária e estrangeira)
+    FOREIGN KEY (ID_LOCAL) REFERENCES LOCAIS (ID_LOCAL) -- relacionamento entre os campos chaves (primária e estrangeira)
 );
 
- 
 
-create table ESPECIALISTA_LOCAL(
-
-    fk_id_especialista int not null,
-
-    fk_id_local int not null,
-
-    FOREIGN KEY(fk_id_especialista) references especialistas(id_especialista),
-
-    FOREIGN KEY(fk_id_local) REFERENCES localidade(id_local)
-
+create table disponibilidade_especialista(
+   ID_AGENDA INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,	
+   DIA_SEMANA INT NOT NULL,
+   ID_ESPECIALISTA INT UNSIGNED NOT NULL,	-- foreign key
+   HR_INICIO TIME NOT NULL,
+   HR_FIM TIME NOT NULL,
+   TIPO_ATENDIMENTO CHAR(1) NOT NULL,
+  -- INTERVALO 
+   DURACAO_CONSULTA INT NOT NULL,
+   PRECO_BASE_ATUAL DECIMAL(6,2) NOT NULL,
+   PRECO_BASE_ANTERIOR DECIMAL(6,2) NOT NULL,
+   DT_ATUALIZACAO_PRECO_BASE DATE NOT NULL,
+   TAXA_LOCOMOCAO_ATUAL DECIMAL(5,2),
+   TAXA_LOCOMOCAO_ANTERIOR DECIMAL(5,2),
+   DT_ATUALIZACAO_TAXA_LOCOMOCAO DATE NOT NULL,
+   FOREIGN KEY (ID_ESPECIALISTA) REFERENCES ESPECIALISTAS (ID_ESPECIALISTA) -- relacionamento entre os campos chaves (primária e estrangeira)
 );
 
- 
-
-create table DISPONIBILIDADE(
-
-    id_disponiv int unsigned primary key AUTO_INCREMENT not null,
-
-    fk_id_especialista int not null,
-
-    data_hora datetime not null,
-
-    tipo_atendimento enum('online', 'domiciliar') not null,
-
-    preco_atendimento decimal(10,2) not null,
-
-    taxa_atendimento decimal(10,2) not null,
-
-    FOREIGN KEY(fk_id_especialista) references especialistas(id_especialista)
-
+create table pausa(
+   ID_PAUSA INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,  
+   ID_AGENDA INT UNSIGNED NOT NULL,	-- foreign key
+   HR_INICIO_PAUSA TIME NOT NULL,
+   HR_FIM_PAUSA TIME NOT NULL,
+   FOREIGN KEY (ID_AGENDA) REFERENCES agenda_especialista (ID_AGENDA) -- relacionamento entre os campos chaves (primária e estrangeira)
 );
 
- 
-
-create table AGENDAMENTO(
-
-    id_agendamento int unsigned primary key AUTO_INCREMENT not null,
-
-    fk_id_disponibilidade int,
-
-    fk_id_paciente int,
-
-    dt_agendamento date,
-
-    status_agendamento ENUM('pendente', 'confirmado', 'cancelado', 'remarcado') NOT NULL DEFAULT 'pendente',
-
-    motivo_cancelamento text,
-
-    FOREIGN KEY(fk_id_disponibilidade) references disponibilidade(id_disponiv),
-
-    FOREIGN KEY(fk_id_paciente) references pacientes(id_paciente)
-
+create table agenda_paciente(
+   ID_AGENDA_PACIENTE INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,  
+   ID_AGENDA INT UNSIGNED NOT NULL,	-- foreign key
+   ID_PACIENTE INT UNSIGNED NOT NULL,	-- foreign key   
+   DT_CONSULTA DATE NOT NULL,
+   HR_CONSULTA TIME NOT NULL,
+   -- distancia_km decimal(10,2),
+   TAXA_TOTAL_LOCOMOCAO DECIMAL(5,2),
+   VALOR_TOTAL_CONSULTA DECIMAL(6,2) NOT NULL,
+   STATUS_AGENDAMENTO CHAR(1) NOT NULL,
+   CANCELAMENTO_PACIENTE CHAR(1),
+   JUSTIFICATIVA_CANCELAMENTO_ESPECIALISTA VARCHAR(200),
+   FOREIGN KEY (ID_AGENDA) REFERENCES agenda_especialista (ID_AGENDA) -- relacionamento entre os campos chaves (primária e estrangeira)
+   FOREIGN KEY (ID_PACIENTE) REFERENCES PACIENTES (ID_PACIENTE) -- relacionamento entre os campos chaves (primária e estrangeira)
 );
 
- 
-
-create table PRONTUARIO(
-
-    id_prontuario int unsigned primary key AUTO_INCREMENT not null,
-
-    prontuario text not null,
-
-    dt_hr_prontuario datetime not null,
-
-    fk_id_paciente int not null,
-
-    FOREIGN key(fk_id_paciente) references pacientes(id_paciente)
-
-);
-
- 
-
-create table RECEITA(
-
-    id_receita int unsigned primary key AUTO_INCREMENT not null,
-
-    receita_url varchar(255) not null,
-
-    assinatura_digital varchar(255) ,
-
-    hash_validacao char(64) ,
-
-    dt_receita datetime not null,
-
-    fk_id_paciente int,
-
-    FOREIGN KEY(fk_id_paciente) references pacientes(id_paciente)
-
-);
-
- 
-
-create table EXAME(
-
-    id_exame int unsigned primary key AUTO_INCREMENT not null,
-
-    exame_url varchar(255) not null,
-
-    assinatura_digital varchar(255) ,
-
-    hash_validacao char(64) ,
-
-    dt_exame datetime not null,
-
-    fk_id_paciente int,
-
-    FOREIGN KEY(fk_id_paciente) REFERENCES pacientes(id_paciente)
-
-);
-
- 
-
-create table CONSULTA(
-
-    id_consulta int unsigned primary key not null,
-
-    fk_id_agendamento int,
-
-    fk_id_especialista int,
-
-    dt_hr_consulta datetime,
-
-    fk_id_prontuario int,
-
-    fk_id_receita int,
-
-    fk_id_exame int,
-
-    status_consulta enum('agendada', 'concluida', 'cancelada', 'pront_pendente') not null default 'agendada',
-
-    FOREIGN KEY(fk_id_agendamento) references agendamento(id_agendamento),
-
-    FOREIGN KEY(fk_id_especialista) REFERENCES especialistas(id_especialista),
-
-    FOREIGN KEY(fk_id_prontuario) references prontuario(id_prontuario),
-
-    FOREIGN KEY(fk_id_receita) references receita(id_receita),
-
-    FOREIGN KEY(fk_id_exame) REFERENCES exame(id_exame)
-
-);
-
- 
-
- 
-
-create table AVALIACAO(
-
-    id_avaliacao int unsigned primary key AUTO_INCREMENT not null,
-
-    dt_avaliacao datetime,
-
-    fk_id_usuario_avalia int,
-
-    fk_id_usuario_avaliado int,
-
-    comentario text,
-
-    estrelas INTEGER CHECK (estrelas BETWEEN 1 AND 5),
-
-    FOREIGN key(fk_id_usuario_avalia) references usuarios(id_usuario),
-
-    foreign key(fk_id_usuario_avaliado) references usuarios(id_usuario)
-
+create table prontuario(
+   ID_PRONTUARIO INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,  
+   DESC_PRONTUARIO VARCHAR(1000) NOT NULL
+   DT_EMISSAO_PRONTUARIO DATETIME NOT NULL
+   ID_PACIENTE INT UNSIGNED NOT NULL,	-- foreign key   
+   FOREIGN KEY (ID_PACIENTE) REFERENCES PACIENTES (ID_PACIENTE) -- relacionamento entre os campos chaves (primária e estrangeira)
 );

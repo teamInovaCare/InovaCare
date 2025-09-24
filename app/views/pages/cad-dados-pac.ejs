@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link do CSS -->
+    <link rel="stylesheet" a href="css/cad-final.css">
+
+    <!-- Link dos ícones -->
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+
+    <!-- Cadastro do email e senha do paciente -->
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+
+
+    <title>Cadastro de dados</title>
+</head>
+
+<body>
+
+
+
+    <!-- Container gerald a página -->
+
+    <section class="container-geral">
+
+
+        <!-- Bloco da direita colorido ou com imagem -->
+        <section class="container container-direita">
+
+            <!-- Botão de voltar -->
+            <section class="container-titulo">
+                <a href="/cad-local-pac" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
+                    <!-- ou -->
+
+                </a>
+
+
+            </section>
+
+            <section class="text">
+                <h2 class="primary-title">Bem-vindo a InovaCare!</h2>
+                <p>Gostaria de trabalhar conosco? Acesse a área do profissional</p>
+
+                <button class="btn"><a href="/profissional/login-prof">Sou Profissional</a></button>
+            </section>
+
+        </section>
+
+
+
+        <!-- Bloco da esquerda com o form de login -->
+        <section class="container container-esquerda">
+
+            <!-- Título e subtítulo da página -->
+            <h2 class="primary-title">Últimos passos...</h2>
+
+
+
+
+            <form action="/cad-dados-pac" method="post">
+
+                <!-- Formulário de login -->
+                <section class="form-log ">
+
+                    <!-- Label que abriga o input para o email -->
+                    <section class="container-dados">
+                        <label for="email" class="label-input">
+
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <input type="email" placeholder="E-mail" name="email" id="email" required>
+                        </label>
+                    </section>
+
+
+                    <!-- Label que abriga o input para o confirmaemail -->
+                    <section class="container-dados">
+
+                        <label for="confirmaemail" class="label-input">
+
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <input type="email" placeholder="Confirme seu E-mail" name="confirmaemail"
+                                id="confirmaemail" required>
+                        </label>
+                    </section>
+
+
+
+                    <section class="container-dados">
+
+                        <!-- Bloco de formulário -->
+                        <section class="container-label-form">
+
+                            <!-- Label que abriga o input para a senha -->
+                            <label for="senha" class="label-input">
+
+                                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+
+                                <input type="password" placeholder="Senha" name="senha" id="senha" required>
+
+                                <!-- Ocultar ou mostrar a senha -->
+                                <article class="oculta-senha-icon" onclick="mostrarSenha('senha', this)">
+                                    <i class="fas fa-eye"></i>
+                                </article>
+
+                            </label>
+
+
+                            <!-- Label que abriga o input para o confirmasenha -->
+                            <label for="confirmasenha" class="label-input">
+
+                                <i class="fa-solid fa-lock" aria-hidden="true"></i>
+
+                                <input type="password" placeholder="Confirmar" name="confirmasenha" id="confirmasenha"
+                                    required>
+
+                                <!-- Ocultar ou mostrar a senha -->
+                                <article class="oculta-senha-icon" onclick="mostrarSenha('confirmasenha', this)">
+                                    <i class="fas fa-eye"></i>
+                                </article>
+
+                            </label>
+
+                        </section>
+
+
+                        <!-- Mensagens de erro qure aparece a partir da interação do usuário com cada campo input - JS -->
+                        <section class="container-erro-front">
+
+                            <section class="mensagem-erro-front">
+                                <p id="mensagem-email"></p>
+                            </section>
+                            <section class="mensagem-erro-front">
+                                <p id="mensagem-senha-forte"></p>
+                            </section>
+                            <section class="mensagem-erro-front">
+                                <p id="mensagem-confirma-senha"></p>
+                            </section>
+                        </section>
+
+
+                    </section>
+
+                    <!-- Enviar form -->
+                    <section class="btn-local"><input type="submit" class="btn-confirmar" value="Entrar"></section>
+
+
+            </form>
+
+
+            <!-- JS com não pode copiar e colar + confirma email e senha + verifica Senha Forte -->
+            <script src="js/confirmasenha.js"></script>
+
+
+        </section>
+
+
+
+    </section>
+
+
+</body>
+
+</html>

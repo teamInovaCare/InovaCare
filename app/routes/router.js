@@ -1,8 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const { body, validationResult } = require("express-validator")
-var { validarCPF, isValidDate, validarCEP } = require
-    ("../helpers/validacoes");
+var  {validarCPF, validarCEP, validarConselho, validarUf, converterParaMysql,
+    isValidDate,
+    isMaiorDeIdade} = require("../helpers/validacoes");
 
 
 /*autenticação*/
@@ -15,6 +16,19 @@ router.get("/", function (req, res) {/**página inicial */
     res.render("pages/index", { autenticado: req.session.autenticado || false, login: req.session.logado || 0 })
 });
 
+router.get("/logado-user-pac", function (req, res) {/**página logado */
+    res.render("pages/logado-user-pac.ejs", { autenticado: req.session.autenticado || false, login: req.session.logado || 0 })
+});
+
+
+/*autenticação- usuário está logado? Função do Middle*/
+router.get("/index", verificarUsuAutenticado, function (req, res) {/*usuário logado*/
+    res.render("pages/index", { autenticado: req.session.autenticado, login: req.session.logado, });
+});
+
+
+
+
 router.get("/especialidades", function (req, res) {/**listagem das especialidades - botão agendamento */
     res.render("pages/especialidades.ejs")
 });
@@ -26,56 +40,6 @@ router.get("/cg", function (req, res) {/**Clínico geral */
 router.get("/consultas", function (req, res) {/**Minhas consultas */
     res.render("pages/consultas.ejs")
 });
-
-
-/*autenticação- usuário está logado? Função do Middle*/
-router.get("/index", verificarUsuAutenticado, function (req, res) {/*usuário logado*/
-    res.render("pages/index", { autenticado: req.session.autenticado, login: req.session.logado, });
-});
-
-router.get("/homepro", function (req, res) {//home do profissional
-    res.render("pages/homepro.ejs");
-});
-
-router.get("/cadastro_prof", function (req, res) {//cadastro do profissional- versão antiga
-    res.render("pages/cadastro_prof.ejs");
-});
-
-router.get("/cadprof_inicial", function (req, res) {//cadastro do profissional_inicial
-    res.render("pages/cadprof_inicial.ejs");
-});
-
-router.get("/cadprof_especialista", function (req, res) {//cadastro do profissional- especialidade 
-    res.render("pages/cadprof_especialista.ejs");
-});
-
-router.get("/cadprof_local", function (req, res) {//cadastro do profissional- endereço
-    res.render("pages/cadprof_local.ejs");
-});
-
-router.get("/cadprof_dados", function (req, res) {//cadastro do profissional-email e senha
-    res.render("pages/cadprof_dados.ejs");
-});
-
-
-/**CONFIGURAÇÃOD E AGENDA DO PROFISSIONAL */
-
-router.get("/config_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
-    res.render("pages/config_agenda_prof.ejs");
-});
-
-/**VISUALIZAÇÃO DA AGENDA DO PROFISISONAL */
-
-router.get("/home_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
-    res.render("pages/home_agenda_prof.ejs");
-});
-
-
-
-router.get("/login_prof", function (req, res) {//login do profissional-
-    res.render("pages/login_prof.ejs");
-});
-
 
 
 router.get("/perfil", function (req, res) {//perfil do paciente
@@ -94,57 +58,60 @@ router.get("/agenda-domiciliar", function (req, res) {
     res.render("pages/agenda-domiciliar.ejs");
 });
 
-router.get("/prontuario", function (req, res) {//prontuario profissional
-    res.render("pages/prontuario.ejs");
+
+
+
+/*LOGIN ADM*/ 
+router.get("/login-adm", function (req, res) {
+    res.render("pages/login-adm.ejs");
 });
 
-router.get("/prontugeral", function (req, res) {//prontuario profissional
-    res.render("pages/prontugeral.ejs");
+/*LOGIN pac*/ 
+router.get("/login-pac", function (req, res) {
+    res.render("pages/login-pac.ejs");
 });
 
 
 
-/**Validação do login, autenticação e "cartão de visita do usuário" */
-router.post(
-    "/singup_post",
-    usuarioController.validalogin,
-    gravarUsuAutenticado,
-    function (req, res) {
-        usuarioController.logar(req, res);
-    });
-
-router.get('/cadastro_inicial', function (req, res) {// cadastro inicial do paciente- GET
-    res.render('pages/cadastro_inicial', { "erros": null, "valores": { "nome": "", "cpf": "", "data": "", }, "retorno": null });
+// cadastro inicial do paciente
+/**GET */
+router.get('/cad-inicial-pac', function (req, res) {
+    res.render("pages/cad-inicial-pac.ejs");
 })
+/**Post */
+router.post("/cad-inicial-pac", usuarioController.validaCadInicial,
+      (req,res)=> {
+        usuarioController.cadIncialPac(req,res);
+
+});
 
 
-router.post("/cadastro_inicial_validacao", usuarioController.validacaduser, //cadastro incial -post
-    (req, res) => {
-        usuarioController.cadastroinicial(req, res);
-    }
-)
+
+//cadastro endereço do paciente -- 
+/**GET */
+router.get("/cad-local-pac", function (req, res) {
+    res.render("pages/cad-local-pac.ejs");
+});
+/**Post */
+router.post("/cad-local-pac", usuarioController.validaCadLocal,
+      (req,res)=> {
+        usuarioController.cadLocalPac(req,res);
+
+});
 
 
-router.get("/cadastro_localizacao", function (req, res) {//cadastro endereço do paciente -- 
-    res.render('pages/cadastro_localizacao', { "erros": null, "valores": { "cep": "", "uf": "", "endereco": "", "bairro": "", "cidade": "" }, "retorno": null });
+
+//cad_paciente_email e senha_get
+/**GET */
+router.get("/cad-dados-pac", function (req, res) {
+    res.render("pages/cad-dados-pac.ejs");
 })
+/**Post */
+router.post("/cad-dados-pac", usuarioController.validaCadDados,
+      (req,res)=> {
+        usuarioController.cadDadosPac(req,res);
 
-router.post("/cadastro_localizacao_validacao", usuarioController.validacadlocal,//post cad_paciente_endereço
-    (req, res) => {
-        usuarioController.cadastrolocal(req, res);
-    }
-)
-
-
-router.get("/cadastro_dados", function (req, res) {//cad_paciente_email e senha_get
-    res.render('pages/cadastro_dados', { "erros": null, "valores": { "email": "", "senha": "", "repsenha": "", "repemail": "" }, "retorno": null });
-})
-
-router.post("/cadastro_dados_validacao", usuarioController.validacadfinal,//cad_paciente_post_email e senha
-    (req, res) => {
-        usuarioController.cadastrofinal(req, res);
-    }
-)
+});
 
 
 

@@ -64,13 +64,55 @@ function validarCPF(cpf){
         } else {return false}
 }
 
-//validar data
+/// Função 1: valida o formato e se a data existe
 function isValidDate(dateString) {
+    // Valida formato YYYY-MM-DD
     let pattern = /^\d{4}-\d{2}-\d{2}$/;
-    return pattern.test(dateString);
+    if (!pattern.test(dateString)) {
+        return false;
+    }
+
+    // Verifica se a data realmente existe
+    const partes = dateString.split("-");
+    const ano = parseInt(partes[0], 10);
+    const mes = parseInt(partes[1], 10) - 1; // meses em JS começam do 0
+    const dia = parseInt(partes[2], 10);
+
+    const data = new Date(ano, mes, dia);
+    if (data.getFullYear() !== ano || data.getMonth() !== mes || data.getDate() !== dia) {
+        return false; // data inválida
+    }
+
+    return true; // data válida
 }
-  console.log(isValidDate("2020-01-01"));  // true
-  console.log(isValidDate("01-01-2020"));  // false
+
+// Função 2: verifica se a pessoa é maior de idade (assumindo que a data é válida)
+function isMaiorDeIdade(dateString) {
+    
+
+    const partes = dateString.split("-");
+    const ano = parseInt(partes[0], 10);
+    const mes = parseInt(partes[1], 10) - 1;
+    const dia = parseInt(partes[2], 10);
+
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - ano;
+
+    if (hoje.getMonth() < mes || (hoje.getMonth() === mes && hoje.getDate() < dia)) {
+        idade--;
+    }
+
+    return idade >= 18;
+}
+
+// Testes
+console.log(isValidDate("2020-01-01"));  // true
+console.log(isValidDate("2020-02-30"));  // false (data inválida)
+console.log(isValidDate("01-01-2020"));  // false (formato errado)
+
+console.log(isMaiorDeIdade("2020-01-01"));  // false (menor de idade)
+console.log(isMaiorDeIdade("2000-01-01"));  // true (maior de idade)
+console.log(isMaiorDeIdade("2020-02-30"));  // false (data inválida)
 
 
 //validar cep
@@ -89,4 +131,64 @@ function validarCEP(cep) {
     return true;
 }
 
-module.exports = {validarCPF, isValidDate, validarCEP}
+
+function validarConselho(numero) {
+  const regexNumero = /^\d{4,6}$/;
+  return regexNumero.test(numero);
+}
+
+function validarUf(uf) {
+
+  const ufsValidas = [
+
+    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO",
+
+    "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI",
+
+    "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+
+  ];
+
+  return ufsValidas.includes(uf.toUpperCase());
+
+}
+
+
+// Converte 'DD/MM/YYYY' para 'YYYY-MM-DD'
+function converterParaMysql(dateString) {
+    const partes = dateString.split('/');
+    if (partes.length !== 3) return null;
+    // PadStart garante formato correto
+    return `${partes[2]}-${partes[1].padStart(2, '0')}-${partes[0].padStart(2, '0')}`;
+}
+
+// Valida formato 'YYYY-MM-DD' e se a data existe
+function isValidDate(dateString) {
+    const pattern = /^\d{4}-\d{2}-\d{2}$/;
+    if (!pattern.test(dateString)) return false;
+
+    const [ano, mes, dia] = dateString.split('-').map(Number);
+    const data = new Date(ano, mes - 1, dia);
+    return (data.getFullYear() === ano && data.getMonth() === mes - 1 && data.getDate() === dia);
+}
+
+// Verifica se a pessoa tem pelo menos 18 anos
+function isMaiorDeIdade(dateString) {
+    if (!isValidDate(dateString)) return false; // Garante que a data é válida
+    const [ano, mes, dia] = dateString.split('-').map(Number);
+    const hoje = new Date();
+    let idade = hoje.getFullYear() - ano;
+    if (hoje.getMonth() + 1 < mes || (hoje.getMonth() + 1 === mes && hoje.getDate() < dia)) {
+        idade--;
+    }
+    return idade >= 18;
+}
+
+ 
+
+
+
+
+module.exports = {validarCPF, isValidDate, isMaiorDeIdade, validarCEP, validarConselho, validarUf, converterParaMysql,
+    isValidDate,
+    isMaiorDeIdade}

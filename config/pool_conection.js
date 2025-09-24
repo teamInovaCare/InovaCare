@@ -1,6 +1,8 @@
 var mysql= require("mysql2");
 
 
+
+
 const pool = mysql.createPool({
     host: process.env.host_db, 
     user: process.env.user_db, 
@@ -9,7 +11,9 @@ const pool = mysql.createPool({
     port: process.env.port,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    connectTimeout: 30000 // 15 segundos
+     
 });
 
 pool.getConnection((err, conn) => {

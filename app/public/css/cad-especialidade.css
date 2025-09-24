@@ -1,0 +1,404 @@
+/*Definir tamanhos gerais do corpo da página*/
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+    padding: 20px;
+    margin: 0; /* Adicionado para remover margens padrão */
+}
+
+
+/* Container do botão de voltar - DENTRO do container */
+.container-titulo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    margin: 0;
+    padding: 0;
+}
+
+.bt-voltar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    color: #343a40;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bt-voltar:hover {
+    background-color: #109EA6;
+    color: white;
+    border-color: #109EA6;
+    transform: translateX(-5px);
+}
+
+.bt-voltar i {
+    font-size: 1.5rem;
+}
+
+/* Ajuste para o container-esquerda ter posição relativa */
+.container-esquerda {
+    position: relative;
+}
+
+/* Ajustes de responsividade */
+@media (max-width: 900px) {
+    .container-titulo {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .bt-voltar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .bt-voltar i {
+        font-size: 1.2rem;
+    }
+    
+    .bt-voltar:hover {
+        transform: none; /* Remove movimento em mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .container-titulo {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .bt-voltar {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .bt-voltar i {
+        font-size: 1rem;
+    }
+}
+
+/*Colocar o container direita e o esquerda lado a lado*/
+.container-geral {
+    display: flex;
+    width: 70%;
+    max-width: 100%;
+    min-height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+/*estilos de container comuns aos dois*/
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 40px; /* Descomentado para adicionar padding */
+}
+
+/*Container da DIREITA*/
+.container-esquerda {
+    position: relative;
+    flex: 1.4;
+    background: white;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Título principal dos dois containers*/
+.primary-title {
+    font-size: 2rem;
+    margin-bottom: 5vh; /* Descomentado para adicionar espaçamento */
+    color: #219399;
+    font-weight: 700;
+    text-align: center; /* Adicionado para centralizar */
+}
+
+/*Cor e estilo dos ícones dos campos de input*/
+.fa-regular,
+.far,
+.fa-solid {
+    font-weight: 400;
+    color: gray;
+    min-width: 16px; /* Garante espaço consistente para ícones */
+}
+
+/*Formulário do lado DIREITO*/
+.form-log {
+    margin: 3vh;
+    justify-content: center;
+    width: 100%; /* Garante que ocupe toda a largura */
+}
+
+/*section que abriga os blocos de cada campo do form*/
+.container-label-form {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1vh;
+    gap: 1vh;
+}
+
+/*CAMPO NCESSÁRIO PARA SEPARAR AS SECTIONS E CAMPOS*/
+.container-dados {
+    margin-bottom: 1vh;
+    width: 100%; /* Garante que ocupe toda a largura */
+}
+
+/*label que abriga o input*/
+.label-input {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    background-color: #f5f7fa;
+    border-radius: 12px;
+    position: relative;
+    width: 100%; /* Garante que ocupe toda a largura */
+}
+
+/*Campo input do formulário*/
+.label-input input {
+    outline: none;
+    padding: 8px 0;
+    font-size: 16px;
+    width: 100%;
+    background: transparent;
+    border: none;
+}
+
+/*Container da ESQUERDA - colorido descritivo*/
+.container-direita {
+    flex: 1.2;
+    background: linear-gradient(180deg, #94e6e4, #1f9298);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/*Texto do lado ESQUERDO*/
+.container-direita .primary-title {
+    color: white;
+    font-size: 2rem;
+}
+
+/*parágrafo do lado ESQUERDO*/
+.container-direita p {
+    margin-bottom: 3vh;
+    font-size: 1rem;
+}
+
+/*Estilo do link do btn - Tag a dentro da class btn*/
+.btn a {
+    text-decoration: none;
+    color: #fff;
+    display: block; /* Faz o link ocupar todo o botão */
+    padding: 10px;
+}
+
+/*Botão cadastrar do lado direito - Link para a página*/
+.btn {
+    padding: 0; /* Removido o padding do botão, agora no link */
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #f5a152;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden; /* Para conter o link */
+}
+
+/* Botão de entrar-posicionamento */
+/* Nessa tela, essa class centralzia e posiciona o campo selected em relação ao campo de registro que aparece via JS */
+
+.btn-local {
+    display: flex
+;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+/*Botão de entrar - submit*/
+input[type="submit"] {
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 60%;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #f5a152;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background-color: #fff;
+    color: #f5a152;
+    border: solid 1px #f5a152;
+}
+
+
+
+/*Remover todos os ícones de ocultar senha dos navegadores*/
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-textfield-decoration-container,
+input[type="password"]::-webkit-clear-button,
+input[type="password"]::-webkit-inner-spin-button,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    display: none !important;
+    visibility: hidden;
+    -webkit-appearance: none;
+}
+
+input[type="password"] {
+    -moz-appearance: textfield;
+}
+
+
+
+/* Estilos para o select */
+.select-container {
+    padding: 0;
+    margin-bottom: 1vh;
+    width: 100%;
+}
+
+
+/*ID que seleciona o conteúdo interno do select*/
+#idespecialidadeprof {
+    
+    border-radius: 12px;
+    text-align: center;
+    padding: 1.5vh;
+    border: none;
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    color:#fdb16a;
+    background-color: #91e4e200;
+    font-weight: 700;
+    transform: translateX(4.5%);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.144);
+}
+
+
+/*Class comum a todos os campos de colocar CRM, CRP, COREN ETC*/
+.registro-container{
+    padding-top: 2vh;
+    
+}
+
+/*RESPONSIVIDADE*/
+
+/*outro tamanho de tela*/
+@media (max-width: 1024px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container-geral {
+        width: 90%;
+    }
+    
+    .text {
+        padding: 1vh;
+    }
+    
+    .label-input {
+        gap: 0.5vh;
+    }
+}
+
+@media (max-width: 900px) {
+    .container-geral {
+        flex-direction: column;
+        width: 100%;
+        max-width: 450px;
+    }
+    
+    .container-direita {
+        order: -1;
+        min-height: 30vh;
+        padding: 20px;
+    }
+    
+    .container-esquerda {
+        padding: 30px 20px;
+    }
+    
+    .text {
+        margin-top: 0;
+    }
+    
+    #idespecialidadeprof {
+        width: 100%;
+        padding: 1vh;
+    }
+    
+    .primary-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .primary-title {
+        font-size: 1.5rem;
+        margin-bottom: 3vh;
+        transform: none; /* Removido transform para mobile */
+    }
+    
+    .container-direita .primary-title {
+        font-size: 1.5rem;
+    }
+    
+    .container-label-form {
+        flex-direction: column;
+    }
+    
+    .label-input {
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .label-input input {
+        width: 100%;
+    }
+    
+    .form-log {
+        margin: 2vh 0;
+        transform: none; /* Removido transform para mobile */
+    }
+    
+    .btn-local {
+        transform: none; /* Removido transform para mobile */
+    }
+    
+    input[type="submit"] {
+        width: 60%;
+    }
+    
+    .mensagem-erro-front {
+        margin-bottom: 2vh;
+        font-size: 0.7rem;
+    }
+}
