@@ -5,49 +5,48 @@ const bcrypt = require('bcryptjs');
 
 /*CADASTRO DO USUÁRIO 1 - PACIENTE*/
 
+const moment = require('moment');
+
 const usuarioModel = {
     createPac: async (dadosUsuarioPac) => {
-
         let connection;
         
-        
         try {
+            connection = await pool.getConnection();
+            await connection.beginTransaction();
 
-            connection= await pool.getConnection();
-            await connection.beginTransaction()
-
-            const [resultUsuarios] = await pool.query(
-                `insert into usuarios 
+            // 1. Inserir na tabela usuarios
+            const [resultUsuarios] = await connection.query(
+                `INSERT INTO usuarios 
                 (tipo_usuario, status_usuario, nome_usuario, email_usuario, cpf_usuario, senha_usuario, foto_usuario)
-                values(?,?,?,?,?,?,?)`,
-
+                VALUES (?, ?, ?, ?, ?, ?, ?)`,
                 [
-                    '1', //tipo de usuário
-                    '0',//status pendente
+                    '1', // tipo de usuário
+                    '0', // status pendente
                     dadosUsuarioPac.nome_usuario,
                     dadosUsuarioPac.email_usuario,
                     dadosUsuarioPac.cpf_usuario,
                     dadosUsuarioPac.senha_usuario,
-                    null //foto
-
+                    null // foto
                 ]
-
             );
 
             if (!resultUsuarios.insertId) {
-            throw new Error("Falha ao criar usuário");
-        }
+                throw new Error("Falha ao criar usuário");
+            }
 
             const idUsuario = resultUsuarios.insertId;
 
-            // 2. Inserir na tabela pacientes
-            const [resultPacientes] = await connection.query(
+            // 2. Formatar a data corretamente para o MySQL
+            const dataNascimentoFormatada = moment(dadosUsuarioPac.dt_nasc_paciente, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
+            // 3. Inserir na tabela pacientes
+            const [resultPacientes] = await connection.query(
                 `INSERT INTO pacientes 
                 (dt_nasc_paciente, logradouro_paciente, num_resid_paciente, complemento_paciente, bairro_paciente, cidade_paciente, uf_paciente, cep_paciente, id_usuario)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [
-                    moment(dadosUsuarioPac.dt_nasc_paciente).format('YYYY-MM-DD'),
+                    dataNascimentoFormatada,
                     dadosUsuarioPac.logradouro_paciente,
                     dadosUsuarioPac.num_resid_paciente,
                     dadosUsuarioPac.complemento_paciente,
@@ -60,19 +59,46 @@ const usuarioModel = {
             );
 
             if (!resultPacientes.insertId) {
-            throw new Error("Falha ao criar paciente");
-        }
+                throw new Error("Falha ao criar paciente");
+            }
 
-        await connection.commit();
+            // Commit da transação se tudo deu certo
+            await connection.commit();
 
-
-            return { resultUsuarios, resultPacientes };
+            return { 
+                success: true,
+                idUsuario: resultUsuarios.insertId,
+                idPaciente: resultPacientes.insertId
+            };
 
         } catch (error) {
-            console.log(error);
+            // Rollback em caso de erro
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error("Erro no createPac:", error);
             throw error;
-        }finally{
-            if(connection) connection.release();
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
+    },
+
+
+
+    findCampoCustomPac: async (criterioWhere) =>{
+        try{
+            const [resultados] = await pool.query(
+                "select count(*) totalReg from usuarios where ?",
+                [criterioWhere]
+            )
+                return resultados[0].totalReg;
+            
+
+        }catch(error){
+            console.log(error);
+            return error;
         }
     },
 

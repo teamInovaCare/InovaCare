@@ -119,8 +119,12 @@ router.post("/cad-local-pac", usuarioController.validaCadLocal,
 //cad_paciente_email e senha_get
 /**GET */
 router.get("/cad-dados-pac", function (req, res) {
-    res.render("pages/cad-dados-pac.ejs");
-})
+    res.render("pages/cad-dados-pac.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {email: "", confirmaemail: "", senha:"", confirmasenha: ""},
+    });
+});
 /**Post */
 router.post("/cad-dados-pac", usuarioController.validaCadDados,
       (req,res)=> {
