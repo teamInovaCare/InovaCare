@@ -111,5 +111,14 @@ routerProf.get("/prontugeral", function (req, res) {//prontuario profissional
 
 
 
+/* Home Profissional sem login */
+
+routerProf.get("/homeprofs", function (req, res) {
+    res.render("pages/homeprofs.ejs");
+});
+
+
+
+
 
 module.exports = routerProf;

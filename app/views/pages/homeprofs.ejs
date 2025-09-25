@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InovaCare Profissional</title>
+    <link rel="stylesheet" href="/css/homeprofs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Kantumruy+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+    <!-- LINK DOS ICONES DA BARRA NAV -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--link do arquivo js-->
+    <link rel="stylesheet" href="/css/barranav.css">
+</head>
+
+<body>
+
+    <header>
+
+        <!--barra de navegação - início -->
+        <nav class="menu-desktop">
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="#">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <section class="dropdown-content">
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/">Agendamento</a></li>
+                <li><a class="consultas" href="/">Área de Consultas</a></li>
+                <li><a class="sou-paciente" href="/">Sou Paciente</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><a href="/profissional/login-prof" class="btn-entrar">Entrar</a></li>
+            </ul>
+
+        </nav>
+
+        <nav class="mobile-menu">
+            <section class="menu-logo">
+                <a href="#">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-actions">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li><a href="/profissional/login-prof" class="btn-entrar-mobile">Entrar</a></li>
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#">Quem somos</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/">Agendamento</a></li>
+                <li><a href="/">Área de Consultas</a></li>
+                <li><a href="/">Sou Paciente</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+
+        <!--barra de navegação - fim ^^^ -->
+
+    </header>
+
+    <main>
+
+        <!-- Banner Principal -->
+        <section class="hero-section">
+            <img src="/imagens/profissional desk.png" alt="banner" class="hero-image desktop">
+            <img src="/imagens/profissional tablet.png" alt="banner" class="hero-image tablet">
+            <img src="/imagens/profissional tablet vertical.png" alt="banner" class="hero-image tablet-vertical">
+            <img src="/imagens/profissional mobile.png" alt="banner" class="hero-image mobile">
+            <a href="/profissional/login-prof" class="hero-button">Trabalhe Conosco</a>
+        </section>
+ 
+        <!-- Seção de Vantagens/Benefícios -->
+        <section class="advantages-section">
+            <h2 class="section-title">DESCUBRA AS VANTAGENS DE ATUAR COM A INOVACARE</h2>
+            <p class="section-subtitle">Oferecemos a você as melhores ferramentas e suporte para impulsionar sua carreira</p>
+            
+            <!-- Agrupador dos Cards de Vantagens -->
+            <section class="advantages-cards">
+                <article class="advantage-card">
+                    <i class="fa-solid fa-house-medical advantage-icon"></i>
+                    <h3>Atendimento</h3>
+                    <p>Tenha liberdade para escolher como deseja atender: Online ou domiciliar.</p>
+                </article>
+                <article class="advantage-card">
+                    <i class="fa-solid fa-calendar-alt advantage-icon"></i>
+                    <h3>Agenda flexível</h3>
+                    <p>Organize seus atendimentos ao seu jeito com uma agenda totalmente personalizável.</p>
+                </article>
+                <article class="advantage-card">
+                    <i class="fa-solid fa-sack-dollar advantage-icon"></i>
+                    <h3>Preço Livre</h3>
+                    <p>Aqui, quem decide o preço a ser cobrado pelo seu trabalho é você!</p>
+                </article>
+                <article class="advantage-card">
+                    <i class="fa-solid fa-check-to-slot advantage-icon"></i>
+                    <h3>Facilidade</h3>
+                    <p>Nossa plataforma é intuitiva e muito direta para facilitar seus atendimentos.</p>
+                </article>
+            </section>
+        </section>
+ 
+        <!-- Seção "Por que trabalhar com a InovaCare?" -->
+        <section class="how-it-works-section">
+            <h2 class="how-it-works-title">Por que trabalhar com a InovaCare?</h2>
+            <article class="how-it-works-conteudo">
+                <p>Na rotina médica, gerir perfis, agendas e prontuários pode ser um desafio. Pensando nisso, a InovaCare criou uma plataforma que simplifica sua prática, permitindo a você gerir, organizar sua agenda de forma leve, segura e tenha acesso completo aos prontuários e histórico de consultas. Com suporte de administração, registros facilitados e gestão transparente de pagamento.</p>
+                <p>Aqui a tecnologia se adapta à sua rotina, e não o contrário.</p>
+            </article>
+        </section>
+ 
+        <!-- Seção de Atendimentos Disponíveis -->
+        <section class="services-section">
+            <h2 class="section-title">CONHEÇA NOSSOS ATENDIMENTOS DISPONÍVEIS</h2>
+            
+            <!-- Agrupador dos Cards de Atendimento -->
+            <ul class="services-list">
+                <li class="service-item">
+                    <img src="/imagens/clinico-geral.png" alt="Ícone Clínico Geral">
+                    <h4>CLÍNICO GERAL</h4>
+                </li>
+                <li class="service-item">
+                    <img src="/imagens/fisio.png" alt="Ícone Fisioterapeuta">
+                    <h4>FISIOTERAPEUTA</h4>
+                </li>
+                <li class="service-item">
+                    <img src="/imagens/fono.png" alt="Ícone Fonoaudiólogo">
+                    <h4>FONOAUDIÓLOGO</h4>
+                </li>
+                <li class="service-item">
+                    <img src="/imagens/nutri.png" alt="Ícone Nutricionista">
+                    <h4>NUTRICIONISTA</h4>
+                </li>
+                <li class="service-item">
+                    <img src="/imagens/psico.png" alt="Ícone Psicólogo">
+                    <h4>PSICÓLOGO</h4>
+                </li>
+                <li class="service-item">
+                    <img src="/imagens/enfermeiro.png" alt="Ícone Enfermeiro">
+                    <h4>ENFERMEIRO</h4>
+                </li>
+                <li class="service-item">
+                    <img src="/imagens/terapeuta.png" alt="Ícone Terapeuta Ocupacional">
+                    <h4>TERAPEUTA OCUPACIONAL</h4>
+                </li>
+            </ul>
+        </section>
+ 
+        <!-- Seção de Depoimentos e Soluções -->
+        <section class="testimonials-section">
+            <h2 class="section-title">OUVIMOS OS PROFISSIONAIS ANTES DE CRIAR A INOVACARE</h2>
+            <p class="section-subtitle">Transformamos as queixas mais comuns em soluções reais para a sua prática</p>
+            
+            <!-- Agrupador dos Cards de Depoimentos -->
+            <section class="testimonials-cards">
+                <article class="testimonial-card a">
+                    <i class="fa-solid fa-xmark testimonial-icon"></i>
+                    <p>"Minha agenda é bagunçada e difícil de controlar"</p>
+                </article>
+                <article class="testimonial-card a testimonial-solution">
+                    <i class="fa-solid fa-check testimonial-icon"></i>
+                    <p>Aqui, você organiza sua agenda do seu jeito.</p>
+                </article>
+                <article class="testimonial-card b">
+                    <i class="fa-solid fa-xmark testimonial-icon"></i>
+                    <p>"Os prontuários são desorganizados e perdi dados importantes."</p>
+                </article>
+                <article class="testimonial-card b testimonial-solution">
+                    <i class="fa-solid fa-check testimonial-icon"></i>
+                    <p>Oferecemos acesso organizado e seguro a todo o histórico do paciente.</p>
+                </article>
+                <article class="testimonial-card c">
+                    <i class="fa-solid fa-xmark testimonial-icon"></i>
+                    <p>"Receber pagamentos é sempre uma dor de cabeça."</p>
+                </article>
+                <article class="testimonial-card c testimonial-solution">
+                    <i class="fa-solid fa-check testimonial-icon"></i>
+                    <p>Nossa plataforma garante pagamentos transparentes e claros.</p>
+                </article>
+                <article class="testimonial-card d">
+                    <i class="fa-solid fa-xmark testimonial-icon"></i>
+                    <p>"Não tenho o suporte necessário para continuar atuando."</p>
+                </article>
+                <article class="testimonial-card d testimonial-solution">
+                    <i class="fa-solid fa-check testimonial-icon"></i>
+                    <p>Aqui, você conta com o suporte humanizado e ágil da adiministração.</p>
+                </article>
+            </section>
+        </section>
+ 
+        <!-- Call to Action Final (CTA) -->
+        <section class="cta-section">
+            <h2 class="cta-title">Na InovaCare, você não está sozinho</h2>
+            <p class="section-subtitle">Oferecemos suporte, organização e liberdade para que seu foco seja o cuidado. Venha crescer com a gente.</p>
+            <a href="/profissional/login-prof" class="cta-button">Quero trabalhar com a InovaCare</a>
+        </section>
+
+    </main>
+
+</body>
+</html>
