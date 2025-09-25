@@ -26,7 +26,11 @@ routerProf.get("/login-prof", function (req, res) {//login do profissional-
 //cadastro do profissional_inicial
 /**Get */
 routerProf.get("/cad-inicial-prof", function (req, res) {
-    res.render("pages/cad-inicial-prof.ejs");
+    res.render("pages/cad-inicial-prof.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {nome:"", cpf:"", dt_nasc:""},
+    });
 });
 /**Post */
 routerProf.post("/cad-inicial-prof", profissionalController.validaCadInicialProf,
@@ -40,7 +44,11 @@ routerProf.post("/cad-inicial-prof", profissionalController.validaCadInicialProf
 //cadastro do prof. especialidade que ele atua
 /**GET */
 routerProf.get("/cad-especialidade-prof", function (req, res) {
-    res.render("pages/cad-especialidade-prof.ejs");
+    res.render("pages/cad-especialidade-prof.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {rg_prof:""},
+    });
 });
 /**Post */
 routerProf.post("/cad-especialidade-prof", profissionalController.validaCadEspecialidade,
@@ -54,7 +62,11 @@ routerProf.post("/cad-especialidade-prof", profissionalController.validaCadEspec
 //cadastro do profissional- endereço
 /**GET */
 routerProf.get("/cad-local-prof", function (req, res) {
-    res.render("pages/cad-local-prof.ejs");
+    res.render("pages/cad-local-prof.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {cep: "", complemento: ""},
+    });
 });
 /**POST */
 routerProf.post("/cad-local-prof", profissionalController.validaCadLocalProf,
@@ -68,7 +80,11 @@ routerProf.post("/cad-local-prof", profissionalController.validaCadLocalProf,
 //cadastro do profissional-email e senha
 /**GET */
 routerProf.get("/cad-dados-prof", function (req, res) {
-    res.render("pages/cad-dados-prof.ejs");
+    res.render("pages/cad-dados-prof.ejs", {
+        erros: null,
+        dadosNotificacao:null,
+        valores: {email: "", confirmaemail: "", senha:"", confirmasenha: ""},
+    });
 });
 /**POST */
 routerProf.post("/cad-dados-prof", profissionalController.validaCadDadosProf,

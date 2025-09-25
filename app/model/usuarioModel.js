@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 /*CADASTRO DO USUÁRIO 1 - PACIENTE*/
 
-const moment = require('moment');
+
 
 const usuarioModel = {
     createPac: async (dadosUsuarioPac) => {

@@ -1,14 +1,21 @@
 const pool = require("../../config/pool_conection");
+const moment = require("moment");
 const bcrypt = require('bcryptjs');
+const { findCampoCustomPac } = require("./usuarioModel");
 
 
 /*CADASTRO DO USUÁRIO 1 - PACIENTE*/
 
 const profModel = {
     createProf: async (dadosUsuarioProf) => {
+
+        let connection;
         
         
         try {
+
+            connection = await pool.getConnection();
+            await connection.beginTransaction();
 
             const [resultUserProf] = await pool.query(
                 `insert into usuarios 
@@ -35,6 +42,8 @@ const profModel = {
 
             const idUsuario = resultUserProf.insertId;
 
+              const dataNascimentoFormatada = moment(dadosUsuarioProf.dt_nasc_especialista, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
             // 2. Inserir na tabela pacientes
             const [resultEspecialistas] = await pool.query(
 
@@ -42,7 +51,7 @@ const profModel = {
                 (dt_nasc_especialista, logradouro_especialista, num_resi_especialista, complemento_especialista, bairro_especialista, cidade_especialista, uf_especialista, cep_especialista, id_especialidade, id_usuario)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [
-                    dadosUsuarioPac.dt_nasc_especialista,
+                    dataNascimentoFormatada,
                     dadosUsuarioPac.logradouro_especialista,
                     dadosUsuarioPac.num_resid_especialista,
                     dadosUsuarioPac.complemento_especialista,
@@ -59,10 +68,39 @@ const profModel = {
             throw new Error("Falha ao criar especialista");
         }
 
-            return { resultUserProf, resultEspecialistas };
+            await connection.commit();
+
+            return { 
+                success: true,
+                idUsuario: resultUserProf.insertId,
+                idEspecialista: resultEspecialistas.insertId
+             };
+
         } catch (error) {
+
+            if(connection){
+                await connection.rollback();
+            }
             console.log(error);
             throw error;
+        }finally{
+            if(connection){
+                connection.release();
+            }
+        }
+    },
+
+    findCampoCustomProf: async (criterioWhere) =>{
+        try{
+            const[resultados]= await pool.query(
+                "select count(*) totalReg from usuarios where ?"
+                [criterioWhere]
+            )
+
+            return resultados[0].totalReg;
+        }catch(error){
+            console.log(error);
+            return error;
         }
     },
 

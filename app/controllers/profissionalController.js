@@ -1,8 +1,8 @@
 const profModel = require("../model/profModel");
 const { body, validationResult } = require("express-validator");
 var { validarCPF, validarCEP, converterParaMysql,
-    isValidDate,
-    isMaiorDeIdade } = require("../helpers/validacoes");
+  isValidDate,
+  isMaiorDeIdade } = require("../helpers/validacoes");
 const bcrypt = require('bcryptjs');
 
 
@@ -23,22 +23,22 @@ const profController = {
         }
       }),
     body('dt_nasc')
-        .custom((value) => {
-          // 1. Converter para formato MySQL
-          const dataMysql = converterParaMysql(value);
-    
-          // 2. Validar se a data existe
-          if (!dataMysql || !isValidDate(dataMysql)) {
-            throw new Error("Data de nascimento inválida");
-          }
-          // 3. Validar se é maior de idade
-          if (!isMaiorDeIdade(dataMysql)) {
-            throw new Error("O usuário deve ser maior de idade");
-          }
-          return true; // passou nas duas validações
-        })
-      ],
-  
+      .custom((value) => {
+        // 1. Converter para formato MySQL
+        const dataMysql = converterParaMysql(value);
+
+        // 2. Validar se a data existe
+        if (!dataMysql || !isValidDate(dataMysql)) {
+          throw new Error("Data de nascimento inválida");
+        }
+        // 3. Validar se é maior de idade
+        if (!isMaiorDeIdade(dataMysql)) {
+          throw new Error("O usuário deve ser maior de idade");
+        }
+        return true; // passou nas duas validações
+      })
+  ],
+
 
   /**Armazenamento dos campos */
   cadIncialProf: async (req, res) => {
@@ -49,7 +49,16 @@ const profController = {
     /**Se a lista de erros não está vazia */
     if (!errors.isEmpty()) {
       console.log(errors);
-      return res.render("pages/cad-inicial-prof", { "erros": errors, "valores": req.body, "retorno": null });
+      return res.render("pages/cad-inicial-prof", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          tipo: "error"
+        },
+
+        valores: req.body,
+
+      });
 
     }
 
@@ -62,7 +71,12 @@ const profController = {
     }
 
     /**Renderiza a próxima etapa do cadastro */
-    return res.render("pages/cad-especialidade-prof", { "erros": null, "valores": req.body, "retorno": null });
+    return res.render("pages/cad-especialidade-prof", {
+      erros: errors,
+      dadosNotificacao: null,
+      valores: req.body,
+
+    });
 
   },
 
@@ -82,7 +96,16 @@ const profController = {
     if (!errors.isEmpty()) {
       /**SE a lista de erros não estiver vazia  */
       console.log(errors);
-      return res.render("pages/cad-especialidade-prof", { "erros": errors, "valores": req.body, "retorno": null });
+      return res.render("pages/cad-especialidade-prof", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          tipo: "error"
+        },
+
+        valores: req.body,
+
+      });
 
     }
 
@@ -92,7 +115,12 @@ const profController = {
       "numero_registro": req.body.rg_prof
     }
 
-    return res.render("pages/cad-local-prof", { "erros": null, "valores": req.body, "retorno": null });
+    return res.render("pages/cad-local-prof", {
+      erros: errors,
+      dadosNotificacao: null,
+      valores: req.body,
+
+    });
 
 
   },
@@ -131,7 +159,16 @@ const profController = {
       console.log(errors);
 
       /**Se a lista nãoe stiver vazia */
-      return res.render("pages/cad-local-prof", { "erros": errors, "valores": req.body, "retorno": null });
+      return res.render("pages/cad-local-prof", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          tipo: "error"
+        },
+
+        valores: req.body,
+
+      });
 
     }
 
@@ -150,7 +187,12 @@ const profController = {
 
     /**Próxima etapa do cadastro */
 
-    return res.render("pages/cad-dados-prof", { "erros": null, "valores": req.body, "retorno": req.body });
+    return res.render("pages/cad-dados-prof", {
+      erros: errors,
+      dadosNotificacao: null,
+      valores: req.body,
+
+    });
 
   },
 
@@ -161,7 +203,13 @@ const profController = {
 
     /**Validação form cadastro_dados */
 
-    body("email").isEmail().withMessage("E-mail inválido!"),
+    body("email").isEmail().withMessage("E-mail inválido!")
+      .custom(async (value) => {
+        const email = await profModel.findCampoCustomProf({ email_usuario: value });
+        if (email > 0) {
+          throw new Errors("E-mail em uso!");
+        }
+      }),
 
     body("confirmaemail").custom((value, { req }) => {
       return value === req.body.email;
@@ -182,15 +230,6 @@ const profController = {
     /**Erros da validação */
     const errors = validationResult(req);
 
-
-    if (!errors.isEmpty()) {
-      console.log(errors);
-
-      /**Se a lista não está vazia */
-
-      return res.render("pages/cad-dados-prof", { "erros": errors, "valores": req.body, "resultado": null });
-    }
-
     /**Antes de passar os dados preciso criptografar a senha */
     const salt = await bcrypt.genSalt(10);
     const novaSenha = await bcrypt.hash(req.body.senha, salt);
@@ -206,21 +245,60 @@ const profController = {
       "senha_usuario": novaSenha
     }
 
+
+    if (!errors.isEmpty()) {
+      console.log(errors);
+
+      /**Se a lista não está vazia */
+
+      return res.render("pages/cad-dados-prof", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          tipo: "error"
+        },
+
+        valores: req.body,
+
+      });
+    }
+
+
+
     try {
       let InsertProfResult = await profModel.createProf(dadosUsuarioProf);
 
-      
 
-        /**Tela logada do apciente só para o teste */
-        res.render("pages/logado-user-pac", { "erros": null, "valores": req.body, "resultado": req.body });
-     
+
+      /**Tela logada do apciente só para o teste */
+      res.render("pages/logado-user-pac", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Cadastro efetuado com sucesso!",
+          mensagem: "Bem-vindo a InovaCare!",
+          tipo: "sucess"
+        },
+        valores: req.body,
+
+      });
+
 
 
     } catch (errors) {
       console.log("Erro no cadastro" + errors);
-              res.render("pages/logado-user-pac", { "erros": null, "valores": req.body, "resultado": req.body });
+      res.render("pages/logado-user-pac", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          mensagem: errors,
+          tipo: "error"
+        },
 
-      
+        valores: req.body,
+
+      });
+
+
     }
 
   },

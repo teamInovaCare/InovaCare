@@ -24,6 +24,53 @@
 
 <body>
 
+     <% 
+    let msgErro="";
+    let avisoErro = {"nome":"", "cpf":"", "dt_nasc":""};
+    if(erros){
+        erros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "nome"){
+                avisoErro.nome = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "cpf"){
+                avisoErro.cpf = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "dt_nasc"){
+                avisoErro.dt_nasc = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
+
 
 
     <!-- Container gerald a página -->
@@ -76,7 +123,7 @@
                         <label for="nome" class="label-input">
 
                             <i class="fa-regular fa-user icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Nome completo" name="nome" id="nome" required>
+                            <input type="text" placeholder="Nome completo" name="nome" id="nome" value="<%= valores.nome %>" class="<%= avisoErro.nome %> " required>
                         </label>
 
                     </section>
@@ -89,7 +136,7 @@
                         <label for="cpf" class="label-input">
 
                             <i class="fa-regular fa-id-card icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Digite seu CPF" name="cpf" id="cpf" required>
+                            <input type="text" placeholder="Digite seu CPF" name="cpf" id="cpf" value="<%= valores.cpf %>" class="<%= avisoErro.cpf %> " required>
 
                         </label>
 
@@ -103,7 +150,7 @@
                         <label for="dt_nasc" class="label-input">
 
                             <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                            <input type="text" placeholder="Data de nascimento" name="dt_nasc" id="dt_nasc" required>
+                            <input type="text" placeholder="Data de nascimento" name="dt_nasc" id="dt_nasc" value="<%= valores.dt_nasc %>" class="<%= avisoErro.dt_nasc %> " required>
 
                         </label>
 
@@ -132,7 +179,7 @@
 
 
     <!-- Máscara do formulário -->
-    <script src="js/mascara-form.js"></script>
+    <script src="../js/mascara-form.js"></script>
 
 
 </body>

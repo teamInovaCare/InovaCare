@@ -25,6 +25,62 @@
 
 <body>
 
+    <!-- EJS para as mensagens de erro + quebra de linha + simple Notify -->
+
+
+    <% 
+    let msgErro="";
+    let avisoErro = {"email":"", "confirmaemail":"", "senha":"", "confirmasenha":""};
+    if(erros){
+        erros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "email"){
+                avisoErro.email = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "confirmaemail"){
+                avisoErro.confirmaemail = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.senha = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+
+            if(itemErro.path == "confirmasenha"){
+                avisoErro.confirmasenha = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
+
+
 
 
     <!-- Container gerald a página -->
@@ -76,7 +132,7 @@
                         <label for="email" class="label-input">
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                            <input type="email" placeholder="E-mail" name="email" id="email" required>
+                            <input type="email" placeholder="E-mail" name="email" id="email" value="<%= valores.email %>" class="<%= avisoErro.email %>" required>
                         </label>
                     </section>
 
@@ -88,7 +144,7 @@
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                             <input type="email" placeholder="Confirme seu E-mail" name="confirmaemail"
-                                id="confirmaemail" required>
+                                id="confirmaemail" value="<%= valores.confirmaemail %>" class="<%= avisoErro.confirmaemail %>" required>
                         </label>
                     </section>
 
@@ -104,7 +160,7 @@
 
                                 <i class="fa-solid fa-lock" aria-hidden="true"></i>
 
-                                <input type="password" placeholder="Senha" name="senha" id="senha" required>
+                                <input type="password" placeholder="Senha" name="senha" id="senha" value=" <%=valores.senha %>" class="<%= avisoErro.senha %>" required>
 
                                 <!-- Ocultar ou mostrar a senha -->
                                 <article class="oculta-senha-icon" onclick="mostrarSenha('senha', this)">
@@ -119,7 +175,7 @@
 
                                 <i class="fa-solid fa-lock" aria-hidden="true"></i>
 
-                                <input type="password" placeholder="Confirmar" name="confirmasenha" id="confirmasenha"
+                                <input type="password" placeholder="Confirmar" name="confirmasenha" id="confirmasenha" value="<%= valores.confirmasenha %>" class="<%= avisoErro.confirmasenha %>"
                                     required>
 
                                 <!-- Ocultar ou mostrar a senha -->

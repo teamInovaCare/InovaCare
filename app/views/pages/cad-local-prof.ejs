@@ -27,6 +27,50 @@
 
 <body>
 
+    <% 
+    let msgErro="";
+    let avisoErro = {"cep":"","complemento":""};
+    if(erros){
+        erros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "cep"){
+                avisoErro.cep = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+
+            if(itemErro.path == "complemento"){
+                avisoErro.complemento = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
+
 
 
     <!-- Container gerald a página -->
@@ -83,7 +127,7 @@
 
                             <i class="fa-regular fa-user icon-modify" aria-hidden="true"></i>
                             <input type="text" placeholder="Cep" name="cep" id="cep" onblur="pesquisacep(this.value);"
-                                onkeyup="mascaraCep(event)" required>
+                                onkeyup="mascaraCep(event)" value="<%= valores.cep %>" class="<%= avisoErro.cep %>" required>
                         </label>
 
 
@@ -148,7 +192,7 @@
                     <label for="complemento" class="label-input">
 
                         <i class="fa-regular fa-calendar icon-modify" aria-hidden="true"></i>
-                        <input type="text" placeholder="Complemento" name="complemento" id="complemento">
+                        <input type="text" placeholder="Complemento" name="complemento" id="complemento" value="<%= valores.complemento %>" class="<%= avisoErro.complemento %>">
                     </label>
 
                 </section>
