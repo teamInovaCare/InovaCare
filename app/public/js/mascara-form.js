@@ -22,4 +22,4 @@ function mascara(input, padrao){
        //Aplicando Máscaras
        mascara(document.getElementById('cpf'), '000.000.000-00')
        mascara(document.getElementById('dt_nasc'), '00/00/0000')
-    
+       

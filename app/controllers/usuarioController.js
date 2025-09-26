@@ -129,7 +129,7 @@ const usuarioController = {
       /**Recebe o que já tem na variável */
       ...req.session.dadosPac,
       "cep_paciente": req.body.cep,
-      "logradouro_paciente": req.body.logradouro,
+      "logradouro_paciente": req.body.endereco,
       "bairro_paciente": req.body.bairro,
       "cidade_paciente": req.body.cidade,
       "num_resid_paciente": req.body.numero,

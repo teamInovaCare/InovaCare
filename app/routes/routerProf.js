@@ -95,7 +95,6 @@ routerProf.post("/cad-dados-prof", profissionalController.validaCadDadosProf,
 
 
 
-
 /**CONFIGURAÇÃOD E AGENDA DO PROFISSIONAL */
 
 routerProf.get("/config_agenda_prof", function (req, res) {//cadastro do profissional-email e senha

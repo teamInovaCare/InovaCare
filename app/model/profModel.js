@@ -17,7 +17,7 @@ const profModel = {
             connection = await pool.getConnection();
             await connection.beginTransaction();
 
-            const [resultUserProf] = await pool.query(
+            const [resultUserProf] = await connection.query(
                 `insert into usuarios 
                 (tipo_usuario, status_usuario, nome_usuario, email_usuario, cpf_usuario, senha_usuario, foto_usuario)
                 values(?,?,?,?,?,?,?)`,
@@ -45,11 +45,11 @@ const profModel = {
               const dataNascimentoFormatada = moment(dadosUsuarioProf.dt_nasc_especialista, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
             // 2. Inserir na tabela pacientes
-            const [resultEspecialistas] = await pool.query(
+            const [resultEspecialistas] = await connection.query(
 
-                `INSERT INTO ESPECIALISTAS
-                (dt_nasc_especialista, logradouro_especialista, num_resi_especialista, complemento_especialista, bairro_especialista, cidade_especialista, uf_especialista, cep_especialista, id_especialidade, id_usuario)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                `INSERT INTO especialistas
+                (dt_nasc_especialista, logradouro_especialista, num_res_especialista, complemento_especialista, bairro_especialista, cidade_especialista, uf_especialista, cep_especialista, id_especialidade, id_usuario, num_registro_especialista)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)`,
                 [
                     dataNascimentoFormatada,
                    dadosUsuarioProf.logradouro_especialista,
@@ -59,8 +59,11 @@ const profModel = {
                    dadosUsuarioProf.cidade_especialista,
                    dadosUsuarioProf.uf_especialista,
                    dadosUsuarioProf.cep_especialista,
-                    dadosUsuarioProf.id_especialidade,
-                    idUsuario
+                   dadosUsuarioProf.id_especialidade,
+                   idUsuario,
+                   dadosUsuarioProf.numero_registro
+
+                    
                 ]
             );
 
@@ -81,7 +84,7 @@ const profModel = {
             if(connection){
                 await connection.rollback();
             }
-            console.log(error);
+            console.log( "Erro no createprofr" , error);
             throw error;
         }finally{
             if(connection){

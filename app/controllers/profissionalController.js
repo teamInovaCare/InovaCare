@@ -177,7 +177,7 @@ const profController = {
       /**Recebe o que já tem na variável */
       ...req.session.dadosProf,
       "cep_especialista": req.body.cep,
-      "logradouro_especialista": req.body.logradouro,
+      "logradouro_especialista": req.body.endereco,
       "bairro_especialista": req.body.bairro,
       "cidade_especialista": req.body.cidade,
       "num_resid_especialista": req.body.numero,
@@ -207,7 +207,8 @@ const profController = {
       .custom(async (value) => {
         const email = await profModel.findCampoCustomProf({ email_usuario: value });
         if (email > 0) {
-          throw new Errors("E-mail em uso!");
+          throw new Error("E-mail em uso!");
+          console.log(errors);
         }
       }),
 
@@ -229,6 +230,7 @@ const profController = {
 
     /**Erros da validação */
     const errors = validationResult(req);
+    console.log(errors);
 
     /**Antes de passar os dados preciso criptografar a senha */
     const salt = await bcrypt.genSalt(10);
@@ -247,7 +249,7 @@ const profController = {
 
 
     if (!errors.isEmpty()) {
-      console.log(errors);
+      
 
       /**Se a lista não está vazia */
 
@@ -255,11 +257,11 @@ const profController = {
         erros: errors,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
-          tipo: "error"
+          mensagem: "Verifique os valores digitados!",
+          tipo: "error",
         },
 
         valores: req.body,
-
       });
     }
 
@@ -273,11 +275,7 @@ const profController = {
       /**Tela logada do apciente só para o teste */
       res.render("pages/logado-user-pac", {
         erros: errors,
-        dadosNotificacao: {
-          titulo: "Cadastro efetuado com sucesso!",
-          mensagem: "Bem-vindo a InovaCare!",
-          tipo: "sucess"
-        },
+        dadosNotificacao:null,
         valores: req.body,
 
       });
@@ -286,11 +284,11 @@ const profController = {
 
     } catch (errors) {
       console.log("Erro no cadastro" + errors);
-      res.render("pages/logado-user-pac", {
+      res.render("pages/cad-dados-prof",  {
         erros: errors,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
-          mensagem: errors,
+          mensagem: "Verifique os valores digitados",
           tipo: "error"
         },
 
@@ -298,7 +296,7 @@ const profController = {
 
       });
 
-
+      return false
     }
 
   },
