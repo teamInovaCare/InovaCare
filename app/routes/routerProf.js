@@ -14,7 +14,6 @@ const profissionalController = require("../controllers/profissionalController");
 
 
 
-
 /**Login do profissional */
 /**GET */
 routerProf.get("/login-prof", function (req, res) {//login do profissional-

@@ -104,7 +104,6 @@ const usuarioModel = {
 
 
 
-
     /**Select no banco para buscar o usuário pelo email */
     findUserEmail: async (camposForm) => {
         try {

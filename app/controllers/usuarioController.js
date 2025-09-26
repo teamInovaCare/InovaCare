@@ -160,7 +160,7 @@ const usuarioController = {
     .custom(async (value)=> {
       const email = await usuarioModel.findCampoCustomPac({email_usuario: value});
       if(email > 0){
-        throw new Erros("E-mail em uso!");
+        throw new Error("E-mail em uso!");
       }
     }),
 
@@ -200,7 +200,6 @@ const usuarioController = {
     if (!errors.isEmpty()) {
 
       /**Se a lista não está vazia */
-
       return res.render("pages/cad-dados-pac", {
         erros: errors,
         dadosNotificacao: {

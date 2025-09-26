@@ -52,13 +52,13 @@ const profModel = {
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [
                     dataNascimentoFormatada,
-                    dadosUsuarioPac.logradouro_especialista,
-                    dadosUsuarioPac.num_resid_especialista,
-                    dadosUsuarioPac.complemento_especialista,
-                    dadosUsuarioPac.bairro_especialista,
-                    dadosUsuarioPac.cidade_especialista,
-                    dadosUsuarioPac.uf_especialista,
-                    dadosUsuarioPac.cep_especialista,
+                   dadosUsuarioProf.logradouro_especialista,
+                   dadosUsuarioProf.num_resid_especialista,
+                   dadosUsuarioProf.complemento_especialista,
+                   dadosUsuarioProf.bairro_especialista,
+                   dadosUsuarioProf.cidade_especialista,
+                   dadosUsuarioProf.uf_especialista,
+                   dadosUsuarioProf.cep_especialista,
                     dadosUsuarioProf.id_especialidade,
                     idUsuario
                 ]
@@ -122,7 +122,6 @@ const profModel = {
     },
 
 };
-
 
 
 
