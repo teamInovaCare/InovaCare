@@ -17,6 +17,50 @@
 
 <body>
 
+     <% 
+    let msgErro="";
+    let avisoErro = {"email":"",  "senha":""};
+    if(listaErros){
+        listaErros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "email"){
+                avisoErro.email = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.confirmaemail = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+           
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
+
     <!-- Container gerald a página -->
 
 
@@ -46,14 +90,14 @@
             <!-- Formulário de login -->
             <section class="form-log">
 
-                <form action="" method="post">
+                <form action="/login-pac" method="post">
 
                     <section class="container-label-form">
                         <!-- Label que abriga o input para o email -->
                         <label for="email" class="label-input">
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                            <input type="email" placeholder="Email" name="email" id="email" required>
+                            <input type="email" placeholder="Email" name="email" id="email" value="<%= valores.email %>" required>
                         </label>
                     </section>
 
@@ -63,7 +107,7 @@
                         <label for="senha" class="label-input">
 
                             <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                            <input type="password" placeholder="Senha" name="senha" id="senha" required>
+                            <input type="password" placeholder="Senha" name="senha" id="senha" value="<%= valores.senha %>" required>
 
                             <!-- Ocultar ou mostrar a senha -->
                             <article class="oculta-senha-icon" onclick="mostrarSenha('senha', this)">
@@ -112,8 +156,8 @@
 
 
 
-    <!-- JS com não pode copiar e colar + confirma email e senha + verifica Senha Forte -->
-    <script src="js/senha_forte.js"></script>
+    <!-- JS para mostrar ou ocultar a senha -->
+    <script src="/js/confirmasenha.js"></script>
 
 
 </body>

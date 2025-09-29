@@ -16,19 +16,25 @@
   <link rel="stylesheet" href="css/carrossel.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/barranav.css">
-<link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/footer.css">
+
+  <!-- Simple Notify -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+    <script src="js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
 
 
-<!-- CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
- 
-<!-- JS -->
-<script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+
 
 
 </head>
 
 <body>
+
+
+  
+  
 
   <header>
 
@@ -130,178 +136,27 @@
       <a href="/especialidades" class="btn-mobile">Agendar agora</a>
     </section>
 
-    <section class="beneficios">
-      <section class="beneficios-topo">
-        <h2>CONHEÇA OS BENEFÍCIOS AO OPTAR PELA INOVACARE</h2>
-        <p>Entregamos a você a nossa excelência e o cuidado que faz toda a diferença.</p>
-      </section>
 
-      <section class="cartoes">
-        <article class="cartao">
-          <section class="icone">
-            <img src="imagens/icon1-beneficios.webp" alt="Ícone Segurança">
-          </section>
-          <h3>Segurança</h3>
-          <p>Garantimos total sigilo e segurança em cada consulta, seja online ou presencial. Suas informações
-            estarão sempre protegidas.</p>
-        </article>
+    <%if(autenticado.autenticado != null){
+    if(login == 1){%>
+    <script>
+      ShowNotify("Login efetuado com sucesso",
+        "Olá <%= autenticado.autenticado %>", "success", "center")
+      
 
-        <article class="cartao">
-          <section class="icone">
-            <img src="imagens/icon2-beneficios.webp" alt="Ícone Flexibilidade">
-          </section>
-          <h3>Flexibilidade</h3>
-          <p>Agende consultas nos dias e horários que melhor se adaptam à sua rotina, com flexibilidade e
-            praticidade.</p>
-        </article>
+    </script>
 
-        <article class="cartao">
-          <section class="icone">
-            <img src="imagens/icon3-beneficios.webp" alt="Ícone Atendimento">
-          </section>
-          <h3>Atendimento</h3>
-          <p>Você recebe um atendimento personalizado, feito por profissionais qualificados e comprometidos
-            com a sua saúde.</p>
-        </article>
-      </section>
-    </section>
+    <% } %>
 
-    <section class="motivo">
-      <section class="pergunta">
-        <h2>Por que escolher a InovaCare?</h2>
-      </section>
-      <section class="resposta">
-        <p>Esperar meses por uma consulta, pagar caro para ser atendido ou ainda enfrentar longos deslocamentos
-          são realidades que muitas pessoas vivem todos os dias. Pensando nisso, criamos uma forma mais
-          simples e acessível de cuidar da saúde: com atendimentos online ou em casa, agendados com rapidez,
-          por profissionais qualificados e com preços justos.
-          Aqui, o cuidado se adapta à sua rotina, e não o contrário.</p>
-      </section>
-    </section>
+    <span>Olá <%= autenticado.autenticado %>!</span><br>
+    <p> <a href= "/sair">sair</a></p>
+
+    <% }else{ %>
+    <span>Olá visitante!</span>}
+    
+  <% } %>
 
 
-    <section class="ttl-depoimentos">
-      <h2>CONHEÇA HISTÓRIAS REAIS DE CUIDADO E CONFIANÇA!</h2>
-      <p>Veja como ajudamos quem escolheu nossa plataforma.</p>
-    </section>
-
-    <section id="testimonials">
-
-      <section class="swiper">
-        <section class="swiper-wrapper">
-          <article class="swiper-slide">
-            <section class="testimonial-rate">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </section>
-
-            <blockquote class="testimonial-quote">
-              "Fui atendido pelo Dr. Henrique e fiquei impressionado com o nível de conhecimento e empatia. Atendimento
-              de excelência!"
-            </blockquote>
-
-            <footer class="testimonial-author">
-              <figure class="author-avatar">
-                <img src="imagens/avatar.jpg" alt="Imagem de uma pessoa">
-              </figure>
-
-              <address class="author-info">
-                <h3>Eduardo V., 55 anos</h3>
-                <p>Cliente desde 2024</p>
-              </address>
-            </footer>
-          </article>
-
-          <article class="swiper-slide">
-            <section class="testimonial-rate">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </section>
-
-            <blockquote class="testimonial-quote">
-              "Experiência incrível! Desde o primeiro contato, fui muito bem atendido e recebi
-              todas as informações de forma clara. Recomendo para todos!"
-            </blockquote>
-
-            <footer class="testimonial-author">
-              <figure class="author-avatar">
-                <img src="imagens/avatar.jpg" alt="Imagem de uma pessoa">
-              </figure>
-
-              <address class="author-info">
-                <h3>Juliana M., 34 anos</h3>
-                <p>Cliente desde 2023</p>
-              </address>
-            </footer>
-          </article>
-
-          <article class="swiper-slide">
-            <section class="testimonial-rate">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </section>
-
-            <blockquote class="testimonial-quote">
-              "Usei a plataforma pela primeira vez e fiquei surpresa com a rapidez no agendamento e a atenção da médica.
-              Fiz tudo do sofá de casa!"
-            </blockquote>
-
-            <footer class="testimonial-author">
-              <figure class="author-avatar">
-                <img src="imagens/avatar.jpg" alt="Imagem de uma pessoa">
-              </figure>
-
-              <address class="author-info">
-                <h3>Renata L., 36 anos</h3>
-                <p>Cliente desde 2024</p>
-              </address>
-            </footer>
-          </article>
-
-          <article class="swiper-slide">
-            <section class="testimonial-rate">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </section>
-
-            <blockquote class="testimonial-quote">
-              "A Dra. Camila foi super atenciosa durante a consulta online. Explicou tudo com calma e me deixou muito
-              mais tranquila!"
-            </blockquote>
-
-            <footer class="testimonial-author">
-              <figure class="author-avatar">
-                <img src="imagens/avatar.jpg" alt="Imagem de uma pessoa">
-              </figure>
-
-              <address class="author-info">
-                <h3>Marlene A., 45 anos</h3>
-                <p>Cliente desde 2020</p>
-              </address>
-            </footer>
-          </article>
-        </section>
-        <nav class="swiper-pagination"></nav>
-
-        <button class="swiper-button-prev"></button>
-        <button class="swiper-button-next"></button>
-      </section>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="js/scriptcarrossel.js"></script>
 
 
     <section class="servicos">
@@ -352,101 +207,33 @@
 
 
 
-    <section class="introdu-passos">
-      <section class="passos-ttl">
-        <h2>COMO FUNCIONA O <span>AGENDAMENTO</span></h2>
-        <p>Veja como é simples fazer o agendamento de suas consultas na modalidade que desejar</p>
-      </section>
-    </section>
+  <footer class="footer">
 
-    <section class="passos">
-      <section class="steps">
-        <section class="step">
-          <section class="diamond"><span>1</span></section>
-          <section class="step-text">
-            <h3>Escolha o tipo de atendimento</h3>
-            <p>Selecione se prefere uma consulta online (por vídeo) ou domiciliar (presencial na sua casa).</p>
-          </section>
-        </section>
-
-        <section class="step">
-          <section class="diamond"><span>2</span></section>
-          <section class="step-text">
-            <h3>Escolha a especialidade ou profissional</h3>
-            <p>Você pode buscar por especialidade (como clínica geral, psicologia, pediatria etc.) ou selecionar
-              diretamente um profissional disponível.</p>
-          </section>
-        </section>
-
-        <section class="step">
-          <section class="diamond"><span>3</span></section>
-          <section class="step-text">
-            <h3>Veja datas e horários disponíveis</h3>
-            <p>Confira os horários livres e escolha o que melhor se encaixa na sua rotina.</p>
-          </section>
-        </section>
-
-        <section class="step">
-          <section class="diamond"><span>4</span></section>
-          <section class="step-text">
-            <h3>Preencha seus dados</h3>
-            <p>Informe nome, telefone, e-mail e endereço (caso seja atendimento domiciliar).</p>
-          </section>
-        </section>
-
-        <section class="step">
-          <section class="diamond"><span>5</span></section>
-          <section class="step-text">
-            <h3>Confirme o agendamento</h3>
-            <p>Revise as informações e confirme. Você receberá a confirmação por e-mail e/ou WhatsApp.</p>
-          </section>
-        </section>
-
-        <section class="step">
-          <section class="diamond"><span>6</span></section>
-          <section class="step-text">
-            <h3>Efetue o pagamento</h3>
-            <p>Realize o pagamento online, com segurança, por cartão ou outro meio disponível na plataforma.</p>
-          </section>
-        </section>
-      </section>
-    </section>
-
-    <section class="finalizacao">
-      <h2>PRONTO!</h2>
-      <p>No dia e hora agendados, você será atendido no conforto da sua casa, presencialmente ou <br> por vídeo chamada.
+    <section class="footer-logo">
+      <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+      <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+      <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+        atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
       </p>
     </section>
 
-  </main>
+    <section class="footer-links">
+      <h3 class="ttl-links">Explorar</h3>
+      <ul class="links">
+        <li><a href="#">Quem somos</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="/especialidades">Especialidades</a></li>
+        <li><a href="/consultas">Consultas</a></li>
+      </ul>
+    </section>
 
-      <footer class="footer">
+    <section class="footer-contato">
+      <h3 class="ttl-contato">Contato</h3>
+      <p class="nmr-contato">(11) 4002-8922</p>
+    </section>
 
-        <section class="footer-logo">
-            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
-            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
-            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
-                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
-            </p>
-        </section>
+  </footer>
 
-        <section class="footer-links">
-            <h3 class="ttl-links">Explorar</h3>
-            <ul class="links">
-                <li><a href="#">Quem somos</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="/especialidades">Especialidades</a></li>
-                <li><a href="/consultas">Consultas</a></li>
-            </ul>
-        </section>
-
-        <section class="footer-contato">
-            <h3 class="ttl-contato">Contato</h3>
-            <p class="nmr-contato">(11) 4002-8922</p>
-        </section>
-
-    </footer>
-   
 
 </body>
 

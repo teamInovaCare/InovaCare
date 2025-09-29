@@ -258,22 +258,48 @@ const usuarioController = {
 
 
 
-  logar: async (req, res) => {
-    const erros = validationResult(req);
-    if (!erros.isEmpty()) {
+//   logar: async (req, res) => {
+//     const erros = validationResult(req);
+//     if (!erros.isEmpty()) {
 
-      return res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
+//       return res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
+//     }
+//     if (req.session.autenticado.autenticado != null) {
+//       console.log(req.session.autenticado)
+//       res.render("pages/index");
+
+//     } else {
+//       res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
+//     }
+//   },
+// };
+
+logarPac: (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.render("pages/login-pac", { listaErros: errors, "valores": req.body, dadosNotificacao: null});
     }
-    if (req.session.autenticado.autenticado != null) {
-      console.log(req.session.autenticado)
-      res.render("pages/index");
 
+    if (req.session.autenticado && req.session.autenticado.autenticado != null) {
+        // Usuário autenticado corretamente
+        return res.render("pages/logado-user-pac", {
+          "valores": req.body,
+        listaErros: errors,
+        autenticado: req.session.autenticado,
+        login: req.session.logado,
+        dadosNotificacao: null,
+      });
     } else {
-      res.render("pages/cadastro_inicial", { "erros": erros, "valores": req.body, "retorno": null })
+        // Login falhou
+        return res.render("pages/login-pac", {
+            listaErros: null,
+            "valores": req.body,
+            dadosNotificacao: {titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error"}
+        });
     }
-  },
-};
+},
 
+};
 
 
 

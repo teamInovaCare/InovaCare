@@ -1,82 +1,74 @@
 const { validationResult } = require("express-validator");
-const usuarioModel = require("./usuarioModel");
+const usuarioModel = require("./usuarioModel"); // ✅ Nome corrigido
 const bcrypt = require("bcryptjs");
 
-const verificarUsuAutenticado = (req, res, next) => {
-    let autenticado;
-
+verificarUsuAutenticado = (req, res, next) => {
     if (req.session.autenticado) {
-        autenticado = req.session.autenticado;
-        req.session.logado = (req.session.logado || 0) + 1;
-
+        var autenticado = req.session.autenticado;
     } else {
-         autenticado = { autenticado: null, id: null, tipo: null };
-         req.session.logado = 0;
-    };
-    
+        var autenticado = { autenticado: null, id: null, tipo: null };
+    }
     req.session.autenticado = autenticado;
     next();
-};
+}
 
-const limparSessao = (req, res, next) => {
+limparSessao = (req, res, next) => {
     req.session.destroy();
     next()
 }
 
-const gravarUsuAutenticado = async (req, res, next) => {
-     autenticado =  { autenticado: null, id: null, tipo: null };
-    erros = validationResult(req)
-
+gravarUsuAutenticado = async (req, res, next) => {
+    let autenticado = { autenticado: null, id: null, tipo: null };
+    const erros = validationResult(req);
+    
     if (erros.isEmpty()) {
-        var dadosForm = {
+        const dadosForm = {
             email_usuario: req.body.email,
-            senha_usuario: req.body.senha
+            senha_usuario: req.body.senha,
         };
-
-        try{
-            const results = await usuarioModel.findUserEmail(dadosForm);
-            const total = results.length;
-
-            if (total === 1) {
-                // Verifica se a senha está correta
-                if (bcrypt.compareSync(dadosForm.senha_usuario, results[0].senha_usuario)) {
-                    autenticado = {
-                        autenticado: results[0].nome_usuario,
-                        id: results[0].id_usuario,
-                        tipo: results[0].tipo_usuario
-                    };
-                }
+        
+        // if (!dadosForm.senha_usuario) {
+        //     req.session.autenticado = autenticado;
+        //     return next();
+        // }
+        
+        const results = await usuarioModel.findUserEmail(dadosForm);
+        console.log(results[0]);
+        
+        if (results && results.length > 0) {
+            const usuario = results[0];
+            const senhaHash = usuario.SENHA_USUARIO;
+            
+            if (senhaHash && bcrypt.compareSync(dadosForm.senha_usuario, senhaHash)) {
+                autenticado = {
+                    autenticado: usuario.NOME_USUARIO,
+                    id: usuario.ID_USUARIO,
+                    tipo: usuario.TIPO_USUARIO
+                };
             }
-        } catch (erros) {
-            console.error("Erro na autenticação:", erros);
-            autenticado = null;
         }
     }
-
-    req.session.autenticado = autenticado;
-    req.session.logado = 0;
     
+    req.session.autenticado = autenticado;
     next();
-};
+}
 
 
-const verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
+
+verificarUsuAutorizado = (tipoPermitido, destinoFalha) => {
     return (req, res, next) => {
-        const usuarioAutenticado = req.session.autenticado;
-        
-        if (usuarioAutenticado && 
-            usuarioAutenticado.autenticado !== null && 
-            tipoPermitido.includes(usuarioAutenticado.tipo)) {
+        if (req.session.autenticado.autenticado != null &&
+            tipoPermitido.find(function (element) { return element == req.session.autenticado.tipo }) != undefined) {
             next();
         } else {
-            res.render(destinoFalha, usuarioAutenticado);
+            res.render(destinoFalha, req.session.autenticado);
         }
     };
-};
+}
 
 module.exports = {
     verificarUsuAutenticado,
     limparSessao,
     gravarUsuAutenticado,
     verificarUsuAutorizado
-};
+}

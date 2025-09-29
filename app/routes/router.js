@@ -19,15 +19,18 @@ router.get("/", function (req, res) {/**página inicial */
 
 // , { autenticado: req.session.autenticado || false, login: req.session.logado || 0 }
 
-router.get("/logado-user-pac", function (req, res) {/**página logado */
-    res.render("pages/logado-user-pac.ejs")
+
+
+/**página logado */
+router.get("/logado-user-pac", verificarUsuAutenticado, function (req, res) {
+        res.render("pages/logado-user-pac.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
 });
 
-// , { autenticado: req.session.autenticado || false, login: req.session.logado || 0 }
+
 
 
 /*autenticação- usuário está logado? Função do Middle*/
-router.get("/index", verificarUsuAutenticado, function (req, res) {/*usuário logado*/
+router.get("/index", /*verificarUsuAutenticado,*/ function (req, res) {/*usuário logado*/
     res.render("pages/index");
 });
 
@@ -73,10 +76,36 @@ router.get("/login-adm", function (req, res) {
     res.render("pages/login-adm.ejs");
 });
 
-/*LOGIN pac*/ 
+
+router.get("adm-teste", 
+    verificarUsuAutorizado([3, 3], "pages/restrito"),
+    function (req,res){
+    res.render("pages/adm-teste", req.session.autenticado);
+})
+
+
+
+
+
+/*LOGIN PACIENTE*/ 
+/**GET */
 router.get("/login-pac", function (req, res) {
-    res.render("pages/login-pac.ejs");
+    res.render("pages/login-pac.ejs", {
+        listaErros: null,
+        dadosNotificacao:null,
+        valores: {email: "", senha: ""},
+    });
 });
+/**POST */
+router.post( "/login-pac",
+    usuarioController.validalogin,
+    gravarUsuAutenticado,
+    
+    function(req,res){
+        usuarioController.logarPac(req,res);
+    });
+
+
 
 
 
