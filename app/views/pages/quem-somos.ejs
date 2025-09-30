@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem somos</title>
+    <link rel="stylesheet" href="css/quem-somos.css">
+    <link rel="stylesheet" href="css/barranav.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="menu-desktop">
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <section class="dropdown-content">
+                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a>
+                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a>
+                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
+                <li><a class="sou-profissional" href="/cadprof_inicial">Sou Profissional</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><a href="/cadastro_inicial" class="btn-entrar">Entrar</a></li>
+            </ul>
+
+        </nav>
+
+        <nav class="mobile-menu">
+            <section class="menu-logo">
+                <a href="/">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-actions">
+                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li><a href="/cadastro_inicial" class="btn-entrar-mobile">Entrar</a></li>
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a></li>
+                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a></li>
+                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/especialidades">Agendamento</a></li>
+                <li><a href="/consultas">Área de Consultas</a></li>
+                <li><a href="/cadprof_inicial">Sou Profissional</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+    </header>
+
+    <section class="banner">
+        <img src="imagens/banner-qs.png" alt="Banner sobre Quem Somos">
+    </section>
+
+    <section class="banner-mobile">
+        <img src="imagens/banner-qs-mobile.png" alt="Banner sobre Quem Somos">
+    </section>
+
+
+    <main>
+
+        <section class="bloco">
+            <section class="left">
+                <img src="imagens/logo-bblt.png" alt="" srcset="">
+            </section>
+            <section class="right">
+                <h2>Quem Somos e Qual é a nossa Missão:</h2>
+                <p>Como uma plataforma de atendimento médico e terapêutico de forma remota, nosso objetivo é <span
+                        class="bluecolor">viabilizar
+                        o acesso aos serviços de saúde</span>, alcançando pessoas através da <span>tecnologia e da
+                        inovação</span>- <span class="orangecolor">INOVA</span>- e
+                    promovendo o <span class="bluecolor">cuidado</span>- <span class="orangecolor">CARE</span>.</p>
+            </section>
+        </section>
+
+        <section class="bloco">
+            <section class="left">
+                <img src="imagens/funcionamento.webp" alt="" srcset="">
+            </section>
+            <section class="right">
+                <h2>Funcionamento da Plataforma:</h2>
+                <p>A InovaCare funciona através das modalidades do <span class="bluecolor">atendimento online e
+                        domiciliar</span>. São <span class="orangecolor">inúmeros
+                        profissionais</span> de saúde disponíveis e <span class="bluecolor">inúmeras opções de
+                        preço</span> para você escolher. <span class="orangecolor">Escolha o
+                        profissional que você precisa e agende</span> um dia e horário para a consulta em uma das
+                    diversas
+                    especialidades que oferecemos:</p>
+                <br>
+                <ul>
+                    <li>Clínico Geral;</li>
+                    <li>Fisioterapeuta;</li>
+                    <li>Nutricionista;</li>
+                    <li>Psicólogo;</li>
+                    <li>Enfermeiro;</li>
+                    <li>Terapeuta ocupacional.</li>
+                </ul>
+            </section>
+        </section>
+
+        <section class="bloco">
+            <section class="left">
+                <img src="imagens/ods.jpg" alt="" srcset="">
+            </section>
+            <section class="right">
+                <h2>Os Objetivos da InovaCare estão Alinhados com a ONU:</h2>
+                <p>A <span class="orangecolor">ONU</span> tem como objetivo <span class="orangecolor">atingir a
+                        cobertura universal de saúde</span>, incluindo a proteção do risco
+                    financeiro, o acesso a serviços de saúde essenciais de qualidade, eficazes e acessíveis.
+                    <br>
+                    <span class="bluecolor">3ª ODS- Assegurar uma vida saudável e promover o bem-estar para todas as
+                        pessoas, em todas as
+                        idades.</span>
+                </p>
+            </section>
+        </section>
+
+
+    </main>
+
+    <footer class="footer">
+
+        <section class="footer-logo">
+            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+            </p>
+        </section>
+
+        <section class="footer-links">
+            <h3 class="ttl-links">Explorar</h3>
+            <ul class="links">
+                <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="/especialidades">Especialidades</a></li>
+                <li><a href="/consultas">Consultas</a></li>
+            </ul>
+        </section>
+
+        <section class="footer-contato">
+            <h3 class="ttl-contato">Contato</h3>
+            <p class="nmr-contato">(11) 4002-8922</p>
+        </section>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+main {
+    margin: 0 80px;
+}
+
+.banner {
+    margin-bottom: 50px;
+}
+
+.banner-mobile {
+    display: none;
+}
+
+.banner img {
+    width: 100%;
+    height: auto; /* mantém proporção */
+    display: block; /* tira espaço extra abaixo da img */
+}
+
+
+.bloco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 100px;
+}
+
+.bloco:nth-child(even) {
+    flex-direction: row-reverse; /* alterna os blocos */
+}
+
+.left img {
+    max-width: 450px;
+    height: auto;
+    border-radius: 10px; /* dá um acabamento mais bonito */
+}
+
+.right {
+    max-width: 600px;
+}
+
+.bloco h2 {
+    color: #f5a252;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.bloco p {
+    font-size: 1.1rem;
+    line-height: 1.6; /* mais espaçamento entre linhas */
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-position: inside; 
+    padding-left: 0; /* remove recuo padrão */
+    display: inline-block; /* lista fica como “bloco no centro” */
+    text-align: left; /* mantém alinhamento interno */
+}
+
+ul li {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.bluecolor {
+    color: #19b2af;
+}
+
+.orangecolor {
+    color: #f5a252;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+    .banner-mobile {
+        display: block;
+    }
+
+    .banner-mobile img {
+    width: 100%;
+    height: auto; /* mantém proporção */
+    display: block; /* tira espaço extra abaixo da img */
+}
+
+    .banner {
+        display: none;
+    }
+
+    main {
+        margin: 0 20px;
+    }
+
+    .bloco {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .bloco:nth-child(even) {
+        flex-direction: column; /* força todos iguais no mobile */
+    }
+
+    .right {
+        max-width: 100%;
+        order: 1; /* texto primeiro */
+    }
+
+    .left {
+        order: 2; /* imagem sempre depois */
+    }
+
+    .left img {
+        max-width: 100%;
+    }
+
+    .bloco img {
+        width: 50%;
+    }
+}
+
