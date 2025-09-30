@@ -274,6 +274,10 @@ body {
     padding: 20px;
   }
 
+  .agenda-r {
+    margin-top: 50px;
+  }
+
   .comentarios {
     display: none;
   }
