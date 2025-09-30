@@ -162,6 +162,13 @@ router.post("/cad-dados-pac", usuarioController.validaCadDados,
 });
 
 
+/**Página quem somos*/
+router.get("/quem-somos", function (req, res) {
+    res.render("pages/quem-somos.ejs");
+});
+
+
 
 
 module.exports = router;
+
