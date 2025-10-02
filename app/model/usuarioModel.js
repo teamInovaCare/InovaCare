@@ -102,6 +102,22 @@ const usuarioModel = {
         }
     },
 
+    /**Select no banco para buscar usuário pelo CPF */
+    findCampoCustomCpf: async (criterioWhere) => {
+        try{
+            const [resultados] = await pool.query(
+                "select count(*) totalReg from usuarios where ?",
+                [criterioWhere]
+            )
+            return resultados[0].totalReg;
+        }catch (error){
+            console.log(error);
+            return error;
+        }
+    },
+
+
+    
 
 
     /**Select no banco para buscar o usuário pelo email */
@@ -118,6 +134,7 @@ const usuarioModel = {
         }
     },
 
+    
 };
 
 

@@ -10,7 +10,7 @@ e digite:
 **** npm install mysql2 --save
 
 
-**** npm install bcryptjs --save
+**** npm install mysql2 --save
 
 
 ****  npm install moment --save

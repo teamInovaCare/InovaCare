@@ -24,7 +24,17 @@ const usuarioController = {
         } else {
           throw new Error('CPF inválido!');
         }
+      
+      })
+      /**Verificar se já existe um CPF cadastrado no banco */
+      .custom(async(value)=>{
+        const cpf = await usuarioModel.findCampoCustomCpf({cpf_usuario:value});
+        if(cpf > 0){
+          throw new Error("CPF em uso!");
+        }
+        return true;
       }),
+
     body('dt_nasc')
       .custom((value) => {
         // 1. Converter para formato MySQL
@@ -99,7 +109,6 @@ const usuarioController = {
           throw new Error("Cep Inválido")
         }
       }),
-    body("complemento").isLength({ min: 3, max: 100 }).withMessage("Complemento inválido.")
 
   ],
 
@@ -202,6 +211,8 @@ const usuarioController = {
       /**Se a lista não está vazia */
       return res.render("pages/cad-dados-pac", {
         erros: errors,
+
+        /*Aqui eu mostro os erros de validação*/ 
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
           mensagem: "Verifique os valores digitados!",
@@ -213,24 +224,33 @@ const usuarioController = {
 
     }
 
-   
+   /*Sucesso ao cadastrar + usuário é  autenticado pela primeira vez*/ 
     try {
       let InsertPacResult = await usuarioModel.createPac(dadosUsuarioPac);
+      req.session.autenticado = autenticado ={
+        autenticado: dadosUsuarioPac.nome_usuario,
+        id: InsertPacResult.insertId,
+        tipo: 1
+      }
 
       /**Se existir resultado positivo no cadastro */
 
       res.render("pages/logado-user-pac", {
       erros: errors,
+      login:1,
       dadosNotificacao: null,
+      autenticado: req.session.autenticado,
 
       valores: req.body,
     });
 
 
+    /*Erro na inserçãod e dados, não no cadastro (validation Result)*/ 
     } catch (errors) {
+
       console.log("Erro no cadastro" + errors);
       res.render("pages/cad-dados-pac", {
-        erros: errors,
+        erros: null,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
           mensagem: "Verifique os valores digitados!",
@@ -278,7 +298,10 @@ logarPac: (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.render("pages/login-pac", { listaErros: errors, "valores": req.body, dadosNotificacao: null});
+        
     }
+  console.log("erros");
+        console.log(errors);
 
     if (req.session.autenticado && req.session.autenticado.autenticado != null) {
         // Usuário autenticado corretamente

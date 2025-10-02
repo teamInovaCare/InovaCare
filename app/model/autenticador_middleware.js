@@ -37,13 +37,13 @@ gravarUsuAutenticado = async (req, res, next) => {
         
         if (results && results.length > 0) {
             const usuario = results[0];
-            const senhaHash = usuario.SENHA_USUARIO;
+            const senhaHash = usuario.senha_usuario;
             
             if (senhaHash && bcrypt.compareSync(dadosForm.senha_usuario, senhaHash)) {
-                autenticado = {
-                    autenticado: usuario.NOME_USUARIO,
-                    id: usuario.ID_USUARIO,
-                    tipo: usuario.TIPO_USUARIO
+                req.session.autenticado = {
+                    autenticado: usuario.nome_usuario,
+                    id: usuario.id_usuario,
+                    tipo: usuario.tipo_usuario
                 };
             }
         }
