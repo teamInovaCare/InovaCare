@@ -1,0 +1,313 @@
+/* Estilos específicos para a página de perfil do profissional */
+:root {
+    --primary: #109EA6;
+    --primary-light: #109EA640;
+    --secondary: #F5A152;
+    --secondary-dark: #e8934a;
+    --text-dark: #003f5c;
+    --text-light: #6c757d;
+    --background: #f8f9fa;
+    --white: #ffffff;
+    --gray-light: #f4f4f4;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: arial;
+}
+
+.perfil-profissional {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.ttl-perfil-profissional {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.ttl-perfil-profissional h3 {
+    font-size: 2.2rem;
+    color: var(--secondary);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.ttl-perfil-profissional h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.bg-perfil-profissional {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.top-profissional {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.esq-profissional {
+    flex: 0 0 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.esq-profissional img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-light);
+    box-shadow: var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.nome-profissional {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+}
+
+.crm-profissional {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.avaliacao-geral {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.estrelas {
+    color: var(--secondary);
+    font-size: 1.2rem;
+}
+
+.nota-avaliacao {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.dir-profissional {
+    flex: 1;
+    min-width: 300px;
+}
+
+.ttl-secao {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-light);
+}
+
+.descricao-formacao {
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+}
+
+.comentarios-container {
+    margin-top: 2rem;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.comentario {
+    background-color: var(--gray-light);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.cabecalho-comentario {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+}
+
+.cabecalho-comentario img {
+    width: 10%;
+}
+
+.autor-comentario {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.data-comentario {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.avaliacao-comentario {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* espaço entre estrelas e botão editar */
+    margin-bottom: 0.5rem;
+}
+
+.icone-editar-comentario {
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+    transition: color 0.2s;
+}
+
+.icone-editar-comentario:hover {
+    color: #000;
+}
+
+.texto-comentario {
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+.form-comentario {
+    background-color: var(--gray-light);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.campo-form {
+    margin-bottom: 1.5rem;
+}
+
+.campo-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.campo-form input,
+.campo-form textarea,
+.campo-form select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.campo-form input:focus,
+.campo-form textarea:focus,
+.campo-form select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.campo-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.avaliacao-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.estrela-avaliacao {
+    font-size: 1.5rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.estrela-avaliacao.ativa {
+    color: var(--secondary);
+}
+
+.btn-enviar-comentario {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-enviar-comentario:hover {
+    background-color: var(--text-dark);
+}
+
+@media (max-width: 768px) {
+    .top-profissional {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .esq-profissional {
+        flex: 0 0 auto;
+        margin-bottom: 1.5rem;
+    }
+    
+    .ttl-perfil-profissional h3 {
+        font-size: 1.8rem;
+    }
+    
+    .bg-perfil-profissional {
+        padding: 1.5rem;
+    }
+}
+
+
+/* Adicionando o estilo para o botão Avaliar */
+.btn-avaliar {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 1rem;
+}
+
+.btn-avaliar:hover {
+    background-color: var(--text-dark);
+}
+
+/* Ocultar o campo de comentário inicialmente */
+#comentarioSection {
+    display: none;
+}
