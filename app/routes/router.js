@@ -167,8 +167,11 @@ router.get("/quem-somos", function (req, res) {
     res.render("pages/quem-somos.ejs");
 });
 
-
+router.get("/perfildoprof", function (req, res) {
+    res.render("pages/perfildoprof.ejs");
+});
 
 
 module.exports = router;
+
 
