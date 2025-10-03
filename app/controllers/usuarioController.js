@@ -295,29 +295,35 @@ const usuarioController = {
 // };
 
 logarPac: (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.render("pages/login-pac", { listaErros: errors, "valores": req.body, dadosNotificacao: null});
+    const erros = validationResult(req);
+    console.log("erros")
+    console.log(erros)
+    if (!erros.isEmpty()) {
+        return res.render("pages/login-pac", { listaErros: erros,  dadosNotificacao: null, valores:req.body});
         
     }
-  console.log("erros");
-        console.log(errors);
+  
+    if (req.session.autenticado.autenticado != null) {
 
-    if (req.session.autenticado && req.session.autenticado.autenticado != null) {
         // Usuário autenticado corretamente
         return res.render("pages/logado-user-pac", {
-          "valores": req.body,
-        listaErros: errors,
+        
+        listaErros: erros,
         autenticado: req.session.autenticado,
         login: req.session.logado,
         dadosNotificacao: null,
+        valores:req.body
       });
     } else {
         // Login falhou
         return res.render("pages/login-pac", {
             listaErros: null,
-            "valores": req.body,
-            dadosNotificacao: {titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error"}
+            
+            dadosNotificacao: {titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error",
+            },
+            valores:req.body
+
+            
         });
     }
 },

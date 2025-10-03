@@ -1,12 +1,14 @@
 const { validationResult } = require("express-validator");
-const usuarioModel = require("./usuarioModel"); // ✅ Nome corrigido
+const usuarioModel = require("./usuarioModel"); // 
 const bcrypt = require("bcryptjs");
 
 verificarUsuAutenticado = (req, res, next) => {
     if (req.session.autenticado) {
         var autenticado = req.session.autenticado;
+        req.session.logado = req.session +1;
     } else {
         var autenticado = { autenticado: null, id: null, tipo: null };
+        req.session.logado = 0
     }
     req.session.autenticado = autenticado;
     next();
@@ -18,8 +20,10 @@ limparSessao = (req, res, next) => {
 }
 
 gravarUsuAutenticado = async (req, res, next) => {
-    let autenticado = { autenticado: null, id: null, tipo: null };
-    const erros = validationResult(req);
+
+    erros = validationResult(req);
+    var autenticado = { autenticado: null, id: null, tipo: null };
+   
     
     if (erros.isEmpty()) {
         const dadosForm = {
@@ -27,29 +31,23 @@ gravarUsuAutenticado = async (req, res, next) => {
             senha_usuario: req.body.senha,
         };
         
-        // if (!dadosForm.senha_usuario) {
-        //     req.session.autenticado = autenticado;
-        //     return next();
-        // }
-        
-        const results = await usuarioModel.findUserEmail(dadosForm);
+        var results = await usuarioModel.findUserEmail(dadosForm);
+        var total = Object.keys(results).length;
         console.log(results[0]);
-        
-        if (results && results.length > 0) {
-            const usuario = results[0];
-            const senhaHash = usuario.senha_usuario;
-            
-            if (senhaHash && bcrypt.compareSync(dadosForm.senha_usuario, senhaHash)) {
-                req.session.autenticado = {
-                    autenticado: usuario.nome_usuario,
-                    id: usuario.id_usuario,
-                    tipo: usuario.tipo_usuario
+
+        if(total == 1){
+            if(bcrypt.compareSync(dadosForm.senha_usuario, results[0].senha_usuario)){
+                var autenticado={
+                    autenticado: results[0].nome_usuario,
+                    id: results[0].id_usuario,
+                    tipo: results[0].tipo_usuario,
                 };
             }
         }
+        
     }
-    
     req.session.autenticado = autenticado;
+    req.session.logado = 0;
     next();
 }
 

@@ -90,12 +90,10 @@ router.get("adm-teste",
 /*LOGIN PACIENTE*/ 
 /**GET */
 router.get("/login-pac", function (req, res) {
-    res.render("pages/login-pac.ejs", {
-        listaErros: null,
-        dadosNotificacao:null,
-        valores: {email: "", senha: ""},
-    });
+    res.render("pages/login-pac.ejs", {listaErros: null,  dadosNotificacao:null, valores:{email: "", senha:""}});
+        
 });
+
 /**POST */
 router.post( "/login-pac",
     usuarioController.validalogin,

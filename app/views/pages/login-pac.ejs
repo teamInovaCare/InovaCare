@@ -11,6 +11,13 @@
     <!-- Link dos ícones -->
     <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
 
+     <!-- Simple Notify -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+    <script src="/js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
+
+
 
     <title>Login</title>
 </head>
@@ -28,7 +35,7 @@
                 msgErro += ` * ${itemErro.msg} <br>`;
             }
             if(itemErro.path == "senha"){
-                avisoErro.confirmaemail = "erro";
+                avisoErro.senha = "erro";
                 msgErro += ` * ${itemErro.msg} <br>`;
             }
            
@@ -97,7 +104,7 @@
                         <label for="email" class="label-input">
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                            <input type="email" placeholder="Email" name="email" id="email" value="<%= valores.email %>" required>
+                            <input type="email" placeholder="Email" name="email" id="email" value="<%= valores.email %>"   required>
                         </label>
                     </section>
 
@@ -107,7 +114,7 @@
                         <label for="senha" class="label-input">
 
                             <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                            <input type="password" placeholder="Senha" name="senha" id="senha" value="<%= valores.senha %>" required>
+                            <input type="password" placeholder="Senha" name="senha" id="senha" value="<%= valores.senha %>"   required>
 
                             <!-- Ocultar ou mostrar a senha -->
                             <article class="oculta-senha-icon" onclick="mostrarSenha('senha', this)">

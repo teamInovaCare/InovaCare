@@ -121,11 +121,11 @@ const usuarioModel = {
 
 
     /**Select no banco para buscar o usuário pelo email */
-    findUserEmail: async (camposForm) => {
+    findUserEmail: async (dadosForm) => {
         try {
             const [resultados] = await pool.query(
                 "SELECT * FROM usuarios WHERE email_usuario = ?",
-                [camposForm.email_usuario]
+                [dadosForm.email_usuario]
             )
             return resultados;
         } catch (error) {

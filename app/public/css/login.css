@@ -14,6 +14,14 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
     padding: 20px;
 }
+
+
+.erro{
+    background-color: rgb(251,223,223);
+    border: 1px solid red;
+    color: red;
+    
+}
 /* Estilos para o botão de voltar como seta */
   /* Container do botão de voltar - DENTRO do container */
 .container-titulo {
