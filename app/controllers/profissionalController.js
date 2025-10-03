@@ -21,7 +21,19 @@ const profController = {
         } else {
           throw new Error('CPF inválido!');
         }
+      })
+
+
+      /**Verificar se já existe usuário com esse CPF no sistema */
+      .custom(async(value)=>{
+        const cpf = await profModel.findCampoCustomProf({cpf_usuario:value});
+        if(cpf >0){
+          throw new Error("CPF em uso!");
+        }
+        return true;
       }),
+      
+
     body('dt_nasc')
       .custom((value) => {
         // 1. Converter para formato MySQL
@@ -37,8 +49,11 @@ const profController = {
         }
         return true; // passou nas duas validações
       })
+
+       
   ],
 
+ 
 
   /**Armazenamento dos campos */
   cadIncialProf: async (req, res) => {
@@ -53,6 +68,7 @@ const profController = {
         erros: errors,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
+          
           tipo: "error"
         },
 
@@ -84,7 +100,17 @@ const profController = {
   validaCadEspecialidade: [
 
     /**Validação do Número do conselho regionald e medicina */
-    body("rg_prof").isLength({ min: 4, max: 6 }).withMessage("Insira um registro válido!"),
+    body("rg_prof").isLength({ min: 4, max: 6 }).withMessage("Insira um registro válido!")
+
+
+    /**Verificar se já existe especialista com esse registro, na especialidade escolhida  */
+      .custom(async(value, {req})=>{
+        const rg = await profModel.findCampoCustomRgProf(value,req.body.especialidadeprof);
+        if(rg >0){
+          throw new Error("Já existe um registro cadastrado!");
+        }
+        return true;
+      }),
 
   ],
 
@@ -112,7 +138,7 @@ const profController = {
     req.session.dadosProf = {
       ...req.session.dadosProf,
       "id_especialidade": req.body.especialidadeprof,
-      "numero_registro": req.body.rg_prof
+      "num_registro_especialista": req.body.rg_prof
     }
 
     return res.render("pages/cad-local-prof", {
@@ -142,7 +168,6 @@ const profController = {
           throw new Error("Cep Inválido")
         }
       }),
-    body("complemento").isLength({ min: 0, max: 100 }).withMessage("Complemento inválido.")
 
   ],
 
@@ -208,8 +233,9 @@ const profController = {
         const email = await profModel.findCampoCustomProf({ email_usuario: value });
         if (email > 0) {
           throw new Error("E-mail em uso!");
-          console.log(errors);
+          
         }
+
       }),
 
     body("confirmaemail").custom((value, { req }) => {
@@ -269,13 +295,21 @@ const profController = {
 
     try {
       let InsertProfResult = await profModel.createProf(dadosUsuarioProf);
+      req.session.autenticado = autenticado ={
+        autenticado: dadosUsuarioProf.nome_usuario,
+        id: InsertProfResult.insertId,
+        tipo: 2
+      }
 
 
 
-      /**Tela logada do apciente só para o teste */
-      res.render("pages/logado-user-pac", {
+      /**Se existir resultado positivo no cadastro */
+
+      res.render("pages/logado-user-prof", {
         erros: errors,
+        login: 1,
         dadosNotificacao:null,
+        autenticado: req.session.autenticado,
         valores: req.body,
 
       });
@@ -285,7 +319,7 @@ const profController = {
     } catch (errors) {
       console.log("Erro no cadastro" + errors);
       res.render("pages/cad-dados-prof",  {
-        erros: errors,
+        erros: null,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
           mensagem: "Verifique os valores digitados",

@@ -13,6 +13,20 @@ const profissionalController = require("../controllers/profissionalController");
 
 
 
+/* Home Profissional sem login */
+
+routerProf.get("/homeprofs", function (req, res) {
+    res.render("pages/homeprofs.ejs");
+});
+
+/* Home Profissional LOGADO */
+
+routerProf.get("/logado-user-prof", verificarUsuAutenticado, function (req, res) {
+    res.render("pages/logado-user-prof.ejs", {autenticado: req.session.autenticado, login:req.session.logado,});
+});
+
+
+
 
 /**Login do profissional */
 /**GET */
@@ -125,11 +139,6 @@ routerProf.get("/prontugeral", function (req, res) {//prontuario profissional
 
 
 
-/* Home Profissional sem login */
-
-routerProf.get("/homeprofs", function (req, res) {
-    res.render("pages/homeprofs.ejs");
-});
 
 
 
