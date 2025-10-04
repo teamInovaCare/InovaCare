@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cg.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/filtro.css">
 
 
     <!--link do arquivo js-->
@@ -123,30 +124,43 @@
         </section>
     </section>
 
-<section id="container-medicos">
-  <label class="container">Online
-    <input type="checkbox" class="filtro" value="online">
-    <section class="checkmark"></section>
-  </label>
-  <label class="container">Domiciliar
-    <input type="checkbox" class="filtro" value="domiciliar">
-    <section class="checkmark"></section>
-  </label>
-</section>
+        <!-- TODOS OS FILTROS EM UMA LINHA -->
+        <section id="container-medicos">
+            <label class="container">Online
+                <input type="checkbox" class="filtro" value="online" id="filtro-online">
+                <section class="checkmark"></section>
+            </label>
+            <label class="container">Domiciliar
+                <input type="checkbox" class="filtro" value="domiciliar" id="filtro-domiciliar">
+                <section class="checkmark"></section>
+            </label>
+            <input type="text" id="filtro-nome" class="input-filtro" placeholder=" Buscar por nome...">
+            <input type="text" id="filtro-localizacao" class="input-filtro" placeholder=" Localização...">
+            <button id="btn-limpar-filtros" class="btn-limpar">Limpar</button>
+        </section>
+
+    </div>
 
     <section class="perfis">
 
     
 
         <section class="retangulo">
+            
             <section class="small-rectangle" id="smallRectangle">
+                
                 <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
                 <section class="infos">
+                    <section class="btn-mod">
+                    <button class="btn" name="button">Agendar online</button>
+                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
+                    </section>
                     <p class="nome">Cleber Jr.</p>
                     <p class="idnt">CRM - SP 284692</p>
                     <p>R$ 180,00</p>
                     <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
                     </section>
+                    
                     <section class="tabela-tablet">
                        
                 </section>

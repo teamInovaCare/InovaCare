@@ -306,7 +306,7 @@ main {
 
 .ttl-cg h3 {
     font-size: 55px;
-    color: #003f5c;
+    color: #F47C4C;
     font-family: sans-serif;
 }
 
@@ -327,16 +327,18 @@ a {
     align-items: center;
     padding: 10px;
     cursor: pointer;
-    background-color: #f2f2f2;
+    background-color: #F5F7FA;
     width: 75%;
     height: 150px;
     border-radius: 16px;
+    box-shadow: #e6e8eb -0.5em 0.5em;
+    position: relative;
 }
-
 .perfil1 {
     width: 110px;
     margin-right: 10px;
     margin-left: 20px;
+    color: #15B3B1;
 }
 
 .infos {
@@ -577,78 +579,72 @@ a {
 }
 
 .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    font-size: 16px;
     user-select: none;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+    white-space: nowrap;
+    position: relative;
+  }
+  
+  .container:hover {
+    background-color: #e9ecef;
+    border-color: #f29434;
   }
   
   .container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
-    height: 0;
-    width: 0;
   }
   
   .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
+    height: 22px;
+    width: 22px;
     background-color: #eee;
-  }
-  
-  .container:hover input ~ .checkmark {
-    background-color: #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+    transition: all 0.3s;
+    position: relative;
   }
   
   .container input:checked ~ .checkmark {
-    background-color: #20b3b2;
+    background-color: #f29434;
   }
   
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
   }
   
   .container input:checked ~ .checkmark:after {
     display: block;
   }
   
-  .container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
-  
   #container-medicos {
       display: flex;
-      gap: 32px;
-      margin-bottom: 8px;
-      margin-top: 18px;
-      max-width: 1300px;            
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
+      gap: 15px;
+      padding: 20px;
       align-items: center;
       justify-content: center;
-      flex-wrap: nowrap;
-      flex-direction: row;
+      flex-wrap: wrap;
+      background-color: #f8f9fa;
+      border-radius: 12px;
+      margin: 20px auto;
   }
 
 @media screen and (max-width:768px) {  
@@ -671,8 +667,8 @@ a {
         font-size: 14px;
     }
       .container .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 7px;
+    top: 7px;
     width: 5px;
     height: 10px;
     border: solid white;
@@ -682,93 +678,398 @@ a {
     transform: rotate(45deg);
   }
 
-
-    /* hebert */
-    .retangulo{
-        width: 90%;
-    } 
-
-    .perfis {
-        flex-direction: column;
-        align-items: center;
-        display: flex;
-     }
-
-     #container-medicos {
+}
+.btn-container {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    }
+    flex-direction: column;
+    gap: 5px;
 }
 
+.btn, .btn-domiciliar {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: block;
+    width: 120px;
+    text-align: center;
+}
 
-/*
-@media screen and (max-width:768px) {
+.btn {
+    background-color: #f29434;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #e8934a;
+}
+
+.btn-domiciliar {
+    background-color: #109ea6;
+    color: white;
+}
+
+.btn-domiciliar:hover {
+    background-color: #0d7a82;
+}
+        /* Variáveis de Cor */
+        :root {
+            --cor-borda-clara: #a3e6e2; /* Turquesa clara para as bordas */
+            --cor-botao-fundo: #00c0b8; /* Turquesa do botão "Filtrar" */
+            --cor-texto: #333;
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            padding: 20px;
+            background-color: #f8f9fa; /* Fundo cinza claro */
+        }
+
+        /* 1. Container Principal (Flexbox) */
+        .filter-area {
+            display: flex;
+            gap: 15px; /* Espaço entre os elementos */
+            align-items: center;
+            flex-wrap: wrap; /* Essencial para responsividade */
+            max-width: 1000px; 
+            margin: 0 auto;
+        }
+
+        /* 2. Estilo Comum para Campos e Dropdowns */
+        .filter-field {
+            flex-grow: 1; 
+            max-width: 250px; 
+            padding: 10px 15px;
+            
+            background-color: white;
+            border: 1px solid var(--cor-borda-clara);
+            border-radius: 5px;
+            /* Simula o contorno da imagem com uma sombra interna */
+            box-shadow: 0 0 0 2px var(--cor-borda-clara); 
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        
+        /* Ajuste para o campo de texto */
+        .filter-area input[type="text"] {
+            all: unset;
+            width: 100%; 
+        }
+
+        /* Estilo do Input - Envolve o input para aplicar a borda */
+        .input-wrapper {
+            position: relative;
+            min-width: 150px;
+        }
+        
+        .input-wrapper.filter-field {
+             padding: 9px 15px; 
+        }
+
+        /* 3. Estilo dos Dropdowns (Simulados) */
+        .dropdown {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: var(--cor-texto);
+            white-space: nowrap; 
+        }
+
+        /* 4. Estilo do Botão Filtrar */
+        .filter-button {
+            background-color: var(--cor-botao-fundo);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            flex-shrink: 0; 
+            min-width: 100px;
+            transition: background-color 0.2s;
+        }
+        
+        .filter-button:hover {
+            background-color: #009990;
+        }
+
+        /* 5. Responsividade */
+        @media (max-width: 650px) {
+            .filter-area {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .filter-field {
+                max-width: 100%;
+                width: 100%; 
+            }
+        }
+.perfis {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfis .retangulo {
+    width: 75%;
+    max-width: 1200px;
+}
+
+.perfis .small-rectangle {
+    width: 100%;
+    min-height: 280px;
+    position: relative;
+    padding-bottom: 100px;
+}
+.btn-mod {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-direction: column;
+}
+
+/* Quando há 2 botões */
+.btn-mod:has(.btn + .btn-domiciliar) {
+    flex-direction: row;
+}
+
+.btn-mod .btn,
+.btn-mod .btn-domiciliar {
+    flex: 1;
+    max-width: 120px;
+}
+
+.preco-nota {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.preco {
+    font-weight: 600;
+    color: #333;
+}
+
+.nota {
+    font-weight: 700;
+    color: #ffa500;
+    font-size: 14px;
+}
+.btn-limpar {
     
-    .retangulo{
-        width: 90%;
-    } 
-
-    .perfis {
-       flex-direction: column;
-       align-items: center;
-       display: flex;
     }
-
-    .large-rectangle {
-        flex-direction: column;    
-        width: 80%;
-        margin: auto;    
+@media screen and (max-width: 600px) {
+    .voltar {
+        margin-left: 10px;
+        margin-top: 10px;
     }
-
-    .coluna-dir {
-        margin: 0;
+    
+    .ttl-cg h3 {
+        font-size: 28px;
+        padding: 0 15px;
     }
-
-    .coluna-esq {
-        border: none;
-    }
-}  
-    */
-
-@media screen and (max-width: 400px) {
+    
     #container-medicos {
-        justify-content: flex-start;
-        padding-left: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        padding: 18px;
+        margin: 15px;
     }
     
     .container {
-        font-size: 22px;
-        padding-left: 25px;
-        margin-bottom: 8px;
-  }
+        font-size: 14px;
+        padding: 6px 10px;
+        width: 49%;
+        min-width: 100px;
+        justify-content: center;
+        display: flex;
+    }
     
-  .checkmark {
-      height: 18px;
-      width: 18px;
-  }
-  .infos {
-      font-size: 12px;
-        
-  }
-  .container .checkmark:after {
-    left: 5px;
-    top: 1px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
-  #container-medicos {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-    flex-direction: row;
-  }
+    .checkmark {
+        height: 20px;
+        width: 20px;
+    }
+    
+    .container .checkmark:after {
+        left: 50%;
+        top: 50%;
+        width: 4px;
+        height: 8px;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    
+    .small-rectangle {
+        flex-direction: column;
+        text-align: center;
+        padding: 18px;
+        padding-bottom: 100px;
+        min-height: 360px;
+        position: relative;
+    }
+    
+    .perfil1 {
+        width: 90px;
+        margin: 0 0 12px 0;
+    }
+    
+    .infos {
+        font-size: 13px;
+        margin-left: 0;
+    }
+    
+    .btn-mod {
+        position: absolute;
+        bottom: 18px;
+        left: 18px;
+        right: 18px;
+        top: auto;
+        transform: none;
+        margin-top: 0;
+        flex-direction: column;
+    }
+    
+    .btn-mod:has(.btn + .btn-domiciliar) {
+        flex-direction: row;
+    }
+    
+    .btn, .btn-domiciliar {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+    
+    .btn-mod .btn,
+    .btn-mod .btn-domiciliar {
+        flex: 1;
+        width: auto;
+    }
+    
+    .retangulo {
+        width: 100%;
+        margin-top: 22px;
+    }
+    
+    .input-filtro, .btn-limpar {
+        width: 100%;
+        margin-bottom: 12px;
+        margin-top: 12px;
+    }
+}
 
+@media screen and (max-width: 400px) {
+    .voltar {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    
+    .ttl-cg h3 {
+        font-size: 24px;
+        padding: 0 10px;
+    }
+    
+    #container-medicos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    .container {
+        font-size: 14px;
+        padding: 8px 12px;
+        width: 45%;
+        min-width: 140px;
+        justify-content: center;
+        display: flex;
+    }
+    
+    .checkmark {
+        height: 18px;
+        width: 18px;
+    }
+    
+    .container .checkmark:after {
+        left: 50%;
+        top: 50%;
+        width: 4px;
+        height: 8px;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+    
+    .small-rectangle {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+        padding-bottom: 90px;
+        min-height: 340px;
+        position: relative;
+    }
+    
+    .perfil1 {
+        width: 80px;
+        margin: 0 0 10px 0;
+    }
+    
+    .infos {
+        font-size: 12px;
+        margin-left: 0;
+    }
+    
+    .btn-mod {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        top: auto;
+        transform: none;
+        margin-top: 0;
+        flex-direction: column;
+    }
+    
+    .btn-mod:has(.btn + .btn-domiciliar) {
+        flex-direction: row;
+    }
+    
+    .btn, .btn-domiciliar {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+    
+    .btn-mod .btn,
+    .btn-mod .btn-domiciliar {
+        flex: 1;
+        width: auto;
+    }
+    
+    .retangulo {
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .input-filtro, .btn-limpar {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
 }

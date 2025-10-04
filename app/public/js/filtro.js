@@ -1,57 +1,123 @@
 const medicos = [
-    { id: 1, nome: "Dr. Cleber", modalidades: ["online"], preco: "R$ 180,00", nota: 4.9, crm: "CRM - SP 284692" },
-    { id: 2, nome: "Dra. Marina s.", modalidades: ["domiciliar"], preco: "R$ 200,00", nota: 4.7, crm: "CRM - SP 123456" },
-    { id: 3, nome: "Dr. Jorge", modalidades: ["online", "domiciliar"], preco: "R$ 220,00", nota: 4.8, crm: "CRM - SP 654321" },
-    { id: 4, nome: "Dr. Bruno", modalidades: ["online"], preco: "R$ 150,00", nota: 4.5, crm: "CRM - SP 789012" },
-    { id: 5, nome: "Dra. Jéssica", modalidades: ["online", "domiciliar"], preco: "R$ 210,00", nota: 4.6, crm: "CRM - SP 345678" }
-];
+            {
+                id: 1,
+                nome: 'Cleber Jr.',
+                crm: 'CRM - SP 284692',
+                preco: 'R$ 180,00',
+                nota: '4,9',
+                modalidades: ['online', 'domiciliar'],
+                localizacao: 'São Paulo'
+            },
+            {
+                id: 2,
+                nome: 'Marina Silva',
+                crm: 'CRM - RJ 103456',
+                preco: 'R$ 120,00',
+                nota: '4,8',
+                modalidades: ['online'],
+                localizacao: 'Rio de Janeiro'
+            },
+            {
+                id: 3,
+                nome: 'Jorge Santos',
+                crm: 'CRM - RJ 120383',
+                preco: 'R$ 180,00',
+                nota: '4,9',
+                modalidades: ['domiciliar'],
+                localizacao: 'Rio de Janeiro'
+            },
+            {
+                id: 4,
+                nome: 'Bruno Pacheco',
+                crm: 'CRM - SP 612029',
+                preco: 'R$ 210,00',
+                nota: '5',
+                modalidades: ['online', 'domiciliar'],
+                localizacao: 'São Paulo'
+            },
+            {
+                id: 5,
+                nome: 'Jéssica Matos',
+                crm: 'CRM - SP 389237',
+                preco: 'R$ 80,00',
+                nota: '4,7',
+                modalidades: ['online'],
+                localizacao: 'São Paulo'
+            }
+        ];
 
-function filtrarMedicos(medicos, filtroSelecionado) {
-    if (filtroSelecionado.length === 0) return medicos;
-    return medicos.filter(medico =>
-        filtroSelecionado.every(modalidade => medico.modalidades.includes(modalidade))
-    );
-}
+        function renderizarMedicos(medicosParaExibir) {
+            const container = document.querySelector('.perfis');
+            container.innerHTML = '';
 
-function aplicarFiltro() {
-    const filtros = [...document.querySelectorAll('.filtro:checked')].map(cb => cb.value);
-    const medicosFiltrados = filtrarMedicos(medicos, filtros);
-    renderizarMedicos(medicosFiltrados);
-}
+            if (medicosParaExibir.length === 0) {
+                container.innerHTML = `
+                    <div class="sem-resultados">
+                        <i class="bi bi-search"></i>
+                        <p>Nenhum médico encontrado com os filtros aplicados.</p>
+                    </div>
+                `;
+                return;
+            }
 
-function renderizarMedicos(lista) {
-    const container = document.querySelector(".perfis"); // ALTERADO AQUI
-    container.innerHTML = "";
+            const imagens = ['perfil.png', 'perfil.png', 'perfil.png', 'perfil.png', 'perfil.png'];
+            medicosParaExibir.forEach((medico, index) => {
+                const imagemPerfil = imagens[index % imagens.length];
+                const card = `
+                    <section class="retangulo">
+                        <section class="small-rectangle">
+                            <img src="imagens/${imagemPerfil}" alt="Perfil" class="perfil1">
+                            <section class="infos">
+                                <section class="btn-mod">
+                                    ${medico.modalidades.includes('online') ? '<button class="btn">Agendar online</button>' : ''}
+                                    ${medico.modalidades.includes('domiciliar') ? '<button class="btn-domiciliar">Agendar domiciliar</button>' : ''}
+                                </section>
+                                <p class="nome">${medico.nome}</p>
+                                <p class="idnt">${medico.crm}</p>
+                                <div class="preco-nota">
+                                    <span class="preco">${medico.preco}</span>
+                                    <span class="nota">${medico.nota} <span style="color: #ffa500;">★</span></span>
+                                </div>
+                            </section>
+                        </section>
+                    </section>
+                `;
+                container.insertAdjacentHTML('beforeend', card);
+            });
+        }
 
-    if (lista.length === 0) {
-        container.innerHTML = "<p>Nenhum médico encontrado com os filtros selecionados.</p>";
-        return;
-    }
-    lista.forEach(medico => {
-        container.innerHTML += `
-        <section class="retangulo">
-            <section class="small-rectangle">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <p class="nome">${medico.nome}</p>
-                    <p class="idnt">${medico.crm}</p>
-                    <p>${medico.preco}</p>
-                    <p class="nota">${medico.nota} <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    <p><strong>Atendimento:</strong> ${medico.modalidades.join(", ")}</p>
-                </section>
-            </section>
-        </section>
-        `;
+        function aplicarFiltros() {
+            const filtros = [...document.querySelectorAll('.filtro:checked')].map(cb => cb.value);
+            
+            const filtrados = medicos.filter(medico => {
+                if (filtros.length === 0) return true;
+                return filtros.some(filtro => medico.modalidades.includes(filtro));
+            });
+            
+            renderizarMedicos(filtrados);
+        }
+        
+        // Inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarMedicos(medicos);
+            
+            // Adicionar event listeners para os filtros
+            document.querySelectorAll('.filtro').forEach(checkbox => {
+                checkbox.addEventListener('change', aplicarFiltros);
+            });
+        });
+            
+function limparFiltros() {
+    document.querySelectorAll('.filtro').forEach(checkbox => {
+        checkbox.checked = false;
     });
-}
-
-// Aguarda o DOM carregar antes de executar
-document.addEventListener('DOMContentLoaded', function() {
-    // Adiciona listener para atualizar ao marcar/desmarcar os checkboxes
-    document.querySelectorAll('.filtro').forEach(cb => {
-        cb.addEventListener('change', aplicarFiltro);
-    });
-    
-    // Renderiza lista completa ao iniciar
     renderizarMedicos(medicos);
+}
+
+// Adicionar event listener para o botão limpar se existir
+document.addEventListener('DOMContentLoaded', function() {
+    const btnLimpar = document.querySelector('.btn-limpar');
+    if (btnLimpar) {
+        btnLimpar.addEventListener('click', limparFiltros);
+    }
 });

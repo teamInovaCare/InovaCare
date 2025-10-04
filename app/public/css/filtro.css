@@ -1,0 +1,349 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .voltar {
+            margin-bottom: 20px;
+        }
+
+        .botao-voltar {
+            width: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .botao-voltar:hover {
+            transform: translateX(-5px);
+        }
+
+        .ttl-cg {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .ttl-cg h3 {
+            font-size: 2.5em;
+            color: #F5A152;
+            font-weight: 700;
+        }
+
+        /* === FILTROS EM UMA ÚNICA LINHA === */
+        #container-medicos {
+            display: flex;
+            gap: 15px;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            margin: 20px auto;
+        }
+
+        /* Checkboxes */
+        .container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+            padding: 10px 15px;
+            background-color: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .container:hover {
+            background-color: #e9ecef;
+            border-color: #f29434;;
+        }
+
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            height: 22px;
+            width: 22px;
+            background-color: #eee;
+            border-radius: 4px;
+            margin-left: 10px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .container input:checked ~ .checkmark {
+            background-color: #f29434;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Campos de input */
+        .input-filtro {
+            flex: 1;
+            min-width: 180px;
+            max-width: 300px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .input-filtro:focus {
+            outline: none;
+            border-color: #f29434;
+            box-shadow: 0 0 0 1px #f0b173;
+        }
+
+        .input-filtro::placeholder {
+            color: #999;
+        }
+
+        /* Botão Limpar */
+        .btn-limpar {
+            padding: 10px 20px;
+            background-color: #f29434;;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-limpar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cards dos Médicos */
+        .perfis {
+            flex-direction: column;
+            align-items: center;
+            display: flex;
+            margin-top: 30px;
+        }
+
+        .retangulo {
+            width: 90%;
+            animation: fadeIn 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .small-rectangle {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 280px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .small-rectangle:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px #c99666(102, 126, 234, 0.3);
+            border-color: #F5A152;
+        }
+
+
+
+        .infos {
+            text-align: center;
+        }
+
+        .btn-mod {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .btn, .btn-domiciliar {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #F5A152 0%, #a77b52 100%);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-domiciliar {
+            background: linear-gradient(135deg, #15B3B1 0%, #66dddb 100%);
+            color: white;
+        }
+
+        .btn-domiciliar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
+        }
+
+        .nome {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .idnt {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .infos p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .nota {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-weight: 700;
+            color: #ffa500;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        /* Mensagem sem resultados */
+        .sem-resultados {
+            width: 90%;
+            max-width: 600px;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            margin: 20px auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .sem-resultados i {
+            font-size: 64px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .sem-resultados p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .container-principal {
+                padding: 20px;
+            }
+
+            .ttl-cg h3 {
+                font-size: 2em;
+            }
+
+            #container-medicos {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .container,
+            .input-filtro,
+            .btn-limpar {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .retangulo {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            #container-medicos {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .container {
+                width: 45%;
+                min-width: 140px;
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .input-filtro {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .btn-limpar {
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            .small-rectangle {
+                min-height: 320px;
+                padding: 15px;
+            }
+
+            .btn-mod {
+                position: absolute;
+                bottom: 15px;
+                left: 15px;
+                right: 15px;
+                margin-bottom: 0;
+            }
+        }
