@@ -52,8 +52,13 @@ router.get("/consultas", function (req, res) {/**Minhas consultas */
 });
 
 
-router.get("/perfil", function (req, res) {//perfil do paciente
-    res.render("pages/perfil.ejs");
+// Usar as rotas do perfil
+const perfilRoutes = require('./perfil');
+router.use('/perfil', perfilRoutes);
+
+// Manter compatibilidade com rota antiga
+router.get("/perfil", function (req, res) {
+    res.redirect('/perfil/');
 });
 
 router.get("/agenda", function (req, res) {

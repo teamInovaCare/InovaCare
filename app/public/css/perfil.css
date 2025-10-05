@@ -310,3 +310,22 @@ main {
 .bg-perfil {
     animation: fadeIn 0.5s ease;
 }
+
+/* Estilos específicos para campos de endereço lado a lado */
+.endereco-detalhado {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    grid-column: 1 / -1;
+}
+
+.conjunto-separado {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .endereco-detalhado {
+        grid-template-columns: 1fr;
+    }
+}

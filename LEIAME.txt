@@ -13,8 +13,7 @@ e digite:
 **** npm install mysql2 --save
 
 
-****  npm install moment --save
-
+**** npm install moment --save
 
 
 index

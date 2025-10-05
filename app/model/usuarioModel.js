@@ -134,6 +134,83 @@ const usuarioModel = {
         }
     },
 
+    /**Buscar dados completos do usuário para o perfil */
+    findUserById: async (idUsuario) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT u.*, p.dt_nasc_paciente, p.logradouro_paciente, p.num_resid_paciente, 
+                        p.complemento_paciente, p.bairro_paciente, p.cidade_paciente, p.uf_paciente, p.cep_paciente
+                 FROM usuarios u 
+                 LEFT JOIN pacientes p ON u.id_usuario = p.id_usuario 
+                 WHERE u.id_usuario = ?`,
+                [idUsuario]
+            )
+            return resultados[0];
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Atualizar dados do usuário */
+    updateUser: async (idUsuario, dadosUsuario) => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            await connection.beginTransaction();
+
+            // Atualizar tabela usuarios
+            let queryUsuarios = `UPDATE usuarios SET nome_usuario = ?, email_usuario = ?`;
+            let paramsUsuarios = [dadosUsuario.nome, dadosUsuario.email];
+            
+            if (dadosUsuario.foto) {
+                queryUsuarios += `, foto_usuario = ?`;
+                paramsUsuarios.push(dadosUsuario.foto);
+            }
+            
+            queryUsuarios += ` WHERE id_usuario = ?`;
+            paramsUsuarios.push(idUsuario);
+            
+            await connection.query(queryUsuarios, paramsUsuarios);
+
+            // Atualizar tabela pacientes
+            const dataNascimentoFormatada = moment(dadosUsuario.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            
+            await connection.query(
+                `UPDATE pacientes SET 
+                 dt_nasc_paciente = ?, logradouro_paciente = ?, num_resid_paciente = ?, 
+                 complemento_paciente = ?, bairro_paciente = ?, cidade_paciente = ?, 
+                 uf_paciente = ?, cep_paciente = ?
+                 WHERE id_usuario = ?`,
+                [
+                    dataNascimentoFormatada,
+                    dadosUsuario.endereco,
+                    dadosUsuario.numero,
+                    dadosUsuario.complemento,
+                    dadosUsuario.bairro,
+                    dadosUsuario.cidade,
+                    dadosUsuario.uf,
+                    dadosUsuario.cep,
+                    idUsuario
+                ]
+            );
+
+            await connection.commit();
+            return { success: true };
+
+        } catch (error) {
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error("Erro no updateUser:", error);
+            throw error;
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
+    },
+
     
 };
 
