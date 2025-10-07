@@ -212,7 +212,68 @@ const usuarioModel = {
         }
     },
 
-    
+    /**Buscar especialistas por tipo de atendimento e especialidade */
+    findEspecialistas: async (tipo_atendimento, nome_especialidade) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT nome_usuario, tipo_registro, nome_especialidade, cidade_local, tipo_atendimento FROM usuarios
+                INNER JOIN especialistas ON usuarios.id_usuario = especialistas.id_usuario
+                INNER JOIN disponibilidade_especialista ON disponibilidade_especialista.id_especialista = especialistas.id_especialista
+                INNER JOIN especialidades ON especialidades.id_especialidade = especialistas.id_especialidade
+                INNER JOIN especialista_local ON especialista_local.id_especialista = especialistas.id_especialista
+                INNER JOIN locais ON locais.id_local = especialista_local.id_local
+                WHERE tipo_atendimento = ? AND nome_especialidade = ?
+                GROUP BY nome_usuario`,
+                [tipo_atendimento, nome_especialidade]
+            );
+            return resultados;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Buscar especialistas por cidade e especialidade */
+    findEspecialistasByCidadeEspecialidade: async (cidade_local, nome_especialidade) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT nome_usuario, nome_especialidade, tipo_registro, num_registro_especialista, cidade_local
+                 FROM especialistas
+                 INNER JOIN usuarios ON usuarios.id_usuario = especialistas.id_usuario
+                 INNER JOIN especialidades ON especialidades.id_especialidade = especialistas.id_especialidade
+                 INNER JOIN especialista_local ON especialista_local.id_especialista = especialistas.id_especialista
+                 INNER JOIN locais ON locais.id_local = especialista_local.id_local
+                 WHERE cidade_local = ? AND nome_especialidade = ?
+                 GROUP BY nome_usuario`,
+                [cidade_local, nome_especialidade]
+            );
+            return resultados;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Buscar especialistas por nome de usuário e especialidade */
+    findEspecialistasByNomeEspecialidade: async (nome_usuario, nome_especialidade) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT nome_usuario, nome_especialidade, tipo_registro, num_registro_especialista, cidade_local
+                 FROM especialistas
+                 INNER JOIN usuarios ON usuarios.id_usuario = especialistas.id_usuario
+                 INNER JOIN especialidades ON especialidades.id_especialidade = especialistas.id_especialidade
+                 INNER JOIN especialista_local ON especialista_local.id_especialista = especialistas.id_especialista
+                 INNER JOIN locais ON locais.id_local = especialista_local.id_local
+                 WHERE nome_usuario = ? AND nome_especialidade = ?`,
+                [nome_usuario, nome_especialidade]
+            );
+            return resultados;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
 };
 
 

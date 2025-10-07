@@ -873,9 +873,7 @@ a {
     color: #ffa500;
     font-size: 14px;
 }
-.btn-limpar {
-    
-    }
+
 @media screen and (max-width: 600px) {
     .voltar {
         margin-left: 10px;
