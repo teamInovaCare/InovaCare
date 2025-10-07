@@ -133,6 +133,7 @@ const usuarioModel = {
             return error;
         }
     },
+    
 
     /**Buscar dados completos do usuário para o perfil */
     findUserById: async (idUsuario) => {

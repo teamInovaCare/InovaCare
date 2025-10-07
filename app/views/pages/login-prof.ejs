@@ -11,11 +11,62 @@
     <!-- Link dos ícones -->
     <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
 
+     <!-- Simple Notify -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+    <script src="../js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
+
+
 
     <title>Login profisisonal</title>
 </head>
 
 <body>
+
+      <% 
+    let msgErro="";
+    let avisoErro = {"email":"",  "senha":""};
+    if(listaErros){
+        listaErros.errors.forEach(function(itemErro){
+
+            if(itemErro.path == "email"){
+                avisoErro.email = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+            if(itemErro.path == "senha"){
+                avisoErro.senha = "erro";
+                msgErro += ` * ${itemErro.msg} <br>`;
+            }
+           
+            
+        })
+
+    
+    if(msgErro != ""){
+        %>
+
+        <script>
+            let msgErro ="<%= msgErro %>"
+            showNotify("Erro(s) no preenchimento" , "Verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<"), "error", "center", 5000 )
+        </script>
+
+        <%
+    }
+
+    }
+
+    if(dadosNotificacao){ %>
+        <script>
+            showNotify("<%= dadosNotificacao.titulo%>", "<%= dadosNotificacao.mensagem%>", "<%= dadosNotificacao.tipo%>", "center")
+            if("<%= dadosNotificacao.tipo %>" == "success"){
+                setTimeout(function(){window.location="/"}, 3000)
+            }
+        </script>
+    
+    }
+
+    <% } %>
 
 
 
@@ -52,7 +103,7 @@
                         <label for="email" class="label-input">
 
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                            <input type="email" placeholder="Email" name="email" id="email" required>
+                            <input type="email" placeholder="Email" name="email" id="email" value="<%=valores.email %>" required>
                         </label>
                     </section>
 
@@ -62,7 +113,7 @@
                         <label for="senha" class="label-input">
 
                             <i class="fa-solid fa-lock" aria-hidden="true"></i>
-                            <input type="password" placeholder="Senha" name="senha" id="senha" required>
+                            <input type="password" placeholder="Senha" name="senha" id="senha" value="<%=valores.senha %>" required>
 
                             <!-- Ocultar ou mostrar a senha -->
                             <article class="oculta-senha-icon" onclick="mostrarSenha('senha', this)">

@@ -123,7 +123,7 @@
 
 
 
-     
+
 
     <!-- ------------------------------------------------------------- -->
 
@@ -147,9 +147,9 @@
     <!-- Sessão que abrange toda a página -->
     <section class="container-geral">
 
-        <form action="" method="post">
+        <form action="/profissional/config-agenda-prof" method="post">
 
-            
+
 
             <!-- ------------------------------------------------------------- -->
 
@@ -158,12 +158,13 @@
 
                 <!-- Título da seção de modalidade com ícone estilizado -->
                 <h2 class="primary-title"><i class="fas fa-calendar-day"></i>Selecione o dia da semana</h2>
-                
+
                 <!-- Legenda informativa explicando para o usuário -->
                 <section class="info-box">
 
                     <i class="fas fa-circle-info"></i>
-                    <p>As configurações de agenda funcionam a partir de uma predefinição para o dia da semana. Escolha um dia e defina horários de trabalho, preço e modalidade de atendimento.</p>
+                    <p>As configurações de agenda funcionam a partir de uma predefinição para o dia da semana. Escolha
+                        um dia e defina horários de trabalho, preço e modalidade de atendimento.</p>
 
                 </section>
 
@@ -173,7 +174,8 @@
 
                     <select id="idsemanadia" name="semanadia" required="">
 
-                        <option value="" disabled="" selected="" hidden="">Selecione o dia da semana</option><!--Legenda da caixa de seleção-->
+                        <option value="" disabled="" selected="" hidden="">Selecione o dia da semana</option>
+                        <!--Legenda da caixa de seleção-->
 
                         <option value="Domingo">Domingo</option>
                         <option value="Segunda-Feira">Segunda-Feira</option>
@@ -192,7 +194,7 @@
             <!-- ------------------------------------------------------------------------ -->
 
             <!-- Seleção da modalidade -->
-             <section class="form-section">
+            <section class="form-section">
 
                 <!-- Título da sessão de modalidade de atendimento com ícone -->
                 <h2 class="primary-title"><i class="fas fa-laptop-house"></i> Modalidade de Atendimento</h2>
@@ -217,12 +219,13 @@
                         </label>
                     </section>
 
-                    
+
                     <!-- Bloco de escolha do DOMICILIAR -->
                     <section class="modalidade-option">
 
                         <!-- Botão de rádio -->
-                        <input type="radio" id="domiciliar" name="modalidade" value="Domiciliar" class="modalidade-input">
+                        <input type="radio" id="domiciliar" name="modalidade" value="Domiciliar"
+                            class="modalidade-input">
 
                         <!-- Formato que vai aparecer para o usuário - ÍCONE  -->
                         <label for="domiciliar" class="modalidade-label">
@@ -231,7 +234,7 @@
                         </label>
                     </section>
 
-                
+
                 </section>
 
             </section>
@@ -283,12 +286,12 @@
                 <p class="subtext">Adicione intervalos do dia em que você não estará disponível para atendimento</p>
 
                 <!-- As pausas serão adicionas aqui a partir de um JS --- De acorod com a interação do usuário com o botão de adicionar -->
-               <section class="container-hora" id="pausas-container">
+                <section class="container-hora" id="pausas-container">
 
 
-                        <!-- As pausas serão adicionadas aqui -->
+                    <!-- As pausas serão adicionadas aqui -->
 
-                        <!-- <section class="hora">
+                    <!-- <section class="hora">
                             <label class="hora-label" for="hrinicio">Horário de Início</label>
                             <input type="text" name="hrinicio" id="hr_inicio" required>
                         </section>
@@ -301,7 +304,7 @@
 
 
 
-                    </section>
+                </section>
 
 
                 <!-- Botão que vai acionar as pausas -->
@@ -309,6 +312,42 @@
                     <i class="fas fa-plus"></i> Adicionar Pausa
                 </button>
 
+
+
+
+            </section>
+
+
+
+            <!-- Preço da Consulta -->
+            <section class="form-section">
+
+                <!-- UTILIZO AS MESMAS CLASSES E ESTILOS DO CONTAINER DAS HORAS -->
+
+                <!-- Título do bloco de horário de trabalho -->
+                <h2 class="primary-title"><i class="fas fa-money-bill-wave"></i> Preço da consulta</h2>
+
+                <!-- Legenda para o usuário -->
+                <p class="subtext">Defina o preço e a taxa da sua consulta que será aplicada por KM rodado. Por padrão, consultas online não possuem taxa!</p>
+
+
+                <!-- Preço da consulta -->
+                <section class="horario-container">
+
+                    <!-- Horário de início -->
+                    <section class="time-input-group">
+                        <label for="hr_inicio" class="time-label">Preço da Consulta</label>
+                        <input type="text" id="preco" name="preco" class="time-input" required>
+                    </section>
+
+
+                    <!-- Taxa da consulta-->
+                    <section class="time-input-group">
+                        <label for="hr_fim" class="time-label">Taxa de Deslocamento</label>
+                        <input type="text" id="taxa" name="taxa" class="time-input" >
+                    </section>
+
+                </section>
             </section>
 
             <!-- Envio das informações -->
@@ -345,7 +384,10 @@
 
     </footer>
 
-    <script src="js/config_agenda_prof.js"></script>
+    <script src="../js/config_agenda_prof.js"></script>
+    <script src="../js/precotaxa.js"></script>
+
+   
 
 
 

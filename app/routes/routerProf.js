@@ -31,8 +31,19 @@ routerProf.get("/logado-user-prof", verificarUsuAutenticado, function (req, res)
 /**Login do profissional */
 /**GET */
 routerProf.get("/login-prof", function (req, res) {//login do profissional-
-    res.render("pages/login-prof.ejs");
+    res.render("pages/login-prof.ejs", {listaErros:null, dadosNotificacao:null,valores:{email:"", senha:""}});
 });
+/**POST */
+/**POST */
+routerProf.post( "/login-prof",
+    profissionalController.validaloginProf,
+    gravarUsuAutenticado,
+    
+    function(req,res){
+        profissionalController.logarProf(req,res);
+    });
+
+
 
 
 
@@ -111,9 +122,18 @@ routerProf.post("/cad-dados-prof", profissionalController.validaCadDadosProf,
 
 /**CONFIGURAÇÃOD E AGENDA DO PROFISSIONAL */
 
-routerProf.get("/config_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
-    res.render("pages/config_agenda_prof.ejs");
+routerProf.get("/config_agenda_prof",
+   
+    verificarUsuAutenticado,
+   verificarUsuAutorizado([2], "pages/restrito"),
+    function (req, res) {//cadastro do profissional-email e senha
+    res.render("pages/config_agenda_prof.ejs", {autenticado: req.session.autenticado, login: req.session.logado });
 });
+
+
+
+
+
 
 /**VISUALIZAÇÃO DA AGENDA DO PROFISISONAL */
 

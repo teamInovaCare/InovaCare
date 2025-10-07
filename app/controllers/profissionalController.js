@@ -335,7 +335,59 @@ const profController = {
 
   },
 
-};
+
+  /************************************************************************LOGIN DO PROFISSIONAL***************************** */
+
+
+  /**vALIDAÇÃO DOS CAMPOS DE LOGIN DO PROFISSIONAL */
+
+  validaloginProf: [
+    body("email").isEmail().withMessage("Email inválido."),
+    body("senha").isStrongPassword().withMessage("Senha inválida!"),
+
+  ],
+
+
+
+  logarProf: (req, res) => {
+      const erros = validationResult(req);
+      console.log("erros")
+      console.log(erros)
+      if (!erros.isEmpty()) {
+          return res.render("pages/login-prof", { listaErros: erros,  dadosNotificacao: null, valores:req.body});
+          
+      }
+    
+      if (req.session.autenticado.autenticado != null) {
+  
+          // Usuário autenticado corretamente
+          return res.render("pages/logado-user-prof", {
+          
+          listaErros: erros,
+          autenticado: req.session.autenticado,
+          login: req.session.logado,
+          dadosNotificacao: null,
+          valores:req.body
+        });
+      } else {
+          // Login falhou
+          return res.render("pages/login-prof", {
+              listaErros: null,
+              
+              dadosNotificacao: {titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error",
+              },
+              valores:req.body
+  
+              
+          });
+      }
+  },
+  
+  };
+  
+  
+
+
 
 
 module.exports = profController

@@ -127,7 +127,7 @@ const profModel = {
             const [resultados] = await pool.query(
                 ` select count(*) totalReg from especialistas
                  where num_registro_especialista=? and id_especialidade = ?`,
-                [num_registro_especialista, id_especialidade ]
+                [num_registro_especialista, id_especialidade]
             )
             return resultados[0].totalReg;
 
@@ -141,7 +141,9 @@ const profModel = {
 
 
     /**Select no banco para buscar o usuário pelo email */
-    findUserEmail: async (camposForm) => {
+    findUserEmailPac: async (camposForm) => {
+
+
         try {
             const [resultados] = await pool.query(
                 "SELECT * FROM usuarios WHERE email_usuario = ?",
@@ -153,6 +155,72 @@ const profModel = {
             return error;
         }
     },
+
+
+    /**Insert na agenda do profissional */
+
+    configAgendaProf: async (dadosForm) => {
+
+        let connection;
+
+
+        try {
+
+            /**Transação para inserir nas tabelas apenas se houver sucesso */
+
+            connection = await pool.getConnection();
+
+            await connection.beginTransaction();
+
+            const [resultadosAgenda] = await connection.query(
+                `insert into disponibilidade_especialista (dia_semana, hr_inicio, hr_fim, tipo_atendimento, duracao_consulta, preco_base, taxa_locomocao, id_especialista)
+                    values(?,?,?,?,?,?,?,? )`,
+                [dadosForm]
+            );
+
+            if (!resultadosAgenda.insertId) {
+                throw new Error("Falha ao criar agenda");
+            }
+
+            const disponibilidade = resultadosAgenda.insertId;
+
+            return [resultadosAgenda];
+
+            const [resultadosPausa] = await connection.query(
+                `insert into pausa (id_disponibilidade, hr_inicio_pausa, hr_fim_pausa)
+                values(?,?,?)`,
+                [dadosForm]
+
+            );
+
+            if (!resultadosPausa.insertId) {
+                throw new Error("Falha ao criar pausa");
+            }
+
+            // Commit da transação se tudo deu certo
+            await connection.commit();
+
+            return {
+                success: true,
+                idagenda: resultadosAgenda.insertId,
+                idPausa: resultadosPausa.insertId
+            };
+
+        } catch (error) {
+            // Rollback em caso de erro
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error("Erro no createPac:", error);
+            throw error;
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
+    },
+
+
 
 };
 
