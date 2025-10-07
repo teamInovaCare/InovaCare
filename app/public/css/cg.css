@@ -836,8 +836,8 @@ a {
 .btn-mod {
     position: absolute;
     right: 15px;
-    bottom: 15px;
-    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -845,10 +845,7 @@ a {
     flex-direction: column;
 }
 
-/* Quando há 2 botões */
-.btn-mod:has(.btn + .btn-domiciliar) {
-    flex-direction: row;
-}
+
 
 .btn-mod .btn,
 .btn-mod .btn-domiciliar {
