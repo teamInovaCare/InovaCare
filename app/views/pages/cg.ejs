@@ -126,16 +126,45 @@
 
         <!-- TODOS OS FILTROS EM UMA LINHA -->
         <section id="container-medicos">
-            <label class="container">Online
-                <input type="checkbox" class="filtro" value="online" id="filtro-online">
-                <section class="checkmark"></section>
-            </label>
-            <label class="container">Domiciliar
-                <input type="checkbox" class="filtro" value="domiciliar" id="filtro-domiciliar">
-                <section class="checkmark"></section>
-            </label>
+            <select id="filtro-modalidade" class="select-filtro">
+                <option value="">Todos</option>
+                <option value="online">Online</option>
+                <option value="domiciliar">Domiciliar</option>
+            </select>
             <input type="text" id="filtro-nome" class="input-filtro" placeholder=" Buscar por nome...">
-            <input type="text" id="filtro-localizacao" class="input-filtro" placeholder=" Localização...">
+            <select id="filtro-localizacao" class="select-filtro">
+                <option value="">Todas as localizações</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Barueri">Barueri</option>
+                <option value="Guarulhos">Guarulhos</option>
+                <option value="Osasco">Osasco</option>
+                <option value="Santo André">Santo André</option>
+                <option value="São Bernardo do Campo">São Bernardo do Campo</option>
+                <option value="Diadema">Diadema</option>
+                <option value="Mauá">Mauá</option>
+                <option value="Carapicuíba">Carapicuíba</option>
+                <option value="Suzano">Suzano</option>
+                <option value="Mogi das Cruzes">Mogi das Cruzes</option>
+                <option value="Itaquaquecetuba">Itaquaquecetuba</option>
+                <option value="Taboão da Serra">Taboão da Serra</option>
+                <option value="Cotia">Cotia</option>
+                <option value="Embu das Artes">Embu das Artes</option>
+                <option value="Ferraz de Vasconcelos">Ferraz de Vasconcelos</option>
+                <option value="Ribeirão Pires">Ribeirão Pires</option>
+                <option value="Rio Grande da Serra">Rio Grande da Serra</option>
+                <option value="Caieiras">Caieiras</option>
+                <option value="Franco da Rocha">Franco da Rocha</option>
+                <option value="Francisco Morato">Francisco Morato</option>
+                <option value="Itapevi">Itapevi</option>
+                <option value="Jandira">Jandira</option>
+                <option value="Santana de Parnaíba">Santana de Parnaíba</option>
+                <option value="Embu-Guaçu">Embu-Guaçu</option>
+                <option value="Vargem Grande Paulista">Vargem Grande Paulista</option>
+                <option value="Poá">Poá</option>
+                <option value="Arujá">Arujá</option>
+                <option value="Biritiba Mirim">Biritiba Mirim</option>
+                <option value="Salesópolis">Salesópolis</option>
+            </select>
             <button id="btn-limpar-filtros" class="btn-limpar">Limpar</button>
         </section>
 

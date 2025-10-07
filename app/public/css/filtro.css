@@ -100,6 +100,40 @@
             display: block;
         }
 
+        /* Select filtro */
+        .select-filtro {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 16px;
+            user-select: none;
+            padding: 10px 15px;
+            background-color: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid #e0e0e0;
+            white-space: nowrap;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="m2 0-2 2h4zm0 5 2-2h-4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 8px;
+            padding-right: 30px;
+        }
+
+        .select-filtro:hover {
+            background-color: #e9ecef;
+            border-color: #f29434;
+        }
+
+        .select-filtro:focus {
+            outline: none;
+            border-color: #f29434;
+            box-shadow: 0 0 0 1px #f0b173;
+        }
+
         /* Campos de input */
         .input-filtro {
             flex: 1;

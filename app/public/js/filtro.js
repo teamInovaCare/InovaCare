@@ -87,30 +87,30 @@ const medicos = [
         }
 
         function aplicarFiltros() {
-            const filtros = [...document.querySelectorAll('.filtro:checked')].map(cb => cb.value);
-            
+            const filtroModalidade = document.getElementById('filtro-modalidade').value;
+            const filtroLocalizacao = document.getElementById('filtro-localizacao').value;
+
             const filtrados = medicos.filter(medico => {
-                if (filtros.length === 0) return true;
-                return filtros.some(filtro => medico.modalidades.includes(filtro));
+                const matchModalidade = filtroModalidade === '' || medico.modalidades.includes(filtroModalidade);
+                const matchLocalizacao = filtroLocalizacao === '' || medico.localizacao === filtroLocalizacao;
+                return matchModalidade && matchLocalizacao;
             });
-            
+
             renderizarMedicos(filtrados);
         }
         
         // Inicializar a página
         document.addEventListener('DOMContentLoaded', function() {
             renderizarMedicos(medicos);
-            
-            // Adicionar event listeners para os filtros
-            document.querySelectorAll('.filtro').forEach(checkbox => {
-                checkbox.addEventListener('change', aplicarFiltros);
-            });
+
+            // Adicionar event listeners para os selects
+            document.getElementById('filtro-modalidade').addEventListener('change', aplicarFiltros);
+            document.getElementById('filtro-localizacao').addEventListener('change', aplicarFiltros);
         });
             
 function limparFiltros() {
-    document.querySelectorAll('.filtro').forEach(checkbox => {
-        checkbox.checked = false;
-    });
+    document.getElementById('filtro-modalidade').value = '';
+    document.getElementById('filtro-localizacao').value = '';
     renderizarMedicos(medicos);
 }
 
