@@ -185,10 +185,28 @@ router.post("/create-preference", async (req, res) => {
         
         const body = {
             items: [{
+                id: "consulta-" + Date.now(),
                 title: title,
+                description: "Consulta médica online",
                 unit_price: parseFloat(price),
                 quantity: 1,
-            }]
+                currency_id: "BRL"
+            }],
+            payer: {
+                name: "Paciente",
+                surname: "InovaCare",
+                email: "paciente@inovacare.com"
+            },
+            back_urls: {
+                success: `${process.env.BASE_URL || 'http://localhost:3000'}/consultas`,
+                failure: `${process.env.BASE_URL || 'http://localhost:3000'}/agenda-online`,
+                pending: `${process.env.BASE_URL || 'http://localhost:3000'}/consultas`
+            },
+            auto_return: "approved",
+            payment_methods: {
+                excluded_payment_types: [],
+                installments: 12
+            }
         };
 
         const response = await preference.create({ body });
