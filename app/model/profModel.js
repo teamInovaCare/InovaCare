@@ -157,53 +157,96 @@ const profModel = {
     },
 
 
+    /**Select na tabela a partir do id_usuario para encontrar o id_especialista */
+    selectIdEspecialista: async (req) => {
+
+        try{
+
+            const[resultados] = await pool.query(
+                `select id_especialista
+                from usuarios
+                inner join especialistas
+                on especialistas.id_usuario = usuarios.id_usuario
+                where usuarios.id_usuario = ? `,
+
+                [req.session.autenticado.id]
+            )
+            return resultados[0]?.id_especialista;
+
+        }catch(error){
+            console.log(error)
+            return error;
+        }
+
+    },
+
     /**Insert na agenda do profissional */
 
-    configAgendaProf: async (dadosForm) => {
+    configAgendaProf: async (dadosAgenda, pausas) => {
 
         let connection;
-
 
         try {
 
             /**Transação para inserir nas tabelas apenas se houver sucesso */
 
             connection = await pool.getConnection();
-
             await connection.beginTransaction();
 
             const [resultadosAgenda] = await connection.query(
                 `insert into disponibilidade_especialista (dia_semana, hr_inicio, hr_fim, tipo_atendimento, duracao_consulta, preco_base, taxa_locomocao, id_especialista)
                     values(?,?,?,?,?,?,?,? )`,
-                [dadosForm]
+                [
+                    dadosAgenda.dia_semana,
+                    dadosAgenda.hr_inicio,
+                    dadosAgenda.hr_fim,
+                    dadosAgenda.tipo_atendimento,
+                    dadosAgenda.duracao_consulta,
+                    dadosAgenda.preco_base,
+                    dadosAgenda.taxa_locomocao,
+                    dadosAgenda.id_especialista
+
+                ]
             );
 
             if (!resultadosAgenda.insertId) {
                 throw new Error("Falha ao criar agenda");
             }
 
-            const disponibilidade = resultadosAgenda.insertId;
+            const idDisponibilidade = resultadosAgenda.insertId;
 
-            return [resultadosAgenda];
 
-            const [resultadosPausa] = await connection.query(
-                `insert into pausa (id_disponibilidade, hr_inicio_pausa, hr_fim_pausa)
-                values(?,?,?)`,
-                [dadosForm]
+            let idPausas = [];
+            /**Verifico as pausas
+             * 
+             * Se pausas for um array e tiver pelo menos 1 elemento eu executo:*/
+            if (Array.isArray(pausas) && pausas.length > 0) {
 
-            );
+                //para cada pausa dentro do PAUSAS (VIA JS, eu faço uma inserção)
+                for (const pausa of pausas) {
 
-            if (!resultadosPausa.insertId) {
-                throw new Error("Falha ao criar pausa");
+                    //Se não houverem campos vazios, eu faço:
+                    if (pausa.pausa_inicio && pausa.pausa_fim) {
+                        const [resultadosPausa] = await connection.query(
+                            `INSERT INTO pausa (id_disponibilidade_especialista, hr_inicio_pausa, hr_fim_pausa)
+                            VALUES (?, ?, ?)`,
+                            [idDisponibilidade, pausa.pausa_inicio, pausa.pausa_fim]
+                        );
+
+                        // Armazena o ID gerado dessa pausa
+                        idPausas.push(resultadosPausa.insertId);
+                    }
+                }
             }
+
 
             // Commit da transação se tudo deu certo
             await connection.commit();
 
             return {
                 success: true,
-                idagenda: resultadosAgenda.insertId,
-                idPausa: resultadosPausa.insertId
+                id_disponibilidade: idDisponibilidade,
+                id_pausa: idPausas
             };
 
         } catch (error) {

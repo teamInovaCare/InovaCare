@@ -1,7 +1,7 @@
 var express = require("express");
 var routerProf = express.Router();
 const { body, validationResult } = require("express-validator");
-var { validarCPF, isValidDate, isMaiorDeIdade, validarCEP, validarConselho, validarUf } = require("../helpers/validacoes");
+var { validarCPF, isValidDate, isMaiorDeIdade, validarCEP, validarConselho, validarUf, limparValorReais } = require("../helpers/validacoes");
 
 
 /*autenticação*/
@@ -129,7 +129,13 @@ routerProf.get("/config_agenda_prof",
     function (req, res) {//cadastro do profissional-email e senha
     res.render("pages/config_agenda_prof.ejs", {autenticado: req.session.autenticado, login: req.session.logado });
 });
+/**
+ * POST */
+routerProf.post("/config-agenda-prof", profissionalController.validaAgendaInsert,
+      (req,res)=> {
+        profissionalController.criarAgenda(req,res);
 
+});
 
 
 
@@ -137,11 +143,13 @@ routerProf.get("/config_agenda_prof",
 
 /**VISUALIZAÇÃO DA AGENDA DO PROFISISONAL */
 
-routerProf.get("/home_agenda_prof", function (req, res) {//cadastro do profissional-email e senha
-    res.render("pages/home_agenda_prof.ejs");
+routerProf.get("/home_agenda_prof",
+
+    verificarUsuAutenticado,
+   verificarUsuAutorizado([2], "pages/restrito"),
+    function (req, res) {//cadastro do profissional-email e senha
+    res.render("pages/home_agenda_prof.ejs", {autenticado: req.session.autenticado, login: req.session.logado });
 });
-
-
 
 
 

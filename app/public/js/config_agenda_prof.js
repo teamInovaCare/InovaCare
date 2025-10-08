@@ -31,12 +31,12 @@ class GerenciadorPausas {
 
             <section class="hora ">
                 <label for="pausa_inicio-${idPausa}" class="pausa-item">Horário de Início</label>
-                <input type="time" class="pausa_hr" name="pausa_inicio" id="pausa_inicio-${idPausa}" required>
+                <input type="time" class="pausa_hr" name="pausas[${this.contadorPausas - 1}][pausa_inicio]" id="pausa_inicio-${idPausa}" required>
             </section>
 
             <section class="hora">
                 <label for="pausa_fim-${idPausa}" class="pausa-item" >Horário de Término</label>
-                <input type="time" class="pausa_hr" name="pausa_fim" id="pausa_fim-${idPausa}" required>
+                <input type="time" class="pausa_hr" name="pausas[${this.contadorPausas - 1}][pausa_fim]" id="pausa_fim-${idPausa}" required>
             </section>
 
             ${this.contadorPausas > 1 ? `

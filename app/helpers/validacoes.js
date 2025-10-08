@@ -184,11 +184,30 @@ function isMaiorDeIdade(dateString) {
     return idade >= 18;
 }
 
+
+/**Re-ploace no campo onde o profissional digita o valor da consula para se encaixar no padrão do banco de dados */
+function limparValorReais(valorComMascara) {
+  // Se o campo for nulo, undefined ou string vazia, retorna null
+  if (valorComMascara == null || valorComMascara === '') {
+    return null;
+  }
+
+  return parseFloat(
+    valorComMascara
+      .toString()
+      .replace('R$', '')
+      .replace(/\s/g, '')
+      .replace(/\./g, '')
+      .replace(',', '.')
+  );
+}
+
+
+
+
+
  
-
-
-
 
 module.exports = {validarCPF, isValidDate, isMaiorDeIdade, validarCEP, validarConselho, validarUf, converterParaMysql,
     isValidDate,
-    isMaiorDeIdade}
+    isMaiorDeIdade, limparValorReais}

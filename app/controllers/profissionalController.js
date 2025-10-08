@@ -2,7 +2,7 @@ const profModel = require("../model/profModel");
 const { body, validationResult } = require("express-validator");
 var { validarCPF, validarCEP, converterParaMysql,
   isValidDate,
-  isMaiorDeIdade } = require("../helpers/validacoes");
+  isMaiorDeIdade, limparValorReais } = require("../helpers/validacoes");
 const bcrypt = require('bcryptjs');
 
 
@@ -25,14 +25,14 @@ const profController = {
 
 
       /**Verificar se já existe usuário com esse CPF no sistema */
-      .custom(async(value)=>{
-        const cpf = await profModel.findCampoCustomProf({cpf_usuario:value});
-        if(cpf >0){
+      .custom(async (value) => {
+        const cpf = await profModel.findCampoCustomProf({ cpf_usuario: value });
+        if (cpf > 0) {
           throw new Error("CPF em uso!");
         }
         return true;
       }),
-      
+
 
     body('dt_nasc')
       .custom((value) => {
@@ -50,10 +50,10 @@ const profController = {
         return true; // passou nas duas validações
       })
 
-       
+
   ],
 
- 
+
 
   /**Armazenamento dos campos */
   cadIncialProf: async (req, res) => {
@@ -68,7 +68,7 @@ const profController = {
         erros: errors,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
-          
+
           tipo: "error"
         },
 
@@ -103,10 +103,10 @@ const profController = {
     body("rg_prof").isLength({ min: 4, max: 6 }).withMessage("Insira um registro válido!")
 
 
-    /**Verificar se já existe especialista com esse registro, na especialidade escolhida  */
-      .custom(async(value, {req})=>{
-        const rg = await profModel.findCampoCustomRgProf(value,req.body.especialidadeprof);
-        if(rg >0){
+      /**Verificar se já existe especialista com esse registro, na especialidade escolhida  */
+      .custom(async (value, { req }) => {
+        const rg = await profModel.findCampoCustomRgProf(value, req.body.especialidadeprof);
+        if (rg > 0) {
           throw new Error("Já existe um registro cadastrado!");
         }
         return true;
@@ -233,7 +233,7 @@ const profController = {
         const email = await profModel.findCampoCustomProf({ email_usuario: value });
         if (email > 0) {
           throw new Error("E-mail em uso!");
-          
+
         }
 
       }),
@@ -275,7 +275,7 @@ const profController = {
 
 
     if (!errors.isEmpty()) {
-      
+
 
       /**Se a lista não está vazia */
 
@@ -295,7 +295,7 @@ const profController = {
 
     try {
       let InsertProfResult = await profModel.createProf(dadosUsuarioProf);
-      req.session.autenticado = autenticado ={
+      req.session.autenticado = autenticado = {
         autenticado: dadosUsuarioProf.nome_usuario,
         id: InsertProfResult.insertId,
         tipo: 2
@@ -308,7 +308,7 @@ const profController = {
       res.render("pages/logado-user-prof", {
         erros: errors,
         login: 1,
-        dadosNotificacao:null,
+        dadosNotificacao: null,
         autenticado: req.session.autenticado,
         valores: req.body,
 
@@ -318,7 +318,7 @@ const profController = {
 
     } catch (errors) {
       console.log("Erro no cadastro" + errors);
-      res.render("pages/cad-dados-prof",  {
+      res.render("pages/cad-dados-prof", {
         erros: null,
         dadosNotificacao: {
           titulo: "Erro ao inserir os dados!",
@@ -350,42 +350,169 @@ const profController = {
 
 
   logarProf: (req, res) => {
-      const erros = validationResult(req);
-      console.log("erros")
-      console.log(erros)
-      if (!erros.isEmpty()) {
-          return res.render("pages/login-prof", { listaErros: erros,  dadosNotificacao: null, valores:req.body});
-          
-      }
-    
-      if (req.session.autenticado.autenticado != null) {
-  
-          // Usuário autenticado corretamente
-          return res.render("pages/logado-user-prof", {
-          
-          listaErros: erros,
-          autenticado: req.session.autenticado,
-          login: req.session.logado,
-          dadosNotificacao: null,
-          valores:req.body
-        });
-      } else {
-          // Login falhou
-          return res.render("pages/login-prof", {
-              listaErros: null,
-              
-              dadosNotificacao: {titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error",
-              },
-              valores:req.body
-  
-              
-          });
-      }
+    const erros = validationResult(req);
+    console.log("erros")
+    console.log(erros)
+    if (!erros.isEmpty()) {
+      return res.render("pages/login-prof", { listaErros: erros, dadosNotificacao: null, valores: req.body });
+
+    }
+
+    if (req.session.autenticado.autenticado != null) {
+
+      // Usuário autenticado corretamente
+      return res.render("pages/logado-user-prof", {
+
+        listaErros: erros,
+        autenticado: req.session.autenticado,
+        login: req.session.logado,
+        dadosNotificacao: null,
+        valores: req.body
+      });
+    } else {
+      // Login falhou
+      return res.render("pages/login-prof", {
+        listaErros: null,
+
+        dadosNotificacao: {
+          titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error",
+        },
+        valores: req.body
+
+
+      });
+    }
   },
-  
-  };
-  
-  
+
+
+  /************************************************AGENDA INSERT DO PROFISSIONAL */
+
+
+  validaloginProf: [
+    body("email").isEmail().withMessage("Email inválido."),
+    body("senha").isStrongPassword().withMessage("Senha inválida!"),
+
+  ],
+
+
+  validaAgendaInsert: [
+
+    /**Hora de trabalho- validação */
+    body("hrinicio").matches(/^([01]\d|2[0-3]):([0-5]\d)$/).withMessage('Formato de hora inválido'),
+    body("hrfim").matches(/^([01]\d|2[0-3]):([0-5]\d)$/).withMessage('Formato de hora inválido'),
+
+    /**Pausa de trabalho- validação */
+    /*body("pausa_inicio").matches(/^([01]\d|2[0-3]):([0-5]\d)$/).withMessage('Formato de hora inválido'),
+    body("pausa_fim").matches(/^([01]\d|2[0-3]):([0-5]\d)$/).withMessage('Formato de hora inválido'),*/
+
+    /**Preço e taxa da consulta */
+    body("preco").customSanitizer(value => limparValorReais(value))
+      .isFloat({ min: 0 })
+      .withMessage('Informe um valor válido em reais'),
+
+    
+  ],
+
+
+  /**Insert da agenda */
+
+  criarAgenda: async (req, res) => {
+
+    /**Armazenar os erros de validação */
+    const errors = validationResult(req);
+    console.log(errors);
+
+    /**Se a lista não está vazia eu mantenho o user na mesma página */
+    if (!errors.isEmpty()) {
+      return res.render("pages/config_agenda_prof", {
+        erros: errors,
+
+        /*dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          mensagem: "Verifique os valores digitados!",
+          tipo: "error",
+        },*/
+        
+        valores: req.body,
+      });
+
+    }
+
+    /**Conversão dos campos de preço para eu conseguir inserir os dados do tipo DECIMAL no banco de dados */
+
+    
+    const precoFormatado = limparValorReais(req.body.preco)
+    const taxaFormatada = limparValorReais(req.body.taxa);
+
+
+    /**Regras para a definição da duração da consulta com base no tipod e atendimento*/
+    if (req.body.modalidade == 1) {
+      var tempoConsulta = 30 //online
+    } else {
+      var tempoConsulta = 50 //domiciliar
+    }
+
+
+    const id_especialista = await profModel.selectIdEspecialista(req)
+
+    /**Armazenando as variáveis para o Model */
+    /**Variáveis da tabela Disponibilidade_especialista */
+
+    const dadosAgenda = {
+      "dia_semana": req.body.semanadia,
+      "hr_inicio": req.body.hrinicio,
+      "hr_fim": req.body.hrfim,
+      "tipo_atendimento": req.body.modalidade,
+      "duracao_consulta": tempoConsulta,
+      "preco_base": precoFormatado,
+      "taxa_locomocao": taxaFormatada,
+      "id_especialista": id_especialista //chave estrangeira
+
+    }
+
+    /**Variáveis da tabela pausa_especialista */
+
+   
+
+    const pausas = req.body.pausas || []; // pode ser um array vazio
+
+    
+
+    /**Se está vazia, tento fazer o insert chamando o Model */
+    try {
+
+      let InsertAgendaProf = await profModel.configAgendaProf(dadosAgenda,pausas);
+
+      /**Se deu tudo certo, renderizo a página de home de agenda do profissional */
+      res.render("pages/home_agenda_prof", {
+        erros: null,
+        valores: req.body,
+      });
+
+      /**Se houve um erro no banco - inserção  */
+    } catch (errors) {
+      console.log("Erro na inserção" + errors);
+      res.render("pages/config_agenda_prof", {
+        erros: null,
+        /*dadosNotificacao: {
+          titulo: "Erro ao inserir os dados!",
+          mensagem: "Verifique os valores digitados",
+          tipo: "error"
+        },*/
+
+        valores: req.body,
+
+      });
+
+      return false
+    }
+
+  },
+
+
+};
+
+
 
 
 
