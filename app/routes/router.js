@@ -174,6 +174,32 @@ router.get("/perfildoprof", function (req, res) {
     res.render("pages/perfildoprof.ejs");
 });
 
+// Rota para criar preferência do Mercado Pago
+router.post("/create-preference", async (req, res) => {
+    try {
+        const { MercadoPagoConfig, Preference } = require('mercadopago');
+        const client = new MercadoPagoConfig({ accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN });
+        const preference = new Preference(client);
+        
+        const { title, price } = req.body;
+        
+        const body = {
+            items: [{
+                title: title,
+                unit_price: parseFloat(price),
+                quantity: 1,
+            }]
+        };
+
+        const response = await preference.create({ body });
+        res.json({ id: response.id });
+        
+    } catch (error) {
+        console.error('Erro MP:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 
 module.exports = router;
 

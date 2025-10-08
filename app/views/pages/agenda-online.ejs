@@ -232,6 +232,65 @@
 
     </footer>
 
+    <!-- SDK do Mercado Pago -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <script>
+        // Inicializa o SDK com sua Public Key do Mercado Pago
+        const mercadopago = new MercadoPago("APP_USR-26daee1c-49f5-400b-baa8-89a34c3c904b", { locale: "pt-BR" });
+
+        // Seleciona o formulário e o botão de confirmação do modal
+        const formAgendamento = document.getElementById("form-agendamento");
+        const btnConfirmar = document.querySelector(".btn-confirmar-modal");
+
+        btnConfirmar.addEventListener("click", async (event) => {
+            // Impede o envio automático do formulário (POST padrão)
+            event.preventDefault();
+
+            // Captura os dados do formulário/modal
+            const medico = document.getElementById("input-medico").value || "Consulta Online";
+            const data = document.getElementById("input-data").value;
+            const horario = document.getElementById("input-horario").value;
+            const preco = parseFloat(document.getElementById("input-preco").value) || 120.00;
+
+            if (!data || !horario) {
+                alert("Selecione a data e o horário antes de confirmar!");
+                return;
+            }
+
+            // Cria o objeto com os dados do pagamento
+            const dadosPagamento = {
+                title: `${medico} - ${data} às ${horario}`,
+                price: preco,
+            };
+
+            try {
+                // Faz a requisição ao backend para criar a preferência de pagamento
+                const response = await fetch("/create-preference", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dadosPagamento),
+                });
+
+                const dataResponse = await response.json();
+
+                if (dataResponse.id) {
+                    // Abre o Checkout Pro do Mercado Pago
+                    mercadopago.checkout({
+                        preference: { id: dataResponse.id },
+                        autoOpen: true,
+                    });
+
+                } else {
+                    alert("Erro ao criar pagamento. Tente novamente.");
+                }
+            } catch (error) {
+                console.error("Erro ao conectar com o servidor:", error);
+                alert("Não foi possível iniciar o pagamento.");
+            }
+        });
+    </script>
+
 
     <script src="js/agenda-online.js"></script>
 
