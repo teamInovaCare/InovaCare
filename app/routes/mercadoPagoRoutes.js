@@ -24,9 +24,9 @@ router.post("/create-preference", async (req, res) => {
           },
         ],
         back_urls: {
-          success: "http://localhost:3000/feedback?status=success",
-          failure: "http://localhost:3000/feedback?status=failure",
-          pending: "http://localhost:3000/feedback?status=pending",
+          success: "https://inovacare-1.onrender.com/feedback?status=success",
+          failure: "https://inovacare-1.onrender.comfeedback?status=failure",
+          pending: "https://inovacare-1.onrender.com/feedback?status=pending",
         },
          auto_return: "approved",
       },
