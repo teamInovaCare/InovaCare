@@ -7,9 +7,7 @@ body {
 
 main {
     height: calc(100vh - 74.95px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
 }
 a {
   color: #109EA6;
@@ -313,6 +311,7 @@ main {
 .txt-especialidades {
     font-size: 45px;
     font-family: sans-serif;
+    margin-top: -4%;
 }
 
 
@@ -348,6 +347,7 @@ main {
         .txt-especialidades{
             margin-bottom: 30px;
             font-size: 35px;
+            margin-top: 30px
         }
 
         .especialidades {
@@ -367,7 +367,7 @@ main {
 
         .botao-voltar {
             position: absolute;       
-            top: 3%;
+            top: 1%;
             left: 6%;
         }
 
