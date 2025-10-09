@@ -1,4 +1,5 @@
 var express = require("express");
+const moment = require('moment')
 var routerProf = express.Router();
 const { body, validationResult } = require("express-validator");
 var { validarCPF, isValidDate, isMaiorDeIdade, validarCEP, validarConselho, validarUf, limparValorReais } = require("../helpers/validacoes");
@@ -148,8 +149,13 @@ routerProf.get("/home_agenda_prof",
     verificarUsuAutenticado,
    verificarUsuAutorizado([2], "pages/restrito"),
     function (req, res) {//cadastro do profissional-email e senha
-    res.render("pages/home_agenda_prof.ejs", {autenticado: req.session.autenticado, login: req.session.logado });
+    res.render("pages/home_agenda_prof.ejs",
+        
+        {moment: moment, autenticado: req.session.autenticado, login: req.session.logado , agendas: [], semanadia:""});
 });
+routerProf.post("/filtroAgenda", (req,res)=>{
+    profissionalController.findAgendaProf(req,res);
+})
 
 
 

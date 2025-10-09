@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 var { validarCPF, validarCEP, converterParaMysql,
   isValidDate,
   isMaiorDeIdade, limparValorReais } = require("../helpers/validacoes");
+  const moment = require('moment');
 const bcrypt = require('bcryptjs');
 
 
@@ -509,8 +510,121 @@ const profController = {
 
   },
 
+  /**FILTRO DA AGENDA **************************************** */
+ 
+  /*findAgendaProf: async (req,res)=>{
+ 
+    try {
+ 
+      const id_especialista = await profModel.selectIdEspecialista(req);
+      semanadia= req.body.semanadia;
+ 
+      if(semanadia==0){
+ 
+      results = await profModel.findAllFiltroProf(id_especialista);
+      res.render("pages/home_agenda_prof", { agendas: results });
+ 
+      }else{
+      results = await profModel.findFiltroProf(id_especialista, semanadia);
+      res.render("pages/home_agenda_prof", { agendas: results });
+ 
+    }
+ 
+    } catch (e) {
+      console.log(e); // exibir os erros no console do vs code
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },*/
 
+  findAgendaProf: async (req, res) => {
+  try {
+    const id_especialista = await profModel.selectIdEspecialista(req);
+
+    /**DEBUG */
+    if (!id_especialista) {
+        return res.status(400).send("Erro: Especialista não encontrado.");
+      }
+
+    const semanadia = Number(req.body.semanadia);
+
+    console.log("ID especialista:", id_especialista);
+    console.log("Dia da semana recebido:", semanadia);
+
+    let agendas = [];
+
+    if (semanadia === 0) {
+      agendas = await profModel.findAllFiltroProf(id_especialista);
+    } else {
+      agendas = await profModel.findFiltroProf(id_especialista, semanadia);
+    }
+  
+
+    /// 4️⃣ Para cada agenda, buscar suas pausas correspondentes
+      const agendasComPausas = [];
+      for (const agenda of agendas) {
+        const pausas = await profModel.findPausa(agenda.id_disponibilidade_especialista);
+        agendasComPausas.push({
+          ...agenda, // copia todos os dados da agenda
+          pausas     // adiciona o array de pausas dentro do objeto
+        });
+      }
+      // 5️⃣ Envia tudo pro EJS renderizar
+      res.render("pages/home_agenda_prof", {
+        agendas: agendasComPausas,
+        semanadia
+      });
+
+
+  } catch (error) {
+    console.log("Erro no controller findAgendaProf:", error);
+    res.status(500).json({ erro: "Falha ao acessar dados" });
+  }
+}
+ 
+ 
+ 
+  /*
+  findAllAgendaProf: async (req, res) => {
+   
+    try {
+ 
+      const id_especialista = await profModel.selectIdEspecialista(req);
+ 
+      results = await profModel.findAllFiltroProf(id_especialista);
+      res.render("pages/home_agenda_prof", { agenda: results });
+ 
+    } catch (e) {
+      console.log(e); // exibir os erros no console do vs code
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },
+ 
+ 
+  findFiltroAgendaProf: async (req, res) => {
+ 
+    const id_especialista = await profModel.selectIdEspecialista(req);
+ 
+    let semanadia = req.body.semanadia
+ 
+ 
+    try {
+      results = await profModel.findFiltroProf(id_especialista, semanadia);
+      res.render("pages/home_agenda_prof", { agenda: results });
+ 
+    } catch (e) {
+      console.log(e); // exibir os erros no console do vs code
+      res.json({ erro: "Falha ao acessar dados" });
+    }
+  },*/
+ 
+ 
 };
+ 
+ 
+ 
+ 
+ 
+
 
 
 

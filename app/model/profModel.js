@@ -160,9 +160,9 @@ const profModel = {
     /**Select na tabela a partir do id_usuario para encontrar o id_especialista */
     selectIdEspecialista: async (req) => {
 
-        try{
+        try {
 
-            const[resultados] = await pool.query(
+            const [resultados] = await pool.query(
                 `select id_especialista
                 from usuarios
                 inner join especialistas
@@ -173,7 +173,7 @@ const profModel = {
             )
             return resultados[0]?.id_especialista;
 
-        }catch(error){
+        } catch (error) {
             console.log(error)
             return error;
         }
@@ -263,6 +263,49 @@ const profModel = {
         }
     },
 
+
+    /**Aplicar o filtro para uma agenda específica */
+    findFiltroProf: async (id_especialista, semanadia) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM disponibilidade_especialista WHERE id_especialista = ? and '
+                + ' dia_semana = ?', [id_especialista, semanadia])
+            return linhas;
+        } catch (error) {
+
+            console.error("Erro ao buscar as agendas filtradas:", error)
+            throw error;
+        }
+    },
+
+
+    /**Mostrar todas as agendas */
+    findAllFiltroProf: async (id_especialista) => {
+        try {
+            const [linhas] = await pool.query('SELECT * FROM disponibilidade_especialista WHERE id_especialista = ?',
+                [id_especialista])
+
+            return linhas;
+
+        } catch (error) {
+            console.error("Erro ao buscar todas as agendas:", error)
+            throw error;
+        }
+    },
+
+    findPausa: async (id_disponibilidade) => {
+  try {
+    const [linhas] = await pool.query(
+      `SELECT hr_inicio_pausa, hr_fim_pausa 
+       FROM pausa
+       WHERE id_disponibilidade_especialista = ?`,
+      [id_disponibilidade]
+    );
+    return linhas;
+  } catch (error) {
+    console.error("Erro ao buscar pausas:", error);
+    throw error;
+  }
+},
 
 
 };

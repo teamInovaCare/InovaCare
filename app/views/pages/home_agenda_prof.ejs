@@ -167,7 +167,7 @@
             <!-- titulo da sessão -->
             <h2 class="primary-title"><i class="fas fa-calendar-day"></i>Predefinições de agenda</h2>
 
-            <form id="filtroagenda" method="get">
+            <form id="filtroagenda" action="/profissional/filtroAgenda" method="post">
 
                 <!-- Caixa de seleção para a escolha do dia da semana -->
                 <section class="select-container">
@@ -176,14 +176,14 @@
 
                         <option value="" disabled="" selected="" hidden="">Selecione o dia da semana</option>
                         <!--Legenda da caixa de seleção-->
-                        <option value="Todos">Todos</option>
-                        <option value="Domingo">Domingo</option>
-                        <option value="Segunda-Feira">Segunda-Feira</option>
-                        <option value="Terça-Feira">Terça-Feira</option>
-                        <option value="Quarta-Feira">Quarta-Feira</option>
-                        <option value="Quinta-Feira">Quinta-Feira</option>
-                        <option value="Sexta-Feira">Sexta-Feira</option>
-                        <option value="Sábado">Sábado</option>
+                        <option value="0" <%= semanadia == 0 ? "selected" : "" %>>Todos</option>
+                        <option value="1" <%= semanadia == 1 ? "selected" : "" %>>Domingo</option>
+                        <option value="2" <%= semanadia == 2 ? "selected" : "" %> >Segunda-Feira</option>
+                        <option value="3" <%= semanadia == 3 ? "selected" : "" %> >Terça-Feira</option>
+                        <option value="4" <%= semanadia == 4 ? "selected" : "" %> >Quarta-Feira</option>
+                        <option value="5" <%= semanadia == 5 ? "selected" : "" %> >Quinta-Feira</option>
+                        <option value="6" <%= semanadia == 6 ? "selected" : "" %> >Sexta-Feira</option>
+                        <option value="7" <%= semanadia == 7 ? "selected" : "" %>>Sábado</option>
 
                     </select>
 
@@ -202,194 +202,102 @@
         <!-- Título + blocos que mostram as configurações de agenda  -->
         <section class="bloco-filtro bloco-section" id="blocos-filtro">
 
+  <% if (agendas && agendas.length > 0) { %>
+    <% agendas.forEach((agenda) => { %>
 
-            <section class="container-filtro">
-                <h2 class=" text-filtro">Segunda-Feira</h2>
+      <section class="container-filtro">
 
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Modalidade:</h2>
-                    <p>Online</p>
-                </section>
+        <!-- Dia da semana -->
+        <h2 class="text-filtro">
+          <% 
+            const diasSemana = ["Domingo","Segunda-Feira","Terça-Feira","Quarta-Feira","Quinta-Feira","Sexta-Feira","Sábado"];
+            const diaIndex = Number(agenda.dia_semana);
+          %>
+          <%= diasSemana[diaIndex - 1] || "Dia não definido" %>
+        </h2>
 
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Horário de início:</h2>
-                    <p>13 horas</p>
-                </section>
+        <!-- Modalidade -->
+        <section class="info-agenda">
+          <h2 class="text-infogenda">Modalidade:</h2>
+          <p>
+            
+        <% if (agenda.tipo_atendimento == 1) { %>
+            Online
+        <% } else if (agenda.tipo_atendimento == 2) { %>
+            Domiciliar
+        <% } else { %>
+            Não definido
+        <% } %></p>
+        </section>
 
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Horário de término:</h2>
-                    <p>17 horas</p>
-                </section>
+        <!-- Preço da consulta -->
+        <section class="info-agenda">
+          <h2 class="text-infogenda">Valor da consulta:</h2>
+          <p><%= new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(agenda.preco_base) %></p>
+        </section>
 
-                <section class="info-pausa">
-                    <h2 class="text-infogenda" id="text-pausas">Pausas definidas:</h2>
-
-                    <!-- Tabela com as pausas -->
-                    <table>
-
-                        <!-- Cabeçalho das pausas -->
-                        <thead>
-                            <tr>
-                                <th>Início</th>
-                                <th>Término</th>
-
-                            </tr>
-                        </thead>
-
-                        <!-- Corpo da tabela -->
-                        <tbody>
-
-                            <!-- Linha de dados da tabela -->
-                            <tr>
-                                <td>13h</td>
-                                <td>17h</td>
-                            </tr>
-
-                            <tr>
-                                <td>13h</td>
-                                <td>17h</td>
-                            </tr>
+        <!-- Taxa da consulta -->
+        <section class="info-agenda">
+          <h2 class="text-infogenda">Taxa da consulta:</h2>
+          <p><%= new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(agenda.taxa_locomocao) %></p>
+        </section>
 
 
-                        </tbody>
-                    </table>
+        <!-- Horário de início -->
+        <section class="info-agenda">
+          <h2 class="text-infogenda">Horário de início:</h2>
+          <p><%= agenda.hr_inicio %></p>
+        </section>
 
-                </section>
+        <!-- Horário de término -->
+        <section class="info-agenda">
+          <h2 class="text-infogenda">Horário de término:</h2>
+          <p><%= agenda.hr_fim %></p>
+        </section>
 
-                <section class="agrupa-btn">
-                    <button class="btn-filtro">Editar</button>
-                    <button class="btn-filtro">Apagar</button>
-                </section>
+        <!-- Pausas -->
+        <section class="info-pausa">
+          <h2 class="text-infogenda" id="text-pausas">Pausas definidas:</h2>
 
-            </section>
-
-
-
-
-            <section class="container-filtro">
-                <h2 class=" text-filtro">Segunda-Feira</h2>
-
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Modalidade:</h2>
-                    <p>Online</p>
-                </section>
-
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Horário de início:</h2>
-                    <p>13 horas</p>
-                </section>
-
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Horário de término:</h2>
-                    <p>17 horas</p>
-                </section>
-
-                <section class="info-pausa">
-                    <h2 class="text-infogenda" id="text-pausas">Pausas definidas:</h2>
-
-                    <!-- Tabela com as pausas -->
-                    <table>
-
-                        <!-- Cabeçalho das pausas -->
-                        <thead>
-                            <tr>
-                                <th>Início</th>
-                                <th>Término</th>
-
-                            </tr>
-                        </thead>
-
-                        <!-- Corpo da tabela -->
-                        <tbody>
-
-                            <!-- Linha de dados da tabela -->
-                            <tr>
-                                <td>13h</td>
-                                <td>17h</td>
-                            </tr>
-
-                            <tr>
-                                <td>13h</td>
-                                <td>17h</td>
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-
-                </section>
-
-                <section class="agrupa-btn">
-                    <button class="btn-filtro">Editar</button>
-                    <button class="btn-filtro">Apagar</button>
-                </section>
-
-            </section>
-
-
-            <section class="container-filtro">
-                <h2 class=" text-filtro">Segunda-Feira</h2>
-
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Modalidade:</h2>
-                    <p>Online</p>
-                </section>
-
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Horário de início:</h2>
-                    <p>13 horas</p>
-                </section>
-
-                <section class="info-agenda">
-                    <h2 class="text-infogenda">Horário de término:</h2>
-                    <p>17 horas</p>
-                </section>
-
-                <section class="info-pausa">
-                    <h2 class="text-infogenda" id="text-pausas">Pausas definidas:</h2>
-
-                    <!-- Tabela com as pausas -->
-                    <table>
-
-                        <!-- Cabeçalho das pausas -->
-                        <thead>
-                            <tr>
-                                <th>Início</th>
-                                <th>Término</th>
-
-                            </tr>
-                        </thead>
-
-                        <!-- Corpo da tabela -->
-                        <tbody>
-
-                            <!-- Linha de dados da tabela -->
-                            <tr>
-                                <td>13h</td>
-                                <td>17h</td>
-                            </tr>
-
-                            <tr>
-                                <td>13h</td>
-                                <td>17h</td>
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-
-                </section>
-
-                <section class="agrupa-btn">
-                    <button class="btn-filtro">Editar</button>
-                    <button class="btn-filtro">Apagar</button>
-                </section>
-
-            </section>
+          <% if (agenda.pausas && agenda.pausas.length > 0) { %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Início</th>
+                  <th>Término</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% agenda.pausas.forEach((pausa) => { %>
+                  <tr>
+                    <td><%= pausa.hr_inicio_pausa %></td>
+                    <td><%= pausa.hr_fim_pausa %></td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          <% } else { %>
+            <p>Sem pausas definidas</p>
+          <% } %>
 
         </section>
 
+        <!-- Botões -->
+        <section class="agrupa-btn">
+          <button class="btn-filtro">Editar</button>
+          <button class="btn-filtro">Apagar</button>
+        </section>
+
+      </section>
+
+    <% }) %>
+  <% } else { %>
+    <p>Nenhuma agenda encontrada no dia selecionado</p>
+  <% } %>
+
+</section>
     </section>
+
 
     <footer class="footer">
 
@@ -397,7 +305,8 @@
             <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
             <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
             <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
-                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
+                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de
+                saúde.
             </p>
         </section>
 
