@@ -74,7 +74,7 @@ nav {
 main {
   background: url("bg.jpg") no-repeat center center;
   background-size: cover;
-  height: 90vh;
+  height: 100%;
 }
 
 .menu-list, .menu-list-direita {
@@ -367,7 +367,8 @@ main {
 
         .botao-voltar {
             position: absolute;       
-            top: 40px;    
+            top: 3%;
+            left: 6%;
         }
 
         .retangulo{
