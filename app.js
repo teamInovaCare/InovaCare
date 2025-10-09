@@ -1,39 +1,50 @@
 const express = require("express");
 const session = require("express-session");
-const app = express();
-const port = 3000;
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 
+const app = express();
+const port = process.env.PORT || 3000;
+
+// =============================
+// CONFIGURAÇÃO DE SESSÃO
+// =============================
 app.use(session({
-  secret: process.env.session_secret, // Defina isso no seu .env
+  secret: process.env.session_secret || "inovacare_secret",
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false }
 }));
 
-// app.use((req, res, next) => {
-//     if (req.session.logado === undefined) {
-//         req.session.logado = 0;
-//     }
-//     next();
-// });
-
+// =============================
+// CONFIGURAÇÕES DO EXPRESS
+// =============================
 app.use(express.static("app/public"));
 app.set("view engine", "ejs");
 app.set("views", "./app/views");
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-/**Acesso a Router */
-var rotas = require("./app/routes/router");
-var rotasProf = require("./app/routes/routerProf");
-var perfilRoutes = require("./app/routes/perfil");
+// =============================
+// IMPORT DAS ROTAS
+// =============================
+const rotas = require("./app/routes/router");
+const rotasProf = require("./app/routes/routerProf");
+const perfilRoutes = require("./app/routes/perfil");
+const mercadoPagoRoutes = require("./app/routes/mercadoPagoRoutes"); // <-- Adiciona isso
 
-/**URLs */
+// =============================
+// USO DAS ROTAS
+// =============================
 app.use("/", rotas);
 app.use("/perfil", perfilRoutes);
 app.use("/profissional", rotasProf);
+app.use("/", mercadoPagoRoutes); // <-- Ativa o Mercado Pago
 
+// =============================
+// SERVIDOR
+// =============================
 app.listen(port, () => {
-  console.log(`Servidor ouvindo na porta ${port}\nhttp://localhost:${port}`);
+  console.log(`Servidor ouvindo na porta ${port}`);
+  console.log(`➡ http://localhost:${port}`);
 });
