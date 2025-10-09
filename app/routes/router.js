@@ -174,49 +174,49 @@ router.get("/perfildoprof", function (req, res) {
     res.render("pages/perfildoprof.ejs");
 });
 
-// Rota para criar preferência do Mercado Pago
-router.post("/create-preference", async (req, res) => {
-    try {
-        const { MercadoPagoConfig, Preference } = require('mercadopago');
-        const client = new MercadoPagoConfig({ accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN });
-        const preference = new Preference(client);
+// // Rota para criar preferência do Mercado Pago
+// router.post("/create-preference", async (req, res) => {
+//     try {
+//         const { MercadoPagoConfig, Preference } = require('mercadopago');
+//         const client = new MercadoPagoConfig({ accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN });
+//         const preference = new Preference(client);
         
-        const { title, price } = req.body;
+//         const { title, price } = req.body;
         
-        const body = {
-            items: [{
-                id: "consulta-" + Date.now(),
-                title: title,
-                description: "Consulta médica online",
-                unit_price: parseFloat(price),
-                quantity: 1,
-                currency_id: "BRL"
-            }],
-            payer: {
-                name: "Paciente",
-                surname: "InovaCare",
-                email: "paciente@inovacare.com"
-            },
-            back_urls: {
-                success: `${process.env.BASE_URL || 'http://localhost:3000'}/consultas`,
-                failure: `${process.env.BASE_URL || 'http://localhost:3000'}/agenda-online`,
-                pending: `${process.env.BASE_URL || 'http://localhost:3000'}/consultas`
-            },
-            auto_return: "approved",
-            payment_methods: {
-                excluded_payment_types: [],
-                installments: 12
-            }
-        };
+//         const body = {
+//             items: [{
+//                 id: "consulta-" + Date.now(),
+//                 title: title,
+//                 description: "Consulta médica online",
+//                 unit_price: parseFloat(price),
+//                 quantity: 1,
+//                 currency_id: "BRL"
+//             }],
+//             payer: {
+//                 name: "Paciente",
+//                 surname: "InovaCare",
+//                 email: "paciente@inovacare.com"
+//             },
+//             back_urls: {
+//                 success: `${process.env.BASE_URL || 'http://localhost:3000'}/consultas`,
+//                 failure: `${process.env.BASE_URL || 'http://localhost:3000'}/agenda-online`,
+//                 pending: `${process.env.BASE_URL || 'http://localhost:3000'}/consultas`
+//             },
+//             auto_return: "approved",
+//             payment_methods: {
+//                 excluded_payment_types: [],
+//                 installments: 12
+//             }
+//         };
 
-        const response = await preference.create({ body });
-        res.json({ id: response.id });
+//         const response = await preference.create({ body });
+//         res.json({ id: response.id });
         
-    } catch (error) {
-        console.error('Erro MP:', error);
-        res.status(500).json({ error: 'Erro interno do servidor' });
-    }
-});
+//     } catch (error) {
+//         console.error('Erro MP:', error);
+//         res.status(500).json({ error: 'Erro interno do servidor' });
+//     }
+// });
 
 
 module.exports = router;
