@@ -161,8 +161,8 @@ const usuarioModel = {
             await connection.beginTransaction();
 
             // Atualizar tabela usuarios
-            let queryUsuarios = `UPDATE usuarios SET nome_usuario = ?, email_usuario = ?`;
-            let paramsUsuarios = [dadosUsuario.nome, dadosUsuario.email];
+            let queryUsuarios = `UPDATE usuarios SET nome_usuario = ?, email_usuario = ?, cpf_usuario = ?`;
+            let paramsUsuarios = [dadosUsuario.nome, dadosUsuario.email, dadosUsuario.cpf];
             
             if (dadosUsuario.foto) {
                 queryUsuarios += `, foto_usuario = ?`;

@@ -174,6 +174,11 @@ router.get("/perfildoprof", function (req, res) {
     res.render("pages/perfildoprof.ejs");
 });
 
+/**Rota de logout */
+router.get("/sair", limparSessao, function (req, res) {
+    res.redirect("/");
+});
+
 
 module.exports = router;
 

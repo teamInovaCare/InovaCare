@@ -54,6 +54,19 @@ router.get('/', async (req, res) => {
         const dataNascimento = dadosUsuario.dt_nasc_paciente ? 
             moment(dadosUsuario.dt_nasc_paciente).format('DD/MM/YYYY') : '';
 
+        // Calcular idade detalhada
+        let idadeDetalhada = null;
+        if (dadosUsuario.dt_nasc_paciente) {
+            const nascimento = moment(dadosUsuario.dt_nasc_paciente);
+            const hoje = moment();
+            
+            const anos = hoje.diff(nascimento, 'years');
+            const meses = hoje.diff(nascimento.add(anos, 'years'), 'months');
+            const dias = hoje.diff(nascimento.add(meses, 'months'), 'days');
+            
+            idadeDetalhada = `${anos} anos, ${meses} meses e ${dias} dias.`;
+        }
+
         // Montar endereço completo
         const enderecoCompleto = `${dadosUsuario.logradouro_paciente || ''}, ${dadosUsuario.num_resid_paciente || ''}, ${dadosUsuario.bairro_paciente || ''} - ${dadosUsuario.cidade_paciente || ''} - ${dadosUsuario.uf_paciente || ''}`;
 
@@ -64,6 +77,7 @@ router.get('/', async (req, res) => {
                 email: dadosUsuario.email_usuario,
                 cpf: dadosUsuario.cpf_usuario,
                 dataNascimento: dataNascimento,
+                idade: idadeDetalhada,
                 enderecoCompleto: enderecoCompleto,
                 cep: dadosUsuario.cep_paciente,
                 endereco: dadosUsuario.logradouro_paciente,
@@ -112,7 +126,7 @@ router.post('/atualizar', upload.single('inputFoto'), validarAtualizacao, async 
             });
         }
 
-        const { nome, email, dataNascimento, cep, endereco, numero, complemento, bairro, cidade, uf } = req.body;
+        const { nome, email, cpf, dataNascimento, cep, endereco, numero, complemento, bairro, cidade, uf } = req.body;
         
         // Validações básicas
         if (!nome || !email) {
@@ -126,6 +140,7 @@ router.post('/atualizar', upload.single('inputFoto'), validarAtualizacao, async 
         const dadosAtualizacao = {
             nome,
             email,
+            cpf,
             dataNascimento,
             cep,
             endereco,

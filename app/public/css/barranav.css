@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansation:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700&display=swap');
+
 a {
   color: #109EA6;
   text-decoration: none;
@@ -53,7 +56,7 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  font-family: 'Sansation', system-ui, -apple-system, Helvetica, Arial, sans-serif;
   background: #fff;
   height: 10vh;
   position: relative;
@@ -159,6 +162,7 @@ main {
     text-decoration: none;
     color: #333;
     text-align: left;
+    font-family: 'Zen Maru Gothic', sans-serif;
   }
   
   .menu-list .dropdown:hover .dropdown-content {
@@ -254,6 +258,7 @@ main {
   text-decoration: none;
   font-weight: 500;
   transition: 0.3s;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .btn-entrar:hover {
@@ -269,6 +274,7 @@ main {
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .btn-sair {
@@ -282,6 +288,7 @@ main {
   text-align: center;
   display: inline-block;
   min-width: 60px;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .btn-sair:hover {
@@ -297,6 +304,7 @@ main {
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .menu-list-direita .dropdown {
@@ -325,6 +333,7 @@ main {
   background: none;
   color: #333;
   font-weight: normal;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .menu-list-direita .dropdown-content .btn-sair:hover {
@@ -362,6 +371,7 @@ main {
   text-decoration: none;
   font-size: 14px;
   text-align: center;
+  font-family: 'Zen Maru Gothic', sans-serif;
 }
 
 .menu-actions .dropdown-content .btn-sair-mobile:hover {
