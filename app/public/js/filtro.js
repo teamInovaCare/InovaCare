@@ -69,31 +69,40 @@ const medicos = [
                             <img src="imagens/${imagemPerfil}" alt="Perfil" class="perfil1">
                             <section class="infos">
                                 <section class="btn-mod">
-                                    ${medico.modalidades.includes('online') ? '<button class="btn">Agendar online</button>' : ''}
-                                    ${medico.modalidades.includes('domiciliar') ? '<button class="btn-domiciliar">Agendar domiciliar</button>' : ''}
+                                    ${medico.modalidades.includes('online') ? '<a href="/agenda-online"><button class="btn">Agendar online</button></a>' : ''}
+                                    ${medico.modalidades.includes('domiciliar') ? '<a href="/agenda-domiciliar"><button class="btn-domiciliar">Agendar domiciliar</button></a>' : ''}
                                 </section>
                                 <p class="nome">${medico.nome}</p>
                                 <p class="idnt">${medico.crm}</p>
-                                <div class="preco-nota">
-                                    <span class="preco">${medico.preco}</span>
-                                    <span class="nota">${medico.nota} <span style="color: #ffa500;">★</span></span>
-                                </div>
+                                <p>${medico.preco}</p>
+                                
+                                <p class="nota">${medico.nota} <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                
                             </section>
                         </section>
                     </section>
                 `;
                 container.insertAdjacentHTML('beforeend', card);
+                const ultimoCard = container.lastElementChild;
+                const botoes = ultimoCard.querySelectorAll('.btn-mod a');
+                botoes.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                })
             });
         }
 
         function aplicarFiltros() {
             const filtroModalidade = document.getElementById('filtro-modalidade').value;
+            const filtroNome = document.getElementById('filtro-nome').value.toLowerCase();
             const filtroLocalizacao = document.getElementById('filtro-localizacao').value;
 
             const filtrados = medicos.filter(medico => {
                 const matchModalidade = filtroModalidade === '' || medico.modalidades.includes(filtroModalidade);
+                const matchNome = filtroNome === '' || medico.nome.toLowerCase().includes(filtroNome);
                 const matchLocalizacao = filtroLocalizacao === '' || medico.localizacao === filtroLocalizacao;
-                return matchModalidade && matchLocalizacao;
+                return matchModalidade && matchNome && matchLocalizacao;
             });
 
             renderizarMedicos(filtrados);
@@ -103,21 +112,9 @@ const medicos = [
         document.addEventListener('DOMContentLoaded', function() {
             renderizarMedicos(medicos);
 
-            // Adicionar event listeners para os selects
+            // Adicionar event listeners para os filtros
             document.getElementById('filtro-modalidade').addEventListener('change', aplicarFiltros);
+            document.getElementById('filtro-nome').addEventListener('input', aplicarFiltros);
             document.getElementById('filtro-localizacao').addEventListener('change', aplicarFiltros);
         });
-            
-function limparFiltros() {
-    document.getElementById('filtro-modalidade').value = '';
-    document.getElementById('filtro-localizacao').value = '';
-    renderizarMedicos(medicos);
-}
-
-// Adicionar event listener para o botão limpar se existir
-document.addEventListener('DOMContentLoaded', function() {
-    const btnLimpar = document.querySelector('.btn-limpar');
-    if (btnLimpar) {
-        btnLimpar.addEventListener('click', limparFiltros);
-    }
-});
+        

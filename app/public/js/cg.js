@@ -1,3 +1,5 @@
+const { link } = require("../../routes/perfil");
+
 // Função para reatribuir os eventos de clique nos pequenos retângulos
 function reatribuirListenersNosPerfis() {
   document.querySelectorAll('.perfis .small-rectangle').forEach(el => {
@@ -9,6 +11,11 @@ function reatribuirListenersNosPerfis() {
   });
 }
 
+document.querySelectorAll('.btn-mod a').forEach(link => { 
+  link.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+});
 // Chamada inicial (caso os elementos já existam ao carregar a página)
 reatribuirListenersNosPerfis();
 

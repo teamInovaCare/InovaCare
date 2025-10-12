@@ -47,6 +47,14 @@ router.get("/cg", function (req, res) {/**Clínico geral */
     res.render("pages/cg.ejs")
 });
 
+router.get("c", function (req, res) {/**agendamento online */
+    res.render("pages/agenda-online.ejs")
+});
+
+router.get("/agenda-domiciliar", function (req, res) {/**agendamento domiciliar */
+    res.render("pages/agenda-domiciliar.ejs")
+});
+
 router.get("/consultas", function (req, res) {/**Minhas consultas */
     res.render("pages/consultas.ejs")
 });
