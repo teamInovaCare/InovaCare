@@ -1,0 +1,286 @@
+:root {
+    /* Cores */
+    --cor-fundo-geral: #f7f7f7;
+    --cor-fundo-secao: #fff;
+    --cor-texto: #333;
+    --cor-borda: #ddd;
+    --cor-tabela-cabecalho: #f5f5f5;
+    --cor-destaque-suave: #ffc187;
+    --cor-fundo-hover: #f8f8f8;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+    --borda-campo: #15B3B1;
+    
+    /* Cores de status */
+    --cor-status-registrado: #eafaea;
+    --cor-status-registrado-texto: green;
+    --cor-status-analise: #fff4e0;
+    --cor-status-analise-texto: #e67e22;
+    --cor-status-suspenso: #ffe5e5;
+    --cor-status-suspenso-texto: red;
+
+    /* Cores dos botões */
+    --cor-btn-primario: #15B3B1;
+    --cor-btn-primario-hover: #119190;
+    --cor-btn-sucesso: #28a745;
+    --cor-btn-sucesso-hover: #218838;
+    --cor-btn-aviso: #ffc107;
+    --cor-btn-aviso-hover: #e0a800;
+    --cor-btn-perigo: #dc3545;
+    --cor-btn-perigo-hover: #c82333;
+    --cor-btn-secundario: #6c757d;
+    --cor-btn-secundario-hover: #5a6268;
+
+    /* Medidas */
+    --espacamento-padrao: 1rem;
+    --largura-sidebar: 15.625rem;
+    --borda-fina: 0.0625rem;
+    --tamanho-fonte-padrao: 1rem;
+}
+
+/* _________________________Layout Geral___________________________ */
+body.container {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(15rem, 20vw) 1fr;
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    background-color: var(--cor-fundo-geral);
+}
+
+/* _________________________Menu Lateral___________________________ */
+.sidebar {
+    background-color: var(--cor-fundo-secao);
+    padding: 1.25rem var(--espacamento-padrao);
+    box-shadow: 0.125rem 0 0.3125rem var(--cor-sombra);
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar .menu a {
+    text-decoration: none;
+    color: var(--cor-texto);
+    padding: 0.8rem var(--espacamento-padrao);
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    font-size: var(--tamanho-fonte-padrao);
+}
+
+.sidebar .menu a i {
+    font-size: 1.2rem;
+}
+
+.sidebar .menu a:hover {
+    background-color: var(--cor-fundo-hover);
+}
+
+.sidebar .menu a.active {
+    background-color: var(--cor-destaque-suave);
+    font-weight: bold;
+}
+
+/* _________________________CONTEÚDO PRINCIPAL___________________________ */
+.content {
+    flex-grow: 1;
+    padding: 2.5rem;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--cor-status-analise-texto);
+}
+
+/* _________________________Formulários de Busca___________________________ */
+.search-form-container {
+    background-color: var(--cor-fundo-secao);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 var(--borda-fina) 0.3125rem var(--cor-sombra);
+    margin-bottom: 2rem;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    align-items: end;
+}
+
+/* Checkboxes lado a lado */
+.checkbox-group {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--cor-borda);
+    border-radius: 0.5rem;
+    background: var(--cor-fundo-secao);
+    transition: all 0.3s ease;
+    font-weight: normal;
+}
+
+.checkbox-label:hover {
+    border-color: var(--borda-campo);
+    background: var(--cor-fundo-hover);
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+/* Labels dos inputs */
+.input-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+.input-label input,
+.input-label select {
+    padding: 0.6rem 0.8rem;
+    border: var(--borda-fina) solid var(--cor-borda);
+    border-radius: 0.5rem;
+    font-size: var(--tamanho-fonte-padrao);
+    background-color: var(--cor-fundo-secao);
+}
+
+.input-label input:focus,
+.input-label select:focus {
+    border-color: var(--borda-campo);
+    outline: none;
+}
+
+/* Estilo específico para o select */
+.filtro-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+/* Posicionamento dos elementos no grid */
+.checkbox-group {
+    grid-area: 1 / 1 / 2 / -1;
+}
+
+.input-label:nth-of-type(1) {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.input-label:nth-of-type(2) {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.input-label:nth-of-type(3) {
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+.btn-limpar {
+    grid-area: 2 / 4 / 3 / 5;
+    height: fit-content;
+    padding: 0.6rem 1.5rem;
+    background-color: #f0f0f0;
+    border: 1px solid var(--cor-borda);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: var(--tamanho-fonte-padrao);
+}
+
+.btn-limpar:hover {
+    background-color: #e0e0e0;
+}
+
+/* _________________________Tabelas___________________________ */
+.user-table-container {
+    background-color: var(--cor-fundo-secao);
+    border-radius: 0.5rem;
+    box-shadow: 0 var(--borda-fina) 0.3125rem var(--cor-sombra);
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--cor-fundo-secao);
+}
+
+.user-table th, .user-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: var(--borda-fina) solid var(--cor-borda);
+}
+
+.user-table thead th {
+    background-color: var(--cor-tabela-cabecalho);
+    font-weight: bold;
+}
+
+.user-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.user-table tbody tr {
+    background-color: var(--cor-fundo-secao);
+}
+
+.user-table tbody tr:hover {
+    background-color: var(--cor-fundo-hover);
+}
+
+/* _________________________Estilos para o status___________________________ */
+.status {
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.2rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    min-width: 100px;
+}
+
+.status.registrado {
+    color: var(--cor-status-registrado-texto);
+    background: var(--cor-status-registrado);
+}
+
+.status.analise {
+    color: var(--cor-status-analise-texto);
+    background: var(--cor-status-analise);
+}
+
+.status.suspenso {
+    color: var(--cor-status-suspenso-texto);
+    background: var(--cor-status-suspenso);
+}
+

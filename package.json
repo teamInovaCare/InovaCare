@@ -21,6 +21,5 @@
     "multer": "^2.0.2",
     "mysql2": "^3.15.2"
   },
-  "devDependencies": {},
   "description": ""
 }

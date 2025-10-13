@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Gestão de Usuários</title> -->
+    <link rel="stylesheet" href="../css/admStyle.css"> 
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+</head>
+
+
+
+<!-- MENU LATERAL -->
+<body class="container">
+    <aside class="sidebar">
+
+        <nav>
+            <ul class="menu">
+
+                <li><a href="admGestao_home.html"><i class="fa-solid fa-users-gear"></i>Gestão de usuários</a></li>
+                <li><a href="admAvaliacoes.html"><i class="fa-solid fa-chart-line"></i>Avaliações</a></li>
+                <li><a href="admConsultas.html"><i class="fa-solid fa-calendar-plus"></i>Consultas</a></li>              
+                <li><a href="admFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i>Financeiro</a></li>
+                <li><a href="admPerfil.html"><i class="fa-solid fa-user"></i>Meu Perfil</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+
+<!-- CONTEÚDO PRINCIPAL -->
+    <main class="content">
+        <h1>Consultas</h1>
+
+        <section class="search-form-container">
+            <form>
+
+                <label>
+                    Nome
+                    <input type="search" id="filtroNome" placeholder="Digite um nome">
+                </label>
+
+                <label>
+                    Área de atuação
+                    <input type="search" id="filtroArea" placeholder="Digite uma área de atuação">
+                </label>
+
+                <label>
+                    ID
+                    <input type="search" id="filtroId" placeholder="Digite uma ID">
+                </label>
+
+            </form>
+        </section>
+
+
+        <!-- TABELAS -->
+        <section class="user-table-container">
+            <table class="user-table" id="tabelaUsuarios">
+
+                <thead>
+                    <tr>
+
+                        <th>Nome</th>
+                        <th>Área</th>
+                        <th>ID</th>
+                        <th>Situação</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+
+                        <td>Marcos Antônio Caldeira</td>
+                        <td>Cardiologia</td>
+                        <td>6581</td>
+                        <td class="status registrado">Registrado</td>
+
+                    </tr>
+
+                    <tr>
+                        <td>Marcos Antônio Caldeira</td>
+                        <td>Pediatria</td>
+                        <td>1750</td>
+                        <td class="status analise">Em análise</td>
+                    </tr>
+
+                    <tr>
+                        <td>Marcos Antônio Caldeira</td>
+                        <td>Clínico Geral</td>
+                        <td>0614</td>
+                        <td class="status suspenso">Suspenso</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="../js/admScript.js"></script>
+
+</body>
+</html>

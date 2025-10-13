@@ -1,0 +1,214 @@
+:root {
+    /* Cores */
+    --cor-fundo-geral: #f7f7f7;
+    --cor-fundo-secao: #fff;
+    --cor-texto: #333;
+    --cor-borda: #ddd;
+    --cor-tabela-cabecalho: #f5f5f5;
+    --cor-destaque-suave: #ffc187;
+    --cor-fundo-hover: #f8f8f8;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+    --borda-campo: #15B3B1;
+    
+    /* Cores de status */
+    --cor-status-registrado: #eafaea;
+    --cor-status-registrado-texto: green;
+    --cor-status-analise: #fff4e0;
+    --cor-status-analise-texto: #e67e22;
+    --cor-status-suspenso: #ffe5e5;
+    --cor-status-suspenso-texto: red;
+
+    /* Cores dos botões */
+    --cor-btn-primario: #15B3B1;
+    --cor-btn-primario-hover: #119190;
+    --cor-btn-sucesso: #28a745;
+    --cor-btn-sucesso-hover: #218838;
+    --cor-btn-aviso: #ffc107;
+    --cor-btn-aviso-hover: #e0a800;
+    --cor-btn-perigo: #dc3545;
+    --cor-btn-perigo-hover: #c82333;
+    --cor-btn-secundario: #6c757d;
+    --cor-btn-secundario-hover: #5a6268;
+
+    /* Medidas */
+    --espacamento-padrao: 1rem;
+    --largura-sidebar: 15.625rem;
+    --borda-fina: 0.0625rem;
+    --tamanho-fonte-padrao: 1rem;
+}
+
+/* _________________________Layout Geral___________________________ */
+body.container {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(15rem, 20vw) 1fr;
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: medium;
+    background-color: var(--cor-fundo-geral);
+}
+
+/* _________________________Menu Lateral___________________________ */
+.sidebar {
+    background-color: var(--cor-fundo-secao);
+    padding: 1.25rem var(--espacamento-padrao);
+    box-shadow: 0.125rem 0 0.3125rem var(--cor-sombra);
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar .menu a {
+    text-decoration: none;
+    color: var(--cor-texto);
+    padding: 0.8rem var(--espacamento-padrao);
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    font-size: var(--tamanho-fonte-padrao);
+}
+
+.sidebar .menu a i {
+    font-size: 1.2rem;
+}
+
+.sidebar .menu a:hover {
+    background-color: var(--cor-fundo-hover);
+}
+
+.sidebar .menu a.active {
+    background-color: var(--cor-destaque-suave);
+    font-weight: bold;
+}
+
+
+/*________________________ Base e Responsividade___________________________ */
+/* perfil-moderno.css */
+/* Variáveis de cores */
+:root {
+    --primary: #109EA6;
+    --primary-light: #109EA640;
+    --secondary: #F5A152;
+    --secondary-dark: #e8934a;
+    --text-dark: #003f5c;
+    --text-light: #6c757d;
+    --background: #f8f9fa;
+    --white: #ffffff;
+    --gray-light: #f4f4f4;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset e estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Conteúdo principal */
+main {
+    padding: 2rem 1rem; /* Mantido em rem, o que é ideal para padding */
+    max-width: 80%; /* Alterado de 1200px para % */
+    margin: 0 auto;
+    }
+    
+    /* Título da página */
+    .ttl-perfil {
+    margin-bottom: 2rem;
+    text-align: center;
+    }
+    
+    .ttl-perfil h3 {
+    font-size: 2.2rem;
+    color: var(--secondary);
+    font-weight: 600;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.625rem; /* Alterado de 10px para rem */
+    }
+    
+    .ttl-perfil h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3.75rem; /* Alterado de 60px para rem (60/16 = 3.75) */
+    height: 0.25rem; /* Alterado de 4px para rem (4/16 = 0.25) */
+    background: var(--primary);
+    border-radius: 0.125rem; /* Alterado de 2px para rem (2/16 = 0.125) */
+    }
+    
+    /* Container do perfil */
+    .bg-perfil {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    }
+    
+    /* Top section - Foto e informações básicas */
+    .top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    }
+    
+    .esq-bg-perfil {
+    flex: 0 0 12.5rem; /* Alterado de 200px para rem (200/16 = 12.5) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    
+    .esq-bg-perfil img {
+    width: 9.375rem; /* Alterado de 150px para rem (150/16 = 9.375) */
+    height: 9.375rem; /* Alterado de 150px para rem (150/16 = 9.375) */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.25rem solid var(--primary-light); /* Alterado de 4px para rem (4/16 = 0.25) */
+    box-shadow: var(--shadow);
+    }
+    
+    .btn-editar {
+    margin-top: 1rem;
+    padding: 0.5rem 0.9375rem; /* Alterado de 8px 15px para rem */
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 1.25rem; /* Alterado de 20px para rem */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    }
+    
+    .btn-editar:hover {
+    background-color: var(--text-dark);
+    }
+    
+    .dir-bg-perfil {
+    flex: 1;
+    min-width: 18.75rem; /* Alterado de 300px para rem (300/16 = 18.75) */
+    }

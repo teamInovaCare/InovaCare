@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações</title>
+    <link rel="stylesheet" href="../css/admStyle.css">
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="container">
+
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+
+        <nav>
+
+            <ul class="menu">
+                <li><a href="admGestao_home.html"><i class="fa-solid fa-users-gear"></i>Gestão de usuários</a></li>
+                <li><a href="admAvaliacoes.html"><i class="fa-solid fa-chart-line"></i>Avaliações</a></li>
+                <li><a href="admConsultas.html"><i class="fa-solid fa-calendar-plus"></i>Consultas</a></li>
+                <li><a href="admFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i>Financeiro</a></li>
+                <li><a href="admPerfil.html"><i class="fa-solid fa-user"></i>Meu Perfil</a></li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+
+
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="content">
+        <header class="page-header">
+            <h1>Avaliações</h1>
+        </header>
+
+
+
+
+
+        <!-- FILTRO DE PESQUISAS -->
+        <section class="search-form-container">
+
+            <form class="search-form">
+                <!-- Checkboxes usando fieldset -->
+                <fieldset class="checkbox-group">
+                    <legend class="visually-hidden">Tipo de usuário</legend>
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="filtro-paciente">
+                        Paciente
+                    </label>
+                    
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="filtro-profissional" >
+                        Profissional
+                    </label>
+
+                </fieldset>
+
+                <!-- Campos de input -->
+                <label class="input-label">
+                    Nome
+                    <input type="search" id="filtroNome" placeholder="Digite um nome">
+                </label>
+
+                <label class="input-label">
+                    Área de atuação
+                    <select id="filtroArea" class="filtro-select">
+                        <option value="">Selecione uma especialidade</option>
+                        <option value="cardiologia">Cardiologia</option>
+                        <option value="pediatria">Pediatria</option>
+                        <option value="clinico-geral">Clínico Geral</option>
+                        <option value="ortopedia">Ortopedia</option>
+                        <option value="dermatologia">Dermatologia</option>
+                    </select>
+                </label>
+
+            
+                <label class="input-label">
+                    ID
+                    <input type="search" id="filtroId" placeholder="Digite uma ID">
+                </label>
+
+                <!-- Botão Limpar -->
+                <button type="button" id="btn-limpar-filtros" class="btn-limpar">Limpar</button>
+
+            </form>
+        </section>
+
+
+
+
+
+        <!-- TABELAS -->
+        <section class="user-table-container">
+            <table class="user-table" id="tabelaUsuarios">
+                <thead>
+
+                    <tr>
+                        <th>Nome</th>
+                        <th>Área</th>
+                        <th>ID</th>
+                        <th>Situação</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    <tr data-user-id="1">
+                        <td>Marcos Antônio Caldeira</td>
+                        <td>Cardiologia</td>
+                        <td>6581</td>
+                        <td>
+
+                            <select class="status-select registrado" data-user-id="1">
+                                <option value="registrado" selected>Registrado</option>
+                                <option value="analise">Em análise</option>
+                                <option value="suspenso">Suspenso</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+
+                        </td>
+                    </tr>
+
+
+                    <tr data-user-id="2">
+                        <td>Marcos Antônio Caldeira</td>
+                        <td>Pediatria</td>
+                        <td>1750</td>
+                        <td>
+
+                            <select class="status-select analise" data-user-id="2">
+                                <option value="registrado">Registrado</option>
+                                <option value="analise" selected>Em análise</option>
+                                <option value="suspenso">Suspenso</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+
+                        </td>
+                    </tr>
+
+
+                    <tr data-user-id="3">
+                        <td>Marcos Antônio Caldeira</td>
+                        <td>Clínico Geral</td>
+                        <td>0614</td>
+                        <td>
+
+                            <select class="status-select suspenso" data-user-id="3">
+                                <option value="registrado">Registrado</option>
+                                <option value="analise">Em análise</option>
+                                <option value="suspenso" selected>Suspenso</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </section>
+
+
+    </main>
+
+    <script src="../js/admScript.js"></script>
+</body>
+</html>

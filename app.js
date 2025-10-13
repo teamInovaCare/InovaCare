@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 // =============================
 const rotas = require("./app/routes/router");
 const rotasProf = require("./app/routes/routerProf");
+const rotasAdm = require("./app/routes/routerAdm");
 const perfilRoutes = require("./app/routes/perfil");
 const mercadoPagoRoutes = require("./app/routes/mercadoPagoRoutes"); // <-- Adiciona isso
 
@@ -39,6 +40,7 @@ const mercadoPagoRoutes = require("./app/routes/mercadoPagoRoutes"); // <-- Adic
 app.use("/", rotas);
 app.use("/perfil", perfilRoutes);
 app.use("/profissional", rotasProf);
+app.use("/adm", rotasAdm);
 app.use("/", mercadoPagoRoutes); // <-- Ativa o Mercado Pago
 
 // =============================

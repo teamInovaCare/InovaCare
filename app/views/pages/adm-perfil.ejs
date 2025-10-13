@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Colaborador</title>
+    <link rel="stylesheet" href="../css/adm_Perfil.css"> 
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="container">
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <nav>
+            <ul class="menu">
+                <li><a href="admGestao_home.html"><i class="fa-solid fa-users-gear"></i>Gestão de usuários</a></li>
+                <li><a href="admAvaliacoes.html"><i class="fa-solid fa-chart-line"></i>Avaliações</a></li>
+                <li><a href="admConsultas.html"><i class="fa-solid fa-calendar-plus"></i>Consultas</a></li>              
+                <li><a href="admFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i>Financeiro</a></li>
+                <li><a href="admPerfil.html"><i class="fa-solid fa-user"></i>Meu Perfil</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+
+
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    
+    <main>
+
+        <section class="ttl-perfil">
+            <section class="txt-perfil">
+                <h3>Meu perfil</h3>
+            </section>
+        </section>
+
+
+        <section class="bg-perfil">
+
+            <section class="top">
+                <section class="esq-bg-perfil">
+
+                    <section class="foto-perfil-container">
+                        <img id="fotoPerfil" src="<%= usuario.foto ? 'imagens/perfil/' + usuario.foto : 'imagens/perfil-default.svg' %>" alt="Foto do perfil">
+                        <input type="file" id="inputFoto" name="inputFoto" accept="image/*" style="display: none;">
+                        <button type="button" class="btn-alterar-foto" onclick="document.getElementById('inputFoto').click()" style="display: none;">Alterar foto</button>
+                        <button type="button" class="btn-remover-foto" onclick="removerFoto()" style="display: none;">Remover foto</button>
+                    </section>
+                </section>
+
+
+                <section class="dir-bg-perfil">
+                    <form id="formPerfil" class="infos" enctype="multipart/form-data" method="POST" action="/perfil/atualizar">
+                        <section class="conjunto">
+                            <section class="ttl-campo">Nome:</section>
+                            <input type="text" class="campo" name="nome" value="<%= usuario.nome %>" readonly>
+                        </section>
+
+
+                        <section class="conjunto">
+                            <section class="ttl-campo">Data de nascimento:</section>
+                            <input type="text" class="campo" name="dataNascimento" value="<%= usuario.dataNascimento %>" readonly>
+                        </section>
+
+
+                        <section class="conjunto">
+                            <section class="ttl-campo">CPF:</section>
+                            <input type="text" class="campo" name="cpf" value="<%= usuario.cpf %>" readonly>
+                        </section>
+
+
+                        <section class="conjunto">
+                            <section class="ttl-campo">E-mail:</section>
+                            <input type="email" class="campo" name="email" value="<%= usuario.email %>" readonly>
+                        </section>
+
+
+                        <section class="conjunto">
+                            <section class="ttl-campo">Senha:</section>
+                            <input type="password" class="campo" name="senha" value="********" readonly>
+                        </section>
+
+
+            <section class="btn-container">
+                <button type="button" class="btn-editar" onclick="toggleEdit()">Editar</button>
+                <button type="submit" class="btn-salvar" form="formPerfil" style="display: none;">Salvar alterações</button>
+            </section>
+
+
+
+
+
+        </section>
+
+    </main>
+
+
+    <script src="../js/admScript_perfil.js"></script>
+</body>
+</html>
