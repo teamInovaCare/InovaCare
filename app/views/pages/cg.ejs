@@ -165,7 +165,7 @@
                 <option value="Biritiba Mirim">Biritiba Mirim</option>
                 <option value="Salesópolis">Salesópolis</option>
             </select>
-            <button id="btn-limpar-filtros" class="btn-limpar">Limpar</button>
+            <button id="btn-limpar-filtros" class="btn-limpar">Buscar</button>
         </section>
 
     </div>
@@ -177,21 +177,36 @@
         <section class="retangulo">
             
             <section class="small-rectangle" id="smallRectangle">
-                
+
                 <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
                 <section class="infos">
                     <section class="btn-mod">
-                    <a href="/agenda-online">
-                    <button class="btn" name="button">Agendar online</button>
-                    </a>
-                    <a href="/agenda-domiciliar">
-                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
-                    </a>
+                        <a href="/agenda-online">
+                        <button class="btn" name="button">Agendar online</button>
+                        </a>
+                        <a href="/agenda-domiciliar">
+                        <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
+                        </a>
                     </section>
+                    <section class="medico-info">
                     <p class="nome">Cleber Jr.</p>
                     <p class="idnt">CRM - SP 284692</p>
-                    <p>R$ 180,00</p>
-                    <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                    
+                        <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                    </section>
+
+                    <section class="localidades">
+                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
+                        <ul>
+                            <li>Barueri</li>
+                            <li>Osasco</li>
+                        </ul>
+                    </section>
+                     <section class="atendimentos-precos">
+                        <p class="titulo-atendimentos">Atendimentos</p>
+                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
+                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
+                    </section>
                     </section>
                     
                     <section class="tabela-tablet">
@@ -200,71 +215,6 @@
                 
             </section>
         </section>
-
-        <section class="overlay" id="overlay">
-            <section class="overlay-content">
-                <section class="large-rectangle">
-                    <section class="coluna-esq">
-                        <img src="imagens/perfil.png" alt="Imagem" class="perfil2">
-                        <h2>Sobre</h2>
-                        <p>Cleber Jr</p>
-                        <p>CRM - SP 284692</p>
-                        <section class="barrinha"></section>
-                        <h2>Formação</h2>
-                        <p>Faculdade</p>
-                        <section class="barrinha"></section>
-                        <h2>Idiomas</h2>
-                        <p>Fluente em inglês</p>
-                    </section>
-                    <section class="coluna-dir">
-
-                        <section id="step1" style="display: none;" class="etapa1">
-                            <h2>Escolha a modalidade</h2>
-                            <img src="imagens/pczin.png" alt="Imagem">
-                            <button id="confirmStep1" class="submit-btn">Confirmar</button>
-                        </section>
-
-                        <section id="step2" style="display: none;">
-
-                            <section class="voltar-overlay">
-                                
-                                    <img id="voltarSeta" class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
-                             
-                            </section>
-
-                        <section class="slider">
-                            <button class="slider-btn" id="prevBtn">&lt;</button>
-                            <table id="sliderTable">
-                                <tr>
-                                    <th>21/08</th>
-                                    <th>22/08</th>
-                                    <th>23/08</th>
-                                    <th>24/08</th>
-                                </tr>
-                                <tr>
-                                    <td>10:00</td>
-                                    <td>10:00</td>
-                                    <td>10:00</td>
-                                    <td>10:00</td>
-                                </tr>
-                                <tr>
-                                    <td>11:00</td>
-                                    <td>11:00</td>
-                                    <td>11:00</td>
-                                    <td>11:00</td>
-                                </tr>
-                            </table>
-                            <button class="slider-btn" id="nextBtn">&gt;</button>
-                        </section>
-                        <!-- Botão abaixo da tabela -->
-                        <a href="/consultas">
-                            <button id="submitButton" class="submit-btn">Agendar</button>
-                        </a>
-                    </section>
-                </section>
-            </section>
-        </section>
-    </section>
 
 
         <section class="retangulo">
@@ -279,10 +229,26 @@
                     <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
                     </a>
                     </section>
+
+                    <section class="medico-info">
                     <p class="nome">Marina Silva</p>
-                    <p class="idnt">CRM - RJ 103456</p>
-                    <p>R$ 120,00</p>
+                    <p class="idnt">CRM - RJ 103456</p>        
                     <p class="nota">4,8 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                    </section>
+                    <section class="localidades">
+                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
+                        <ul>
+                            <li>Barueri</li>
+                            <li>Osasco</li>
+                        </ul>
+                        
+                    </section>
+                     <section class="atendimentos-precos">
+                        <p class="titulo-atendimentos">Atendimentos</p>
+                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
+                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
+                            
+                    </section>
                 </section>
             </section>
         </section>
@@ -296,10 +262,23 @@
                     <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
                     </a>
                     </section>
+                    <section class="medico-info">
                     <p class="nome">Jorge Santos</p>
                     <p class="idnt">CRM - RJ 120383</p>
-                    <p>R$ 180,00</p>
                     <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                    </section>
+                    <section class="localidades">
+                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
+                        <ul>
+                            <li>Barueri</li>
+                            <li>Osasco</li>
+                        </ul>
+                    </section>
+                     <section class="atendimentos-precos">
+                        <p class="titulo-atendimentos">Atendimentos</p>
+                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
+                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
+                    </section>
                 </section>
             </section>
         </section>
@@ -316,10 +295,24 @@
                     <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
                     </a>
                     </section>
+
+                    <section class="medico-info">
                     <p class="nome">Bruno Pacheco</p>
                     <p class="idnt">CRM - SP 612029</p>
-                    <p>R$ 210,00</p>
                     <p class="nota">5 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                    </section>
+                    <section class="localidades">
+                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
+                        <ul>
+                            <li>Barueri</li>
+                            <li>Osasco</li>
+                        </ul>
+                    </section>
+                     <section class="atendimentos-precos">
+                        <p class="titulo-atendimentos">Atendimentos</p>
+                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
+                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
+                    </section>
                 </section>
             </section>
         </section>
@@ -333,10 +326,24 @@
                     <button class="btn" name="button">Agendar online</button>
                     </a>
                     </section>
+
+                    <section class="medico-info">
                     <p class="nome">Jéssica Matos</p>
                     <p class="idnt">CRM - SP 389237</p>
-                    <p>R$ 80,00</p>
                     <p class="nota">4,7 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                    </section>
+                    <section class="localidades">
+                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
+                        <ul>
+                            <li>Barueri</li>
+                            <li>Osasco</li>
+                        </ul>
+                    </section>
+                     <section class="atendimentos-precos">
+                        <p class="titulo-atendimentos">Atendimentos</p>
+                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
+                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
+                    </section>
                 </section>
             </section>
         </section>

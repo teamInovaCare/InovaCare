@@ -321,7 +321,7 @@ a {
     align-items: center;
     margin-top: 65px;
 }
-
+/* 
 .small-rectangle {
     display: flex;
     align-items: center;
@@ -333,7 +333,7 @@ a {
     border-radius: 16px;
     box-shadow: #e6e8eb -0.5em 0.5em;
     position: relative;
-}
+} */
 .perfil1 {
     width: 110px;
     margin-right: 10px;
@@ -825,48 +825,281 @@ a {
     max-width: 1200px;
 }
 
-.perfis .small-rectangle {
+/* .perfis .small-rectangle {
     width: 100%;
     min-height: 280px;
     position: relative;
     padding-bottom: 100px;
-}
-.btn-mod {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+} */
+/* ---------------------------------------------------------------- */
+/* AJUSTES DE LAYOUT E POSICIONAMENTO DO CARD (small-rectangle) */
+/* ---------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- */
+/* ESTILO PRINCIPAL DO CARD */
+/* ---------------------------------------------------------------- */
+.small-rectangle {
+    /* Contêiner principal: Imagem à esquerda, Conteúdo à direita */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+    align-items: flex-start; /* Alinha Imagem e Conteúdo ao topo */
+    padding: 20px;
+    background-color: #F5F7FA;
+    width: 75%; /* Você pode precisar ajustar isso dependendo do seu layout principal */
+    min-height: 180px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    position: relative; /* Base para o posicionamento absoluto dos botões */
+    margin: 20px auto; /* Centraliza se o .retangulo for 'display: block' */
+}
+
+.perfil1 {
+    width: 100px; 
+    height: 100px; /* Adicionado para ter certeza que é quadrado (se a imagem for de perfil) */
+    object-fit: cover; /* Garante que a imagem preencha a área sem distorcer */
+    border-radius: 50%; /* Se for para ser uma foto redonda */
+    margin-right: 25px;
+    flex-shrink: 0; /* A imagem não diminui */
+}
+
+/* ---------------------------------------------------------------- */
+/* SEÇÃO DE INFORMAÇÕES (FLEX-CONTAINER VERTICAL) */
+/* ---------------------------------------------------------------- */
+.infos {
+    /* Ocupa o espaço restante */
+    flex-grow: 1;
+    /* Conteúdo principal (medico-info, localidades, atendimentos-precos) em coluna */
+    display: flex;
     flex-direction: column;
+    /* Espaçamento vertical entre os blocos (medic-info, localidades, atendimentos) */
+    gap: 15px; 
+    /* Garante espaço à direita para os botões posicionados absolutamente */
+    padding-right: 150px; 
 }
 
-
-
-.btn-mod .btn,
-.btn-mod .btn-domiciliar {
-    flex: 1;
-    max-width: 120px;
+/* Remove margem padrão dos parágrafos dentro de .infos para controle de espaçamento */
+.infos p {
+    margin: 0;
 }
 
-.preco-nota {
+/* ---------------------------------------------------------------- */
+/* INFORMAÇÕES DO MÉDICO (Nome, CRM, Preço e Nota) */
+/* ---------------------------------------------------------------- */
+.medico-info {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 0;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha o texto à esquerda (mais comum em cartões) */
+    /* Você pode querer que este bloco (e os parágrafos dele) fique alinhado à esquerda. */
 }
 
-.preco {
+.nome {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 2px !important;
+}
+
+.idnt {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px !important;
+}
+
+/* Estilo para o preço que está fora das classes específicas de preços de atendimento */
+.medico-info > p:nth-child(3) { /* Seleciona o parágrafo de R$ 180,00 */
+    font-size: 1.1em;
     font-weight: 600;
     color: #333;
 }
 
 .nota {
-    font-weight: 700;
-    color: #ffa500;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #ff9900; /* Cor de estrela/nota */
     font-size: 14px;
+}
+
+.nota-img {
+    width: 14px; /* Tamanho da estrela */
+    height: 14px;
+    margin-left: 5px;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* BOTÕES DE AÇÃO (btn-mod) */
+/* ---------------------------------------------------------------- */
+
+.btn-mod {
+    position: absolute;
+    right: 20px; /* Distância da borda direita do .small-rectangle */
+    top: 50%; 
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+}
+
+.btn-mod a {
+    text-decoration: none; /* Remove sublinhado do link */
+}
+
+.btn-mod .btn,
+.btn-mod .btn-domiciliar {
+    /* Estilos comuns para os botões */
+    width: 140px; /* Largura fixa para os botões */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn { /* Botão primário (Agendar Online) */
+    background-color: #109EA6;
+    color: white;
+}
+
+.btn-domiciliar { /* Botão secundário (Agendar Domiciliar) */
+    background-color: #e6f7ff; 
+    color: #109EA6;
+    border: 1px solid #109EA6;
+}
+
+.btn:hover {
+    background-color: #0d838a;
+}
+
+.btn-domiciliar:hover {
+    background-color: #d0efff;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* SEÇÃO ATENDIMENTOS E PREÇOS */
+/* ---------------------------------------------------------------- */
+.atendimentos-precos {
+    /* Define como flex-container vertical */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha o conteúdo à esquerda */
+    padding-top: 5px; 
+    border-top: 1px solid #eee; /* Linha sutil para separar */
+}
+
+.titulo-atendimentos {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px !important;
+}
+
+.item-preco {
+    font-size: 14px;
+    color: #555;
+    /* Garante que o item e o valor fiquem lado a lado */
+    display: flex;
+    justify-content: space-between;
+    width: 200px; /* Ajuste para o seu layout */
+    margin: 2px 0 !important; 
+}
+
+.valor-preco {
+    font-weight: 600;
+    color: #000;
+    margin-left: 10px; /* Espaço entre o tipo e o valor */
+}
+
+/* ---------------------------------------------------------------- */
+/* SEÇÃO LOCALIDADES (TAGS) */
+/* ---------------------------------------------------------------- */
+.localidades {
+    /* Não precisa de 'margin-top' se o .infos tiver 'gap' */
+    max-width: 100%;
+}
+
+.titulo-localidades {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin: 0 0 5px 0 !important;
+}
+
+.localidades ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 8px; /* Espaço entre as tags */
+}
+
+.localidades li {
+    background-color: #e6f7ff; 
+    color: #109EA6; 
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #109EA6;
+    white-space: nowrap; 
+}
+
+/* ---------------------------------------------------------------- */
+/* TABELA TABLET (Provavelmente para responsividade, deixado vazio) */
+/* ---------------------------------------------------------------- */
+.tabela-tablet {
+    /* Vazio por enquanto, mas pode ser usado para media queries */
+}
+
+/* ---------------------------------------------------------------- */
+/* Media Query Exemplo (Opcional, mas recomendado) */
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .small-rectangle {
+        width: 95%; /* Ocupa mais espaço em telas menores */
+        flex-direction: column; /* Pilha verticalmente */
+        align-items: center;
+        padding-bottom: 100px; /* Espaço para os botões na parte inferior */
+    }
+
+    .perfil1 {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .infos {
+        padding-right: 0;
+        align-items: center; /* Centraliza blocos de texto */
+        gap: 10px;
+    }
+
+    .medico-info {
+        align-items: center; /* Centraliza informações do médico */
+    }
+
+    .btn-mod {
+        position: absolute;
+        bottom: 10px; /* Move os botões para baixo */
+        top: auto;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%); /* Centraliza horizontalmente */
+        flex-direction: row; /* Coloca os botões lado a lado */
+        width: 90%; /* Ocupa a largura total do card (menos padding) */
+        justify-content: space-around;
+    }
+
+    .btn-mod .btn,
+    .btn-mod .btn-domiciliar {
+        max-width: 48%; /* Permite que os botões caibam lado a lado */
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 600px) {
