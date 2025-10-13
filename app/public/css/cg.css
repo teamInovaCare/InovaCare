@@ -958,25 +958,6 @@ a {
     transition: background-color 0.3s ease;
 }
 
-.btn { /* Botão primário (Agendar Online) */
-    background-color: #109EA6;
-    color: white;
-}
-
-.btn-domiciliar { /* Botão secundário (Agendar Domiciliar) */
-    background-color: #e6f7ff; 
-    color: #109EA6;
-    border: 1px solid #109EA6;
-}
-
-.btn:hover {
-    background-color: #0d838a;
-}
-
-.btn-domiciliar:hover {
-    background-color: #d0efff;
-}
-
 
 /* ---------------------------------------------------------------- */
 /* SEÇÃO ATENDIMENTOS E PREÇOS */
@@ -1083,23 +1064,7 @@ a {
         align-items: center; /* Centraliza informações do médico */
     }
 
-    .btn-mod {
-        position: absolute;
-        bottom: 10px; /* Move os botões para baixo */
-        top: auto;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%); /* Centraliza horizontalmente */
-        flex-direction: row; /* Coloca os botões lado a lado */
-        width: 90%; /* Ocupa a largura total do card (menos padding) */
-        justify-content: space-around;
-    }
 
-    .btn-mod .btn,
-    .btn-mod .btn-domiciliar {
-        max-width: 48%; /* Permite que os botões caibam lado a lado */
-        width: 100%;
-    }
 }
 
 @media screen and (max-width: 600px) {
@@ -1149,7 +1114,7 @@ a {
         text-align: center;
         padding: 18px;
         padding-bottom: 100px;
-        min-height: 360px;
+        
         position: relative;
     }
     
@@ -1253,7 +1218,7 @@ a {
     }
     
     .perfil1 {
-        width: 80px;
+        width: 100px;
         margin: 0 0 10px 0;
     }
     
@@ -1263,7 +1228,8 @@ a {
     }
     
     .btn-mod {
-        position: absolute;
+        flex-direction: column;
+        width: 100%;
         bottom: 15px;
         left: 15px;
         right: 15px;
@@ -1278,14 +1244,18 @@ a {
     }
     
     .btn, .btn-domiciliar {
+        
         font-size: 12px;
         padding: 8px 12px;
     }
     
     .btn-mod .btn,
     .btn-mod .btn-domiciliar {
+        flex-direction: column;
+        width: 90%;
         flex: 1;
-        width: auto;
+        justify-content: center;
+        
     }
     
     .retangulo {

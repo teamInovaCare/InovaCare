@@ -250,16 +250,9 @@
             margin-bottom: 15px;
         }
 
-        .btn, .btn-domiciliar {
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-        }
+        
+
+        
 
         .btn {
             background: linear-gradient(135deg, #F5A152 0%, #a77b52 100%);
@@ -269,11 +262,6 @@
         .btn:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-domiciliar {
-            background: linear-gradient(135deg, #15B3B1 0%, #66dddb 100%);
-            color: white;
         }
 
         .btn-domiciliar:hover {
@@ -387,12 +375,13 @@
             }
 
             .small-rectangle {
-                min-height: 320px;
+                min-height: 450px;
                 padding: 15px;
             }
 
             .btn-mod {
-                position: absolute;
+                flex-direction: column;
+                width: 100%;
                 bottom: 15px;
                 left: 15px;
                 right: 15px;
