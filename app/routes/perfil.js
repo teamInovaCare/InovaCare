@@ -1,37 +1,11 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
 const usuarioModel = require('../model/usuarioModel');
 const moment = require('moment');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 
-// Configuração do multer para upload de imagens
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'app/public/uploads/perfil/');
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, 'perfil-' + uniqueSuffix + path.extname(file.originalname));
-    }
-});
-
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
-        cb(null, true);
-    } else {
-        cb(new Error('Apenas imagens são permitidas!'), false);
-    }
-};
-
-const upload = multer({ 
-    storage: storage,
-    fileFilter: fileFilter,
-    limits: {
-        fileSize: 5 * 1024 * 1024 // 5MB
-    }
-});
+// Usar o uploader da pasta util
+const uploadFile = require("../util/uploader")("./app/public/imagens/perfil/", 5);
 
 // Rota para exibir perfil
 router.get('/', async (req, res) => {
@@ -43,6 +17,8 @@ router.get('/', async (req, res) => {
 
         // Buscar dados do usuário no banco
         const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
+        
+        console.log('Dados do usuário encontrados:', dadosUsuario);
         
         if (!dadosUsuario) {
             return res.status(404).render('pages/erro', {
@@ -68,25 +44,37 @@ router.get('/', async (req, res) => {
         }
 
         // Montar endereço completo
-        const enderecoCompleto = `${dadosUsuario.logradouro_paciente || ''}, ${dadosUsuario.num_resid_paciente || ''}, ${dadosUsuario.bairro_paciente || ''} - ${dadosUsuario.cidade_paciente || ''} - ${dadosUsuario.uf_paciente || ''}`;
+        const partes = [
+            dadosUsuario.logradouro_paciente,
+            dadosUsuario.num_resid_paciente,
+            dadosUsuario.bairro_paciente,
+            dadosUsuario.cidade_paciente,
+            dadosUsuario.uf_paciente
+        ].filter(parte => parte && parte.trim() !== '');
+        
+        const enderecoCompleto = partes.length > 0 ? partes.join(', ') : 'Endereço não informado';
 
         // Renderizar página do perfil com os dados
         res.render('pages/perfil', {
             usuario: {
-                nome: dadosUsuario.nome_usuario,
-                email: dadosUsuario.email_usuario,
-                cpf: dadosUsuario.cpf_usuario,
-                dataNascimento: dataNascimento,
-                idade: idadeDetalhada,
+                nome: dadosUsuario.nome_usuario || '',
+                email: dadosUsuario.email_usuario || '',
+                cpf: dadosUsuario.cpf_usuario || '',
+                dataNascimento: dataNascimento || '',
+                idade: idadeDetalhada || 'Não informado',
                 enderecoCompleto: enderecoCompleto,
-                cep: dadosUsuario.cep_paciente,
-                endereco: dadosUsuario.logradouro_paciente,
-                numero: dadosUsuario.num_resid_paciente,
-                complemento: dadosUsuario.complemento_paciente,
-                bairro: dadosUsuario.bairro_paciente,
-                cidade: dadosUsuario.cidade_paciente,
-                uf: dadosUsuario.uf_paciente,
-                foto: dadosUsuario.foto_usuario
+                cep: dadosUsuario.cep_paciente || '',
+                endereco: dadosUsuario.logradouro_paciente || '',
+                numero: dadosUsuario.num_resid_paciente || '',
+                complemento: dadosUsuario.complemento_paciente || '',
+                bairro: dadosUsuario.bairro_paciente || '',
+                cidade: dadosUsuario.cidade_paciente || '',
+                uf: dadosUsuario.uf_paciente || '',
+                foto: dadosUsuario.foto_usuario || null,
+                diagnostico: null,
+                medicamentoContinuo: null,
+                alergias: null,
+                cirurgia: null
             }
         });
 
@@ -98,6 +86,8 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+
 // Validações para atualização do perfil
 const validarAtualizacao = [
     body('nome').isLength({ min: 2, max: 100 }).withMessage('Nome deve ter entre 2 e 100 caracteres'),
@@ -106,7 +96,7 @@ const validarAtualizacao = [
 ];
 
 // Rota para atualizar perfil
-router.post('/atualizar', upload.single('inputFoto'), validarAtualizacao, async (req, res) => {
+router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (req, res) => {
     try {
         // Verificar erros de validação
         const errors = validationResult(req);
@@ -151,9 +141,20 @@ router.post('/atualizar', upload.single('inputFoto'), validarAtualizacao, async 
             uf
         };
 
-        // Se uma nova imagem foi enviada, adicionar ao objeto de atualização
-        if (req.file) {
+        // Verificar se deve remover a foto
+        if (req.body.removerFoto === 'true') {
+            dadosAtualizacao.foto = null;
+        } else if (req.file) {
+            // Se uma nova imagem foi enviada, adicionar ao objeto de atualização
             dadosAtualizacao.foto = req.file.filename;
+        }
+        
+        // Verificar se houve erro no upload
+        if (req.session.erroMulter) {
+            return res.status(400).json({
+                success: false,
+                message: req.session.erroMulter.msg
+            });
         }
 
         // Atualizar no banco de dados

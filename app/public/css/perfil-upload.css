@@ -31,6 +31,19 @@
     background-color: #003f5c;
 }
 
+.btn-remover-foto {
+    background: none;
+    color: #109EA6;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+
 .btn-salvar {
     background-color: #F5A152;
     color: white;

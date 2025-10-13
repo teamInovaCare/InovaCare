@@ -140,7 +140,8 @@ const usuarioModel = {
         try {
             const [resultados] = await pool.query(
                 `SELECT u.*, p.dt_nasc_paciente, p.logradouro_paciente, p.num_resid_paciente, 
-                        p.complemento_paciente, p.bairro_paciente, p.cidade_paciente, p.uf_paciente, p.cep_paciente
+                        p.complemento_paciente, p.bairro_paciente, p.cidade_paciente, p.uf_paciente, p.cep_paciente,
+                        p.id_paciente
                  FROM usuarios u 
                  LEFT JOIN pacientes p ON u.id_usuario = p.id_usuario 
                  WHERE u.id_usuario = ?`,
@@ -164,7 +165,7 @@ const usuarioModel = {
             let queryUsuarios = `UPDATE usuarios SET nome_usuario = ?, email_usuario = ?, cpf_usuario = ?`;
             let paramsUsuarios = [dadosUsuario.nome, dadosUsuario.email, dadosUsuario.cpf];
             
-            if (dadosUsuario.foto) {
+            if (dadosUsuario.hasOwnProperty('foto')) {
                 queryUsuarios += `, foto_usuario = ?`;
                 paramsUsuarios.push(dadosUsuario.foto);
             }
