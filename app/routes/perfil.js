@@ -54,6 +54,12 @@ router.get('/', async (req, res) => {
         
         const enderecoCompleto = partes.length > 0 ? partes.join(', ') : 'Endereço não informado';
 
+        // Buscar informações médicas do paciente
+        let infoMedica = null;
+        if (dadosUsuario.id_paciente) {
+            infoMedica = await usuarioModel.findInfoMedica(dadosUsuario.id_paciente);
+        }
+
         // Renderizar página do perfil com os dados
         res.render('pages/perfil', {
             usuario: {
@@ -71,10 +77,11 @@ router.get('/', async (req, res) => {
                 cidade: dadosUsuario.cidade_paciente || '',
                 uf: dadosUsuario.uf_paciente || '',
                 foto: dadosUsuario.foto_usuario || null,
-                diagnostico: null,
-                medicamentoContinuo: null,
-                alergias: null,
-                cirurgia: null
+                idPaciente: dadosUsuario.id_paciente || null,
+                diagnostico: infoMedica?.DIAGNOSTICO_PACIENTE || '',
+                medicamentoContinuo: infoMedica?.medicamento_cont || '',
+                alergias: infoMedica?.alergia || '',
+                cirurgia: infoMedica?.cirurgia || 'N'
             }
         });
 
@@ -170,6 +177,54 @@ router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (re
 
     } catch (error) {
         console.error('Erro ao atualizar perfil:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor'
+        });
+    }
+});
+
+// Rota para atualizar informações médicas
+router.post('/atualizar-medico', async (req, res) => {
+    try {
+        // Verificar se o usuário está autenticado
+        if (!req.session.autenticado || !req.session.autenticado.id) {
+            return res.status(401).json({
+                success: false,
+                message: 'Usuário não autenticado'
+            });
+        }
+
+        // Buscar dados do usuário para obter o ID do paciente
+        const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
+        
+        if (!dadosUsuario || !dadosUsuario.id_paciente) {
+            return res.status(404).json({
+                success: false,
+                message: 'Paciente não encontrado'
+            });
+        }
+
+        const { diagnostico, medicamentoContinuo, alergias, cirurgia } = req.body;
+        
+        // Dados médicos para atualização
+        const dadosMedicos = {
+            diagnostico: diagnostico || null,
+            medicamentoContinuo: medicamentoContinuo || null,
+            alergias: alergias || null,
+            cirurgia: cirurgia === 'S' ? 'S' : 'N'
+        };
+
+        // Atualizar no banco de dados
+        await usuarioModel.upsertInfoMedica(dadosUsuario.id_paciente, dadosMedicos);
+
+        res.json({
+            success: true,
+            message: 'Informações médicas atualizadas com sucesso'
+        });
+
+    } catch (error) {
+        console.error('Erro ao atualizar informações médicas:', error);
         res.status(500).json({
             success: false,
             message: 'Erro interno do servidor'

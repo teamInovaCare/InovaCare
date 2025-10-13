@@ -275,6 +275,63 @@ const usuarioModel = {
         }
     },
 
+    /**Buscar informações médicas do paciente */
+    findInfoMedica: async (idPaciente) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT * FROM informacao_paciente WHERE ID_PACIENTE = ?`,
+                [idPaciente]
+            );
+            return resultados[0] || null;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Criar ou atualizar informações médicas do paciente */
+    upsertInfoMedica: async (idPaciente, dadosMedicos) => {
+        try {
+            // Verificar se já existe registro
+            const infoExistente = await usuarioModel.findInfoMedica(idPaciente);
+            
+            if (infoExistente) {
+                // Atualizar registro existente
+                const [resultado] = await pool.query(
+                    `UPDATE informacao_paciente SET 
+                     DIAGNOSTICO_PACIENTE = ?, medicamento_cont = ?, alergia = ?, cirurgia = ?
+                     WHERE ID_PACIENTE = ?`,
+                    [
+                        dadosMedicos.diagnostico,
+                        dadosMedicos.medicamentoContinuo,
+                        dadosMedicos.alergias,
+                        dadosMedicos.cirurgia,
+                        idPaciente
+                    ]
+                );
+                return { success: true, updated: true };
+            } else {
+                // Criar novo registro
+                const [resultado] = await pool.query(
+                    `INSERT INTO informacao_paciente 
+                     (DIAGNOSTICO_PACIENTE, medicamento_cont, alergia, cirurgia, ID_PACIENTE)
+                     VALUES (?, ?, ?, ?, ?)`,
+                    [
+                        dadosMedicos.diagnostico,
+                        dadosMedicos.medicamentoContinuo,
+                        dadosMedicos.alergias,
+                        dadosMedicos.cirurgia,
+                        idPaciente
+                    ]
+                );
+                return { success: true, created: true, id: resultado.insertId };
+            }
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+
 };
 
 
