@@ -232,17 +232,17 @@
                     
                     <section class="conjunto">
                         <section class="ttl-campo">Diagnóstico:</section>
-                        <input type="text" class="campo campo-medico" name="diagnostico" value="<%= usuario.diagnostico || 'Não informado' %>" readonly>
+                        <input type="text" class="campo campo-medico" id="diagnostico" name="diagnostico" value="<%= usuario.diagnostico || 'Não informado' %>" readonly>
                     </section>
                     
                     <section class="conjunto">
                         <section class="ttl-campo">Medicamento contínuo:</section>
-                        <input type="text" class="campo campo-medico" name="medicamentoContinuo" value="<%= usuario.medicamentoContinuo || 'Não informado' %>" readonly>
+                        <input type="text" class="campo campo-medico" id="medicamentoContinuo" name="medicamentoContinuo" value="<%= usuario.medicamentoContinuo || 'Não informado' %>" readonly>
                     </section>
                     
                     <section class="conjunto">
                         <section class="ttl-campo">Alergias:</section>
-                        <input type="text" class="campo campo-medico" name="alergias" value="<%= usuario.alergias || 'Não informado' %>" readonly>
+                        <input type="text" class="campo campo-medico" id="alergias" name="alergias" value="<%= usuario.alergias || 'Não informado' %>" readonly>
                     </section>
                     
                     <section class="conjunto">
@@ -329,6 +329,8 @@
             const enderecoCep = document.querySelector('.endereco-cep');
             const camposMedicos = document.querySelectorAll('.campo-medico');
             
+
+            
             campos.forEach(campo => {
                 if (!campo.classList.contains('campo-nao-editavel') && !campo.classList.contains('campo-medico')) {
                     campo.readOnly = !campo.readOnly;
@@ -337,6 +339,7 @@
             
             // Habilitar/desabilitar campos médicos
             camposMedicos.forEach(campo => {
+
                 if (campo.tagName === 'SELECT') {
                     campo.disabled = !campo.disabled;
                     campo.style.display = campo.disabled ? 'none' : 'block';
@@ -347,6 +350,7 @@
                     }
                 } else {
                     campo.readOnly = !campo.readOnly;
+
                 }
             });
             
@@ -475,15 +479,20 @@
 
         // Função para salvar informações médicas
         async function salvarInfoMedica() {
-            const diagnostico = document.querySelector('input[name="diagnostico"]').value;
-            const medicamentoContinuo = document.querySelector('input[name="medicamentoContinuo"]').value;
-            const alergias = document.querySelector('input[name="alergias"]').value;
-            const cirurgia = document.querySelector('select[name="cirurgia"]').value;
+            const diagnosticoEl = document.getElementById('diagnostico');
+            const medicamentoContinuoEl = document.getElementById('medicamentoContinuo');
+            const alergiasEl = document.getElementById('alergias');
+            const cirurgiaEl = document.querySelector('select[name="cirurgia"]');
+            
+            const diagnostico = diagnosticoEl ? diagnosticoEl.value : '';
+            const medicamentoContinuo = medicamentoContinuoEl ? medicamentoContinuoEl.value : '';
+            const alergias = alergiasEl ? alergiasEl.value : '';
+            const cirurgia = cirurgiaEl ? cirurgiaEl.value : 'N';
             
             const dadosMedicos = {
-                diagnostico: diagnostico === 'Não informado' ? '' : diagnostico,
-                medicamentoContinuo: medicamentoContinuo === 'Não informado' ? '' : medicamentoContinuo,
-                alergias: alergias === 'Não informado' ? '' : alergias,
+                diagnostico: diagnostico && diagnostico !== 'Não informado' ? diagnostico : '',
+                medicamentoContinuo: medicamentoContinuo && medicamentoContinuo !== 'Não informado' ? medicamentoContinuo : '',
+                alergias: alergias && alergias !== 'Não informado' ? alergias : '',
                 cirurgia
             };
             

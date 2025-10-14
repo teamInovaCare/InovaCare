@@ -19,14 +19,18 @@ router.get('/', async (req, res) => {
         // Buscar dados do usuário no banco
         const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
         
-        console.log('Dados do usuário encontrados:', dadosUsuario);
-        console.log('Foto do usuário:', dadosUsuario.foto_usuario);
-        
         if (!dadosUsuario) {
-            return res.status(404).render('pages/erro', {
-                mensagem: 'Usuário não encontrado'
-            });
+            return res.status(404).json({ error: 'Usuário não encontrado' });
         }
+
+        // Buscar informações médicas do paciente
+        let infoMedica = null;
+        if (dadosUsuario.id_paciente) {
+            infoMedica = await usuarioModel.findInfoMedica(dadosUsuario.id_paciente);
+        }
+        
+        console.log('Dados do usuário encontrados:', dadosUsuario);
+        console.log('Info médica encontrada:', infoMedica);
 
         // Formatar data de nascimento
         const dataNascimento = dadosUsuario.dt_nasc_paciente ? 
@@ -56,12 +60,6 @@ router.get('/', async (req, res) => {
         
         const enderecoCompleto = partes.length > 0 ? partes.join(', ') : 'Endereço não informado';
 
-        // Buscar informações médicas do paciente
-        let infoMedica = null;
-        if (dadosUsuario.id_paciente) {
-            infoMedica = await usuarioModel.findInfoMedica(dadosUsuario.id_paciente);
-        }
-
         // Renderizar página do perfil com os dados
         res.render('pages/perfil', {
             usuario: {
@@ -80,7 +78,7 @@ router.get('/', async (req, res) => {
                 uf: dadosUsuario.uf_paciente || '',
                 foto: dadosUsuario.foto_usuario || null,
                 idPaciente: dadosUsuario.id_paciente || null,
-                diagnostico: infoMedica?.DIAGNOSTICO_PACIENTE || '',
+                diagnostico: infoMedica?.diagnostico_paciente || '',
                 medicamentoContinuo: infoMedica?.medicamento_cont || '',
                 alergias: infoMedica?.alergia || '',
                 cirurgia: infoMedica?.cirurgia || 'N'
@@ -89,9 +87,7 @@ router.get('/', async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao carregar perfil:', error);
-        res.status(500).render('pages/erro', {
-            mensagem: 'Erro interno do servidor'
-        });
+        res.status(500).json({ error: 'Erro interno do servidor' });
     }
 });
 
@@ -154,14 +150,8 @@ router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (re
         if (req.body.removerFoto === 'true') {
             dadosAtualizacao.foto = null;
         } else if (req.file) {
-            // Converter imagem para base64 e salvar no banco
-            const fs = require('fs');
-            const imageBuffer = fs.readFileSync(req.file.path);
-            const base64Image = `data:${req.file.mimetype};base64,${imageBuffer.toString('base64')}`;
-            dadosAtualizacao.foto = base64Image;
-            
-            // Remover arquivo temporário
-            fs.unlinkSync(req.file.path);
+            // Salvar apenas o nome do arquivo
+            dadosAtualizacao.foto = req.file.filename;
         }
         
         // Verificar se houve erro no upload
@@ -194,9 +184,11 @@ router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (re
 
 // Rota para atualizar informações médicas
 router.post('/atualizar-medico', async (req, res) => {
+    console.log('Rota /atualizar-medico chamada');
     try {
         // Verificar se o usuário está autenticado
         if (!req.session.autenticado || !req.session.autenticado.id) {
+            console.log('Usuário não autenticado');
             return res.status(401).json({
                 success: false,
                 message: 'Usuário não autenticado'
@@ -215,6 +207,8 @@ router.post('/atualizar-medico', async (req, res) => {
 
         const { diagnostico, medicamentoContinuo, alergias, cirurgia } = req.body;
         
+        console.log('Dados recebidos no servidor:', req.body);
+        
         // Dados médicos para atualização
         const dadosMedicos = {
             diagnostico: diagnostico || null,
@@ -222,6 +216,8 @@ router.post('/atualizar-medico', async (req, res) => {
             alergias: alergias || null,
             cirurgia: cirurgia === 'S' ? 'S' : 'N'
         };
+        
+        console.log('Dados processados para o banco:', dadosMedicos);
 
         // Atualizar no banco de dados
         await usuarioModel.upsertInfoMedica(dadosUsuario.id_paciente, dadosMedicos);

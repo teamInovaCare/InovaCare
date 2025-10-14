@@ -281,7 +281,7 @@ const usuarioModel = {
     findInfoMedica: async (idPaciente) => {
         try {
             const [resultados] = await pool.query(
-                `SELECT * FROM informacao_paciente WHERE ID_PACIENTE = ?`,
+                `SELECT * FROM informacao_paciente WHERE id_paciente = ?`,
                 [idPaciente]
             );
             return resultados[0] || null;
@@ -294,15 +294,20 @@ const usuarioModel = {
     /**Criar ou atualizar informações médicas do paciente */
     upsertInfoMedica: async (idPaciente, dadosMedicos) => {
         try {
+            console.log('upsertInfoMedica - ID Paciente:', idPaciente);
+            console.log('upsertInfoMedica - Dados recebidos:', dadosMedicos);
+            
             // Verificar se já existe registro
             const infoExistente = await usuarioModel.findInfoMedica(idPaciente);
+            console.log('upsertInfoMedica - Info existente:', infoExistente);
             
             if (infoExistente) {
                 // Atualizar registro existente
+                console.log('upsertInfoMedica - Atualizando registro existente');
                 const [resultado] = await pool.query(
                     `UPDATE informacao_paciente SET 
-                     DIAGNOSTICO_PACIENTE = ?, medicamento_cont = ?, alergia = ?, cirurgia = ?
-                     WHERE ID_PACIENTE = ?`,
+                     diagnostico_paciente = ?, medicamento_cont = ?, alergia = ?, cirurgia = ?
+                     WHERE id_paciente = ?`,
                     [
                         dadosMedicos.diagnostico,
                         dadosMedicos.medicamentoContinuo,
@@ -311,12 +316,14 @@ const usuarioModel = {
                         idPaciente
                     ]
                 );
+                console.log('upsertInfoMedica - Resultado UPDATE:', resultado);
                 return { success: true, updated: true };
             } else {
                 // Criar novo registro
+                console.log('upsertInfoMedica - Criando novo registro');
                 const [resultado] = await pool.query(
                     `INSERT INTO informacao_paciente 
-                     (DIAGNOSTICO_PACIENTE, medicamento_cont, alergia, cirurgia, ID_PACIENTE)
+                     (diagnostico_paciente, medicamento_cont, alergia, cirurgia, id_paciente)
                      VALUES (?, ?, ?, ?, ?)`,
                     [
                         dadosMedicos.diagnostico,
@@ -326,10 +333,11 @@ const usuarioModel = {
                         idPaciente
                     ]
                 );
+                console.log('upsertInfoMedica - Resultado INSERT:', resultado);
                 return { success: true, created: true, id: resultado.insertId };
             }
         } catch (error) {
-            console.log(error);
+            console.log('upsertInfoMedica - ERRO:', error);
             throw error;
         }
     },
