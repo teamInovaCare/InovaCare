@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/barranav.css">
     <link rel="stylesheet" href="css/perfil-upload.css">
+
     
     <!--viaCep-->
     <script src="/js/mascaraCep.js"></script>
@@ -129,9 +130,10 @@
             <section class="top">
                 <section class="esq-bg-perfil">
                     <section class="foto-perfil-container">
-                        <img id="fotoPerfil" src="imagens/foto-perfil.png" alt="Foto do perfil">
-                        <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                        <img id="fotoPerfil" src="<%= usuario.foto ? 'imagens/perfil/' + usuario.foto : 'imagens/perfil-default.svg' %>" alt="Foto do perfil">
+                        <input type="file" id="inputFoto" name="inputFoto" accept="image/*" style="display: none;">
                         <button type="button" class="btn-alterar-foto" onclick="document.getElementById('inputFoto').click()" style="display: none;">Alterar foto</button>
+                        <button type="button" class="btn-remover-foto" onclick="removerFoto()" style="display: none;">Remover foto</button>
                     </section>
                 </section>
                 <section class="dir-bg-perfil">
@@ -217,7 +219,7 @@
             <section class="historico-container">
                 <section class="bot" onclick="toggleInfoExtra()">
                     <section class="txt-historico">
-                        <h2>Histórico Médico</h2>
+                        <h2>Agenda</h2>
                     </section>
                     <section class="seta-historico">
                         <img src="imagens/seta-direita.png" alt="" class="seta-img">
@@ -231,28 +233,27 @@
                     </section>
                     
                     <section class="conjunto">
-                        <section class="ttl-campo">Sexo:</section>
-                        <input type="text" class="campo" value="Feminino" readonly>
+                        <section class="ttl-campo">Diagnóstico:</section>
+                        <input type="text" class="campo campo-medico" name="diagnostico" value="<%= usuario.diagnostico || 'Não informado' %>" readonly>
                     </section>
                     
                     <section class="conjunto">
-                        <section class="ttl-campo">Possui diagnóstico?</section>
-                        <input type="text" class="campo" value="Não" readonly>
-                    </section>
-                    
-                    <section class="conjunto">
-                        <section class="ttl-campo">Medicamento contínuo?</section>
-                        <input type="text" class="campo" value="Não" readonly>
+                        <section class="ttl-campo">Medicamento contínuo:</section>
+                        <input type="text" class="campo campo-medico" name="medicamentoContinuo" value="<%= usuario.medicamentoContinuo || 'Não informado' %>" readonly>
                     </section>
                     
                     <section class="conjunto">
                         <section class="ttl-campo">Alergias:</section>
-                        <input type="text" class="campo" value="APLV IgE mediada" readonly>
+                        <input type="text" class="campo campo-medico" name="alergias" value="<%= usuario.alergias || 'Não informado' %>" readonly>
                     </section>
                     
                     <section class="conjunto">
-                        <section class="ttl-campo">Cirurgia?</section>
-                        <input type="text" class="campo" value="Não" readonly>
+                        <section class="ttl-campo">Cirurgia:</section>
+                        <input type="text" class="campo campo-medico-display" value="<%= usuario.cirurgia === 'S' ? 'Sim' : 'Não' %>" readonly>
+                        <select class="campo campo-medico" name="cirurgia" style="display: none;" disabled>
+                            <option value="N" <%= usuario.cirurgia === 'N' ? 'selected' : '' %>>Não</option>
+                            <option value="S" <%= usuario.cirurgia === 'S' ? 'selected' : '' %>>Sim</option>
+                        </select>
                     </section>
                     
                     <section class="bot-historico">
@@ -328,9 +329,26 @@
             const enderecoSimples = document.querySelector('.endereco-simples');
             const enderecoDetalhado = document.querySelector('.endereco-detalhado');
             const enderecoCep = document.querySelector('.endereco-cep');
+            const btnContainerMedico = document.querySelector('.btn-container-medico');
+            const camposMedicos = document.querySelectorAll('.campo-medico');
             
             campos.forEach(campo => {
-                if (!campo.classList.contains('campo-nao-editavel')) {
+                if (!campo.classList.contains('campo-nao-editavel') && !campo.classList.contains('campo-medico')) {
+                    campo.readOnly = !campo.readOnly;
+                }
+            });
+            
+            // Habilitar/desabilitar campos médicos
+            camposMedicos.forEach(campo => {
+                if (campo.tagName === 'SELECT') {
+                    campo.disabled = !campo.disabled;
+                    campo.style.display = campo.disabled ? 'none' : 'block';
+                    // Mostrar/ocultar campo de exibição
+                    const displayField = campo.parentElement.querySelector('.campo-medico-display');
+                    if (displayField) {
+                        displayField.style.display = campo.disabled ? 'block' : 'none';
+                    }
+                } else {
                     campo.readOnly = !campo.readOnly;
                 }
             });
@@ -340,6 +358,8 @@
                 btnEditar.classList.add('cancelar');
                 btnSalvar.style.display = 'inline-block';
                 btnAlterarFoto.style.display = 'inline-block';
+                document.querySelector('.btn-remover-foto').style.display = 'inline-block';
+                btnContainerMedico.style.display = 'block';
                 
                 // Alternar visualização do endereço
                 enderecoSimples.style.display = 'none';
@@ -351,6 +371,8 @@
                 btnEditar.classList.remove('cancelar');
                 btnSalvar.style.display = 'none';
                 btnAlterarFoto.style.display = 'none';
+                document.querySelector('.btn-remover-foto').style.display = 'none';
+                btnContainerMedico.style.display = 'none';
                 
                 // Voltar visualização do endereço
                 enderecoSimples.style.display = 'block';
@@ -368,7 +390,19 @@
             
             const formData = new FormData(this);
             
+            // Verificar se deve remover a foto
+            if (this.getAttribute('data-remover-foto') === 'true') {
+                formData.append('removerFoto', 'true');
+            }
+            
+            // Adicionar o arquivo de imagem se foi selecionado
+            const inputFoto = document.getElementById('inputFoto');
+            if (inputFoto.files[0]) {
+                formData.append('inputFoto', inputFoto.files[0]);
+            }
+            
             try {
+                // Salvar dados do perfil
                 const response = await fetch('/perfil/atualizar', {
                     method: 'POST',
                     body: formData
@@ -377,6 +411,8 @@
                 const result = await response.json();
                 
                 if (result.success) {
+                    // Salvar informações médicas
+                    await salvarInfoMedica();
                     alert('Perfil atualizado com sucesso!');
                     location.reload();
                 } else {
@@ -429,6 +465,47 @@
                 }
             } else {
                 limpa_formulário_cep();
+            }
+        }
+
+        // Função para remover foto
+        function removerFoto() {
+            if (confirm('Tem certeza que deseja remover sua foto de perfil?')) {
+                document.getElementById('fotoPerfil').src = 'imagens/perfil-default.svg';
+                document.getElementById('inputFoto').value = '';
+                // Marcar para remoção no servidor
+                document.getElementById('formPerfil').setAttribute('data-remover-foto', 'true');
+            }
+        }
+
+        // Função para salvar informações médicas
+        async function salvarInfoMedica() {
+            const diagnostico = document.querySelector('input[name="diagnostico"]').value;
+            const medicamentoContinuo = document.querySelector('input[name="medicamentoContinuo"]').value;
+            const alergias = document.querySelector('input[name="alergias"]').value;
+            const cirurgia = document.querySelector('select[name="cirurgia"]').value;
+            
+            const dadosMedicos = {
+                diagnostico: diagnostico === 'Não informado' ? '' : diagnostico,
+                medicamentoContinuo: medicamentoContinuo === 'Não informado' ? '' : medicamentoContinuo,
+                alergias: alergias === 'Não informado' ? '' : alergias,
+                cirurgia
+            };
+            
+            try {
+                const response = await fetch('/perfil/atualizar-medico', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosMedicos)
+                });
+                
+                const result = await response.json();
+                return result.success;
+            } catch (error) {
+                console.error('Erro ao salvar informações médicas:', error);
+                return false;
             }
         }
     </script>

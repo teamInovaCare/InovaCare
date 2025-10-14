@@ -128,7 +128,7 @@
             <section class="top">
                 <section class="esq-bg-perfil">
                     <section class="foto-perfil-container">
-                        <img id="fotoPerfil" src="<%= usuario.foto ? '/imagens/perfil/' + usuario.foto : '/imagens/perfil-default.svg' %>" alt="Foto do perfil">
+                        <img id="fotoPerfil" src="<%= usuario.foto || '/imagens/perfil-default.svg' %>" alt="Foto do perfil">
                         <input type="file" id="inputFoto" name="inputFoto" accept="image/*" style="display: none;">
                         <button type="button" class="btn-alterar-foto" onclick="document.getElementById('inputFoto').click()" style="display: none;">Alterar foto</button>
                         <button type="button" class="btn-remover-foto" onclick="removerFoto()" style="display: none;">Remover foto</button>

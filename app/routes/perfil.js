@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
         const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
         
         console.log('Dados do usuário encontrados:', dadosUsuario);
+        console.log('Foto do usuário:', dadosUsuario.foto_usuario);
         
         if (!dadosUsuario) {
             return res.status(404).render('pages/erro', {
@@ -77,7 +78,9 @@ router.get('/', async (req, res) => {
                 bairro: dadosUsuario.bairro_paciente || '',
                 cidade: dadosUsuario.cidade_paciente || '',
                 uf: dadosUsuario.uf_paciente || '',
-                foto: dadosUsuario.foto_usuario || null,
+                foto: dadosUsuario.foto_usuario ? 
+                    (dadosUsuario.foto_usuario.startsWith('/') ? dadosUsuario.foto_usuario : '/imagens/perfil/' + dadosUsuario.foto_usuario) 
+                    : null,
                 idPaciente: dadosUsuario.id_paciente || null,
                 diagnostico: infoMedica?.DIAGNOSTICO_PACIENTE || '',
                 medicamentoContinuo: infoMedica?.medicamento_cont || '',
@@ -153,8 +156,8 @@ router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (re
         if (req.body.removerFoto === 'true') {
             dadosAtualizacao.foto = null;
         } else if (req.file) {
-            // Se uma nova imagem foi enviada, adicionar ao objeto de atualização
-            dadosAtualizacao.foto = req.file.filename;
+            // Se uma nova imagem foi enviada, salvar o caminho completo
+            dadosAtualizacao.foto = '/imagens/perfil/' + req.file.filename;
         }
         
         // Verificar se houve erro no upload

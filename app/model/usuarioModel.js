@@ -139,7 +139,9 @@ const usuarioModel = {
     findUserById: async (idUsuario) => {
         try {
             const [resultados] = await pool.query(
-                `SELECT u.*, p.dt_nasc_paciente, p.logradouro_paciente, p.num_resid_paciente, 
+                `SELECT u.id_usuario, u.tipo_usuario, u.status_usuario, u.nome_usuario, u.email_usuario, 
+                        u.cpf_usuario, u.senha_usuario, u.foto_usuario,
+                        p.dt_nasc_paciente, p.logradouro_paciente, p.num_resid_paciente, 
                         p.complemento_paciente, p.bairro_paciente, p.cidade_paciente, p.uf_paciente, p.cep_paciente,
                         p.id_paciente
                  FROM usuarios u 
