@@ -94,7 +94,7 @@ const inputPreco = document.getElementById("input-preco");
 // Pega os parâmetros da URL
 const urlParams = new URLSearchParams(window.location.search);
 const medicoSelecionado = urlParams.get('medico') || 'Profissional';
-const precoConsulta = urlParams.get('preco') || '250,00'; // preço vindo da URL ou padrão
+const precoConsulta = urlParams.get('preco') || '00,01'; // preço vindo da URL ou padrão
 
 // Formata data para o padrão brasileiro
 function formatarData(data) {
