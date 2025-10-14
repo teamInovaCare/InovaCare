@@ -43,9 +43,15 @@ router.get("/especialidades", function (req, res) {/**listagem das especialidade
     res.render("pages/especialidades.ejs")
 });
 
+
 router.get("/cg", function (req, res) {/**Clínico geral */
-    res.render("pages/cg.ejs")
+    res.render("pages/cg.ejs", {
+        medicos: []})
 });
+/**POST */
+router.post("/filtro-medicos", (req,res)=>{
+    usuarioController.filtroMedicos(req,res);
+})
 
 router.get("c", function (req, res) {/**agendamento online */
     res.render("pages/agenda-online.ejs")

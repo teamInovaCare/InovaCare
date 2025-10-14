@@ -5,25 +5,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="imagens/logo-bblt.png" sizes="any">
+    <link rel="icon" href="/imagens/logo-bblt.png" sizes="any">
     <title> InovaCare</title>
 
     <!--Link dos ícones da barra de navegação-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!--link do arquivo css-->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cg.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/filtro.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cg.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/filtro.css">
 
 
     <!--link do arquivo js-->
-    <script src="js/barra_nav.js"></script>
+    <script src="/js/barra_nav.js"></script>
     <!-- link do js -->
-     <!--link do arquivo js-->
-    <script src="js/filtro.js"></script>
+    <!--link do arquivo js-->
+    <script src="/js/filtro.js"></script>
     <!-- link do js -->
 
     <!--link do js do carrossel 2 - redondo-->
@@ -40,9 +39,9 @@
             <!--Espaço para a logo-->
             <section class="menu-logo">
                 <a href="/homepaciente.html">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
@@ -73,9 +72,9 @@
         <nav class="mobile-menu">
             <section class="menu-logo">
                 <a href="/homepaciente.html">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
@@ -113,7 +112,7 @@
 
     <section class="voltar">
         <a href="/especialidades">
-            <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+            <img class="botao-voltar" src="/imagens/seta-esquerda.png" alt="" srcset="">
         </a>
     </section>
 
@@ -124,17 +123,23 @@
         </section>
     </section>
 
-        <!-- TODOS OS FILTROS EM UMA LINHA -->
-         <form action="">
+    <!-- TODOS OS FILTROS EM UMA LINHA -->
+    <form action="filtro-medicos" method="post">
+
         <section id="container-medicos">
-            <select id="filtro-modalidade" class="select-filtro">
-                <option value="">Todos</option>
-                <option value="online">Online</option>
-                <option value="domiciliar">Domiciliar</option>
+
+            <input type="hidden" value="1" name="especialidade">
+
+            <select id="filtro-modalidade" class="select-filtro" name="modalidade">
+                <option value="" disabled="" selected="" hidden="">Selecione a modalidade</option>
+                <option value="1">Online</option>
+                <option value="2">Domiciliar</option>
             </select>
-            <input type="text" id="filtro-nome" class="input-filtro" placeholder=" Buscar por nome...">
-            <select id="filtro-localizacao" class="select-filtro">
-                <option value="">Todas as localizações</option>
+
+            <input type="text" id="filtro-nome" class="input-filtro" placeholder=" Buscar por nome..." name="nomeProf">
+
+            <select id="filtro-localizacao" class="select-filtro" name="local">
+                <option value="" disabled="" selected="" hidden="">Selecione uma localização</option>
                 <option value="São Paulo">São Paulo</option>
                 <option value="Barueri">Barueri</option>
                 <option value="Guarulhos">Guarulhos</option>
@@ -169,217 +174,108 @@
             <button type="submit" id="btn-limpar-filtros" class="btn-limpar">Buscar</button>
         </section>
     </form>
-    </div>
-
-    <section class="perfis">
 
     
 
-        <section class="retangulo">
-            
-            <section class="small-rectangle" id="smallRectangle">
+    <section class="perfis">
 
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="btn-mod">
-                        <a href="/agenda-online">
-                        <button class="btn" name="button">Agendar online</button>
-                        </a>
-                        <a href="/agenda-domiciliar">
-                        <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
-                        </a>
-                    </section>
-                    <section class="medico-info">
-                    <p class="nome">Cleber Jr.</p>
-                    <p class="idnt">CRM - SP 284692</p>
-                    
-                        <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    </section>
-
-                    <section class="localidades">
-                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
-                        <ul>
-                            <li>Barueri</li>
-                            <li>Osasco</li>
-                        </ul>
-                    </section>
-                     <section class="atendimentos-precos">
-                        <p class="titulo-atendimentos">Atendimentos</p>
-                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
-                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
-                    </section>
-                    </section>
-                    
-                    <section class="tabela-tablet">
-                       
-                </section>
-                
-            </section>
-        </section>
 
 
         <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle2">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="btn-mod">
-                    <a href="/agenda-online">
-                    <button class="btn" name="button">Agendar online</button>
-                    </a>
-                    <a href="/agenda-domiciliar">
-                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
-                    </a>
+
+            <% if (medicos && medicos.data && medicos.data.length> 0) { %>
+
+                <% medicos.data.forEach((medico)=> { %>
+
+                    <section class="small-rectangle" id="smallRectangle">
+
+                        <img src="/imagens/perfil.png" alt="Imagem" class="perfil1">
+
+                        <section class="infos">
+
+                            <section class="btn-mod">
+                                <a href="/agenda-online">
+                                    <button class="btn" name="button">Agendar online</button>
+                                </a>
+                                <a href="/agenda-domiciliar">
+                                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
+                                </a>
+                            </section>
+
+                            <section class="medico-info">
+                                <p class="nome">
+                                    <%= medico.nome_usuario %>
+                                </p>
+                                <p class="idnt">
+                                    <%= medico.num_registro_especialista %>
+                                </p>
+                                <p class="nota">4,9 <img src="/imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                            </section>
+
+                            <section class="localidades">
+                                <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
+                                <ul>
+                                    <li>
+                                        <%= medico.cidade_local %>
+                                    </li>
+                                </ul>
+                            </section>
+
+                            <section class="atendimentos-precos">
+                                <p class="titulo-atendimentos">Atendimentos</p>
+                                <p class="item-preco">Online: <span class="valor-preco">R$ <%= medico.preco_base %>
+                                    </span></p>
+                                <p class="item-preco">Domiciliar: <span class="valor-preco">R$ <%= medico.taxa_locomocao
+                                            %></span></p>
+                            </section>
+
+                        </section>
+
+                        <section class="tabela-tablet"></section>
+
                     </section>
 
-                    <section class="medico-info">
-                    <p class="nome">Marina Silva</p>
-                    <p class="idnt">CRM - RJ 103456</p>        
-                    <p class="nota">4,8 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    </section>
-                    <section class="localidades">
-                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
-                        <ul>
-                            <li>Barueri</li>
-                            <li>Osasco</li>
-                        </ul>
-                        
-                    </section>
-                     <section class="atendimentos-precos">
-                        <p class="titulo-atendimentos">Atendimentos</p>
-                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
-                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
-                            
-                    </section>
-                </section>
-            </section>
+                    <% }) %>
+
+                        <% } else { %>
+
+                            <p>Nenhum médico encontrado.</p>
+
+                            <% } %>
+
         </section>
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle3">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="btn-mod">
-                    <a href="/agenda-domiciliar">
-                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
-                    </a>
-                    </section>
-                    <section class="medico-info">
-                    <p class="nome">Jorge Santos</p>
-                    <p class="idnt">CRM - RJ 120383</p>
-                    <p class="nota">4,9 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    </section>
-                    <section class="localidades">
-                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
-                        <ul>
-                            <li>Barueri</li>
-                            <li>Osasco</li>
-                        </ul>
-                    </section>
-                     <section class="atendimentos-precos">
-                        <p class="titulo-atendimentos">Atendimentos</p>
-                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
-                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
-                    </section>
-                </section>
+
+
+        <footer class="footer">
+
+            <section class="footer-logo">
+                <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
+                <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
+                <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+                    atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de
+                    saúde.
+                </p>
             </section>
-        </section>
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle4">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="btn-mod">
-                    <a href="/agenda-online">
-                    <button class="btn" name="button">Agendar online</button>
-                    </a>
-                    <a href="/agenda-domiciliar">
-                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
-                    </a>
-                    </section>
-
-                    <section class="medico-info">
-                    <p class="nome">Bruno Pacheco</p>
-                    <p class="idnt">CRM - SP 612029</p>
-                    <p class="nota">5 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    </section>
-                    <section class="localidades">
-                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
-                        <ul>
-                            <li>Barueri</li>
-                            <li>Osasco</li>
-                        </ul>
-                    </section>
-                     <section class="atendimentos-precos">
-                        <p class="titulo-atendimentos">Atendimentos</p>
-                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
-                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
-                    </section>
-                </section>
+            <section class="footer-links">
+                <h3 class="ttl-links">Explorar</h3>
+                <ul class="links">
+                    <li><a href="#">Quem somos</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="/especialidades">Especialidades</a></li>
+                    <li><a href="/consultas">Consultas</a></li>
+                </ul>
             </section>
-        </section>
 
-        <section class="retangulo">
-            <section class="small-rectangle" id="smallRectangle5">
-                <img src="imagens/perfil.png" alt="Imagem" class="perfil1">
-                <section class="infos">
-                    <section class="btn-mod">
-                    <a href="/agenda-online">
-                    <button class="btn" name="button">Agendar online</button>
-                    </a>
-                    </section>
-
-                    <section class="medico-info">
-                    <p class="nome">Jéssica Matos</p>
-                    <p class="idnt">CRM - SP 389237</p>
-                    <p class="nota">4,7 <img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
-                    </section>
-                    <section class="localidades">
-                        <h1 class="titulo-localidades">Regiões de atendimento em domicílio:</h1>
-                        <ul>
-                            <li>Barueri</li>
-                            <li>Osasco</li>
-                        </ul>
-                    </section>
-                     <section class="atendimentos-precos">
-                        <p class="titulo-atendimentos">Atendimentos</p>
-                            <p class="item-preco">Online: <span class="valor-preco">R$ 190,00</span></p>
-                            <p class="item-preco">Domiciliar: <span class="valor-preco">R$ 150,00</span></p>
-                    </section>
-                </section>
+            <section class="footer-contato">
+                <h3 class="ttl-contato">Contato</h3>
+                <p class="nmr-contato">(11) 4002-8922</p>
             </section>
-        </section>
 
+        </footer>
     </section>
 
-
-    <footer class="footer">
-
-        <section class="footer-logo">
-            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
-            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
-            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
-                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
-            </p>
-        </section>
-
-        <section class="footer-links">
-            <h3 class="ttl-links">Explorar</h3>
-            <ul class="links">
-                <li><a href="#">Quem somos</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="/especialidades">Especialidades</a></li>
-                <li><a href="/consultas">Consultas</a></li>
-            </ul>
-        </section>
-
-        <section class="footer-contato">
-            <h3 class="ttl-contato">Contato</h3>
-            <p class="nmr-contato">(11) 4002-8922</p>
-        </section>
-
-    </footer>
-
-    <script src="js/cg.js"></script>
 
 
 

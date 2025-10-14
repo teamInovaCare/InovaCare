@@ -332,6 +332,52 @@ const usuarioModel = {
         }
     },
 
+
+    findMedicoFiltro: async (cidade_local, nome_especialidade, nome_usuario, tipo_atendimento) => {
+  try {
+    let query = `
+      SELECT nome_usuario, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
+      FROM usuarios
+      INNER JOIN especialistas ON usuarios.id_usuario = especialistas.id_usuario
+      INNER JOIN disponibilidade_especialista ON disponibilidade_especialista.id_especialista = especialistas.id_especialista
+      INNER JOIN especialidades ON especialidades.id_especialidade = especialistas.id_especialidade
+      INNER JOIN especialista_local ON especialista_local.id_especialista = especialistas.id_especialista
+      INNER JOIN locais ON locais.id_local = especialista_local.id_local
+      WHERE 1 = 1
+    `;
+
+    const params = [];
+
+    if (cidade_local) {
+      query += ` AND cidade_local = ?`;
+      params.push(cidade_local);
+    }
+
+    if (nome_especialidade) {
+      query += ` AND especialistas.id_especialidade = ?`;
+      params.push(nome_especialidade);
+    }
+
+    if (nome_usuario) {
+      query += ` AND UPPER(nome_usuario) LIKE ?`;
+      params.push(`%${nome_usuario.toUpperCase()}%`);
+    }
+
+    if (tipo_atendimento) {
+      query += ` AND tipo_atendimento = ?`;
+      params.push(tipo_atendimento);
+    }
+
+    const [resultado] = await pool.query(query, params);
+    return { success: true, data: resultado };
+
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+
 };
 
 
