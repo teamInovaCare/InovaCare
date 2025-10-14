@@ -320,6 +320,7 @@ a {
     justify-content: center;
     align-items: center;
     margin-top: 65px;
+    flex-direction: column;
 }
 /* 
 .small-rectangle {
