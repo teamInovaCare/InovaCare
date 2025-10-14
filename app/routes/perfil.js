@@ -5,8 +5,8 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 
 // Usar o uploader da pasta util
-//const uploadFile = require("../util/uploader")("./app/public/imagens/perfil/", 5);
-const uploadFile = require("../util/uploader")();
+const uploadFile = require("../util/uploader")("./app/public/imagens/perfil/", 5);
+//const uploadFile = require("../util/uploader")();
 
 // Rota para exibir perfil
 router.get('/', async (req, res) => {
