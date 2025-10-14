@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/barranav.css">
     <link rel="stylesheet" href="/css/perfil-upload.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.css">
 
     
     <!--viaCep-->
     <script src="/js/mascaraCep.js"></script>
     <script src="/js/viaCep.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 </head>
 
 <body>
@@ -394,10 +396,19 @@
                 formData.append('removerFoto', 'true');
             }
             
-            // Adicionar o arquivo de imagem se foi selecionado
+            // Converter imagem para base64 se foi selecionada
             const inputFoto = document.getElementById('inputFoto');
             if (inputFoto.files[0]) {
-                formData.append('inputFoto', inputFoto.files[0]);
+                const file = inputFoto.files[0];
+                const reader = new FileReader();
+                const base64Promise = new Promise((resolve) => {
+                    reader.onload = function(e) {
+                        resolve(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                const base64 = await base64Promise;
+                formData.append('fotoBase64', base64);
             }
             
             try {
@@ -412,14 +423,41 @@
                 if (result.success) {
                     // Salvar informações médicas
                     await salvarInfoMedica();
-                    alert('Perfil atualizado com sucesso!');
-                    location.reload();
+                    new Notify({
+                        status: 'success',
+                        title: 'Sucesso!',
+                        text: 'Perfil atualizado com sucesso!',
+                        effect: 'fade',
+                        speed: 300,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        position: 'right top'
+                    });
+                    setTimeout(() => location.reload(), 1000);
                 } else {
-                    alert('Erro: ' + result.message);
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro!',
+                        text: result.message,
+                        effect: 'fade',
+                        speed: 300,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        position: 'right top'
+                    });
                 }
             } catch (error) {
                 console.error('Erro:', error);
-                alert('Erro ao salvar alterações');
+                new Notify({
+                    status: 'error',
+                    title: 'Erro!',
+                    text: 'Erro ao salvar alterações',
+                    effect: 'fade',
+                    speed: 300,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    position: 'right top'
+                });
             }
         });
 

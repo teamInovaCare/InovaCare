@@ -149,9 +149,9 @@ router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (re
         // Verificar se deve remover a foto
         if (req.body.removerFoto === 'true') {
             dadosAtualizacao.foto = null;
-        } else if (req.file) {
-            // Salvar apenas o nome do arquivo
-            dadosAtualizacao.foto = req.file.filename;
+        } else if (req.body.fotoBase64) {
+            // Salvar base64 da imagem
+            dadosAtualizacao.foto = req.body.fotoBase64;
         }
         
         // Verificar se houve erro no upload
