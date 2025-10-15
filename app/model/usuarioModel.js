@@ -350,7 +350,7 @@ const usuarioModel = {
     findMedicoFiltro: async (cidade_local, nome_especialidade, nome_usuario, tipo_atendimento) => {
   try {
     let query = `
-      SELECT nome_usuario, especialistas.id_especialista, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
+      SELECT usuarios.id_usuario, nome_usuario, especialistas.id_especialista, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
       FROM usuarios
       INNER JOIN especialistas ON usuarios.id_usuario = especialistas.id_usuario
       INNER JOIN disponibilidade_especialista ON disponibilidade_especialista.id_especialista = especialistas.id_especialista
@@ -581,6 +581,113 @@ const usuarioModel = {
             if (connection) {
                 connection.release();
             }
+        }
+    },
+
+    /**Buscar dados completos do especialista por ID para perfil público */
+    findEspecialistaById: async (idUsuario) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT u.nome_usuario, u.foto_usuario, 
+                        e.num_registro_especialista, e.id_especialista,
+                        esp.nome_especialidade, esp.tipo_registro
+                 FROM usuarios u
+                 INNER JOIN especialistas e ON u.id_usuario = e.id_usuario
+                 INNER JOIN especialidades esp ON e.id_especialidade = esp.id_especialidade
+                 WHERE u.id_usuario = ?`,
+                [idUsuario]
+            );
+            
+            if (resultados[0]) {
+                // Tratar foto_usuario para base64 se existir
+                if (resultados[0].foto_usuario && Buffer.isBuffer(resultados[0].foto_usuario)) {
+                    resultados[0].foto_usuario = `data:image/jpeg;base64,${resultados[0].foto_usuario.toString('base64')}`;
+                }
+            }
+            
+            return resultados[0] || null;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Buscar informações profissionais completas do especialista */
+    findInfoEspecialistaCompleta: async (idEspecialista) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT ie.linkddin_especialista, ie.formacao_especialista,
+                        GROUP_CONCAT(l.cidade_local) as regioes_atendimento
+                 FROM informacao_especialista ie
+                 LEFT JOIN especialista_local el ON ie.id_especialista = el.id_especialista
+                 LEFT JOIN locais l ON el.id_local = l.id_local
+                 WHERE ie.id_especialista = ?
+                 GROUP BY ie.id_info_especialista`,
+                [idEspecialista]
+            );
+            return resultados[0] || null;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Buscar avaliações do especialista */
+    findAvaliacoes: async (idEspecialista) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT a.nota, a.comentario, a.data_avaliacao,
+                        u.nome_usuario as nome_paciente
+                 FROM avaliacoes a
+                 INNER JOIN pacientes p ON a.id_paciente = p.id_paciente
+                 INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
+                 WHERE a.id_especialista = ?
+                 ORDER BY a.data_avaliacao DESC`,
+                [idEspecialista]
+            );
+            return resultados;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    },
+
+    /**Calcular média das avaliações */
+    calcularMediaAvaliacoes: async (idEspecialista) => {
+        try {
+            const [resultado] = await pool.query(
+                `SELECT AVG(nota) as media, COUNT(*) as total
+                 FROM avaliacoes
+                 WHERE id_especialista = ?`,
+                [idEspecialista]
+            );
+            return {
+                media: resultado[0].media ? parseFloat(resultado[0].media).toFixed(1) : 0,
+                total: resultado[0].total
+            };
+        } catch (error) {
+            console.log(error);
+            return { media: 0, total: 0 };
+        }
+    },
+
+    /**Criar nova avaliação */
+    criarAvaliacao: async (dadosAvaliacao) => {
+        try {
+            const [resultado] = await pool.query(
+                `INSERT INTO avaliacoes (id_paciente, id_especialista, nota, comentario, data_avaliacao)
+                 VALUES (?, ?, ?, ?, NOW())`,
+                [
+                    dadosAvaliacao.idPaciente,
+                    dadosAvaliacao.idEspecialista,
+                    dadosAvaliacao.nota,
+                    dadosAvaliacao.comentario
+                ]
+            );
+            return { success: true, id: resultado.insertId };
+        } catch (error) {
+            console.log(error);
+            throw error;
         }
     }
 

@@ -51,10 +51,7 @@ router.get("/especialidades", function (req, res) {/**listagem das especialidade
 });
 
 
-router.get("/cg", function (req, res) {/**Clínico geral */
-    res.render("pages/cg.ejs", {
-        medicos: []})
-});
+router.get("/cg", usuarioController.listarTodosMedicos);
 /**POST */
 router.post("/filtro-medicos", (req,res)=>{
     usuarioController.filtroMedicos(req,res);
@@ -202,9 +199,8 @@ router.get("/quem-somos", function (req, res) {
     res.render("pages/quem-somos.ejs");
 });
 
-router.get("/perfildoprof", function (req, res) {
-    res.render("pages/perfildoprof.ejs");
-});
+router.get("/perfildoprof/:id", usuarioController.perfilProfissional);
+router.post("/avaliar-profissional", usuarioController.criarAvaliacao);
 
 /**Página home profissional sem login */
 router.get("/homeprofs", function (req, res) {

@@ -468,28 +468,34 @@ const usuarioController = {
 
 
   filtroMedicos: async (req, res) => {
- 
     try {
- 
-      //cidade_local, nome_especialidade, nome_usuario, tipo_atendimento
- 
-     var cidade_local = req.body.local;
-     var nome_especialidade = req.body.especialidade;
-     var nome_usuario = req.body.nomeProf;
-     var tipo_atendimento = req.body.modalidade
- 
- 
-    let result = await usuarioModel.findMedicoFiltro(cidade_local, nome_especialidade,nome_usuario,tipo_atendimento  );
- 
+      var cidade_local = req.body.local;
+      var nome_especialidade = req.body.especialidade;
+      var nome_usuario = req.body.nomeProf;
+      var tipo_atendimento = req.body.modalidade;
+
+      let result = await usuarioModel.findMedicoFiltro(cidade_local, nome_especialidade, nome_usuario, tipo_atendimento);
+
       res.render("pages/cg", {
-        medicos: result,
- 
-      }
- 
-      );
- 
+        medicos: result
+      });
+
     } catch (error) {
-      console.log("Erro no controller findAgendaProf:", error);
+      console.log("Erro no controller filtroMedicos:", error);
+      res.status(500).json({ erro: "Falha ao acessar dados" });
+    }
+  },
+
+  listarTodosMedicos: async (req, res) => {
+    try {
+      let result = await usuarioModel.findMedicoFiltro(null, null, null, null);
+      
+      res.render("pages/cg", {
+        medicos: result
+      });
+
+    } catch (error) {
+      console.log("Erro no controller listarTodosMedicos:", error);
       res.status(500).json({ erro: "Falha ao acessar dados" });
     }
   },
@@ -554,6 +560,71 @@ const usuarioController = {
     } catch (error) {
       console.error('Erro ao gerar os dias disponíveis:', error);
       return res.status(500).json({ message: 'Erro interno ao gerar os dias disponíveis.' });
+    }
+  },
+
+  perfilProfissional: async (req, res) => {
+    try {
+      const idUsuario = req.params.id;
+      
+      // Buscar dados do profissional
+      const profissional = await usuarioModel.findEspecialistaById(idUsuario);
+      
+      if (!profissional) {
+        return res.status(404).render('pages/404', { message: 'Profissional não encontrado' });
+      }
+      
+      // Buscar informações profissionais adicionais
+      const infoProfissional = await usuarioModel.findInfoEspecialistaCompleta(profissional.id_especialista);
+      
+      // Buscar avaliações
+      const avaliacoes = await usuarioModel.findAvaliacoes(profissional.id_especialista);
+      
+      // Calcular média das avaliações
+      const mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(profissional.id_especialista);
+      
+      res.render('pages/perfildoprof', {
+        profissional: profissional,
+        infoProfissional: infoProfissional || {},
+        avaliacoes: avaliacoes,
+        mediaAvaliacoes: mediaAvaliacoes,
+        usuarioLogado: req.session.autenticado || null
+      });
+      
+    } catch (error) {
+      console.error('Erro ao carregar perfil do profissional:', error);
+      res.status(500).render('pages/error', { message: 'Erro interno do servidor' });
+    }
+  },
+
+  criarAvaliacao: async (req, res) => {
+    try {
+      if (!req.session.autenticado || req.session.autenticado.tipo !== 1) {
+        return res.status(401).json({ success: false, message: 'Apenas pacientes podem avaliar' });
+      }
+
+      const { idEspecialista, nota, comentario } = req.body;
+      
+      // Buscar id do paciente
+      const usuario = await usuarioModel.findUserById(req.session.autenticado.id);
+      if (!usuario || !usuario.id_paciente) {
+        return res.status(400).json({ success: false, message: 'Paciente não encontrado' });
+      }
+
+      const dadosAvaliacao = {
+        idPaciente: usuario.id_paciente,
+        idEspecialista: idEspecialista,
+        nota: nota,
+        comentario: comentario
+      };
+
+      await usuarioModel.criarAvaliacao(dadosAvaliacao);
+      
+      res.json({ success: true, message: 'Avaliação salva com sucesso!' });
+      
+    } catch (error) {
+      console.error('Erro ao criar avaliação:', error);
+      res.status(500).json({ success: false, message: 'Erro interno do servidor' });
     }
   }
 
