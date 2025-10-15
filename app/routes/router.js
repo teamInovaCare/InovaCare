@@ -206,6 +206,11 @@ router.get("/perfildoprof", function (req, res) {
     res.render("pages/perfildoprof.ejs");
 });
 
+/**Página home profissional sem login */
+router.get("/homeprofs", function (req, res) {
+    res.render("pages/homeprofs.ejs");
+});
+
 /**Rota de logout */
 router.get("/sair", limparSessao, function (req, res) {
     res.redirect("/");

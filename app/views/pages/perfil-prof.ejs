@@ -218,6 +218,57 @@
             </section>
 
         </section>
+         <!-- NOVO BLOCO: Informações Profissionais -->
+        <section class="info-profissional-container">
+            <section class="info-profissional-header">
+                <h3>Informações Profissionais</h3>
+                <button type="button" class="btn-editar-profissional" onclick="toggleEditProfissional()">
+                    <i class="bi bi-pencil"></i> Editar
+                </button>
+            </section>
+            
+            <section class="info-profissional-content">
+                <!-- Regiões de Atendimento -->
+                <section class="info-section">
+                    <h4><i class="bi bi-geo-alt"></i> Regiões de Atendimento</h4>
+                    <ul class="regioes-list" id="regioesList">
+                        <!-- As regiões serão carregadas dinamicamente via JavaScript -->
+                    </ul>
+                    <button type="button" class="add-item-btn" onclick="adicionarRegiao()">+ Adicionar região</button>
+                </section>
+                
+                <!-- Formação Médica -->
+                <section class="info-section">
+                    <h4><i class="bi bi-mortarboard"></i> Formação Médica</h4>
+                    <div id="formacaoList">
+                        <!-- As formações serão carregadas dinamicamente via JavaScript -->
+                    </div>
+                    <button type="button" class="add-item-btn" onclick="adicionarFormacao()">+ Adicionar formação</button>
+                </section>
+                
+                <!-- Tabela de Preços -->
+                <section class="info-section">
+                    <h4><i class="bi bi-currency-dollar"></i> Tabela de Preços</h4>
+                    <table class="tabela-precos" id="tabelaPrecos">
+                        <thead>
+                            <tr>
+                                <th>Modalidade</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Os preços serão carregados dinamicamente via JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+            </section>
+            
+            <section class="btn-container-profissional">
+                <button type="button" class="btn-cancelar-profissional" onclick="toggleEditProfissional()">Cancelar</button>
+                <button type="button" class="btn-salvar-profissional" onclick="salvarInformacoesProfissionais()">Salvar alterações</button>
+            </section>
+        </section>
+
 
 
     </main>
@@ -498,7 +549,234 @@
                 document.getElementById('formPerfil').setAttribute('data-remover-foto', 'true');
             }
         }
+        
+       // ========== NOVAS FUNÇÕES PARA O BLOCO DE INFORMAÇÕES PROFISSIONAIS ==========
+        
+        // Dados de exemplo (em uma aplicação real, esses dados viriam do servidor)
+        let dadosProfissionais = {
+            regioes: ["Zona Sul", "Centro", "Zona Oeste"],
+            formacao: [
+                { curso: "Medicina", instituicao: "Universidade Federal", ano: "2015" },
+                { curso: "Residência em Cardiologia", instituicao: "Hospital das Clínicas", ano: "2018" }
+            ],
+            precos: {
+                online: "R$ 150,00",
+                domiciliar: "R$ 250,00"
+            }
+        };
+        
+        // Carregar dados profissionais quando a página carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarDadosProfissionais();
+        });
+        
+        // Função para carregar os dados profissionais
+        function carregarDadosProfissionais() {
+            // Carregar regiões
+            const regioesList = document.getElementById('regioesList');
+            regioesList.innerHTML = '';
+            
+            dadosProfissionais.regioes.forEach(regiao => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <i class="bi bi-geo-fill"></i>
+                    <span class="regiao-texto">${regiao}</span>
+                    <input type="text" class="edit-input" value="${regiao}" style="display: none;">
+                    <button type="button" class="remove-item-btn" onclick="removerRegiao(this)">×</button>
+                `;
+                regioesList.appendChild(li);
+            });
+            
+            // Carregar formação
+            const formacaoList = document.getElementById('formacaoList');
+            formacaoList.innerHTML = '';
+            
+            dadosProfissionais.formacao.forEach((formacao, index) => {
+                const div = document.createElement('div');
+                div.className = 'formacao-item';
+                div.innerHTML = `
+                    <div class="formacao-texto">
+                        <strong>${formacao.curso}</strong>
+                        <span>${formacao.instituicao} - ${formacao.ano}</span>
+                    </div>
+                    <div class="formacao-edit" style="display: none;">
+                        <input type="text" class="edit-input" placeholder="Curso" value="${formacao.curso}">
+                        <input type="text" class="edit-input" placeholder="Instituição" value="${formacao.instituicao}">
+                        <input type="text" class="edit-input" placeholder="Ano" value="${formacao.ano}">
+                    </div>
+                    <button type="button" class="remove-item-btn" onclick="removerFormacao(${index})">×</button>
+                `;
+                formacaoList.appendChild(div);
+            });
+            
+            // Carregar preços
+            const tabelaPrecos = document.querySelector('#tabelaPrecos tbody');
+            tabelaPrecos.innerHTML = '';
+            
+            const modalidades = [
+                { nome: 'Online', preco: dadosProfissionais.precos.online },
+                { nome: 'Domiciliar', preco: dadosProfissionais.precos.domiciliar }
+            ];
+            
+            modalidades.forEach(modalidade => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${modalidade.nome}</td>
+                    <td>
+                        <span class="preco-texto">${modalidade.preco}</span>
+                        <input type="text" class="edit-input preco-edit" value="${modalidade.preco}" style="display: none;">
+                    </td>
+                `;
+                tabelaPrecos.appendChild(tr);
+            });
+        }
+        
+        // Função para alternar modo de edição das informações profissionais
+        function toggleEditProfissional() {
+            const container = document.querySelector('.info-profissional-container');
+            const btnEditar = document.querySelector('.btn-editar-profissional');
+            const btnSalvar = document.querySelector('.btn-salvar-profissional');
+            const btnCancelar = document.querySelector('.btn-cancelar-profissional');
+            
+            if (container.classList.contains('edit-mode')) {
+                // Sair do modo de edição
+                container.classList.remove('edit-mode');
+                btnEditar.style.display = 'flex';
+                btnSalvar.style.display = 'none';
+                btnCancelar.style.display = 'none';
+                
+                // Esconder campos de edição e mostrar texto
+                document.querySelectorAll('.regiao-texto').forEach(el => el.style.display = 'inline');
+                document.querySelectorAll('.regioes-list input').forEach(el => el.style.display = 'none');
+                
+                document.querySelectorAll('.formacao-texto').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.formacao-edit').forEach(el => el.style.display = 'none');
+                
+                document.querySelectorAll('.preco-texto').forEach(el => el.style.display = 'inline');
+                document.querySelectorAll('.preco-edit').forEach(el => el.style.display = 'none');
+                
+                // Recarregar dados para cancelar alterações
+                carregarDadosProfissionais();
+            } else {
+                // Entrar no modo de edição
+                container.classList.add('edit-mode');
+                btnEditar.style.display = 'none';
+                btnSalvar.style.display = 'inline-block';
+                btnCancelar.style.display = 'inline-block';
+                
+                // Mostrar campos de edição e esconder texto
+                document.querySelectorAll('.regiao-texto').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.regioes-list input').forEach(el => el.style.display = 'inline');
+                
+                document.querySelectorAll('.formacao-texto').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.formacao-edit').forEach(el => el.style.display = 'block');
+                
+                document.querySelectorAll('.preco-texto').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.preco-edit').forEach(el => el.style.display = 'inline');
+            }
+        }
+        
+        // Função para adicionar uma nova região
+        function adicionarRegiao() {
+            const regioesList = document.getElementById('regioesList');
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <i class="bi bi-geo-fill"></i>
+                <span class="regiao-texto" style="display: none;">Nova região</span>
+                <input type="text" class="edit-input" value="Nova região">
+                <button type="button" class="remove-item-btn" onclick="removerRegiao(this)">×</button>
+            `;
+            regioesList.appendChild(li);
+        }
+        
+        // Função para remover uma região
+        function removerRegiao(btn) {
+            btn.parentElement.remove();
+        }
+        
+        // Função para adicionar uma nova formação
+        function adicionarFormacao() {
+            const formacaoList = document.getElementById('formacaoList');
+            const div = document.createElement('div');
+            div.className = 'formacao-item';
+            div.innerHTML = `
+                <div class="formacao-texto" style="display: none;">
+                    <strong>Novo curso</strong>
+                    <span>Nova instituição - Novo ano</span>
+                </div>
+                <div class="formacao-edit">
+                    <input type="text" class="edit-input" placeholder="Curso" value="Novo curso">
+                    <input type="text" class="edit-input" placeholder="Instituição" value="Nova instituição">
+                    <input type="text" class="edit-input" placeholder="Ano" value="Novo ano">
+                </div>
+                <button type="button" class="remove-item-btn" onclick="this.parentElement.remove()">×</button>
+            `;
+            formacaoList.appendChild(div);
+        }
+        
+        // Função para remover uma formação
+        function removerFormacao(index) {
+            // Em uma aplicação real, você enviaria o índice para o servidor
+            // Aqui apenas removemos do array local
+            dadosProfissionais.formacao.splice(index, 1);
+            carregarDadosProfissionais();
+        }
+        
+        // Função para salvar as informações profissionais
+        function salvarInformacoesProfissionais() {
+            // Coletar regiões atualizadas
+            const novasRegioes = [];
+            document.querySelectorAll('.regioes-list input').forEach(input => {
+                if (input.value.trim() !== '') {
+                    novasRegioes.push(input.value.trim());
+                }
+            });
+            
+            // Coletar formações atualizadas
+            const novaFormacao = [];
+            document.querySelectorAll('.formacao-item').forEach(item => {
+                const inputs = item.querySelectorAll('.formacao-edit input');
+                if (inputs[0].value.trim() !== '' && inputs[1].value.trim() !== '' && inputs[2].value.trim() !== '') {
+                    novaFormacao.push({
+                        curso: inputs[0].value.trim(),
+                        instituicao: inputs[1].value.trim(),
+                        ano: inputs[2].value.trim()
+                    });
+                }
+            });
+            
+            // Coletar preços atualizados
+            const novosPrecos = {};
+            const precoInputs = document.querySelectorAll('.preco-edit');
+            novosPrecos.online = precoInputs[0].value.trim();
+            novosPrecos.domiciliar = precoInputs[1].value.trim();
+            
+            // Atualizar dados locais
+            dadosProfissionais.regioes = novasRegioes;
+            dadosProfissionais.formacao = novaFormacao;
+            dadosProfissionais.precos = novosPrecos;
+            
+            // Em uma aplicação real, você enviaria esses dados para o servidor
+            // Aqui apenas simulamos o salvamento
+            console.log('Dados profissionais a serem salvos:', dadosProfissionais);
+            
+            // Mostrar mensagem de sucesso
+            new Notify({
+                status: 'success',
+                title: 'Sucesso!',
+                text: 'Informações profissionais salvas com sucesso!',
+                effect: 'fade',
+                speed: 300,
+                autoclose: true,
+                autotimeout: 3000,
+                position: 'right top'
+            });
+            
+            // Sair do modo de edição
+            toggleEditProfissional();
+        }
     </script>
+
 
 </body>
 

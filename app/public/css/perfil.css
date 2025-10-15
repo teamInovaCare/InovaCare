@@ -329,3 +329,277 @@ main {
         grid-template-columns: 1fr;
     }
 }
+
+ /* Estilos para o novo bloco de informações profissionais */
+        .info-profissional-container {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .info-profissional-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .info-profissional-header h3 {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        
+        .info-profissional-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .info-section {
+            background-color: var(--gray-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .info-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-section h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-section h4 i {
+            font-size: 1.1rem;
+        }
+        
+        .regioes-list {
+            list-style-type: none;
+        }
+        
+        .regioes-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .regioes-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .regioes-list li i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .formacao-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .formacao-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .formacao-item strong {
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .formacao-item span {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        .tabela-precos {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .tabela-precos th {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        .tabela-precos td {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabela-precos tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .tabela-precos tr:nth-child(even) {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        .preco {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .btn-editar-profissional {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-editar-profissional:hover {
+            background-color: var(--text-dark);
+        }
+        
+        .btn-container-profissional {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-salvar-profissional {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: none;
+        }
+        
+        .btn-salvar-profissional:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        .btn-cancelar-profissional {
+            background-color: var(--text-light);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: none;
+        }
+        
+        .btn-cancelar-profissional:hover {
+            background-color: #5a6268;
+        }
+        
+        .edit-mode .info-section {
+            background-color: var(--white);
+            border: 1px solid var(--primary-light);
+        }
+        
+        .edit-mode .regioes-list li,
+        .edit-mode .formacao-item {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .edit-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        .edit-textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .add-item-btn {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border: 1px dashed var(--primary);
+            border-radius: 4px;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            transition: var(--transition);
+            display: none;
+        }
+        
+        .add-item-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .remove-item-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .edit-mode .remove-item-btn {
+            display: flex;
+        }
+        
+        .edit-mode .add-item-btn {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .info-profissional-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-profissional-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .btn-container-profissional {
+                justify-content: flex-start;
+            }
+        }
