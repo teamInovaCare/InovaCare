@@ -251,6 +251,12 @@ router.get('/prof', async (req, res) => {
         console.log('Dados retornados do banco:', dadosUsuario);
         console.log('ID do usuário na sessão:', req.session.autenticado.id);
         
+        // Buscar informações profissionais do especialista
+        let infoProfissional = null;
+        if (dadosUsuario && dadosUsuario.id_especialista) {
+            infoProfissional = await usuarioModel.findInfoEspecialista(dadosUsuario.id_especialista);
+        }
+        
         if (!dadosUsuario) {
             return res.status(404).json({ error: 'Usuário não encontrado' });
         }
@@ -287,7 +293,12 @@ router.get('/prof', async (req, res) => {
                 bairro: dadosUsuario.bairro_especialista || '',
                 cidade: dadosUsuario.cidade_especialista || '',
                 uf: dadosUsuario.uf_especialista || '',
-                foto: dadosUsuario.foto_usuario || null
+                foto: dadosUsuario.foto_usuario || null,
+                infoProfissional: {
+                    linkedin: infoProfissional?.linkddin_especialista || '',
+                    formacao: infoProfissional?.formacao_especialista || '',
+                    regioes: infoProfissional?.regioes_atendimento ? infoProfissional.regioes_atendimento.split(',') : []
+                }
             }
         });
 
@@ -370,6 +381,54 @@ router.post('/atualizar-prof', uploadFile('inputFoto'), async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao atualizar perfil do especialista:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor'
+        });
+    }
+});
+
+// Rota para atualizar informações profissionais do especialista
+router.post('/atualizar-info-prof', async (req, res) => {
+    try {
+        // Verificar se o usuário está autenticado
+        if (!req.session.autenticado || !req.session.autenticado.id) {
+            return res.status(401).json({
+                success: false,
+                message: 'Usuário não autenticado'
+            });
+        }
+
+        const { linkedin, formacao, regioes } = req.body;
+        
+        console.log('Dados profissionais recebidos:', req.body);
+        
+        // Verificar se o usuário é um especialista
+        const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
+        if (!dadosUsuario || !dadosUsuario.id_especialista) {
+            return res.status(400).json({
+                success: false,
+                message: 'Usuário não é um especialista'
+            });
+        }
+
+        // Dados profissionais para atualização
+        const dadosProfissionais = {
+            linkedin: linkedin || null,
+            formacao: formacao || null,
+            regioes: regioes || []
+        };
+
+        // Atualizar no banco de dados
+        await usuarioModel.upsertInfoEspecialista(dadosUsuario.id_especialista, dadosProfissionais);
+
+        res.json({
+            success: true,
+            message: 'Informações profissionais atualizadas com sucesso'
+        });
+
+    } catch (error) {
+        console.error('Erro ao atualizar informações profissionais:', error);
         res.status(500).json({
             success: false,
             message: 'Erro interno do servidor'

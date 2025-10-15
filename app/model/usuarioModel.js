@@ -472,7 +472,117 @@ const usuarioModel = {
           console.error('Erro ao buscar agenda:', error);
           throw error;
         }
-      }
+      },
+
+    /**Buscar informações profissionais do especialista */
+    findInfoEspecialista: async (idEspecialista) => {
+        try {
+            const [resultados] = await pool.query(
+                `SELECT ie.linkddin_especialista, ie.formacao_especialista,
+                        GROUP_CONCAT(l.cidade_local) as regioes_atendimento
+                 FROM informacao_especialista ie
+                 LEFT JOIN especialista_local el ON ie.id_especialista = el.id_especialista
+                 LEFT JOIN locais l ON el.id_local = l.id_local
+                 WHERE ie.id_especialista = ?
+                 GROUP BY ie.id_info_especialista`,
+                [idEspecialista]
+            );
+            return resultados[0] || null;
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+    },
+
+    /**Criar ou atualizar informações profissionais do especialista */
+    upsertInfoEspecialista: async (idEspecialista, dadosProfissionais) => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            await connection.beginTransaction();
+
+            // Verificar se já existe registro
+            const [infoExistente] = await connection.query(
+                `SELECT id_info_especialista FROM informacao_especialista WHERE id_especialista = ?`,
+                [idEspecialista]
+            );
+
+            if (infoExistente.length > 0) {
+                // Atualizar registro existente
+                await connection.query(
+                    `UPDATE informacao_especialista SET 
+                     linkddin_especialista = ?, formacao_especialista = ?
+                     WHERE id_especialista = ?`,
+                    [
+                        dadosProfissionais.linkedin,
+                        dadosProfissionais.formacao,
+                        idEspecialista
+                    ]
+                );
+            } else {
+                // Criar novo registro
+                await connection.query(
+                    `INSERT INTO informacao_especialista 
+                     (linkddin_especialista, formacao_especialista, id_especialista)
+                     VALUES (?, ?, ?)`,
+                    [
+                        dadosProfissionais.linkedin,
+                        dadosProfissionais.formacao,
+                        idEspecialista
+                    ]
+                );
+            }
+
+            // Atualizar regiões de atendimento
+            if (dadosProfissionais.regioes && dadosProfissionais.regioes.length > 0) {
+                // Remover regiões existentes
+                await connection.query(
+                    `DELETE FROM especialista_local WHERE id_especialista = ?`,
+                    [idEspecialista]
+                );
+
+                // Inserir novas regiões
+                for (const regiao of dadosProfissionais.regioes) {
+                    // Buscar ou criar a cidade
+                    let [cidadeExistente] = await connection.query(
+                        `SELECT id_local FROM locais WHERE cidade_local = ?`,
+                        [regiao]
+                    );
+
+                    let idLocal;
+                    if (cidadeExistente.length > 0) {
+                        idLocal = cidadeExistente[0].id_local;
+                    } else {
+                        const [novaCidade] = await connection.query(
+                            `INSERT INTO locais (cidade_local) VALUES (?)`,
+                            [regiao]
+                        );
+                        idLocal = novaCidade.insertId;
+                    }
+
+                    // Inserir relação especialista-local
+                    await connection.query(
+                        `INSERT INTO especialista_local (id_especialista, id_local) VALUES (?, ?)`,
+                        [idEspecialista, idLocal]
+                    );
+                }
+            }
+
+            await connection.commit();
+            return { success: true };
+
+        } catch (error) {
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error('Erro no upsertInfoEspecialista:', error);
+            throw error;
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
+    }
 
 
 };

@@ -243,29 +243,23 @@
                     <div id="formacaoList">
                         <!-- As formações serão carregadas dinamicamente via JavaScript -->
                     </div>
-                    <button type="button" class="add-item-btn" onclick="adicionarFormacao()">+ Adicionar formação</button>
+
                 </section>
                 
-                <!-- Tabela de Preços -->
+                <!-- LinkedIn -->
                 <section class="info-section">
-                    <h4><i class="bi bi-currency-dollar"></i> Tabela de Preços</h4>
-                    <table class="tabela-precos" id="tabelaPrecos">
-                        <thead>
-                            <tr>
-                                <th>Modalidade</th>
-                                <th>Preço</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Os preços serão carregados dinamicamente via JavaScript -->
-                        </tbody>
-                    </table>
+                    <h4><i class="bi bi-linkedin"></i> LinkedIn</h4>
+                    <div class="linkedin-container">
+                        <span class="linkedin-texto">Não informado</span>
+                        <input type="url" class="edit-input linkedin-edit" placeholder="https://www.linkedin.com/in/seu-perfil" style="display: none;">
+                    </div>
                 </section>
+                
             </section>
             
-            <section class="btn-container-profissional">
-                <button type="button" class="btn-cancelar-profissional" onclick="toggleEditProfissional()">Cancelar</button>
-                <button type="button" class="btn-salvar-profissional" onclick="salvarInformacoesProfissionais()">Salvar alterações</button>
+            <section class="btn-container-profissional" style="display: none; justify-content: flex-end; gap: 10px; text-align: right;">
+                <button type="button" class="btn-cancelar-profissional btn-editar cancelar" onclick="toggleEditProfissional()" style="display: inline-block !important; visibility: visible !important;">Cancelar</button>
+                <button type="button" class="btn-salvar-profissional btn-salvar" onclick="salvarInformacoesProfissionais()" style="display: inline-block !important; visibility: visible !important;">Salvar alterações</button>
             </section>
         </section>
 
@@ -552,17 +546,11 @@
         
        // ========== NOVAS FUNÇÕES PARA O BLOCO DE INFORMAÇÕES PROFISSIONAIS ==========
         
-        // Dados de exemplo (em uma aplicação real, esses dados viriam do servidor)
+        // Dados profissionais do servidor
         let dadosProfissionais = {
-            regioes: ["Zona Sul", "Centro", "Zona Oeste"],
-            formacao: [
-                { curso: "Medicina", instituicao: "Universidade Federal", ano: "2015" },
-                { curso: "Residência em Cardiologia", instituicao: "Hospital das Clínicas", ano: "2018" }
-            ],
-            precos: {
-                online: "R$ 150,00",
-                domiciliar: "R$ 250,00"
-            }
+            regioes: <%- JSON.stringify(usuario.infoProfissional.regioes) %>,
+            formacao: <%- JSON.stringify(usuario.infoProfissional.formacao) %>,
+            linkedin: "<%- usuario.infoProfissional.linkedin %>"
         };
         
         // Carregar dados profissionais quando a página carregar
@@ -591,59 +579,64 @@
             const formacaoList = document.getElementById('formacaoList');
             formacaoList.innerHTML = '';
             
-            dadosProfissionais.formacao.forEach((formacao, index) => {
+            if (dadosProfissionais.formacao) {
                 const div = document.createElement('div');
                 div.className = 'formacao-item';
                 div.innerHTML = `
                     <div class="formacao-texto">
-                        <strong>${formacao.curso}</strong>
-                        <span>${formacao.instituicao} - ${formacao.ano}</span>
+                        <span>${dadosProfissionais.formacao}</span>
                     </div>
                     <div class="formacao-edit" style="display: none;">
-                        <input type="text" class="edit-input" placeholder="Curso" value="${formacao.curso}">
-                        <input type="text" class="edit-input" placeholder="Instituição" value="${formacao.instituicao}">
-                        <input type="text" class="edit-input" placeholder="Ano" value="${formacao.ano}">
+                        <textarea class="edit-input" placeholder="Descreva sua formação acadêmica e profissional">${dadosProfissionais.formacao}</textarea>
                     </div>
-                    <button type="button" class="remove-item-btn" onclick="removerFormacao(${index})">×</button>
                 `;
                 formacaoList.appendChild(div);
-            });
-            
-            // Carregar preços
-            const tabelaPrecos = document.querySelector('#tabelaPrecos tbody');
-            tabelaPrecos.innerHTML = '';
-            
-            const modalidades = [
-                { nome: 'Online', preco: dadosProfissionais.precos.online },
-                { nome: 'Domiciliar', preco: dadosProfissionais.precos.domiciliar }
-            ];
-            
-            modalidades.forEach(modalidade => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${modalidade.nome}</td>
-                    <td>
-                        <span class="preco-texto">${modalidade.preco}</span>
-                        <input type="text" class="edit-input preco-edit" value="${modalidade.preco}" style="display: none;">
-                    </td>
+            } else {
+                const div = document.createElement('div');
+                div.className = 'formacao-item';
+                div.innerHTML = `
+                    <div class="formacao-texto">
+                        <span>Não informado</span>
+                    </div>
+                    <div class="formacao-edit" style="display: none;">
+                        <textarea class="edit-input" placeholder="Descreva sua formação acadêmica e profissional"></textarea>
+                    </div>
                 `;
-                tabelaPrecos.appendChild(tr);
-            });
+                formacaoList.appendChild(div);
+            }
+            
+            // Carregar LinkedIn
+            const linkedinTexto = document.querySelector('.linkedin-texto');
+            const linkedinEdit = document.querySelector('.linkedin-edit');
+            if (dadosProfissionais.linkedin) {
+                linkedinTexto.innerHTML = `<a href="${dadosProfissionais.linkedin}" target="_blank">${dadosProfissionais.linkedin}</a>`;
+                linkedinEdit.value = dadosProfissionais.linkedin;
+            } else {
+                linkedinTexto.textContent = 'Não informado';
+                linkedinEdit.value = '';
+            }
+            
+
         }
         
         // Função para alternar modo de edição das informações profissionais
         function toggleEditProfissional() {
             const container = document.querySelector('.info-profissional-container');
             const btnEditar = document.querySelector('.btn-editar-profissional');
-            const btnSalvar = document.querySelector('.btn-salvar-profissional');
-            const btnCancelar = document.querySelector('.btn-cancelar-profissional');
+            const btnContainer = document.querySelector('.btn-container-profissional');
+            
+            console.log('Elementos encontrados:', { container, btnEditar, btnContainer });
+            
+            if (!container || !btnEditar || !btnContainer) {
+                console.error('Elementos não encontrados');
+                return;
+            }
             
             if (container.classList.contains('edit-mode')) {
                 // Sair do modo de edição
                 container.classList.remove('edit-mode');
-                btnEditar.style.display = 'flex';
-                btnSalvar.style.display = 'none';
-                btnCancelar.style.display = 'none';
+                btnEditar.style.display = 'block';
+                btnContainer.style.display = 'none';
                 
                 // Esconder campos de edição e mostrar texto
                 document.querySelectorAll('.regiao-texto').forEach(el => el.style.display = 'inline');
@@ -652,17 +645,21 @@
                 document.querySelectorAll('.formacao-texto').forEach(el => el.style.display = 'block');
                 document.querySelectorAll('.formacao-edit').forEach(el => el.style.display = 'none');
                 
-                document.querySelectorAll('.preco-texto').forEach(el => el.style.display = 'inline');
-                document.querySelectorAll('.preco-edit').forEach(el => el.style.display = 'none');
+                const linkedinTexto = document.querySelector('.linkedin-texto');
+                const linkedinEdit = document.querySelector('.linkedin-edit');
+                if (linkedinTexto) linkedinTexto.style.display = 'inline';
+                if (linkedinEdit) linkedinEdit.style.display = 'none';
                 
                 // Recarregar dados para cancelar alterações
                 carregarDadosProfissionais();
             } else {
                 // Entrar no modo de edição
+                console.log('Entrando no modo de edição');
                 container.classList.add('edit-mode');
                 btnEditar.style.display = 'none';
-                btnSalvar.style.display = 'inline-block';
-                btnCancelar.style.display = 'inline-block';
+                btnContainer.style.setProperty('display', 'flex', 'important');
+                btnContainer.style.setProperty('visibility', 'visible', 'important');
+                console.log('btnContainer display:', btnContainer.style.display);
                 
                 // Mostrar campos de edição e esconder texto
                 document.querySelectorAll('.regiao-texto').forEach(el => el.style.display = 'none');
@@ -671,8 +668,10 @@
                 document.querySelectorAll('.formacao-texto').forEach(el => el.style.display = 'none');
                 document.querySelectorAll('.formacao-edit').forEach(el => el.style.display = 'block');
                 
-                document.querySelectorAll('.preco-texto').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.preco-edit').forEach(el => el.style.display = 'inline');
+                const linkedinTexto = document.querySelector('.linkedin-texto');
+                const linkedinEdit = document.querySelector('.linkedin-edit');
+                if (linkedinTexto) linkedinTexto.style.display = 'none';
+                if (linkedinEdit) linkedinEdit.style.display = 'inline';
             }
         }
         
@@ -694,36 +693,10 @@
             btn.parentElement.remove();
         }
         
-        // Função para adicionar uma nova formação
-        function adicionarFormacao() {
-            const formacaoList = document.getElementById('formacaoList');
-            const div = document.createElement('div');
-            div.className = 'formacao-item';
-            div.innerHTML = `
-                <div class="formacao-texto" style="display: none;">
-                    <strong>Novo curso</strong>
-                    <span>Nova instituição - Novo ano</span>
-                </div>
-                <div class="formacao-edit">
-                    <input type="text" class="edit-input" placeholder="Curso" value="Novo curso">
-                    <input type="text" class="edit-input" placeholder="Instituição" value="Nova instituição">
-                    <input type="text" class="edit-input" placeholder="Ano" value="Novo ano">
-                </div>
-                <button type="button" class="remove-item-btn" onclick="this.parentElement.remove()">×</button>
-            `;
-            formacaoList.appendChild(div);
-        }
-        
-        // Função para remover uma formação
-        function removerFormacao(index) {
-            // Em uma aplicação real, você enviaria o índice para o servidor
-            // Aqui apenas removemos do array local
-            dadosProfissionais.formacao.splice(index, 1);
-            carregarDadosProfissionais();
-        }
+
         
         // Função para salvar as informações profissionais
-        function salvarInformacoesProfissionais() {
+        async function salvarInformacoesProfissionais() {
             // Coletar regiões atualizadas
             const novasRegioes = [];
             document.querySelectorAll('.regioes-list input').forEach(input => {
@@ -732,48 +705,74 @@
                 }
             });
             
-            // Coletar formações atualizadas
-            const novaFormacao = [];
-            document.querySelectorAll('.formacao-item').forEach(item => {
-                const inputs = item.querySelectorAll('.formacao-edit input');
-                if (inputs[0].value.trim() !== '' && inputs[1].value.trim() !== '' && inputs[2].value.trim() !== '') {
-                    novaFormacao.push({
-                        curso: inputs[0].value.trim(),
-                        instituicao: inputs[1].value.trim(),
-                        ano: inputs[2].value.trim()
+            // Coletar formação atualizada
+            const formacaoTextarea = document.querySelector('.formacao-edit textarea');
+            const novaFormacao = formacaoTextarea ? formacaoTextarea.value.trim() : '';
+            
+            // Coletar LinkedIn atualizado
+            const novoLinkedin = document.querySelector('.linkedin-edit').value.trim();
+            
+            const dadosParaSalvar = {
+                regioes: novasRegioes,
+                formacao: novaFormacao,
+                linkedin: novoLinkedin
+            };
+            
+            try {
+                const response = await fetch('/perfil/atualizar-info-prof', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosParaSalvar)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Atualizar dados locais
+                    dadosProfissionais.regioes = novasRegioes;
+                    dadosProfissionais.formacao = novaFormacao;
+                    dadosProfissionais.linkedin = novoLinkedin;
+                    
+                    new Notify({
+                        status: 'success',
+                        title: 'Sucesso!',
+                        text: 'Informações profissionais salvas com sucesso!',
+                        effect: 'fade',
+                        speed: 300,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        position: 'right top'
+                    });
+                    
+                    // Sair do modo de edição
+                    toggleEditProfissional();
+                } else {
+                    new Notify({
+                        status: 'error',
+                        title: 'Erro!',
+                        text: result.message,
+                        effect: 'fade',
+                        speed: 300,
+                        autoclose: true,
+                        autotimeout: 3000,
+                        position: 'right top'
                     });
                 }
-            });
-            
-            // Coletar preços atualizados
-            const novosPrecos = {};
-            const precoInputs = document.querySelectorAll('.preco-edit');
-            novosPrecos.online = precoInputs[0].value.trim();
-            novosPrecos.domiciliar = precoInputs[1].value.trim();
-            
-            // Atualizar dados locais
-            dadosProfissionais.regioes = novasRegioes;
-            dadosProfissionais.formacao = novaFormacao;
-            dadosProfissionais.precos = novosPrecos;
-            
-            // Em uma aplicação real, você enviaria esses dados para o servidor
-            // Aqui apenas simulamos o salvamento
-            console.log('Dados profissionais a serem salvos:', dadosProfissionais);
-            
-            // Mostrar mensagem de sucesso
-            new Notify({
-                status: 'success',
-                title: 'Sucesso!',
-                text: 'Informações profissionais salvas com sucesso!',
-                effect: 'fade',
-                speed: 300,
-                autoclose: true,
-                autotimeout: 3000,
-                position: 'right top'
-            });
-            
-            // Sair do modo de edição
-            toggleEditProfissional();
+            } catch (error) {
+                console.error('Erro:', error);
+                new Notify({
+                    status: 'error',
+                    title: 'Erro!',
+                    text: 'Erro ao salvar informações profissionais',
+                    effect: 'fade',
+                    speed: 300,
+                    autoclose: true,
+                    autotimeout: 3000,
+                    position: 'right top'
+                });
+            }
         }
     </script>
 
