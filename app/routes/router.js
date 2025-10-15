@@ -9,6 +9,7 @@ var  {validarCPF, validarCEP, validarConselho, validarUf, converterParaMysql,
 
 /*autenticação*/
 const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../model/autenticador_middleware");
+const { verificarEmailVerificado } = require("../model/verificarEmail_middleware");
 
 const usuarioController = require("../controllers/usuarioController");
 
@@ -22,7 +23,7 @@ router.get("/", function (req, res) {/**página inicial */
 
 
 /**página logado */
-router.get("/logado-user-pac", verificarUsuAutenticado, function (req, res) {
+router.get("/logado-user-pac", verificarUsuAutenticado, verificarEmailVerificado, function (req, res) {
         res.render("pages/logado-user-pac.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
 });
 
@@ -66,8 +67,8 @@ const { idEspecialista, tipoAtendimento } = req.query;
   
 });*/
 
-router.get('/agenda-online', usuarioController.GerarProximosDias);
-router.get('/agenda-domiciliar', usuarioController.GerarProximosDias);
+router.get('/agenda-online', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
+router.get('/agenda-domiciliar', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
 
 /*router.get('/agenda-domiciliar', (req, res) => {
   const { tipo_atendimento, id_especialista } = req.query;
@@ -207,6 +208,10 @@ router.post("/atualizar-avaliacao", usuarioController.atualizarAvaliacao);
 router.get("/homeprofs", function (req, res) {
     res.render("pages/homeprofs.ejs");
 });
+
+/**Rotas de verificação de email */
+router.get("/verificar-email", usuarioController.verificarEmail);
+router.post("/reenviar-email", usuarioController.reenviarEmailVerificacao);
 
 /**Rota de logout */
 router.get("/sair", function (req, res) {

@@ -37,11 +37,21 @@ gravarUsuAutenticado = async (req, res, next) => {
 
         if(total == 1){
             if(bcrypt.compareSync(dadosForm.senha_usuario, results[0].senha_usuario)){
-                var autenticado={
-                    autenticado: results[0].nome_usuario,
-                    id: results[0].id_usuario,
-                    tipo: parseInt(results[0].tipo_usuario),
-                };
+                // Verificar se o email foi verificado
+                if (!results[0].email_verificado) {
+                    req.session.emailNaoVerificado = {
+                        email: results[0].email_usuario,
+                        nome: results[0].nome_usuario,
+                        tipo: parseInt(results[0].tipo_usuario)
+                    };
+                    var autenticado = { autenticado: null, id: null, tipo: null };
+                } else {
+                    var autenticado={
+                        autenticado: results[0].nome_usuario,
+                        id: results[0].id_usuario,
+                        tipo: parseInt(results[0].tipo_usuario),
+                    };
+                }
                 console.log('Usuário autenticado:', autenticado);
             }
         }

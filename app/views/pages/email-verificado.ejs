@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verificado - InovaCare</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="container-geral">
+        <section class="container container-esquerda">
+            <h2 class="primary-title">✅ Email Verificado!</h2>
+            <p class="sub-title">Conta ativada com sucesso</p>
+            
+            <section class="form-log">
+                <div style="text-align: center; margin: 20px 0;">
+                    <p>Sua conta foi ativada com sucesso!</p>
+                    <p>Agora você pode fazer login e acessar todos os recursos do InovaCare.</p>
+                </div>
+                
+                <section class="link-btn">
+                    <% if (typeof tipoUsuario !== 'undefined' && tipoUsuario === 2) { %>
+                        <a href="/profissional/login-prof" class="btn-confirmar">Fazer Login</a>
+                    <% } else { %>
+                        <a href="/login-pac" class="btn-confirmar">Fazer Login</a>
+                    <% } %>
+                </section>
+            </section>
+        </section>
+        
+        <section class="container container-direita">
+            <section class="text">
+                <h2 class="primary-title">Bem-vindo ao InovaCare!</h2>
+                <p>Sua conta está pronta! Faça login e comece a cuidar da sua saúde.</p>
+            </section>
+        </section>
+    </section>
+</body>
+</html>

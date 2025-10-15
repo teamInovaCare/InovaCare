@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Não Verificado - InovaCare</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="container-geral">
+        <section class="container container-esquerda">
+            <section class="container-titulo">
+                <a href="/login-pac" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </section>
+            
+            <h2 class="primary-title">⚠️ Email Não Verificado</h2>
+            <p class="sub-title">Verificação necessária</p>
+            
+            <section class="form-log">
+                <div style="text-align: center; margin: 20px 0;">
+                    <p>Olá <strong><%= nome %></strong>!</p>
+                    <p>Você precisa verificar seu email:</p>
+                    <p><strong><%= email %></strong></p>
+                    <p>Verifique sua caixa de entrada e clique no link de verificação.</p>
+                </div>
+                
+                <section class="link-btn">
+                    <button onclick="reenviarEmail()" class="btn-confirmar">Reenviar Email</button>
+                    <a href="/login-pac" class="mudar-senha">Voltar ao Login</a>
+                </section>
+            </section>
+        </section>
+        
+        <section class="container container-direita">
+            <section class="text">
+                <h2 class="primary-title">Verificação Necessária</h2>
+                <p>Para sua segurança, precisamos verificar seu email antes de acessar o InovaCare.</p>
+            </section>
+        </section>
+    </section>
+
+    <script>
+        async function reenviarEmail() {
+            try {
+                const response = await fetch('/reenviar-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: '<%= email %>' })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    new Notify({ status: 'success', title: 'Email reenviado!', text: result.message, effect: 'fade', speed: 300, customClass: null, customIcon: null, showIcon: true, showCloseButton: true, autoclose: true, autotimeout: 3000, gap: 20, distance: 20, type: 1, position: 'right top' });
+                } else {
+                    new Notify({ status: 'error', title: 'Erro', text: result.message, effect: 'fade', speed: 300, customClass: null, customIcon: null, showIcon: true, showCloseButton: true, autoclose: true, autotimeout: 3000, gap: 20, distance: 20, type: 1, position: 'right top' });
+                }
+            } catch (error) {
+                new Notify({ status: 'error', title: 'Erro', text: 'Erro ao reenviar email', effect: 'fade', speed: 300, customClass: null, customIcon: null, showIcon: true, showCloseButton: true, autoclose: true, autotimeout: 3000, gap: 20, distance: 20, type: 1, position: 'right top' });
+            }
+        }
+    </script>
+</body>
+</html>

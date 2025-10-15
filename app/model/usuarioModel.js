@@ -711,6 +711,62 @@ const usuarioModel = {
             console.log(error);
             throw error;
         }
+    },
+
+    /**Salvar token de verificação de email */
+    salvarTokenVerificacao: async (idUsuario, token) => {
+        try {
+            const expiracao = new Date();
+            expiracao.setHours(expiracao.getHours() + 24);
+            
+            const [resultado] = await pool.query(
+                `UPDATE usuarios SET token_verificacao = ?, token_expiracao = ? WHERE id_usuario = ?`,
+                [token, expiracao, idUsuario]
+            );
+            return { success: true };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+
+    /**Verificar email com token */
+    verificarEmail: async (token) => {
+        try {
+            const [resultado] = await pool.query(
+                `SELECT id_usuario FROM usuarios 
+                 WHERE token_verificacao = ? AND token_expiracao > NOW() AND email_verificado = FALSE`,
+                [token]
+            );
+            
+            if (resultado.length > 0) {
+                await pool.query(
+                    `UPDATE usuarios SET email_verificado = TRUE, token_verificacao = NULL, token_expiracao = NULL 
+                     WHERE id_usuario = ?`,
+                    [resultado[0].id_usuario]
+                );
+                return { success: true, idUsuario: resultado[0].id_usuario };
+            }
+            
+            return { success: false, message: 'Token inválido ou expirado' };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+
+    /**Verificar se email está verificado */
+    isEmailVerificado: async (idUsuario) => {
+        try {
+            const [resultado] = await pool.query(
+                `SELECT email_verificado FROM usuarios WHERE id_usuario = ?`,
+                [idUsuario]
+            );
+            return resultado[0]?.email_verificado || false;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
     }
 
 

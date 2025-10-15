@@ -330,6 +330,28 @@ input[type= "submit"]:hover{
     color: #f5a152;
     border:solid 1px #f5a152;
 }
+
+/*Botão confirmar - mesmo estilo do submit*/
+.btn-confirmar {
+    padding: 10px;
+    font-size: 16px;
+    width: 60%;
+    font-weight: 700;
+    cursor: pointer;
+    background-color: #f5a152;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-confirmar:hover {
+    background-color: #fff;
+    color: #f5a152;
+    border: solid 1px #f5a152;
+}
  
 
 /*cor dos ícones da tela de login*/
