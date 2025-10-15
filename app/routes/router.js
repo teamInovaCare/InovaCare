@@ -60,13 +60,26 @@ router.post("/filtro-medicos", (req,res)=>{
     usuarioController.filtroMedicos(req,res);
 })
 
-router.get("c", function (req, res) {/**agendamento online */
-    res.render("pages/agenda-online.ejs")
-});
 
-router.get("/agenda-domiciliar", function (req, res) {/**agendamento domiciliar */
-    res.render("pages/agenda-domiciliar.ejs")
-});
+
+/*router.get('/agenda-online', (req, res) => {
+const { idEspecialista, tipoAtendimento } = req.query;
+  console.log(idEspecialista, tipoAtendimento);
+  res.render("pages/agenda-online.ejs", usuarioController.GerarProximosDias)
+  
+});*/
+
+router.get('/agenda-online', usuarioController.GerarProximosDias);
+router.get('/agenda-domiciliar', usuarioController.GerarProximosDias);
+
+/*router.get('/agenda-domiciliar', (req, res) => {
+  const { tipo_atendimento, id_especialista } = req.query;
+  console.log(tipo_atendimento, id_especialista);
+  res.render("pages/agenda-domiciliar.ejs")
+  // lógica para buscar os dados no banco
+});*/
+
+
 
 router.get("/consultas", function (req, res) {/**Minhas consultas */
     res.render("pages/consultas.ejs")
@@ -86,9 +99,7 @@ router.get("/agenda", function (req, res) {
     res.render("pages/agenda.ejs");
 });
 
-router.get("/agenda-online", function (req, res) {
-    res.render("pages/agenda-online.ejs");
-});
+
 
 router.get("/agenda-domiciliar", function (req, res) {
     res.render("pages/agenda-domiciliar.ejs");

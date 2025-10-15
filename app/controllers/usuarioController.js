@@ -494,6 +494,69 @@ const usuarioController = {
     }
   },
 
+  /**idEspecialista, tipoAtendimento */
+
+  GerarProximosDias: async (req, res) => {
+    try {
+  
+      const idEspecialista = req.query.id_especialista;
+      const tipoAtendimento = parseInt(req.query.tipo_atendimento);
+
+ 
+      // Busca os dias da semana em que o especialista atende
+      const disponibilidade = await usuarioModel.Selectagenda(idEspecialista, tipoAtendimento);
+      console.log('Disponibilidade:', disponibilidade);
+ 
+      // Extrai só os números dos dias da semana
+      const diasProcurados = disponibilidade.map(item => item.dia_semana);
+ 
+      // Array que vai guardar as datas válidas
+      const proximos15Dias = [];
+ 
+      // Gera os próximos 15 dias
+      for (let i = 0; i < 30; i++) {
+        const data = new Date();
+        data.setDate(data.getDate() + i);
+ 
+        const diaDaSemana = data.getDay(); // 0 = domingo, 1 = segunda, etc.
+ 
+        // Se o dia da semana está entre os dias procurados
+        if (diasProcurados.includes(diaDaSemana)) {
+ 
+          // Verifica se o tipo de atendimento bate (1 = online, 2 = domiciliar)
+          const tipo = parseInt(disponibilidade.find(item => item.dia_semana === diaDaSemana)?.tipo_atendimento);
+ 
+          if (tipo === parseInt(tipoAtendimento)) {
+            const dia = String(data.getDate()).padStart(2, '0');
+            const mes = String(data.getMonth() + 1).padStart(2, '0');
+            const ano = data.getFullYear();
+ 
+            proximos15Dias.push(`${dia}/${mes}/${ano}`);
+          }
+        }
+      }
+ 
+      if(tipoAtendimento ==1){
+      res.render('pages/agenda-online', {
+      especialista: idEspecialista,
+      tipo_atendimento: tipoAtendimento,
+      dias_disponiveis: proximos15Dias
+    });
+      }else if(tipoAtendimento ==2){
+      res.render('pages/agenda-domiciliar', {
+      especialista: idEspecialista,
+      tipo_atendimento: tipoAtendimento,
+      dias_disponiveis: proximos15Dias
+    });
+      }
+      
+ 
+    } catch (error) {
+      console.error('Erro ao gerar os dias disponíveis:', error);
+      return res.status(500).json({ message: 'Erro interno ao gerar os dias disponíveis.' });
+    }
+  }
+
 };
 
 

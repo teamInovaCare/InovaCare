@@ -350,7 +350,7 @@ const usuarioModel = {
     findMedicoFiltro: async (cidade_local, nome_especialidade, nome_usuario, tipo_atendimento) => {
   try {
     let query = `
-      SELECT nome_usuario, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
+      SELECT nome_usuario, especialistas.id_especialista, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
       FROM usuarios
       INNER JOIN especialistas ON usuarios.id_usuario = especialistas.id_usuario
       INNER JOIN disponibilidade_especialista ON disponibilidade_especialista.id_especialista = especialistas.id_especialista
@@ -448,7 +448,24 @@ const usuarioModel = {
                 connection.release();
             }
         }
-    }
+    },
+
+    /**Buscando a agenda para gerar as datas - dias da semana*/
+    Selectagenda: async (idEspecialista, tipoAtendimento) => {
+        try {
+          const [rows] = await pool.query(
+            `SELECT id_disponibilidade_especialista, dia_semana, tipo_atendimento
+             FROM disponibilidade_especialista
+             WHERE id_especialista = ?
+             AND tipo_atendimento = ?`,
+            [idEspecialista, tipoAtendimento]
+          );
+          return rows;
+        } catch (error) {
+          console.error('Erro ao buscar agenda:', error);
+          throw error;
+        }
+      }
 
 
 };
