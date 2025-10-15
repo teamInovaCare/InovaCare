@@ -350,7 +350,7 @@ const usuarioModel = {
     findMedicoFiltro: async (cidade_local, nome_especialidade, nome_usuario, tipo_atendimento) => {
   try {
     let query = `
-      SELECT usuarios.id_usuario, nome_usuario, especialistas.id_especialista, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
+      SELECT usuarios.id_usuario, nome_usuario, usuarios.foto_usuario, especialistas.id_especialista, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
       FROM usuarios
       INNER JOIN especialistas ON usuarios.id_usuario = especialistas.id_usuario
       INNER JOIN disponibilidade_especialista ON disponibilidade_especialista.id_especialista = especialistas.id_especialista
@@ -383,6 +383,14 @@ const usuarioModel = {
     }
 
     const [resultado] = await pool.query(query, params);
+    
+    // Processar fotos para base64
+    resultado.forEach(medico => {
+      if (medico.foto_usuario && Buffer.isBuffer(medico.foto_usuario)) {
+        medico.foto_usuario = `data:image/jpeg;base64,${medico.foto_usuario.toString('base64')}`;
+      }
+    });
+    
     return { success: true, data: resultado };
 
   } catch (error) {
