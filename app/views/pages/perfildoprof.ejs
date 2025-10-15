@@ -207,19 +207,18 @@
                     <section class="nome-profissional"><%= profissional.nome_usuario %></section>
                     <section class="crm-profissional"><%= profissional.tipo_registro %>-<%= profissional.num_registro_especialista %></section>
                     <section class="avaliacao-geral" style="text-align: center; margin-top: 10px;">
-                        <section class="estrelas" style="margin-bottom: 5px;">
-                            <% const media = parseFloat(mediaAvaliacoes.media); %>
-                            <% for (let i = 1; i <= 5; i++) { %>
-                                <% if (i <= Math.floor(media)) { %>
-                                    <i class="bi bi-star-fill" style="color: #ffc107;"></i>
-                                <% } else if (i - 0.5 <= media) { %>
-                                    <i class="bi bi-star-half" style="color: #ffc107;"></i>
-                                <% } else { %>
-                                    <i class="bi bi-star" style="color: #ffc107;"></i>
-                                <% } %>
+                        <% const media = parseFloat(mediaAvaliacoes.media); %>
+                        <% for (let i = 1; i <= 5; i++) { %>
+                            <% if (i <= Math.floor(media)) { %>
+                                <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <% } else if (i - 0.5 <= media) { %>
+                                <i class="bi bi-star-half" style="color: #ffc107;"></i>
+                            <% } else { %>
+                                <i class="bi bi-star" style="color: #ffc107;"></i>
                             <% } %>
-                        </section>
-                        <section class="nota-avaliacao" style="font-size: 14px; color: #666;"><%= mediaAvaliacoes.media %> (<%= mediaAvaliacoes.total %> avaliações)</section>
+                        <% } %>
+                        <br>
+                        <section style="font-size: 14px; color: #666;"><%= mediaAvaliacoes.total %> avaliações</section>
                     </section>
                 </section>
                 <section class="dir-profissional">
@@ -255,7 +254,7 @@
                 <button class="btn-avaliar" id="btnAvaliar">Avaliar</button>
             <% } else if (!usuarioLogado) { %>
                 <p style="text-align: center; color: #666; margin: 20px 0;">
-                    <a href="/login-pac" style="color: #007bff; text-decoration: none;">Faça login</a> para avaliar este profissional
+                    <a href="/login-pac?redirect=<%= encodeURIComponent('/perfildoprof/' + profissional.id_usuario) %>" style="color: #007bff; text-decoration: none;">Faça login</a> para avaliar este profissional
                 </p>
             <% } %>
         

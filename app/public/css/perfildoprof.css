@@ -97,9 +97,8 @@ body {
 }
 
 .avaliacao-geral {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: block;
+    text-align: center;
     margin-bottom: 1rem;
 }
 

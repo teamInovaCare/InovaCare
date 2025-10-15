@@ -311,9 +311,16 @@ const usuarioController = {
       console.log('Dados da sessão:', req.session.autenticado);
       console.log('Tipo do usuário:', req.session.autenticado.tipo, typeof req.session.autenticado.tipo);
 
+      // Verificar se há URL de redirecionamento
+      const redirectUrl = req.query.redirect || req.body.redirect;
+      
       // Verificar tipo de usuário e redirecionar adequadamente
       if (req.session.autenticado.tipo == 1) {
-        // Paciente - redirecionar para home do paciente
+        // Paciente - verificar se há redirecionamento
+        if (redirectUrl) {
+          console.log('Redirecionando paciente para:', redirectUrl);
+          return res.redirect(redirectUrl);
+        }
         console.log('Redirecionando paciente para logado-user-pac');
         return res.render("pages/logado-user-pac", {
           listaErros: erros,
