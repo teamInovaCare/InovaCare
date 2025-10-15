@@ -735,13 +735,13 @@ const usuarioModel = {
         try {
             const [resultado] = await pool.query(
                 `SELECT id_usuario FROM usuarios 
-                 WHERE token_verificacao = ? AND token_expiracao > NOW() AND email_verificado = FALSE`,
+                 WHERE token_verificacao = ? AND token_expiracao > NOW() AND (email_verificado = 0 OR email_verificado = FALSE)`,
                 [token]
             );
             
             if (resultado.length > 0) {
                 await pool.query(
-                    `UPDATE usuarios SET email_verificado = TRUE, token_verificacao = NULL, token_expiracao = NULL 
+                    `UPDATE usuarios SET email_verificado = 1, token_verificacao = NULL, token_expiracao = NULL 
                      WHERE id_usuario = ?`,
                     [resultado[0].id_usuario]
                 );
@@ -762,7 +762,7 @@ const usuarioModel = {
                 `SELECT email_verificado FROM usuarios WHERE id_usuario = ?`,
                 [idUsuario]
             );
-            return resultado[0]?.email_verificado || false;
+            return resultado[0]?.email_verificado == 1 || resultado[0]?.email_verificado === true;
         } catch (error) {
             console.log(error);
             return false;
