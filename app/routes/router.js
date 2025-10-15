@@ -225,6 +225,21 @@ router.get("/sair", function (req, res) {
     });
 });
 
+router.get("/prontuario", function (req, res) {
+    res.render("pages/prontuario.ejs");
+});
+
+router.get("/novo-prontuario", function (req, res) {
+    res.render("pages/novo-prontuario.ejs");
+});
+
+router.get("/receita", function (req, res) {
+    res.render("pages/receita.ejs");
+});
+
+router.get("/novo-exame", function (req, res) {
+    res.render("pages/novo-exame.ejs");
+});
 
 module.exports = router;
 
