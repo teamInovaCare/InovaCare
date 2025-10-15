@@ -415,24 +415,31 @@ const usuarioModel = {
             // Atualizar tabela especialistas
             const dataNascimentoFormatada = moment(dadosEspecialista.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
             
-            await connection.query(
-                `UPDATE especialistas SET 
+            let queryEspecialista = `UPDATE especialistas SET 
                  dt_nasc_especialista = ?, logradouro_especialista = ?, num_resid_especialista = ?, 
                  complemento_especialista = ?, bairro_especialista = ?, cidade_especialista = ?, 
-                 uf_especialista = ?, cep_especialista = ?
-                 WHERE id_usuario = ?`,
-                [
-                    dataNascimentoFormatada,
-                    dadosEspecialista.endereco,
-                    dadosEspecialista.numero,
-                    dadosEspecialista.complemento,
-                    dadosEspecialista.bairro,
-                    dadosEspecialista.cidade,
-                    dadosEspecialista.uf,
-                    dadosEspecialista.cep,
-                    idUsuario
-                ]
-            );
+                 uf_especialista = ?, cep_especialista = ?`;
+            
+            let paramsEspecialista = [
+                dataNascimentoFormatada,
+                dadosEspecialista.endereco,
+                dadosEspecialista.numero,
+                dadosEspecialista.complemento,
+                dadosEspecialista.bairro,
+                dadosEspecialista.cidade,
+                dadosEspecialista.uf,
+                dadosEspecialista.cep
+            ];
+            
+            if (dadosEspecialista.especialidade) {
+                queryEspecialista += `, id_especialidade = ?`;
+                paramsEspecialista.push(dadosEspecialista.especialidade);
+            }
+            
+            queryEspecialista += ` WHERE id_usuario = ?`;
+            paramsEspecialista.push(idUsuario);
+            
+            await connection.query(queryEspecialista, paramsEspecialista);
 
             await connection.commit();
             return { success: true };

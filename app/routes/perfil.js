@@ -308,7 +308,7 @@ router.post('/atualizar-prof', uploadFile('inputFoto'), async (req, res) => {
             });
         }
 
-        const { nome, email, cpf, dataNascimento, cep, endereco, numero, complemento, bairro, cidade, uf } = req.body;
+        const { nome, email, cpf, dataNascimento, especialidade, cep, endereco, numero, complemento, bairro, cidade, uf } = req.body;
         
         console.log('Dados recebidos no servidor:', req.body);
         console.log('Nome:', nome, 'Email:', email);
@@ -322,12 +322,22 @@ router.post('/atualizar-prof', uploadFile('inputFoto'), async (req, res) => {
             });
         }
 
+        // Verificar se o usuário é um especialista
+        const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
+        if (!dadosUsuario || !dadosUsuario.id_especialista) {
+            return res.status(400).json({
+                success: false,
+                message: 'Usuário não é um especialista'
+            });
+        }
+
         // Dados para atualização
         const dadosAtualizacao = {
             nome,
             email,
             cpf,
             dataNascimento,
+            especialidade,
             cep,
             endereco,
             numero,
@@ -345,15 +355,6 @@ router.post('/atualizar-prof', uploadFile('inputFoto'), async (req, res) => {
         } else if (req.file) {
             const base64 = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
             dadosAtualizacao.foto = base64;
-        }
-
-        // Verificar se o usuário é um especialista
-        const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
-        if (!dadosUsuario || !dadosUsuario.id_especialista) {
-            return res.status(400).json({
-                success: false,
-                message: 'Usuário não é um especialista'
-            });
         }
 
         // Atualizar no banco de dados

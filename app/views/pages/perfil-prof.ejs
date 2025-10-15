@@ -146,7 +146,16 @@
 
                         <section class="conjunto">
                             <section class="ttl-campo">Especialidade:</section>
-                            <input type="text" class="campo" name="especialidade" value="<%= usuario.especialidade %>" readonly>
+                            <input type="text" class="campo campo-especialidade-display" name="especialidadeDisplay" value="<%= usuario.especialidade %>" readonly>
+                            <select class="campo campo-especialidade" name="especialidade" style="display: none;" disabled>
+                                <option value="1" <%= usuario.especialidade === 'Clínico Geral' ? 'selected' : '' %>>Clínico Geral</option>
+                                <option value="2" <%= usuario.especialidade === 'Fisioterapeuta' ? 'selected' : '' %>>Fisioterapeuta</option>
+                                <option value="3" <%= usuario.especialidade === 'Fonoaudiólogo' ? 'selected' : '' %>>Fonoaudiólogo</option>
+                                <option value="4" <%= usuario.especialidade === 'Nutricionista' ? 'selected' : '' %>>Nutricionista</option>
+                                <option value="5" <%= usuario.especialidade === 'Psicólogo' ? 'selected' : '' %>>Psicólogo</option>
+                                <option value="6" <%= usuario.especialidade === 'Enfermeiro' ? 'selected' : '' %>>Enfermeiro</option>
+                                <option value="7" <%= usuario.especialidade === 'Terapeuta Ocupacional' ? 'selected' : '' %>>Terapeuta Ocupacional</option>
+                            </select>
                         </section>
 
                         <section class="conjunto">
@@ -262,14 +271,23 @@
             const enderecoSimples = document.querySelector('.endereco-simples');
             const enderecoDetalhado = document.querySelector('.endereco-detalhado');
             const enderecoCep = document.querySelector('.endereco-cep');
+            const especialidadeDisplay = document.querySelector('.campo-especialidade-display');
+            const especialidadeSelect = document.querySelector('.campo-especialidade');
             
             if (btnEditar.textContent === 'Editar') {
                 // Entrar no modo de edição - remover readonly de todos os campos editáveis
                 campos.forEach(campo => {
-                    if (!campo.classList.contains('campo-nao-editavel') && campo.name !== 'senha' && campo.name !== 'enderecoCompleto') {
+                    if (!campo.classList.contains('campo-nao-editavel') && campo.name !== 'senha' && campo.name !== 'enderecoCompleto' && campo.name !== 'especialidadeDisplay') {
                         campo.readOnly = false;
                     }
                 });
+                
+                // Mostrar select de especialidade
+                if (especialidadeDisplay && especialidadeSelect) {
+                    especialidadeDisplay.style.display = 'none';
+                    especialidadeSelect.style.display = 'block';
+                    especialidadeSelect.disabled = false;
+                }
             } else {
                 // Sair do modo de edição - adicionar readonly de volta
                 campos.forEach(campo => {
@@ -277,6 +295,13 @@
                         campo.readOnly = true;
                     }
                 });
+                
+                // Voltar para display de especialidade
+                if (especialidadeDisplay && especialidadeSelect) {
+                    especialidadeDisplay.style.display = 'block';
+                    especialidadeSelect.style.display = 'none';
+                    especialidadeSelect.disabled = true;
+                }
             }
             
             if (btnEditar.textContent === 'Editar') {
@@ -318,7 +343,7 @@
                 email: document.querySelector('input[name="email"]').value || '',
                 cpf: document.querySelector('input[name="cpf"]').value || '',
                 dataNascimento: document.querySelector('input[name="dataNascimento"]').value || '',
-                especialidade: document.querySelector('input[name="especialidade"]').value || '',
+                especialidade: document.querySelector('select[name="especialidade"]').value || '',
                 registroMedico: document.querySelector('input[name="registroMedico"]').value || '',
                 cep: document.querySelector('input[name="cep"]').value || '',
                 endereco: document.querySelector('input[name="endereco"]').value || '',
