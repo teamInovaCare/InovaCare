@@ -4,9 +4,8 @@ const moment = require('moment');
 const { body, validationResult } = require('express-validator');
 const router = express.Router();
 
-// Usar o uploader da pasta util
-const uploadFile = require("../util/uploader")("./app/public/imagens/perfil/", 5);
-//const uploadFile = require("../util/uploader")();
+// Usar o uploader da pasta util para armazenamento em memória (base64)
+const uploadFile = require("../util/uploader")(null, 5);
 
 // Rota para exibir perfil
 router.get('/', async (req, res) => {
@@ -52,7 +51,7 @@ router.get('/', async (req, res) => {
         // Montar endereço completo
         const partes = [
             dadosUsuario.logradouro_paciente,
-            dadosUsuario.num_resid_paciente,
+            dadosUsuario.num_resid_paciente ? `nº ${dadosUsuario.num_resid_paciente}` : null,
             dadosUsuario.bairro_paciente,
             dadosUsuario.cidade_paciente,
             dadosUsuario.uf_paciente
@@ -146,12 +145,14 @@ router.post('/atualizar', uploadFile('inputFoto'), validarAtualizacao, async (re
             uf
         };
 
-        // Verificar se deve remover a foto
+        // Processar foto
         if (req.body.removerFoto === 'true') {
             dadosAtualizacao.foto = null;
         } else if (req.body.fotoBase64) {
-            // Salvar base64 da imagem
             dadosAtualizacao.foto = req.body.fotoBase64;
+        } else if (req.file) {
+            const base64 = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+            dadosAtualizacao.foto = base64;
         }
         
         // Verificar se houve erro no upload
@@ -229,6 +230,145 @@ router.post('/atualizar-medico', async (req, res) => {
 
     } catch (error) {
         console.error('Erro ao atualizar informações médicas:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Erro interno do servidor'
+        });
+    }
+});
+
+// Rota para exibir perfil do especialista
+router.get('/prof', async (req, res) => {
+    try {
+        // Verificar se o usuário está autenticado
+        if (!req.session.autenticado || !req.session.autenticado.id) {
+            return res.redirect('/login-pac');
+        }
+
+        // Buscar dados do especialista no banco
+        const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
+        
+        console.log('Dados retornados do banco:', dadosUsuario);
+        console.log('ID do usuário na sessão:', req.session.autenticado.id);
+        
+        if (!dadosUsuario) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        // Formatar data de nascimento
+        const dataNascimento = dadosUsuario.dt_nasc_especialista ? 
+            moment(dadosUsuario.dt_nasc_especialista).format('DD/MM/YYYY') : '';
+
+        // Montar endereço completo
+        const partes = [
+            dadosUsuario.logradouro_especialista,
+            dadosUsuario.num_resid_especialista ? `nº ${dadosUsuario.num_resid_especialista}` : null,
+            dadosUsuario.bairro_especialista,
+            dadosUsuario.cidade_especialista,
+            dadosUsuario.uf_especialista
+        ].filter(parte => parte && parte.trim() !== '');
+        
+        const enderecoCompleto = partes.length > 0 ? partes.join(', ') : 'Endereço não informado';
+
+        // Renderizar página do perfil profissional
+        res.render('pages/perfil-prof', {
+            usuario: {
+                nome: dadosUsuario.nome_usuario || '',
+                email: dadosUsuario.email_usuario || '',
+                cpf: dadosUsuario.cpf_usuario || '',
+                dataNascimento: dataNascimento || '',
+                especialidade: dadosUsuario.NOME_ESPECIALIDADE || '',
+                registroMedico: dadosUsuario.num_registro_especialista || '',
+                enderecoCompleto: enderecoCompleto,
+                cep: dadosUsuario.cep_especialista || '',
+                endereco: dadosUsuario.logradouro_especialista || '',
+                numero: dadosUsuario.num_resid_especialista || '',
+                complemento: dadosUsuario.complemento_especialista || '',
+                bairro: dadosUsuario.bairro_especialista || '',
+                cidade: dadosUsuario.cidade_especialista || '',
+                uf: dadosUsuario.uf_especialista || '',
+                foto: dadosUsuario.foto_usuario || null
+            }
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar perfil profissional:', error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+// Rota para atualizar perfil do especialista
+router.post('/atualizar-prof', uploadFile('inputFoto'), async (req, res) => {
+    try {
+        // Verificar se o usuário está autenticado
+        if (!req.session.autenticado || !req.session.autenticado.id) {
+            return res.status(401).json({
+                success: false,
+                message: 'Usuário não autenticado'
+            });
+        }
+
+        const { nome, email, cpf, dataNascimento, cep, endereco, numero, complemento, bairro, cidade, uf } = req.body;
+        
+        console.log('Dados recebidos no servidor:', req.body);
+        console.log('Nome:', nome, 'Email:', email);
+        
+        // Validações básicas
+        if (!nome || !email) {
+            console.log('Validação falhou - Nome:', nome, 'Email:', email);
+            return res.status(400).json({
+                success: false,
+                message: 'Nome e email são obrigatórios'
+            });
+        }
+
+        // Dados para atualização
+        const dadosAtualizacao = {
+            nome,
+            email,
+            cpf,
+            dataNascimento,
+            cep,
+            endereco,
+            numero,
+            complemento,
+            bairro,
+            cidade,
+            uf
+        };
+
+        // Processar foto
+        if (req.body.removerFoto === 'true') {
+            dadosAtualizacao.foto = null;
+        } else if (req.body.fotoBase64) {
+            dadosAtualizacao.foto = req.body.fotoBase64;
+        } else if (req.file) {
+            const base64 = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+            dadosAtualizacao.foto = base64;
+        }
+
+        // Verificar se o usuário é um especialista
+        const dadosUsuario = await usuarioModel.findUserById(req.session.autenticado.id);
+        if (!dadosUsuario || !dadosUsuario.id_especialista) {
+            return res.status(400).json({
+                success: false,
+                message: 'Usuário não é um especialista'
+            });
+        }
+
+        // Atualizar no banco de dados
+        await usuarioModel.updateEspecialista(req.session.autenticado.id, dadosAtualizacao);
+
+        // Atualizar nome na sessão
+        req.session.autenticado.autenticado = nome;
+
+        res.json({
+            success: true,
+            message: 'Perfil atualizado com sucesso'
+        });
+
+    } catch (error) {
+        console.error('Erro ao atualizar perfil do especialista:', error);
         res.status(500).json({
             success: false,
             message: 'Erro interno do servidor'

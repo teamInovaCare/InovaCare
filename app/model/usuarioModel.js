@@ -143,9 +143,13 @@ const usuarioModel = {
                         u.cpf_usuario, u.senha_usuario, u.foto_usuario,
                         p.dt_nasc_paciente, p.logradouro_paciente, p.num_resid_paciente, 
                         p.complemento_paciente, p.bairro_paciente, p.cidade_paciente, p.uf_paciente, p.cep_paciente,
-                        p.id_paciente
+                        p.id_paciente,
+                        e.*,
+                        esp.NOME_ESPECIALIDADE, esp.TIPO_REGISTRO
                  FROM usuarios u 
                  LEFT JOIN pacientes p ON u.id_usuario = p.id_usuario 
+                 LEFT JOIN especialistas e ON u.id_usuario = e.id_usuario
+                 LEFT JOIN especialidades esp ON e.ID_ESPECIALIDADE = esp.ID_ESPECIALIDADE
                  WHERE u.id_usuario = ?`,
                 [idUsuario]
             )
@@ -385,7 +389,66 @@ const usuarioModel = {
     console.log(error);
     throw error;
   }
-}
+},
+
+    /**Atualizar dados do especialista */
+    updateEspecialista: async (idUsuario, dadosEspecialista) => {
+        let connection;
+        try {
+            connection = await pool.getConnection();
+            await connection.beginTransaction();
+
+            // Atualizar tabela usuarios
+            let queryUsuarios = `UPDATE usuarios SET nome_usuario = ?, email_usuario = ?, cpf_usuario = ?`;
+            let paramsUsuarios = [dadosEspecialista.nome, dadosEspecialista.email, dadosEspecialista.cpf];
+            
+            if (dadosEspecialista.hasOwnProperty('foto')) {
+                queryUsuarios += `, foto_usuario = ?`;
+                paramsUsuarios.push(dadosEspecialista.foto);
+            }
+            
+            queryUsuarios += ` WHERE id_usuario = ?`;
+            paramsUsuarios.push(idUsuario);
+            
+            await connection.query(queryUsuarios, paramsUsuarios);
+
+            // Atualizar tabela especialistas
+            const dataNascimentoFormatada = moment(dadosEspecialista.dataNascimento, 'DD/MM/YYYY').format('YYYY-MM-DD');
+            
+            await connection.query(
+                `UPDATE especialistas SET 
+                 dt_nasc_especialista = ?, logradouro_especialista = ?, num_resid_especialista = ?, 
+                 complemento_especialista = ?, bairro_especialista = ?, cidade_especialista = ?, 
+                 uf_especialista = ?, cep_especialista = ?
+                 WHERE id_usuario = ?`,
+                [
+                    dataNascimentoFormatada,
+                    dadosEspecialista.endereco,
+                    dadosEspecialista.numero,
+                    dadosEspecialista.complemento,
+                    dadosEspecialista.bairro,
+                    dadosEspecialista.cidade,
+                    dadosEspecialista.uf,
+                    dadosEspecialista.cep,
+                    idUsuario
+                ]
+            );
+
+            await connection.commit();
+            return { success: true };
+
+        } catch (error) {
+            if (connection) {
+                await connection.rollback();
+            }
+            console.error("Erro no updateEspecialista:", error);
+            throw error;
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
+    }
 
 
 };

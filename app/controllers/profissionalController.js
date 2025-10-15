@@ -306,14 +306,7 @@ const profController = {
 
       /**Se existir resultado positivo no cadastro */
 
-      res.render("pages/logado-user-prof", {
-        erros: errors,
-        login: 1,
-        dadosNotificacao: null,
-        autenticado: req.session.autenticado,
-        valores: req.body,
-
-      });
+      res.redirect('/homepro');
 
 
 
@@ -361,15 +354,8 @@ const profController = {
 
     if (req.session.autenticado.autenticado != null) {
 
-      // Usuário autenticado corretamente
-      return res.render("pages/logado-user-prof", {
-
-        listaErros: erros,
-        autenticado: req.session.autenticado,
-        login: req.session.logado,
-        dadosNotificacao: null,
-        valores: req.body
-      });
+      // Usuário autenticado corretamente - redirecionar para home do especialista
+      return res.redirect('/homepro');
     } else {
       // Login falhou
       return res.render("pages/login-prof", {

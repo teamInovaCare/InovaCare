@@ -28,6 +28,13 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     background-color: var(--white);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 0;
+    padding: 0;
 }
  
 img {
@@ -267,6 +274,7 @@ img {
     background-color: var(--secondary-color);
     text-align: center;
     padding: 5%;
+    margin-bottom: 0;
 }
  
 .cta-title {

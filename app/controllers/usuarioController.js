@@ -308,16 +308,35 @@ const usuarioController = {
     }
 
     if (req.session.autenticado.autenticado != null) {
+      console.log('Dados da sessão:', req.session.autenticado);
+      console.log('Tipo do usuário:', req.session.autenticado.tipo, typeof req.session.autenticado.tipo);
 
-      // Usuário autenticado corretamente
-      return res.render("pages/logado-user-pac", {
-
-        listaErros: erros,
-        autenticado: req.session.autenticado,
-        login: req.session.logado,
-        dadosNotificacao: null,
-        valores: req.body
-      });
+      // Verificar tipo de usuário e redirecionar adequadamente
+      if (req.session.autenticado.tipo == 1) {
+        // Paciente - redirecionar para home do paciente
+        console.log('Redirecionando paciente para logado-user-pac');
+        return res.render("pages/logado-user-pac", {
+          listaErros: erros,
+          autenticado: req.session.autenticado,
+          login: req.session.logado,
+          dadosNotificacao: null,
+          valores: req.body
+        });
+      } else if (req.session.autenticado.tipo == 2) {
+        // Especialista - redirecionar para home do profissional
+        console.log('Redirecionando especialista para /homepro');
+        return res.redirect('/homepro');
+      } else {
+        // Tipo desconhecido - redirecionar para paciente por padrão
+        console.log('Tipo desconhecido, redirecionando para paciente');
+        return res.render("pages/logado-user-pac", {
+          listaErros: erros,
+          autenticado: req.session.autenticado,
+          login: req.session.logado,
+          dadosNotificacao: null,
+          valores: req.body
+        });
+      }
     } else {
       // Login falhou
       return res.render("pages/login-pac", {
