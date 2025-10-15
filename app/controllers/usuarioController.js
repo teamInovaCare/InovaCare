@@ -483,6 +483,14 @@ const usuarioController = {
 
       let result = await usuarioModel.findMedicoFiltro(cidade_local, nome_especialidade, nome_usuario, tipo_atendimento);
 
+      // Adicionar média de avaliações para cada médico
+      if (result && result.data) {
+        for (let medico of result.data) {
+          const mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(medico.id_especialista);
+          medico.mediaAvaliacoes = mediaAvaliacoes;
+        }
+      }
+
       res.render("pages/cg", {
         medicos: result
       });
@@ -496,6 +504,14 @@ const usuarioController = {
   listarTodosMedicos: async (req, res) => {
     try {
       let result = await usuarioModel.findMedicoFiltro(null, null, null, null);
+      
+      // Adicionar média de avaliações para cada médico
+      if (result && result.data) {
+        for (let medico of result.data) {
+          const mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(medico.id_especialista);
+          medico.mediaAvaliacoes = mediaAvaliacoes;
+        }
+      }
       
       res.render("pages/cg", {
         medicos: result
@@ -633,15 +649,32 @@ const usuarioController = {
       console.error('Erro ao criar avaliação:', error);
       res.status(500).json({ success: false, message: 'Erro interno do servidor' });
     }
+  },
+
+  atualizarAvaliacao: async (req, res) => {
+    try {
+      if (!req.session.autenticado || req.session.autenticado.tipo !== 1) {
+        return res.status(401).json({ success: false, message: 'Apenas pacientes podem editar avaliações' });
+      }
+
+      const { idAvaliacao, nota, comentario } = req.body;
+      
+      const dadosAvaliacao = {
+        nota: nota,
+        comentario: comentario
+      };
+
+      await usuarioModel.atualizarAvaliacao(idAvaliacao, dadosAvaliacao);
+      
+      res.json({ success: true, message: 'Avaliação atualizada com sucesso!' });
+      
+    } catch (error) {
+      console.error('Erro ao atualizar avaliação:', error);
+      res.status(500).json({ success: false, message: 'Erro interno do servidor' });
+    }
   }
 
 };
-
-
-
-
-
-
 
 module.exports = usuarioController;
 

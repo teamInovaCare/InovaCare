@@ -261,6 +261,14 @@ router.get('/prof', async (req, res) => {
             return res.status(404).json({ error: 'Usuário não encontrado' });
         }
 
+        // Buscar avaliações do especialista
+        let avaliacoes = [];
+        let mediaAvaliacoes = 0;
+        if (dadosUsuario.id_especialista) {
+            avaliacoes = await usuarioModel.findAvaliacoes(dadosUsuario.id_especialista);
+            mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(dadosUsuario.id_especialista);
+        }
+
         // Formatar data de nascimento
         const dataNascimento = dadosUsuario.dt_nasc_especialista ? 
             moment(dadosUsuario.dt_nasc_especialista).format('DD/MM/YYYY') : '';
@@ -299,7 +307,9 @@ router.get('/prof', async (req, res) => {
                     formacao: infoProfissional?.formacao_especialista || '',
                     regioes: infoProfissional?.regioes_atendimento ? infoProfissional.regioes_atendimento.split(',') : []
                 }
-            }
+            },
+            avaliacoes: avaliacoes,
+            mediaAvaliacoes: mediaAvaliacoes
         });
 
     } catch (error) {

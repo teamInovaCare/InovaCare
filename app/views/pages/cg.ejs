@@ -236,7 +236,11 @@
                                     <%= medico.num_registro_especialista %>
                                 </p>
                                 
-                                <p class="nota">4,9 <img src="/imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                <% if (medico.mediaAvaliacoes && medico.mediaAvaliacoes.media && !isNaN(medico.mediaAvaliacoes.media)) { %>
+                                    <p class="nota"><%= Number(medico.mediaAvaliacoes.media).toFixed(1) %> <img src="/imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                <% } else { %>
+                                    <p class="nota">Sem avaliações</p>
+                                <% } %>
                                 
                             </section>
 

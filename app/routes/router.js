@@ -201,6 +201,7 @@ router.get("/quem-somos", function (req, res) {
 
 router.get("/perfildoprof/:id", usuarioController.perfilProfissional);
 router.post("/avaliar-profissional", usuarioController.criarAvaliacao);
+router.post("/atualizar-avaliacao", usuarioController.atualizarAvaliacao);
 
 /**Página home profissional sem login */
 router.get("/homeprofs", function (req, res) {

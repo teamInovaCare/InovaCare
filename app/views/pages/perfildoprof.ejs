@@ -183,7 +183,7 @@
 
     <main class="perfil-profissional">
         <section class="voltar">
-            <a href="/index">
+            <a href="/cg">
                 <img class="botao-voltar" src="/imagens/seta-esquerda.png" alt="Voltar">
             </a>
         </section>
@@ -287,7 +287,7 @@
             <section id="avaliacoesExibidas">
                 <% if (avaliacoes && avaliacoes.length > 0) { %>
                     <% avaliacoes.forEach(avaliacao => { %>
-                        <section class="comentario">
+                        <section class="comentario" data-avaliacao-id="<%= avaliacao.id_avaliacao %>">
                             <section class="cabecalho-comentario">
                                 <section class="autor-comentario"><%= avaliacao.nome_paciente %></section>
                                 <section class="data-comentario"><%= new Date(avaliacao.data_avaliacao).toLocaleDateString('pt-BR') %></section>
@@ -302,6 +302,9 @@
                                         <% } %>
                                     <% } %>
                                 </section>
+                                <% if (usuarioLogado && usuarioLogado.id === avaliacao.id_usuario) { %>
+                                    <i class="bi bi-pencil icone-editar-comentario" onclick="editarAvaliacao('<%= avaliacao.id_avaliacao %>', <%= avaliacao.nota %>, '<%= avaliacao.comentario %>')"></i>
+                                <% } %>
                             </section>
                             <% if (avaliacao.comentario) { %>
                                 <section class="texto-comentario">
@@ -423,6 +426,100 @@
                 alert('Erro ao enviar avaliação');
             }
         });
+
+        // Função para editar avaliação
+        function editarAvaliacao(idAvaliacao, notaAtual, comentarioAtual) {
+            const comentarioElement = document.querySelector(`[data-avaliacao-id="${idAvaliacao}"]`);
+            const estrelasElement = comentarioElement.querySelector('.estrelas');
+            const textoElement = comentarioElement.querySelector('.texto-comentario');
+            
+            // Criar formulário de edição
+            const formEdicao = document.createElement('section');
+            formEdicao.className = 'form-edicao-avaliacao';
+            formEdicao.innerHTML = `
+                <section class="campo-form">
+                    <label>Nova avaliação:</label>
+                    <section class="avaliacao-form-edicao">
+                        ${[1,2,3,4,5].map(i => `<i class="bi bi-star estrela-edicao" data-value="${i}" onclick="selecionarEstrela(${i}, '${idAvaliacao}')"></i>`).join('')}
+                    </section>
+                    <input type="hidden" id="notaEdicao-${idAvaliacao}" value="${notaAtual}">
+                </section>
+                <section class="campo-form">
+                    <label>Novo comentário:</label>
+                    <textarea id="comentarioEdicao-${idAvaliacao}" placeholder="Seu comentário...">${comentarioAtual || ''}</textarea>
+                </section>
+                <button type="button" onclick="salvarEdicao('${idAvaliacao}')">Salvar</button>
+                <button type="button" onclick="cancelarEdicao('${idAvaliacao}')">Cancelar</button>
+            `;
+            
+            // Substituir conteúdo
+            comentarioElement.appendChild(formEdicao);
+            estrelasElement.style.display = 'none';
+            if (textoElement) textoElement.style.display = 'none';
+            
+            // Definir estrelas iniciais
+            atualizarEstrelasEdicao(notaAtual, idAvaliacao);
+        }
+
+        function selecionarEstrela(valor, idAvaliacao) {
+            document.getElementById(`notaEdicao-${idAvaliacao}`).value = valor;
+            atualizarEstrelasEdicao(valor, idAvaliacao);
+        }
+
+        function atualizarEstrelasEdicao(nota, idAvaliacao) {
+            const estrelas = document.querySelectorAll(`[data-avaliacao-id="${idAvaliacao}"] .estrela-edicao`);
+            estrelas.forEach((estrela, index) => {
+                if (index < nota) {
+                    estrela.classList.remove('bi-star');
+                    estrela.classList.add('bi-star-fill');
+                } else {
+                    estrela.classList.remove('bi-star-fill');
+                    estrela.classList.add('bi-star');
+                }
+            });
+        }
+
+        async function salvarEdicao(idAvaliacao) {
+            const nota = document.getElementById(`notaEdicao-${idAvaliacao}`).value;
+            const comentario = document.getElementById(`comentarioEdicao-${idAvaliacao}`).value;
+            
+            try {
+                const response = await fetch('/atualizar-avaliacao', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        idAvaliacao: idAvaliacao,
+                        nota: parseInt(nota),
+                        comentario: comentario
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Avaliação atualizada com sucesso!');
+                    location.reload();
+                } else {
+                    alert(result.message || 'Erro ao atualizar avaliação');
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao atualizar avaliação');
+            }
+        }
+
+        function cancelarEdicao(idAvaliacao) {
+            const comentarioElement = document.querySelector(`[data-avaliacao-id="${idAvaliacao}"]`);
+            const formEdicao = comentarioElement.querySelector('.form-edicao-avaliacao');
+            const estrelasElement = comentarioElement.querySelector('.estrelas');
+            const textoElement = comentarioElement.querySelector('.texto-comentario');
+            
+            formEdicao.remove();
+            estrelasElement.style.display = 'flex';
+            if (textoElement) textoElement.style.display = 'block';
+        }
     </script>
 </body>
 

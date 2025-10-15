@@ -644,8 +644,8 @@ const usuarioModel = {
     findAvaliacoes: async (idEspecialista) => {
         try {
             const [resultados] = await pool.query(
-                `SELECT a.nota, a.comentario, a.data_avaliacao,
-                        u.nome_usuario as nome_paciente
+                `SELECT a.id_avaliacao, a.nota, a.comentario, a.data_avaliacao,
+                        u.nome_usuario as nome_paciente, u.id_usuario
                  FROM avaliacoes a
                  INNER JOIN pacientes p ON a.id_paciente = p.id_paciente
                  INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
@@ -693,6 +693,20 @@ const usuarioModel = {
                 ]
             );
             return { success: true, id: resultado.insertId };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+
+    /**Atualizar avaliação existente */
+    atualizarAvaliacao: async (idAvaliacao, dadosAvaliacao) => {
+        try {
+            const [resultado] = await pool.query(
+                `UPDATE avaliacoes SET nota = ?, comentario = ? WHERE id_avaliacao = ?`,
+                [dadosAvaliacao.nota, dadosAvaliacao.comentario, idAvaliacao]
+            );
+            return { success: true, affectedRows: resultado.affectedRows };
         } catch (error) {
             console.log(error);
             throw error;
