@@ -71,7 +71,7 @@
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/homepaciente.html">
+                <a href="/index.ejs">
                     <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
@@ -227,13 +227,17 @@
                             </section>
 
                             <section class="medico-info">
+                                <a href="/perfildoprof">
                                 <p class="nome">
                                     <%= medico.nome_usuario %>
                                 </p>
+                                </a>
                                 <p class="idnt">
                                     <%= medico.num_registro_especialista %>
                                 </p>
+                                
                                 <p class="nota">4,9 <img src="/imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                
                             </section>
 
                             <section class="localidades">

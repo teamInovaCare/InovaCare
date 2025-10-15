@@ -224,8 +224,7 @@ img {
  
 .testimonials-cards {
     display: flex;
-    flex-direction: line;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 20px;
 }
  
