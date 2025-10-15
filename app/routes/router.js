@@ -208,8 +208,15 @@ router.get("/homeprofs", function (req, res) {
 });
 
 /**Rota de logout */
-router.get("/sair", limparSessao, function (req, res) {
-    res.redirect("/");
+router.get("/sair", function (req, res) {
+    const isProfessional = req.session.autenticado && req.session.autenticado.tipo === 2;
+    limparSessao(req, res, () => {
+        if (isProfessional) {
+            res.redirect("/homeprofs");
+        } else {
+            res.redirect("/");
+        }
+    });
 });
 
 
