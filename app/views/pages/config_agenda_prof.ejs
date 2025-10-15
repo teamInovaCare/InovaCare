@@ -40,34 +40,27 @@
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                <a href="/homepro">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
-            <!--Botão de pesquisa-->
+            <!--Menu profissional-->
             <ul class="menu-list">
-                <li class="dropdown">
-                    <a class="sobre" href="#">Sobre</a>
-                    <section class="dropdown-content">
-                        <a href="#">Quem somos</a>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
-                    </section>
-                </li>
-                <li><a class="agendamento" href="/">Agendamento</a></li>
-                <li><a class="consultas" href="/">Área de Consultas</a></li>
+                <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+                <li><a class="consultas" href="/consultas">Consultas</a></li>
+                <li><a class="pacientes" href="/pacientes">Pacientes</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
                 <li class="dropdown">
-                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
                     <section class="dropdown-content">
-                        <a href="/" class="btn-sair">Sair</a>
+                        <a href="/sair" class="btn-sair">Sair</a>
                     </section>
                 </li>
             </ul>
@@ -76,7 +69,7 @@
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/">
+                <a href="/homepro">
                     <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
@@ -84,28 +77,16 @@
             </section>
 
             <ul class="menu-actions">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li class="dropdown">
-                    <button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
-                    <ul class="dropdown-content">
-                        <li><a href="/" class="btn-sair-mobile">Sair</a></li>
-                    </ul>
-                </li>
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
             <!-- Menu suspenso do hambúrguer -->
             <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li class="dropdown">
-                    <a href="#">Sobre</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Quem somos</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </li>
-                <li><a href="/">Agendamento</a></li>
-                <li><a href="/">Área de Consultas</a></li>
+                <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+                <li><a href="/consultas">Consultas</a></li>
+                <li><a href="/pacientes">Pacientes</a></li>
+                <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
             </ul>
         </nav>
 
@@ -121,17 +102,13 @@
 
     </header>
 
-
-
-
-
     <!-- ------------------------------------------------------------- -->
 
 
     <!-- titulo geral da página + botão de voltar -->
 
     <section class="container-titulo">
-        <a href="/home_agenda_prof" class="bt-voltar">
+        <a href="/profissional/home_agenda_prof" class="bt-voltar">
             <i class="fas fa-arrow-left"></i> <!-- Opção com Font Awesome -->
             <!-- ou -->
 

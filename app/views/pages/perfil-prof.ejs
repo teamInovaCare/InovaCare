@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/barranav.css">
     <link rel="stylesheet" href="/css/perfil-upload.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.css">
+    <link rel="stylesheet" href="/css/perfildoprof.css">
 
     
     <!--viaCep-->
@@ -42,7 +43,7 @@
 
             <!--Menu profissional-->
             <ul class="menu-list">
-                <li><a class="agenda" href="/agenda">Minha Agenda</a></li>
+                <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
                 <li><a class="consultas" href="/consultas">Consultas</a></li>
                 <li><a class="pacientes" href="/pacientes">Pacientes</a></li>
             </ul>
@@ -76,7 +77,7 @@
 
             <!-- Menu suspenso do hambúrguer -->
             <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li><a href="/agenda">Minha Agenda</a></li>
+                <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
                 <li><a href="/consultas">Consultas</a></li>
                 <li><a href="/pacientes">Pacientes</a></li>
                 <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
@@ -240,19 +241,19 @@
                 <!-- Formação Médica -->
                 <section class="info-section">
                     <h4><i class="bi bi-mortarboard"></i> Formação Médica</h4>
-                    <div id="formacaoList">
+                    <section id="formacaoList">
                         <!-- As formações serão carregadas dinamicamente via JavaScript -->
-                    </div>
+                    </section>
 
                 </section>
                 
                 <!-- LinkedIn -->
                 <section class="info-section">
                     <h4><i class="bi bi-linkedin"></i> LinkedIn</h4>
-                    <div class="linkedin-container">
+                    <section class="linkedin-container">
                         <span class="linkedin-texto">Não informado</span>
                         <input type="url" class="edit-input linkedin-edit" placeholder="https://www.linkedin.com/in/seu-perfil" style="display: none;">
-                    </div>
+                    </section>
                 </section>
                 
             </section>
@@ -262,6 +263,50 @@
                 <button type="button" class="btn-salvar-profissional btn-salvar" onclick="salvarInformacoesProfissionais()" style="display: inline-block !important; visibility: visible !important;">Salvar alterações</button>
             </section>
         </section>
+
+        <section class="comentarios-container">
+            <h3 class="ttl-secao">Avaliações Recebidas 
+                <% if (avaliacoes && avaliacoes.length > 0 && mediaAvaliacoes && mediaAvaliacoes.media && !isNaN(mediaAvaliacoes.media)) { %>
+                    <span class="media-avaliacoes">(<%= Number(mediaAvaliacoes.media).toFixed(1) %> ★)</span>
+                <% } %>
+            </h3>
+        
+            <!-- Exibição das avaliações -->
+            <section id="avaliacoesExibidas">
+                <% if (avaliacoes && avaliacoes.length > 0) { %>
+                    <% avaliacoes.forEach(avaliacao => { %>
+                        <section class="comentario" data-avaliacao-id="<%= avaliacao.id_avaliacao %>">
+                            <section class="cabecalho-comentario">
+                                <section class="autor-comentario"><%= avaliacao.nome_paciente %></section>
+                                <section class="data-comentario"><%= new Date(avaliacao.data_avaliacao).toLocaleDateString('pt-BR') %></section>
+                            </section>
+                            <section class="avaliacao-comentario">
+                                <section class="estrelas">
+                                    <% for (let i = 1; i <= 5; i++) { %>
+                                        <% if (i <= avaliacao.nota) { %>
+                                            <i class="bi bi-star-fill"></i>
+                                        <% } else { %>
+                                            <i class="bi bi-star"></i>
+                                        <% } %>
+                                    <% } %>
+                                </section>
+
+                            </section>
+                            <% if (avaliacao.comentario) { %>
+                                <section class="texto-comentario">
+                                    <%= avaliacao.comentario %>
+                                </section>
+                            <% } %>
+                        </section>
+                    <% }); %>
+                <% } else { %>
+                    <p>Ainda não há avaliações para este profissional.</p>
+                <% } %>
+            </section>
+
+
+        </section>
+
 
 
 
@@ -580,29 +625,29 @@
             formacaoList.innerHTML = '';
             
             if (dadosProfissionais.formacao) {
-                const div = document.createElement('div');
-                div.className = 'formacao-item';
-                div.innerHTML = `
-                    <div class="formacao-texto">
+                const section = document.createElement('section');
+                section.className = 'formacao-item';
+                section.innerHTML = `
+                    <section class="formacao-texto">
                         <span>${dadosProfissionais.formacao}</span>
-                    </div>
-                    <div class="formacao-edit" style="display: none;">
+                    </section>
+                    <section class="formacao-edit" style="display: none;">
                         <textarea class="edit-input" placeholder="Descreva sua formação acadêmica e profissional">${dadosProfissionais.formacao}</textarea>
-                    </div>
+                    </section>
                 `;
-                formacaoList.appendChild(div);
+                formacaoList.appendChild(section);
             } else {
-                const div = document.createElement('div');
-                div.className = 'formacao-item';
-                div.innerHTML = `
-                    <div class="formacao-texto">
+                const section = document.createElement('section');
+                section.className = 'formacao-item';
+                section.innerHTML = `
+                    <section class="formacao-texto">
                         <span>Não informado</span>
-                    </div>
-                    <div class="formacao-edit" style="display: none;">
+                    </section>
+                    <section class="formacao-edit" style="display: none;">
                         <textarea class="edit-input" placeholder="Descreva sua formação acadêmica e profissional"></textarea>
-                    </div>
+                    </section>
                 `;
-                formacaoList.appendChild(div);
+                formacaoList.appendChild(section);
             }
             
             // Carregar LinkedIn

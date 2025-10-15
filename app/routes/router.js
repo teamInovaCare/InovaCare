@@ -9,6 +9,7 @@ var  {validarCPF, validarCEP, validarConselho, validarUf, converterParaMysql,
 
 /*autenticação*/
 const { verificarUsuAutenticado, limparSessao, gravarUsuAutenticado, verificarUsuAutorizado } = require("../model/autenticador_middleware");
+const { verificarEmailVerificado } = require("../model/verificarEmail_middleware");
 
 const usuarioController = require("../controllers/usuarioController");
 
@@ -22,7 +23,7 @@ router.get("/", function (req, res) {/**página inicial */
 
 
 /**página logado */
-router.get("/logado-user-pac", verificarUsuAutenticado, function (req, res) {
+router.get("/logado-user-pac", verificarUsuAutenticado, verificarEmailVerificado, function (req, res) {
         res.render("pages/logado-user-pac.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
 });
 
@@ -51,10 +52,7 @@ router.get("/especialidades", function (req, res) {/**listagem das especialidade
 });
 
 
-router.get("/cg", function (req, res) {/**Clínico geral */
-    res.render("pages/cg.ejs", {
-        medicos: []})
-});
+router.get("/cg", usuarioController.listarTodosMedicos);
 /**POST */
 router.post("/filtro-medicos", (req,res)=>{
     usuarioController.filtroMedicos(req,res);
@@ -69,8 +67,8 @@ const { idEspecialista, tipoAtendimento } = req.query;
   
 });*/
 
-router.get('/agenda-online', usuarioController.GerarProximosDias);
-router.get('/agenda-domiciliar', usuarioController.GerarProximosDias);
+router.get('/agenda-online', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
+router.get('/agenda-domiciliar', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
 
 /*router.get('/agenda-domiciliar', (req, res) => {
   const { tipo_atendimento, id_especialista } = req.query;
@@ -202,18 +200,29 @@ router.get("/quem-somos", function (req, res) {
     res.render("pages/quem-somos.ejs");
 });
 
-router.get("/perfildoprof", function (req, res) {
-    res.render("pages/perfildoprof.ejs");
-});
+router.get("/perfildoprof/:id", usuarioController.perfilProfissional);
+router.post("/avaliar-profissional", usuarioController.criarAvaliacao);
+router.post("/atualizar-avaliacao", usuarioController.atualizarAvaliacao);
 
 /**Página home profissional sem login */
 router.get("/homeprofs", function (req, res) {
     res.render("pages/homeprofs.ejs");
 });
 
+/**Rotas de verificação de email */
+router.get("/verificar-email", usuarioController.verificarEmail);
+router.post("/reenviar-email", usuarioController.reenviarEmailVerificacao);
+
 /**Rota de logout */
-router.get("/sair", limparSessao, function (req, res) {
-    res.redirect("/");
+router.get("/sair", function (req, res) {
+    const isProfessional = req.session.autenticado && req.session.autenticado.tipo === 2;
+    limparSessao(req, res, () => {
+        if (isProfessional) {
+            res.redirect("/homeprofs");
+        } else {
+            res.redirect("/");
+        }
+    });
 });
 
 router.get("/prontuario", function (req, res) {

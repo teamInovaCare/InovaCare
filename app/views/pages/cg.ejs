@@ -38,7 +38,7 @@
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/homepaciente.html">
+                <a href="/app/views/pages/index.ejs">
                     <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
@@ -71,7 +71,7 @@
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/homepaciente.html">
+                <a href="/app/views/pages/index.ejs">
                     <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
@@ -193,7 +193,7 @@
 
                     <section class="small-rectangle" id="smallRectangle">
 
-                        <img src="/imagens/perfil.png" alt="Imagem" class="perfil1">
+                        <img src="<%= medico.foto_usuario || '/imagens/perfil-default.svg' %>" alt="Imagem" class="perfil1">
 
                         <section class="infos">
 
@@ -215,16 +215,33 @@
                                     Agendar domiciliar
                                 </button>
                                 </a>
+                                
+                                <a>
+                                <button 
+                                    class="btn" 
+                                    name="button"
+                                    onclick="window.location='/perfildoprof/<%= medico.id_usuario %>'">
+                                    Ver Perfil
+                                </button>
+                                </a>
                             </section>
 
                             <section class="medico-info">
+                                <a href="/perfildoprof">
                                 <p class="nome">
                                     <%= medico.nome_usuario %>
                                 </p>
+                                </a>
                                 <p class="idnt">
                                     <%= medico.num_registro_especialista %>
                                 </p>
-                                <p class="nota">4,9 <img src="/imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                
+                                <% if (medico.mediaAvaliacoes && medico.mediaAvaliacoes.media && !isNaN(medico.mediaAvaliacoes.media)) { %>
+                                    <p class="nota"><%= Number(medico.mediaAvaliacoes.media).toFixed(1) %> <img src="/imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                <% } else { %>
+                                    <p class="nota">Sem avaliações</p>
+                                <% } %>
+                                
                             </section>
 
                             <section class="localidades">

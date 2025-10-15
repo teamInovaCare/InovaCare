@@ -5,6 +5,8 @@ var { validarCPF, validarCEP, converterParaMysql,
   isMaiorDeIdade, limparValorReais } = require("../helpers/validacoes");
   const moment = require('moment');
 const bcrypt = require('bcryptjs');
+const emailService = require('../util/emailService');
+const usuarioModel = require('../model/usuarioModel');
 
 
 const profController = {
@@ -295,23 +297,41 @@ const profController = {
 
 
     try {
+      console.log('Tentando criar profissional:', dadosUsuarioProf);
       let InsertProfResult = await profModel.createProf(dadosUsuarioProf);
-      req.session.autenticado = autenticado = {
-        autenticado: dadosUsuarioProf.nome_usuario,
-        id: InsertProfResult.insertId,
-        tipo: 2
-      }
+      console.log('Profissional criado:', InsertProfResult);
+      
+      // Gerar token de verificação
+      const token = emailService.gerarToken();
+      console.log('Token gerado:', token);
+      await usuarioModel.salvarTokenVerificacao(InsertProfResult.idUsuario, token);
+      
+      // Enviar email de verificação
+      console.log('Enviando email para:', dadosUsuarioProf.email_usuario);
+      await emailService.enviarEmailVerificacao(
+        dadosUsuarioProf.email_usuario,
+        dadosUsuarioProf.nome_usuario,
+        token
+      );
+      console.log('Email enviado com sucesso');
 
-
-
-      /**Se existir resultado positivo no cadastro */
-
-      res.redirect('/homepro');
+      /**Renderizar página de confirmação */
+      res.render("pages/email-enviado", {
+        erros: errors,
+        dadosNotificacao: {
+          titulo: "Cadastro realizado!",
+          mensagem: "Verifique seu email para ativar a conta.",
+          tipo: "success"
+        },
+        email: dadosUsuarioProf.email_usuario,
+        valores: req.body,
+      });
 
 
 
     } catch (errors) {
-      console.log("Erro no cadastro" + errors);
+      console.log("Erro no cadastro de profissional:", errors);
+      console.log("Stack trace:", errors.stack);
       res.render("pages/cad-dados-prof", {
         erros: null,
         dadosNotificacao: {
@@ -349,10 +369,50 @@ const profController = {
     console.log(erros)
     if (!erros.isEmpty()) {
       return res.render("pages/login-prof", { listaErros: erros, dadosNotificacao: null, valores: req.body });
+    }
 
+    // Verificar se o email não foi verificado
+    if (req.session.emailNaoVerificado) {
+      // Verificar se é paciente tentando logar como profissional
+      if (req.session.emailNaoVerificado.tipo === 1) {
+        return res.render("pages/login-prof", {
+          listaErros: null,
+          dadosNotificacao: {
+            titulo: "Acesso incorreto!",
+            mensagem: "Você é um paciente. Use o login de pacientes.",
+            tipo: "error"
+          },
+          valores: req.body
+        });
+      }
+      
+      return res.render("pages/email-nao-verificado", {
+        listaErros: null,
+        dadosNotificacao: {
+          titulo: "Email não verificado!",
+          mensagem: "Verifique seu email para ativar a conta.",
+          tipo: "warning"
+        },
+        email: req.session.emailNaoVerificado.email,
+        nome: req.session.emailNaoVerificado.nome,
+        valores: req.body
+      });
     }
 
     if (req.session.autenticado.autenticado != null) {
+      // Verificar se é paciente tentando logar como profissional
+      if (req.session.autenticado.tipo === 1) {
+        req.session.autenticado = { autenticado: null, id: null, tipo: null };
+        return res.render("pages/login-prof", {
+          listaErros: null,
+          dadosNotificacao: {
+            titulo: "Acesso incorreto!",
+            mensagem: "Você é um paciente. Use o login de pacientes.",
+            tipo: "error"
+          },
+          valores: req.body
+        });
+      }
 
       // Usuário autenticado corretamente - redirecionar para home do especialista
       return res.redirect('/homepro');
@@ -360,13 +420,12 @@ const profController = {
       // Login falhou
       return res.render("pages/login-prof", {
         listaErros: null,
-
         dadosNotificacao: {
-          titulo: "Falha ao logar!", mensagem: "Uusário e/ou senhas inválidos!", tipo: "error",
+          titulo: "Falha ao logar!", 
+          mensagem: "Usuário e/ou senhas inválidos!", 
+          tipo: "error"
         },
         valores: req.body
-
-
       });
     }
   },

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro na Verificação - InovaCare</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://kit.fontawesome.com/db9bc09a1d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="container-geral">
+        <section class="container container-esquerda">
+            <section class="container-titulo">
+                <a href="/login-pac" class="bt-voltar">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </section>
+            
+            <h2 class="primary-title">❌ Erro na Verificação</h2>
+            <p class="sub-title">Não foi possível verificar</p>
+            
+            <section class="form-log">
+                <div style="text-align: center; margin: 20px 0;">
+                    <p><%= mensagem %></p>
+                    <p>O link pode ter expirado ou já ter sido usado.</p>
+                </div>
+                
+                <section class="link-btn">
+                    <a href="/login-pac" class="btn-confirmar">Voltar ao Login</a>
+                </section>
+            </section>
+        </section>
+        
+        <section class="container container-direita">
+            <section class="text">
+                <h2 class="primary-title">Algo deu errado</h2>
+                <p>Tente fazer login novamente ou solicite um novo email de verificação.</p>
+            </section>
+        </section>
+    </section>
+</body>
+</html>

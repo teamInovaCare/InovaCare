@@ -540,20 +540,20 @@ a {
 }
  
 .slider-btn {
-    background-color: #109ea6;
+    background: #109ea6;
     color: white;
     border: none;
     padding: 8px 12px;
     cursor: pointer;
     font-size: 16px;
     border-radius: 4px;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
 }
  
 
  
 .submit-btn {
-    background-color:#f29434;
+    background: #f29434;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -562,11 +562,11 @@ a {
     border-radius: 4px;
     width: 100%;
     margin-top: 10px;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
 }
  
 .submit-btn:hover {
-    background-color: #f29434;
+    background: #e8934a;
 }
 
 
@@ -700,21 +700,27 @@ a {
 }
 
 .btn {
-    background-color: #f29434;
+    background: #f29434 !important;
+    background-image: none !important;
+    background-gradient: none !important;
     color: white;
 }
 
 .btn:hover {
-    background-color: #e8934a;
+    background: #e8934a !important;
+    background-image: none !important;
 }
 
 .btn-domiciliar {
-    background-color: #109ea6;
+    background: #109ea6 !important;
+    background-image: none !important;
+    background-gradient: none !important;
     color: white;
 }
 
 .btn-domiciliar:hover {
-    background-color: #0d7a82;
+    background: #0d7a82 !important;
+    background-image: none !important;
 }
         /* Variáveis de Cor */
         :root {
@@ -787,7 +793,8 @@ a {
 
         /* 4. Estilo do Botão Filtrar */
         .filter-button {
-            background-color: var(--cor-botao-fundo);
+            background: var(--cor-botao-fundo) !important;
+            background-image: none !important;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -796,11 +803,12 @@ a {
             font-weight: bold;
             flex-shrink: 0; 
             min-width: 100px;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
         }
         
         .filter-button:hover {
-            background-color: #009990;
+            background: #009990 !important;
+            background-image: none !important;
         }
 
         /* 5. Responsividade */
@@ -956,7 +964,9 @@ a {
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
+    background-image: none !important;
+    background-gradient: none !important;
 }
 
 

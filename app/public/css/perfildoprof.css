@@ -97,13 +97,13 @@ body {
 }
 
 .avaliacao-geral {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    display: block;
+    text-align: center;
     margin-bottom: 1rem;
 }
 
 .estrelas {
+    display: flex;
     color: var(--secondary);
     font-size: 1.2rem;
 }
@@ -124,6 +124,12 @@ body {
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--primary-light);
+}
+
+.media-avaliacoes {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
 .descricao-formacao {
@@ -310,4 +316,86 @@ body {
 /* Ocultar o campo de comentário inicialmente */
 #comentarioSection {
     display: none;
+}
+
+/* Estilos para edição de avaliação */
+.form-edicao-avaliacao {
+    background-color: var(--gray-light);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border: 2px solid var(--primary-light);
+}
+
+.form-edicao-avaliacao .campo-form {
+    margin-bottom: 1rem;
+}
+
+.form-edicao-avaliacao label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.avaliacao-form-edicao {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+.estrela-edicao {
+    font-size: 1.3rem;
+    color: #ffd51a;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.estrela-edicao:hover {
+    color: var(--secondary);
+}
+
+.form-edicao-avaliacao textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-edicao-avaliacao textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.form-edicao-avaliacao button {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-right: 0.5rem;
+}
+
+.form-edicao-avaliacao button:hover {
+    background-color: var(--text-dark);
+}
+
+.form-edicao-avaliacao button:last-child {
+    background-color: #6c757d;
+    margin-right: 0;
+}
+
+.form-edicao-avaliacao button:last-child:hover {
+    background-color: #5a6268;
 }

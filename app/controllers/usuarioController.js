@@ -8,6 +8,7 @@ var salt = bcrypt.genSaltSync(12);
 const { removeImg } = require("../util/removeImg");
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const https = require('https');
+const emailService = require('../util/emailService');
 
 
 
@@ -228,23 +229,35 @@ const usuarioController = {
 
     }
 
-    /*Sucesso ao cadastrar + usuário é  autenticado pela primeira vez*/
+    /*Sucesso ao cadastrar + envio de email de verificação*/
     try {
+      console.log('Tentando criar usuário:', dadosUsuarioPac);
       let InsertPacResult = await usuarioModel.createPac(dadosUsuarioPac);
-      req.session.autenticado = autenticado = {
-        autenticado: dadosUsuarioPac.nome_usuario,
-        id: InsertPacResult.insertId,
-        tipo: 1
-      }
+      console.log('Usuário criado:', InsertPacResult);
+      
+      // Gerar token de verificação
+      const token = emailService.gerarToken();
+      console.log('Token gerado:', token);
+      await usuarioModel.salvarTokenVerificacao(InsertPacResult.idUsuario, token);
+      
+      // Enviar email de verificação
+      console.log('Enviando email para:', dadosUsuarioPac.email_usuario);
+      await emailService.enviarEmailVerificacao(
+        dadosUsuarioPac.email_usuario,
+        dadosUsuarioPac.nome_usuario,
+        token
+      );
+      console.log('Email enviado com sucesso');
 
-      /**Se existir resultado positivo no cadastro */
-
-      res.render("pages/logado-user-pac", {
+      /**Renderizar página de confirmação */
+      res.render("pages/email-enviado", {
         erros: errors,
-        login: 1,
-        dadosNotificacao: null,
-        autenticado: req.session.autenticado,
-
+        dadosNotificacao: {
+          titulo: "Cadastro realizado!",
+          mensagem: "Verifique seu email para ativar a conta.",
+          tipo: "success"
+        },
+        email: dadosUsuarioPac.email_usuario,
         valores: req.body,
       });
 
@@ -252,7 +265,8 @@ const usuarioController = {
       /*Erro na inserçãod e dados, não no cadastro (validation Result)*/
     } catch (errors) {
 
-      console.log("Erro no cadastro" + errors);
+      console.log("Erro no cadastro:", errors);
+      console.log("Stack trace:", errors.stack);
       res.render("pages/cad-dados-pac", {
         erros: null,
         dadosNotificacao: {
@@ -307,13 +321,62 @@ const usuarioController = {
 
     }
 
+    // Verificar se o email não foi verificado
+    if (req.session.emailNaoVerificado) {
+      // Verificar se é profissional tentando logar como paciente
+      if (req.session.emailNaoVerificado.tipo === 2) {
+        return res.render("pages/login-pac", {
+          listaErros: null,
+          dadosNotificacao: {
+            titulo: "Acesso incorreto!",
+            mensagem: "Você é um profissional. Use o login de profissionais.",
+            tipo: "error"
+          },
+          valores: req.body
+        });
+      }
+      
+      return res.render("pages/email-nao-verificado", {
+        listaErros: null,
+        dadosNotificacao: {
+          titulo: "Email não verificado!",
+          mensagem: "Verifique seu email para ativar a conta.",
+          tipo: "warning"
+        },
+        email: req.session.emailNaoVerificado.email,
+        nome: req.session.emailNaoVerificado.nome,
+        valores: req.body
+      });
+    }
+
     if (req.session.autenticado.autenticado != null) {
       console.log('Dados da sessão:', req.session.autenticado);
       console.log('Tipo do usuário:', req.session.autenticado.tipo, typeof req.session.autenticado.tipo);
 
+      // Verificar se é profissional tentando logar como paciente
+      if (req.session.autenticado.tipo === 2) {
+        req.session.autenticado = { autenticado: null, id: null, tipo: null };
+        return res.render("pages/login-pac", {
+          listaErros: null,
+          dadosNotificacao: {
+            titulo: "Acesso incorreto!",
+            mensagem: "Você é um profissional. Use o login de profissionais.",
+            tipo: "error"
+          },
+          valores: req.body
+        });
+      }
+
+      // Verificar se há URL de redirecionamento
+      const redirectUrl = req.query.redirect || req.body.redirect;
+      
       // Verificar tipo de usuário e redirecionar adequadamente
       if (req.session.autenticado.tipo == 1) {
-        // Paciente - redirecionar para home do paciente
+        // Paciente - verificar se há redirecionamento
+        if (redirectUrl) {
+          console.log('Redirecionando paciente para:', redirectUrl);
+          return res.redirect(redirectUrl);
+        }
         console.log('Redirecionando paciente para logado-user-pac');
         return res.render("pages/logado-user-pac", {
           listaErros: erros,
@@ -468,28 +531,50 @@ const usuarioController = {
 
 
   filtroMedicos: async (req, res) => {
- 
     try {
- 
-      //cidade_local, nome_especialidade, nome_usuario, tipo_atendimento
- 
-     var cidade_local = req.body.local;
-     var nome_especialidade = req.body.especialidade;
-     var nome_usuario = req.body.nomeProf;
-     var tipo_atendimento = req.body.modalidade
- 
- 
-    let result = await usuarioModel.findMedicoFiltro(cidade_local, nome_especialidade,nome_usuario,tipo_atendimento  );
- 
-      res.render("pages/cg", {
-        medicos: result,
- 
+      var cidade_local = req.body.local;
+      var nome_especialidade = req.body.especialidade;
+      var nome_usuario = req.body.nomeProf;
+      var tipo_atendimento = req.body.modalidade;
+
+      let result = await usuarioModel.findMedicoFiltro(cidade_local, nome_especialidade, nome_usuario, tipo_atendimento);
+
+      // Adicionar média de avaliações para cada médico
+      if (result && result.data) {
+        for (let medico of result.data) {
+          const mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(medico.id_especialista);
+          medico.mediaAvaliacoes = mediaAvaliacoes;
+        }
       }
- 
-      );
- 
+
+      res.render("pages/cg", {
+        medicos: result
+      });
+
     } catch (error) {
-      console.log("Erro no controller findAgendaProf:", error);
+      console.log("Erro no controller filtroMedicos:", error);
+      res.status(500).json({ erro: "Falha ao acessar dados" });
+    }
+  },
+
+  listarTodosMedicos: async (req, res) => {
+    try {
+      let result = await usuarioModel.findMedicoFiltro(null, null, null, null);
+      
+      // Adicionar média de avaliações para cada médico
+      if (result && result.data) {
+        for (let medico of result.data) {
+          const mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(medico.id_especialista);
+          medico.mediaAvaliacoes = mediaAvaliacoes;
+        }
+      }
+      
+      res.render("pages/cg", {
+        medicos: result
+      });
+
+    } catch (error) {
+      console.log("Erro no controller listarTodosMedicos:", error);
       res.status(500).json({ erro: "Falha ao acessar dados" });
     }
   },
@@ -555,15 +640,165 @@ const usuarioController = {
       console.error('Erro ao gerar os dias disponíveis:', error);
       return res.status(500).json({ message: 'Erro interno ao gerar os dias disponíveis.' });
     }
+  },
+
+  perfilProfissional: async (req, res) => {
+    try {
+      const idUsuario = req.params.id;
+      
+      // Buscar dados do profissional
+      const profissional = await usuarioModel.findEspecialistaById(idUsuario);
+      
+      if (!profissional) {
+        return res.status(404).render('pages/404', { message: 'Profissional não encontrado' });
+      }
+      
+      // Buscar informações profissionais adicionais
+      const infoProfissional = await usuarioModel.findInfoEspecialistaCompleta(profissional.id_especialista);
+      
+      // Buscar avaliações
+      const avaliacoes = await usuarioModel.findAvaliacoes(profissional.id_especialista);
+      
+      // Calcular média das avaliações
+      const mediaAvaliacoes = await usuarioModel.calcularMediaAvaliacoes(profissional.id_especialista);
+      
+      res.render('pages/perfildoprof', {
+        profissional: profissional,
+        infoProfissional: infoProfissional || {},
+        avaliacoes: avaliacoes,
+        mediaAvaliacoes: mediaAvaliacoes,
+        usuarioLogado: req.session.autenticado || null
+      });
+      
+    } catch (error) {
+      console.error('Erro ao carregar perfil do profissional:', error);
+      res.status(500).render('pages/error', { message: 'Erro interno do servidor' });
+    }
+  },
+
+  criarAvaliacao: async (req, res) => {
+    try {
+      if (!req.session.autenticado || req.session.autenticado.tipo !== 1) {
+        return res.status(401).json({ success: false, message: 'Apenas pacientes podem avaliar' });
+      }
+
+      const { idEspecialista, nota, comentario } = req.body;
+      
+      // Buscar id do paciente
+      const usuario = await usuarioModel.findUserById(req.session.autenticado.id);
+      if (!usuario || !usuario.id_paciente) {
+        return res.status(400).json({ success: false, message: 'Paciente não encontrado' });
+      }
+
+      const dadosAvaliacao = {
+        idPaciente: usuario.id_paciente,
+        idEspecialista: idEspecialista,
+        nota: nota,
+        comentario: comentario
+      };
+
+      await usuarioModel.criarAvaliacao(dadosAvaliacao);
+      
+      res.json({ success: true, message: 'Avaliação salva com sucesso!' });
+      
+    } catch (error) {
+      console.error('Erro ao criar avaliação:', error);
+      res.status(500).json({ success: false, message: 'Erro interno do servidor' });
+    }
+  },
+
+  atualizarAvaliacao: async (req, res) => {
+    try {
+      if (!req.session.autenticado || req.session.autenticado.tipo !== 1) {
+        return res.status(401).json({ success: false, message: 'Apenas pacientes podem editar avaliações' });
+      }
+
+      const { idAvaliacao, nota, comentario } = req.body;
+      
+      const dadosAvaliacao = {
+        nota: nota,
+        comentario: comentario
+      };
+
+      await usuarioModel.atualizarAvaliacao(idAvaliacao, dadosAvaliacao);
+      
+      res.json({ success: true, message: 'Avaliação atualizada com sucesso!' });
+      
+    } catch (error) {
+      console.error('Erro ao atualizar avaliação:', error);
+      res.status(500).json({ success: false, message: 'Erro interno do servidor' });
+    }
+  },
+
+  verificarEmail: async (req, res) => {
+    try {
+      const { token } = req.query;
+      
+      if (!token) {
+        return res.render('pages/erro-verificacao', {
+          mensagem: 'Token de verificação não fornecido'
+        });
+      }
+
+      const resultado = await usuarioModel.verificarEmail(token);
+      
+      if (resultado.success) {
+        // Buscar dados do usuário para determinar o tipo
+        const usuario = await usuarioModel.findUserById(resultado.idUsuario);
+        const tipoUsuario = usuario ? parseInt(usuario.tipo_usuario) : 1;
+        
+        res.render('pages/email-verificado', {
+          dadosNotificacao: {
+            titulo: 'Email verificado!',
+            mensagem: 'Sua conta foi ativada com sucesso.',
+            tipo: 'success'
+          },
+          tipoUsuario: tipoUsuario
+        });
+      } else {
+        res.render('pages/erro-verificacao', {
+          mensagem: resultado.message
+        });
+      }
+    } catch (error) {
+      console.error('Erro na verificação de email:', error);
+      res.render('pages/erro-verificacao', {
+        mensagem: 'Erro interno do servidor'
+      });
+    }
+  },
+
+  reenviarEmailVerificacao: async (req, res) => {
+    try {
+      const { email } = req.body;
+      
+      const usuario = await usuarioModel.findUserEmail({ email_usuario: email });
+      
+      if (!usuario || usuario.length === 0) {
+        return res.json({ success: false, message: 'Email não encontrado' });
+      }
+      
+      if (usuario[0].email_verificado) {
+        return res.json({ success: false, message: 'Email já verificado' });
+      }
+      
+      const token = emailService.gerarToken();
+      await usuarioModel.salvarTokenVerificacao(usuario[0].id_usuario, token);
+      
+      await emailService.enviarEmailVerificacao(
+        email,
+        usuario[0].nome_usuario,
+        token
+      );
+      
+      res.json({ success: true, message: 'Email de verificação reenviado' });
+    } catch (error) {
+      console.error('Erro ao reenviar email:', error);
+      res.status(500).json({ success: false, message: 'Erro interno do servidor' });
+    }
   }
 
 };
-
-
-
-
-
-
 
 module.exports = usuarioController;
 
