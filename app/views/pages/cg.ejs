@@ -198,11 +198,22 @@
                         <section class="infos">
 
                             <section class="btn-mod">
-                                <a href="/agenda-online">
-                                    <button class="btn" name="button">Agendar online</button>
+                                <a>
+                                <button 
+                                    class="btn" 
+                                    name="button"
+                                    onclick="window.location='/agenda-online?tipo_atendimento=1&id_especialista=<%= medico.id_especialista %>'">
+                                    Agendar online
+                                </button>
                                 </a>
-                                <a href="/agenda-domiciliar">
-                                    <button class="btn-domiciliar" name="button">Agendar domiciliar</button>
+
+                                <a>
+                                <button 
+                                    class="btn-domiciliar" 
+                                    name="button"
+                                    onclick="window.location='/agenda-domiciliar?tipo_atendimento=2&id_especialista=<%= medico.id_especialista %>'">
+                                    Agendar domiciliar
+                                </button>
                                 </a>
                             </section>
 
