@@ -38,7 +38,7 @@ gravarUsuAutenticado = async (req, res, next) => {
         if(total == 1){
             if(bcrypt.compareSync(dadosForm.senha_usuario, results[0].senha_usuario)){
                 // Verificar se o email foi verificado
-                if (!results[0].email_verificado) {
+                if (results[0].email_verificado == 0 || results[0].email_verificado === false) {
                     req.session.emailNaoVerificado = {
                         email: results[0].email_usuario,
                         nome: results[0].nome_usuario,
