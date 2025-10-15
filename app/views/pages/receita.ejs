@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Receita</title>
+  <link rel="stylesheet" href="/css/novo-prontuario.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  
+  <section class="header">
+      <button class="back-btn" onclick="window.history.back()">←</button>
+      <h1>Nova Receita Médica</h1>
+  </section>
+
+  <main class="form-container">
+      <form class="prontuario-form" id="receitaForm">
+          <!-- Campos do formulário -->
+          <section class="form-section">
+              <label for="nome">Nome do paciente:</label>
+              <input type="text" id="nome" name="nome" value="Amélia Viana Peixoto" readonly>
+          </section>
+
+          <section class="form-section">
+              <label for="data">Data:</label>
+              <input type="date" id="data" name="data" readonly>
+          </section>
+
+          <section class="form-section">
+              <label for="profissional">Nome do profissional:</label>
+              <input type="text" id="profissional" name="profissional" value="Dra. Maria Silva" readonly>
+          </section>
+
+          <section class="form-section">
+              <label for="medicamentos" class="avaliacao-label">Medicamentos Prescritos:</label>
+              <textarea id="medicamentos" name="medicamentos" rows="4" placeholder="Descreva os medicamentos e doses" required></textarea>
+          </section>
+
+          <section class="form-section">
+              <label for="observacoes" class="avaliacao-label">Observações:</label>
+              <textarea id="observacoes" name="observacoes" rows="4" placeholder="Instruções adicionais" required></textarea>
+          </section>
+
+          <button type="button" class="btn gerar" id="gerarPDF">Gerar Pré-Visualização</button>
+          <button type="submit" class="btn enviar">Enviar</button>
+      </form>
+
+      <!-- Iframe para pré-visualização -->
+      <div class="preview-container">
+          <h3>Pré-Visualização do PDF:</h3>
+          <iframe id="pdfPreview" width="100%" height="400px"></iframe>
+      </div>
+  </main>
+
+  <script>
+    const { jsPDF } = window.jspdf;
+
+    // Preenche a data automaticamente
+    const dataInput = document.getElementById('data');
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2,'0');
+    const dia = String(hoje.getDate()).padStart(2,'0');
+    dataInput.value = `${ano}-${mes}-${dia}`;
+
+    // Função para gerar PDF
+    function gerarPDFBlob() {
+        const nome = document.getElementById('nome').value;
+        const data = document.getElementById('data').value;
+        const profissional = document.getElementById('profissional').value;
+        const medicamentos = document.getElementById('medicamentos').value;
+        const observacoes = document.getElementById('observacoes').value;
+
+        const doc = new jsPDF();
+        doc.setFontSize(20);
+        doc.text('Receita Médica', 105, 20, { align: 'center' });
+        doc.setFontSize(14);
+        doc.text(`Nome do paciente: ${nome}`, 20, 40);
+        doc.text(`Data: ${data}`, 20, 50);
+        doc.text(`Profissional: ${profissional}`, 20, 60);
+        doc.text('Medicamentos Prescritos:', 20, 80);
+        doc.setFontSize(12);
+        const medLines = doc.splitTextToSize(medicamentos, 170);
+        doc.text(medLines, 20, 90);
+        doc.setFontSize(14);
+        doc.text('Observações:', 20, 120);
+        doc.setFontSize(12);
+        const obsLines = doc.splitTextToSize(observacoes, 170);
+        doc.text(obsLines, 20, 130);
+
+        return doc.output('blob');
+    }
+
+    // Botão gerar pré-visualização
+    document.getElementById('gerarPDF').addEventListener('click', () => {
+        const pdfBlob = gerarPDFBlob();
+        const url = URL.createObjectURL(pdfBlob);
+        document.getElementById('pdfPreview').src = url;
+    });
+
+    // Envio do formulário
+    document.getElementById('receitaForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const pdfBlob = gerarPDFBlob(); // gera novamente para envio
+        const formData = new FormData();
+        formData.append('pdf', pdfBlob, `receita_${Date.now()}.pdf`);
+        formData.append('nome', document.getElementById('nome').value);
+        formData.append('data', document.getElementById('data').value);
+        formData.append('profissional', document.getElementById('profissional').value);
+        formData.append('medicamentos', document.getElementById('medicamentos').value);
+        formData.append('observacoes', document.getElementById('observacoes').value);
+
+        try {
+            const res = await fetch('/upload-receita', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await res.json();
+            if(result.success){
+                alert('Receita enviada com sucesso!');
+                document.getElementById('receitaForm').reset();
+                document.getElementById('pdfPreview').src = '';
+            } else {
+                alert('Erro ao enviar PDF.');
+            }
+        } catch(err){
+            console.error(err);
+            alert('Erro ao enviar PDF.');
+        }
+    });
+  </script>
+</body>
+</html>

@@ -1,263 +1,184 @@
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #fff;
-  color: #333;
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
-.icon-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
-
-h1 {
-  text-align: center;
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-}
-
-.card {
-  background: #f4f4f4;
-  border-radius: 10px;
-  padding: 1.5rem 1rem;
-  max-width: 400px;
-  margin: 0 auto;
-  box-shadow: 0 1px 3px #0001;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* ----------- Prontuário (prontugeral) específico ----------- */
-.card.prontuario-header {
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1rem;
-  position: relative;
-  padding: 1.2rem 1rem 1rem 1rem;
-}
-
-.card.prontuario-header nav[aria-label="Voltar"] {
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-}
-
-.avatar-figure {
-  margin: 0;
-}
-.card.prontuario-header .avatar-figure {
-  margin: 0 1rem 0 2.5rem;
-}
-
-.avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #eee;
-}
-.card.prontuario-header .avatar {
-  width: 56px;
-  height: 56px;
-}
-
-.paciente-info {
-  flex: 1;
-  font-size: 0.98em;
-  padding-top: 0.2rem;
-}
-
-.novo-prontuario {
-  display: flex;
-  justify-content: center;
-  margin: 2.5rem 0 1.5rem 0;
-}
-
-.main-btn {
-  background: #6ed4d2;
-  color: #222;
-  border: none;
-  width: 100%;
-  padding: 0.6rem;
-  font-size: 1.1rem;
-  border-radius: 5px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 0.5rem;
-  box-shadow: 0 2px 4px #0001;
-}
-.novo-prontuario .main-btn {
-  width: 90%;
-  padding: 0.7rem;
-  margin-top: 0;
-}
-
-.historico {
-  max-width: 400px;
-  margin: 0 auto;
-  margin-top: 2.5rem;
-  text-align: left;
-}
-
-.historico h2 {
-  text-align: center;
-  font-size: 1.18rem;
-  margin-bottom: 1.2rem;
-  font-weight: 700;
-}
-
-.ultimos {
-  color: #999;
-  font-size: 0.99rem;
-  margin-left: 0.2rem;
-  margin-bottom: 0.6rem;
-}
-
-.historico-lista {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.historico-lista li {
-  background: #ffad60;
-  color: #fff;
-  border-radius: 5px;
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.historico-lista span {
-  font-weight: 500;
-}
-
-.historico-lista time {
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-/* ----------- Fim prontugeral ----------- */
-
-.card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.7rem;
-}
-
-.card-header-right {
-  text-align: right;
-  font-size: 0.95em;
-}
-
-.download-info {
-  display: flex;
-  align-items: center;
-  background: #e5f6f6;
-  border-radius: 5px;
-  font-size: 0.85rem;
-  color: #15727b;
-  padding: 0.4rem 0.7rem;
-  gap: 0.5rem;
-}
-
-.download-info img {
-  width: 18px;
-  height: 18px;
-}
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  align-items: stretch;
-  justify-content: center;
-}
-
-.input-label {
-  font-size: 0.95rem;
-  color: #ffad60;
-  font-weight: 600;
-  margin-bottom: 0.15rem;
-}
-
-.input-file {
-  background: #ffad60;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.97rem;
-  margin-bottom: 0.3rem;
-  font-weight: 500;
-  outline: none;
-  transition: background 0.2s, color 0.2s;
-  width: 100%;
-  /* Remove default input file styles on some browsers */
-}
-
-.input-file::file-selector-button {
-  background: #ffad60;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.97rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.input-file:focus-within,
-.input-file:focus {
-  outline: 2px solid #ffc180;
-}
-
-.secondary-btn {
-  background: #ffad60;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.94rem;
-  cursor: pointer;
-  margin-top: 0.3rem;
-  font-weight: 500;
-}
-
-@media (max-width: 600px) {
-  .card, main {
-    max-width: 98vw;
-    padding: 0.5rem;
-  }
-  .card.prontuario-header, .historico {
-    max-width: 98vw;
-    padding: 0.7rem;
-  }
-  .card.prontuario-header .avatar-figure {
-    margin: 0 0.5rem 0 2.2rem;
-  }
-  .novo-prontuario .main-btn {
+/* ---------- Cabeçalho ---------- */
+.header {
     width: 100%;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
 }
+
+.back-btn {
+    position: absolute;
+    left: 30px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.header h1 {
+    color: #f47c3c;
+    font-weight: 600;
+}
+
+/* ---------- Card de informações ---------- */
+.info-card {
+    background-color: #f8f9fb;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 900px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.patient-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.patient-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.text-info p,
+.appointment-info p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* ---------- Botões ---------- */
+.buttons {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: 12px 25px;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
+
+.btn.azul {
+    background-color: #7bd0d3;
+}
+
+.btn.azul:hover {
+    background-color: #67b9bc;
+}
+
+.btn.laranja {
+    background-color: #f6a04e;
+}
+
+.btn.laranja:hover {
+    background-color: #e98e36;
+}
+
+/* ---------- RESPONSIVIDADE ---------- */
+@media (max-width: 768px) {
+    .info-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        gap: 15px;
+    }
+
+    .patient-info {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        width: 100%;
+    }
+
+    .patient-info img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .appointment-info {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+        width: 85%;
+        max-width: 400px;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px 0;
+    }
+}
+
+.form-section {
+  background: #f8f9fb;
+  border-radius: 8px;
+  padding: 25px;
+  width: 90%;
+  max-width: 700px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-group label,
+.text-group label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.info-group input,
+.text-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.text-group textarea {
+  height: 150px;
+  resize: none;
+}
+
+.btn.azul {
+  width: 100%;
+  font-size: 16px;
+}
+
