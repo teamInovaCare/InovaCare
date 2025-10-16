@@ -1,71 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nova Receita</title>
   <link rel="stylesheet" href="/css/novo-prontuario.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/barranav.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
-  
-  <section class="header">
+
+  <header>
+    <!--barra de navegação - início -->
+    <nav class="menu-desktop">
+
+      <!--Espaço para a logo-->
+      <section class="menu-logo">
+        <a href="/homepro">
+          <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+          <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+          <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+        </a>
+      </section>
+
+      <!--Menu profissional-->
+      <ul class="menu-list">
+        <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+        <li><a class="consultas" href="/consultas">Consultas</a></li>
+        <li><a class="pacientes" href="/pacientes">Pacientes</a></li>
+      </ul>
+
+
+      <ul class="menu-list-direita">
+        <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+        <li class="dropdown">
+          <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+          <section class="dropdown-content">
+            <a href="/sair" class="btn-sair">Sair</a>
+          </section>
+        </li>
+      </ul>
+
+    </nav>
+
+    <nav class="mobile-menu">
+      <section class="menu-logo">
+        <a href="/homepro">
+          <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+          <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+          <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+        </a>
+      </section>
+
+      <ul class="menu-actions">
+        <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+        <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+      </ul>
+
+      <!-- Menu suspenso do hambúrguer -->
+      <ul id="hamburger-menu" class="hamburger-menu-content">
+        <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+        <li><a href="/consultas">Consultas</a></li>
+        <li><a href="/pacientes">Pacientes</a></li>
+        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+      </ul>
+    </nav>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("hamburger-menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+    </script>
+
+  </header>
+  <main>
+
+
+
+
+    <section class="cabecalho">
       <button class="back-btn" onclick="window.history.back()">←</button>
       <h1>Nova Receita Médica</h1>
-  </section>
+    </section>
 
-  <main class="form-container">
+    <main class="form-container">
       <form class="prontuario-form" id="receitaForm">
-          <!-- Campos do formulário -->
-          <section class="form-section">
-              <label for="nome">Nome do paciente:</label>
-              <input type="text" id="nome" name="nome" value="Amélia Viana Peixoto" readonly>
-          </section>
+        <!-- Campos do formulário -->
+        <section class="form-section">
+          <label for="nome">Nome do paciente:</label>
+          <input type="text" id="nome" name="nome" value="Amélia Viana Peixoto" readonly>
+        </section>
 
-          <section class="form-section">
-              <label for="data">Data:</label>
-              <input type="date" id="data" name="data" readonly>
-          </section>
+        <section class="form-section">
+          <label for="data">Data:</label>
+          <input type="date" id="data" name="data" readonly>
+        </section>
 
-          <section class="form-section">
-              <label for="profissional">Nome do profissional:</label>
-              <input type="text" id="profissional" name="profissional" value="Dra. Maria Silva" readonly>
-          </section>
+        <section class="form-section">
+          <label for="profissional">Nome do profissional:</label>
+          <input type="text" id="profissional" name="profissional" value="Dra. Maria Silva" readonly>
+        </section>
 
-          <section class="form-section">
-              <label for="medicamentos" class="avaliacao-label">Medicamentos Prescritos:</label>
-              <textarea id="medicamentos" name="medicamentos" rows="4" placeholder="Descreva os medicamentos e doses" required></textarea>
-          </section>
+        <section class="form-section">
+          <label for="medicamentos" class="avaliacao-label">Medicamentos Prescritos:</label>
+          <textarea id="medicamentos" name="medicamentos" rows="4" placeholder="Descreva os medicamentos e doses"
+            required></textarea>
+        </section>
 
-          <section class="form-section">
-              <label for="observacoes" class="avaliacao-label">Observações:</label>
-              <textarea id="observacoes" name="observacoes" rows="4" placeholder="Instruções adicionais" required></textarea>
-          </section>
+        <section class="form-section">
+          <label for="observacoes" class="avaliacao-label">Observações:</label>
+          <textarea id="observacoes" name="observacoes" rows="4" placeholder="Instruções adicionais"
+            required></textarea>
+        </section>
 
-          <button type="button" class="btn gerar" id="gerarPDF">Gerar Pré-Visualização</button>
-          <button type="submit" class="btn enviar">Enviar</button>
+        <button type="button" class="btn gerar" id="gerarPDF">Gerar Pré-Visualização</button>
+        <button type="submit" class="btn enviar">Enviar</button>
       </form>
 
       <!-- Iframe para pré-visualização -->
-      <div class="preview-container">
-          <h3>Pré-Visualização do PDF:</h3>
-          <iframe id="pdfPreview" width="100%" height="400px"></iframe>
-      </div>
-  </main>
+      <section class="preview-container">
+        <h3>Pré-Visualização do PDF:</h3>
+        <iframe id="pdfPreview" width="100%" height="400px"></iframe>
+      </section>
+    </main>
 
-  <script>
-    const { jsPDF } = window.jspdf;
+    <script>
+      const { jsPDF } = window.jspdf;
 
-    // Preenche a data automaticamente
-    const dataInput = document.getElementById('data');
-    const hoje = new Date();
-    const ano = hoje.getFullYear();
-    const mes = String(hoje.getMonth() + 1).padStart(2,'0');
-    const dia = String(hoje.getDate()).padStart(2,'0');
-    dataInput.value = `${ano}-${mes}-${dia}`;
+      // Preenche a data automaticamente
+      const dataInput = document.getElementById('data');
+      const hoje = new Date();
+      const ano = hoje.getFullYear();
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      dataInput.value = `${ano}-${mes}-${dia}`;
 
-    // Função para gerar PDF
-    function gerarPDFBlob() {
+      // Função para gerar PDF
+      function gerarPDFBlob() {
         const nome = document.getElementById('nome').value;
         const data = document.getElementById('data').value;
         const profissional = document.getElementById('profissional').value;
@@ -90,17 +165,17 @@
         doc.text(obsLines, 20, 130);
 
         return doc.output('blob');
-    }
+      }
 
-    // Botão gerar pré-visualização
-    document.getElementById('gerarPDF').addEventListener('click', () => {
+      // Botão gerar pré-visualização
+      document.getElementById('gerarPDF').addEventListener('click', () => {
         const pdfBlob = gerarPDFBlob();
         const url = URL.createObjectURL(pdfBlob);
         document.getElementById('pdfPreview').src = url;
-    });
+      });
 
-    // Envio do formulário
-    document.getElementById('receitaForm').addEventListener('submit', async (e) => {
+      // Envio do formulário
+      document.getElementById('receitaForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const pdfBlob = gerarPDFBlob(); // gera novamente para envio
         const formData = new FormData();
@@ -112,23 +187,54 @@
         formData.append('observacoes', document.getElementById('observacoes').value);
 
         try {
-            const res = await fetch('/upload-receita', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await res.json();
-            if(result.success){
-                alert('Receita enviada com sucesso!');
-                document.getElementById('receitaForm').reset();
-                document.getElementById('pdfPreview').src = '';
-            } else {
-                alert('Erro ao enviar PDF.');
-            }
-        } catch(err){
-            console.error(err);
+          const res = await fetch('/upload-receita', {
+            method: 'POST',
+            body: formData
+          });
+          const result = await res.json();
+          if (result.success) {
+            alert('Receita enviada com sucesso!');
+            document.getElementById('receitaForm').reset();
+            document.getElementById('pdfPreview').src = '';
+          } else {
             alert('Erro ao enviar PDF.');
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Erro ao enviar PDF.');
         }
-    });
-  </script>
+      });
+    </script>
+
+  </main>
+
+  <footer class="footer">
+
+    <section class="footer-logo">
+      <img class="footer-logo-desktop" src="/imagens/logo-bblt.png" alt="Logo da Empresa">
+      <img class="footer-logo-mobile" src="/imagens/logo-extenso.png" alt="Logo da Empresa">
+      <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
+        atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de
+        saúde.
+      </p>
+    </section>
+
+    <section class="footer-links">
+      <h3 class="ttl-links">Explorar</h3>
+      <ul class="links">
+        <li><a href="#">Quem somos</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="/especialidades">Especialidades</a></li>
+        <li><a href="/consultas">Consultas</a></li>
+      </ul>
+    </section>
+
+    <section class="footer-contato">
+      <h3 class="ttl-contato">Contato</h3>
+      <p class="nmr-contato">(11) 4002-8922</p>
+    </section>
+
+  </footer>
 </body>
+
 </html>

@@ -7,21 +7,38 @@
 
 body {
   background-color: #fff;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
 }
 
-.header {
+.cabecalho {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px 0;
   position: relative;
-  background-color: #f8f9fb;
+}
+
+.bt-voltar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    color: #343a40;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 1rem;
+}
+
+.bt-voltar:hover {
+    background-color: #109EA6;
+    color: white;
+    border-color: #109EA6;
+    transform: translateX(-5px);
 }
 
 .back-btn {
@@ -33,7 +50,7 @@ body {
   cursor: pointer;
 }
 
-.header h1 {
+.cabecalho h1 {
   color: #f47c3c;
   font-weight: 600;
 }
@@ -41,7 +58,7 @@ body {
 .form-container {
   width: 90%;
   max-width: 700px;
-  margin-top: 40px;
+  margin: 40px auto;
   background-color: #f8f9fb;
   border-radius: 8px;
   padding: 30px;
