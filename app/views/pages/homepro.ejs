@@ -26,10 +26,17 @@
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
+<<<<<<< HEAD
                 <a href="/profissional/homepro">
                     <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+=======
+                <a href="profissional/homepro">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+>>>>>>> 8f7be73fb64c8c595ff0988ab7eb992ae1407a35
                 </a>
             </section>
 
@@ -56,9 +63,15 @@
         <nav class="mobile-menu">
             <section class="menu-logo">
                 <a href="/profissional/homepro">
+<<<<<<< HEAD
                     <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+=======
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+>>>>>>> 8f7be73fb64c8c595ff0988ab7eb992ae1407a35
                 </a>
             </section>
 
@@ -98,6 +111,25 @@
             <img src="/imagens/profissional mobile.png" alt="banner" class="hero-image mobile">
             <a href="/profissional/login-prof" class="hero-button">Trabalhe Conosco</a>
         </section>
+
+                <%if(autenticado.autenticado != null){
+    if(login == 1){%>
+    <script>
+      ShowNotify("Login efetuado com sucesso",
+        "Olá <%= autenticado.autenticado %>", "success", "center")
+      
+
+    </script>
+
+    <% } %>
+
+    <span>Olá <%= autenticado.autenticado %>!</span><br>
+    <p> <a href= "/sair">sair</a></p>
+
+    <% }else{ %>
+    <span>Olá visitante!</span>}
+    
+  <% } %>
  
         <!-- Seção de Vantagens/Benefícios -->
         <section class="advantages-section">

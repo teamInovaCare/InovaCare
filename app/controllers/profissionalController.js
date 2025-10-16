@@ -415,7 +415,7 @@ const profController = {
       }
 
       // Usuário autenticado corretamente - redirecionar para home do especialista
-      return res.redirect('/homepro');
+      return res.redirect('/profissional/homepro');
     } else {
       // Login falhou
       return res.render("pages/login-prof", {
