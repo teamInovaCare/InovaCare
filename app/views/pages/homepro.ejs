@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Kantumruy+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sansation:wght@400;700&family=Zen+Maru+Gothic:wght@400;500;700&family=Kantumruy+Pro:wght@400;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
     <!-- LINK DOS ICONES DA BARRA NAV -->
@@ -20,36 +23,29 @@
 <body>
 
     <header>
-
         <!--barra de navegação - início -->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-<<<<<<< HEAD
-                <a href="/profissional/homepro">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-=======
-                <a href="profissional/homepro">
+                <a href="/homepro">
                     <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
->>>>>>> 8f7be73fb64c8c595ff0988ab7eb992ae1407a35
                 </a>
             </section>
 
             <!--Menu profissional-->
             <ul class="menu-list">
-                <li><a class="agenda" href="/home_agenda_prof">Minha Agenda</a></li>
+                <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
                 <li><a class="consultas" href="/consultas">Consultas</a></li>
                 <li><a class="pacientes" href="/pacientes">Pacientes</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i
+                            class="bi bi-person-circle"></i></a></li>
                 <li class="dropdown">
                     <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
                     <section class="dropdown-content">
@@ -62,27 +58,22 @@
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/profissional/homepro">
-<<<<<<< HEAD
+                <a href="/homepro">
                     <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-=======
-                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
->>>>>>> 8f7be73fb64c8c595ff0988ab7eb992ae1407a35
                 </a>
             </section>
 
             <ul class="menu-actions">
-                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i
+                            class="bi bi-person-circle"></i></a></li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
             <!-- Menu suspenso do hambúrguer -->
             <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li><a href="/home_agenda_prof">Minha Agenda</a></li>
+                <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
                 <li><a href="/consultas">Consultas</a></li>
                 <li><a href="/pacientes">Pacientes</a></li>
                 <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
@@ -95,47 +86,24 @@
                 menu.style.display = menu.style.display === "block" ? "none" : "block";
             }
         </script>
-
-
-        <!--barra de navegação - fim ^^^ -->
-
     </header>
 
     <main>
 
-        <!-- Banner Principal -->
-        <section class="hero-section">
-            <img src="/imagens/profissional desk.png" alt="banner" class="hero-image desktop">
-            <img src="/imagens/profissional tablet.png" alt="banner" class="hero-image tablet">
-            <img src="/imagens/profissional tablet vertical.png" alt="banner" class="hero-image tablet-vertical">
-            <img src="/imagens/profissional mobile.png" alt="banner" class="hero-image mobile">
-            <a href="/profissional/login-prof" class="hero-button">Trabalhe Conosco</a>
+
+        <section class="welcome-banner">
+            <div class="welcome-content">
+                <h1>Olá, <%= autenticado.autenticado %>!</h1>
+                <p>Bem-vindo(a) à InovaCare. Explore nossos serviços e potencialize sua carreira!</p>
+            </div>
         </section>
 
-                <%if(autenticado.autenticado != null){
-    if(login == 1){%>
-    <script>
-      ShowNotify("Login efetuado com sucesso",
-        "Olá <%= autenticado.autenticado %>", "success", "center")
-      
-
-    </script>
-
-    <% } %>
-
-    <span>Olá <%= autenticado.autenticado %>!</span><br>
-    <p> <a href= "/sair">sair</a></p>
-
-    <% }else{ %>
-    <span>Olá visitante!</span>}
-    
-  <% } %>
- 
         <!-- Seção de Vantagens/Benefícios -->
         <section class="advantages-section">
             <h2 class="section-title">DESCUBRA AS VANTAGENS DE ATUAR COM A INOVACARE</h2>
-            <p class="section-subtitle">Oferecemos a você as melhores ferramentas e suporte para impulsionar sua carreira</p>
-            
+            <p class="section-subtitle">Oferecemos a você as melhores ferramentas e suporte para impulsionar sua
+                carreira</p>
+
             <!-- Agrupador dos Cards de Vantagens -->
             <section class="advantages-cards">
                 <article class="advantage-card">
@@ -160,20 +128,23 @@
                 </article>
             </section>
         </section>
- 
+
         <!-- Seção "Por que trabalhar com a InovaCare?" -->
         <section class="how-it-works-section">
             <h2 class="how-it-works-title">Por que trabalhar com a InovaCare?</h2>
             <article class="how-it-works-conteudo">
-                <p>Na rotina médica, gerir perfis, agendas e prontuários pode ser um desafio. Pensando nisso, a InovaCare criou uma plataforma que simplifica sua prática, permitindo a você gerir, organizar sua agenda de forma leve, segura e tenha acesso completo aos prontuários e histórico de consultas. Com suporte de administração, registros facilitados e gestão transparente de pagamento.</p>
+                <p>Na rotina médica, gerir perfis, agendas e prontuários pode ser um desafio. Pensando nisso, a
+                    InovaCare criou uma plataforma que simplifica sua prática, permitindo a você gerir, organizar sua
+                    agenda de forma leve, segura e tenha acesso completo aos prontuários e histórico de consultas. Com
+                    suporte de administração, registros facilitados e gestão transparente de pagamento.</p>
                 <p>Aqui a tecnologia se adapta à sua rotina, e não o contrário.</p>
             </article>
         </section>
- 
+
         <!-- Seção de Atendimentos Disponíveis -->
         <section class="services-section">
             <h2 class="section-title">CONHEÇA NOSSOS ATENDIMENTOS DISPONÍVEIS</h2>
-            
+
             <!-- Agrupador dos Cards de Atendimento -->
             <ul class="services-list">
                 <li class="service-item">
@@ -206,12 +177,12 @@
                 </li>
             </ul>
         </section>
- 
+
         <!-- Seção de Depoimentos e Soluções -->
         <section class="testimonials-section">
             <h2 class="section-title">OUVIMOS OS PROFISSIONAIS ANTES DE CRIAR A INOVACARE</h2>
             <p class="section-subtitle">Transformamos as queixas mais comuns em soluções reais para a sua prática</p>
-            
+
             <!-- Agrupador dos Cards de Depoimentos -->
             <section class="testimonials-cards">
                 <article class="testimonial-card a">
@@ -248,15 +219,16 @@
                 </article>
             </section>
         </section>
- 
+
         <!-- Call to Action Final (CTA) -->
         <section class="cta-section">
             <h2 class="cta-title">Na InovaCare, você não está sozinho</h2>
-            <p class="section-subtitle">Oferecemos suporte, organização e liberdade para que seu foco seja o cuidado. Venha crescer com a gente.</p>
+            <p class="section-subtitle">Oferecemos suporte, organização e liberdade para que seu foco seja o cuidado.
+                Venha crescer com a gente.</p>
         </section>
 
     </main>
-    
+
     <footer class="footer">
 
         <section class="footer-logo">
@@ -285,4 +257,5 @@
     </footer>
 
 </body>
+
 </html>

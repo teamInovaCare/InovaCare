@@ -19,10 +19,10 @@
   <link rel="stylesheet" href="css/footer.css">
 
   <!-- Simple Notify -->
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
-    <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
-    <script src="js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.css" />
+  <script src="https://cdn.jsdelivr.net/npm/simple-notify/dist/simple-notify.min.js"></script>
+  <script src="js/notify-script.js"></script><!--JS do Simple Notify criado por mim-->
 
 
 
@@ -32,189 +32,167 @@
 
 <body>
 
-
-  
-  
-
   <header>
 
-        <!--barra de navegação - início -->
-        <nav class="menu-desktop">
+    <!--barra de navegação - início -->
+    <nav class="menu-desktop">
 
-            <!--Espaço para a logo-->
-            <section class="menu-logo">
-                <a href="/logado-user-pac">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-                </a>
-            </section>
+      <!--Espaço para a logo-->
+      <section class="menu-logo">
+        <a href="/logado-user-pac">
+          <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+          <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+          <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+        </a>
+      </section>
 
-            <!--Botão de pesquisa-->
-            <ul class="menu-list">
-                <li class="dropdown">
-                    <a class="sobre" href="#">Sobre</a>
-                    <section class="dropdown-content">
-                        <a href="#">Quem somos</a>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
-                    </section>
-                </li>
-                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
-                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
-            </ul>
-
-
-            <ul class="menu-list-direita">
-                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
-                <li class="dropdown">
-                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
-                    <section class="dropdown-content">
-                        <a href="/sair" class="btn-sair">Sair</a>
-                    </section>
-                </li>
-            </ul>
-
-        </nav>
-
-        <nav class="mobile-menu">
-            <section class="menu-logo">
-                <a href="/logado-user-pac">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-                </a>
-            </section>
-
-            <ul class="menu-actions">
-                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
-                <li class="dropdown">
-                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
-                    <ul class="dropdown-content">
-                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
-                    </ul>
-                </li>
-                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
-            </ul>
-
-            <!-- Menu suspenso do hambúrguer -->
-            <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li class="dropdown">
-                    <a href="#">Sobre</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Quem somos</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </li>
-                <li><a href="/especialidades">Agendamento</a></li>
-                <li><a href="/consultas">Área de Consultas</a></li>
-            </ul>
-        </nav>
-
-        <script>
-            function toggleMenu() {
-                const menu = document.getElementById("hamburger-menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-            }
-        </script>
+      <!--Botão de pesquisa-->
+      <ul class="menu-list">
+        <li class="dropdown">
+          <a class="sobre" href="#">Sobre</a>
+          <section class="dropdown-content">
+            <a href="#">Quem somos</a>
+            <a href="#">Contato</a>
+            <a href="#">FAQ</a>
+          </section>
+        </li>
+        <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+        <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
+      </ul>
 
 
-        <!--barra de navegação - fim ^^^ -->
+      <ul class="menu-list-direita">
+        <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+        <li class="dropdown">
+          <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+          <section class="dropdown-content">
+            <a href="/sair" class="btn-sair">Sair</a>
+          </section>
+        </li>
+      </ul>
+
+    </nav>
+
+    <nav class="mobile-menu">
+      <section class="menu-logo">
+        <a href="/logado-user-pac">
+          <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+          <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+          <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+        </a>
+      </section>
+
+      <ul class="menu-actions">
+        <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+        <li class="dropdown">
+          <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+          <ul class="dropdown-content">
+            <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+          </ul>
+        </li>
+        <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+      </ul>
+
+      <!-- Menu suspenso do hambúrguer -->
+      <ul id="hamburger-menu" class="hamburger-menu-content">
+        <li class="dropdown">
+          <a href="#">Sobre</a>
+          <ul class="dropdown-content">
+            <li><a href="#">Quem somos</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </li>
+        <li><a href="/especialidades">Agendamento</a></li>
+        <li><a href="/consultas">Área de Consultas</a></li>
+      </ul>
+    </nav>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("hamburger-menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+    </script>
+
+
+    <!--barra de navegação - fim ^^^ -->
 
   </header>
 
-  <main>
+  <main style="min-height: 100hv;">
 
-    <section class="banner">
-      <section class="img-banner">
-        <img src="imagens/rayssa.png" alt="">
+
+
+    <!-- Boas-vindas do usuário -->
+    <% if(autenticado.autenticado !=null){ %>
+      <section class="welcome-banner">
+        <div class="welcome-content">
+          <h1>Olá, <%= autenticado.autenticado %>!</h1>
+          <p>Bem-vindo(a) à InovaCare. Estamos felizes em vê-lo(a) novamente.</p>
+        </div>
       </section>
-      <section class="banner-tablet">
-        <img src="imagens/tablet.png" alt="">
-      </section>
-
-      <a href="/especialidades" class="banner-btn">Agendar agora</a>
-
-    </section>
-
-    <section class="banner-mobile">
-      <section class="img-banner-mobile">
-        <img src="imagens/mobile.png" alt="">
-      </section>
-      <a href="/especialidades" class="btn-mobile">Agendar agora</a>
-    </section>
-
-
-    <%if(autenticado.autenticado != null){
-    if(login == 1){%>
-    <script>
-      ShowNotify("Login efetuado com sucesso",
-        "Olá <%= autenticado.autenticado %>", "success", "center")
-      
-
-    </script>
-
-    <% } %>
-
-    <span>Olá <%= autenticado.autenticado %>!</span><br>
-    <p> <a href= "/sair">sair</a></p>
-
-    <% }else{ %>
-    <span>Olá visitante!</span>}
-    
-  <% } %>
-
-
-
-
-    <section class="servicos">
-      <section class="ttl-servicos">
-        <h2>CONHEÇA NOSSOS SERVIÇOS</h2>
-      </section>
-
-      <section class="all-conjuntos">
-
-        <section class="conjunto-servicos">
-          <img src="imagens/clinico-geral.png" alt="" srcset="">
-          <p>CLÍNICO GERAL</p>
+      <% } else { %>
+        <section class="welcome-banner">
+          <div class="welcome-content">
+            <h1>Olá, visitante!</h1>
+            <p>Faça login para acessar nossos serviços.</p>
+          </div>
         </section>
-
-        <section class="conjunto-servicos">
-          <img src="imagens/fisio.png" alt="" srcset="">
-          <p>FISIOTERAPEUTA</p>
-        </section>
-
-        <section class="conjunto-servicos">
-          <img src="imagens/fono.png" alt="" srcset="">
-          <p>FONOAUDIÓLOGO</p>
-        </section>
-
-        <section class="conjunto-servicos">
-          <img src="imagens/nutri.png" alt="" srcset="">
-          <p>NUTRICIONISTA</p>
-        </section>
-
-        <section class="conjunto-servicos">
-          <img src="imagens/psico.png" alt="" srcset="">
-          <p>PSICÓLOGO</p>
-        </section>
-
-        <section class="conjunto-servicos">
-          <img src="imagens/enfermeiro.png" alt="" srcset="">
-          <p>ENFERMEIRO</p>
-        </section>
-
-        <section class="conjunto-servicos">
-          <img src="imagens/terapeuta.png" alt="" srcset="">
-          <p>TERAPEUTA OCUPACIONAL</p>
-        </section>
-
-      </section>
-
-    </section>
+        <% } %>
 
 
+
+
+          <section class="servicos">
+            <section class="ttl-servicos">
+              <h2>CONHEÇA NOSSOS SERVIÇOS</h2>
+            </section>
+
+            <section class="all-conjuntos">
+
+              <section class="conjunto-servicos">
+                <a href="/cg">
+                <img src="imagens/clinico-geral.png" alt="" srcset="">
+                <p>CLÍNICO GERAL</p>
+                </a>
+              </section>
+
+              <section class="conjunto-servicos">
+                <img src="imagens/fisio.png" alt="" srcset="">
+                <p>FISIOTERAPEUTA</p>
+              </section>
+
+              <section class="conjunto-servicos">
+                <img src="imagens/fono.png" alt="" srcset="">
+                <p>FONOAUDIÓLOGO</p>
+              </section>
+
+              <section class="conjunto-servicos">
+                <img src="imagens/nutri.png" alt="" srcset="">
+                <p>NUTRICIONISTA</p>
+              </section>
+
+              <section class="conjunto-servicos">
+                <img src="imagens/psico.png" alt="" srcset="">
+                <p>PSICÓLOGO</p>
+              </section>
+
+              <section class="conjunto-servicos">
+                <img src="imagens/enfermeiro.png" alt="" srcset="">
+                <p>ENFERMEIRO</p>
+              </section>
+
+              <section class="conjunto-servicos">
+                <img src="imagens/terapeuta.png" alt="" srcset="">
+                <p>TERAPEUTA OCUPACIONAL</p>
+              </section>
+
+            </section>
+
+          </section>
+
+  </main>
 
   <footer class="footer">
 

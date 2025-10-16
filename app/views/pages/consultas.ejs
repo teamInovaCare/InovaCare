@@ -30,7 +30,7 @@
 <body>
 
     <header>
-<!--barra de navegação-->
+        <!--barra de navegação-->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
@@ -108,9 +108,7 @@
     </header>
 
     <section class="voltar">
-        <a href="/index">
-            <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
-        </a>
+        <img onclick="window.history.back()" class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
     </section>
 
 
@@ -263,34 +261,36 @@
                                         </div>
                                     </div>
                                     <div class="info-coluna-dir">
-                                        <button class="cancelar-consulta" id="avaliar-btn" onclick="abrirPopup()">Avaliar Profissional</button>
+                                        <button class="cancelar-consulta" id="avaliar-btn"
+                                            onclick="abrirPopup()">Avaliar Profissional</button>
                                         <button class="cancelar-consulta">Agendar Retorno</button>
                                         <button class="cancelar-consulta">Acessar Receita</button>
                                         <button class="cancelar-consulta">Acessar Pedidos</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="popup-overlay" id="popup">
-                                    <form class="popup">
-                                        <span class="close-btn" onclick="fecharPopup()">×</span>
-                                        <h2>Como foi a sua consulta com o(a) Dr João A. ?</h2>
-                                        <p>Deixe sua avaliação.</p>
-                                        <div class="stars" id="estrelas">
-                                            <span class="star" data-value="1">&#9733;</span>
-                                            <span class="star" data-value="2">&#9733;</span>
-                                            <span class="star" data-value="3">&#9733;</span>
-                                            <span class="star" data-value="4">&#9733;</span>
-                                            <span class="star" data-value="5">&#9733;</span>
-                                        </div>
+                                <form class="popup">
+                                    <span class="close-btn" onclick="fecharPopup()">×</span>
+                                    <h2>Como foi a sua consulta com o(a) Dr João A. ?</h2>
+                                    <p>Deixe sua avaliação.</p>
+                                    <div class="stars" id="estrelas">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
 
-                                        <div class="comment-box" id="comment-box">
-                                            <h2>Conte como foi a sua experiência:</h2>
-                                            <textarea id="caixatexto" placeholder="Digite aqui..." id="comentario"></textarea>
-                                            <button class="cancelar-consulta" onclick="enviar()">Enviar</button>
-                                      </div>
-                                    </form>
-                                </div>
+                                    <div class="comment-box" id="comment-box">
+                                        <h2>Conte como foi a sua experiência:</h2>
+                                        <textarea id="caixatexto" placeholder="Digite aqui..."
+                                            id="comentario"></textarea>
+                                        <button class="cancelar-consulta" onclick="enviar()">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
                         </li>
 
 
@@ -342,7 +342,7 @@
                                         <button class="cancelar-consulta">Acessar Receita</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </li>
                         </div>

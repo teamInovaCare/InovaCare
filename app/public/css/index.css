@@ -422,6 +422,13 @@ body {
   align-items: center;
 }
 
+.conjunto-servicos:hover {
+  transform: translateY(-10px) scale(1.05); /* sobe um pouco e aumenta */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* sombra maior */
+  border-color: #1f9298; /* muda cor da borda */
+  cursor: pointer;
+}
+
 .conjunto-servicos img {
   width: 60%;
   margin-bottom: 15px;
@@ -551,4 +558,48 @@ body {
   font-size: clamp(1.5rem, 2.5vw, 2rem);
   margin-top: 5px;
   font-weight: bold;
+}
+
+/* ---------- Texto de boas-vindas ---------- */
+/* ---------- BANNER DE BOAS-VINDAS ---------- */
+.welcome-banner {
+    background: linear-gradient(180deg, #94e6e4, #1f9298);
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    margin-bottom: 40px;
+    border-radius: 0; /* ocupa toda a largura, sem arredondar nas laterais */
+}
+
+.welcome-content {
+    max-width: 1200px;
+    text-align: center;
+    color: #fff;
+}
+
+.welcome-banner h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.welcome-banner p {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+    .welcome-banner {
+        padding: 40px 15px;
+    }
+
+    .welcome-banner h1 {
+        font-size: 2rem;
+    }
+
+    .welcome-banner p {
+        font-size: 1.2rem;
+    }
 }
