@@ -187,7 +187,6 @@ body {
 /* Responsividade */
 @media (max-width: 768px) {
     .btn-avancar {
-        width: 100%;
         padding: 1rem;
         font-size: 1rem;
     }
@@ -243,6 +242,14 @@ label.ativo {
 
 .form-section.horarios {
     display: none;
+}
+
+.form-section.horarios {
+    max-width: 1200px !important;
+    margin: 2rem auto !important;
+    padding: 2rem !important;
+    width: calc(100% - 3rem) !important;
+    box-sizing: border-box !important;
 }
 
 
@@ -378,10 +385,13 @@ label.ativo {
 /* Seção de endereço */
 /* ------------------------------------------------ */
 .form-section.endereco {
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    max-width: 1200px !important;
+    margin: 2rem auto !important;
+    padding: 2rem !important;
+    width: calc(100% - 3rem) !important;
+    box-sizing: border-box !important;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .form-section.endereco h2.primary-title {
