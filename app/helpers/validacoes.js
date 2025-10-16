@@ -200,9 +200,51 @@ function limparValorReais(valorComMascara) {
       .replace(/\./g, '')
       .replace(',', '.')
   );
+
 }
 
+function gerarBlocos(hrInicio, hrFim, intervaloMinutos) {
+  const blocos = [];
+  const [hInicio, mInicio] = hrInicio.split(":").map(Number);
+  const [hFim, mFim] = hrFim.split(":").map(Number);
 
+  let minutosAtuais = hInicio * 60 + mInicio;
+  const minutosFim = hFim * 60 + mFim;
+
+  while (minutosAtuais + intervaloMinutos <= minutosFim) {
+    const hora = Math.floor(minutosAtuais / 60).toString().padStart(2, "0");
+    const min = (minutosAtuais % 60).toString().padStart(2, "0");
+    blocos.push(`${hora}:${min}`);
+    minutosAtuais += intervaloMinutos;
+  }
+
+  return blocos;
+}
+
+ 
+function removerBlocosDePausa(blocos, pausas, intervalo) {
+  return blocos.filter(bloco => {
+    const [h, m] = bloco.split(":").map(Number);
+    const inicioBloco = h * 60 + m;
+    const fimBloco = inicioBloco + intervalo;
+
+    for (const pausa of pausas) {
+      const [hIni, mIni] = pausa.pausa_inicio.split(":").map(Number);
+      const [hFim, mFim] = pausa.pausa_fim.split(":").map(Number);
+      const inicioPausa = hIni * 60 + mIni;
+      const fimPausa = hFim * 60 + mFim;
+
+      // Se o bloco sobrepõe a pausa → descarta
+      if (inicioBloco < fimPausa && fimBloco > inicioPausa) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+}
+
+ 
 
 
 
@@ -210,4 +252,4 @@ function limparValorReais(valorComMascara) {
 
 module.exports = {validarCPF, isValidDate, isMaiorDeIdade, validarCEP, validarConselho, validarUf, converterParaMysql,
     isValidDate,
-    isMaiorDeIdade, limparValorReais}
+    isMaiorDeIdade, limparValorReais,gerarBlocos, removerBlocosDePausa}

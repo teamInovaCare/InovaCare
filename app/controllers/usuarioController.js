@@ -2,7 +2,7 @@ const usuarioModel = require("../model/usuarioModel");
 const { body, validationResult } = require("express-validator");
 var { validarCPF, validarCEP, converterParaMysql,
   isValidDate,
-  isMaiorDeIdade } = require("../helpers/validacoes");
+  isMaiorDeIdade, gerarBlocos, removerBlocosDePausa } = require("../helpers/validacoes");
 const bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(12);
 const { removeImg } = require("../util/removeImg");
@@ -583,22 +583,49 @@ const usuarioController = {
 
   GerarProximosDias: async (req, res) => {
     try {
-  
       const idEspecialista = req.query.id_especialista;
       const tipoAtendimento = parseInt(req.query.tipo_atendimento);
 
- 
+      console.log('=== DEBUG GERAR DIAS ===');
+      console.log('ID Especialista:', idEspecialista);
+      console.log('Tipo Atendimento:', tipoAtendimento);
+
+      if (!idEspecialista || !tipoAtendimento) {
+        console.log('Parâmetros obrigatórios não informados');
+        return res.status(400).json({ message: 'Parâmetros obrigatórios não informados.' });
+      }
+
       // Busca os dias da semana em que o especialista atende
       const disponibilidade = await usuarioModel.Selectagenda(idEspecialista, tipoAtendimento);
-      console.log('Disponibilidade:', disponibilidade);
+      console.log('Disponibilidade encontrada:', disponibilidade);
  
+      if (!disponibilidade || disponibilidade.length === 0) {
+        console.log('Nenhuma disponibilidade encontrada');
+        const proximos15Dias = [];
+        
+        if(tipoAtendimento == 1){
+          return res.render('pages/agenda-online', {
+            especialista: idEspecialista,
+            tipo_atendimento: tipoAtendimento,
+            dias_disponiveis: proximos15Dias
+          });
+        } else if(tipoAtendimento == 2){
+          return res.render('pages/agenda-domiciliar', {
+            especialista: idEspecialista,
+            tipo_atendimento: tipoAtendimento,
+            dias_disponiveis: proximos15Dias
+          });
+        }
+      }
+
       // Extrai só os números dos dias da semana
       const diasProcurados = disponibilidade.map(item => item.dia_semana);
+      console.log('Dias da semana procurados:', diasProcurados);
  
       // Array que vai guardar as datas válidas
       const proximos15Dias = [];
  
-      // Gera os próximos 15 dias
+      // Gera os próximos 30 dias
       for (let i = 0; i < 30; i++) {
         const data = new Date();
         data.setDate(data.getDate() + i);
@@ -607,11 +634,10 @@ const usuarioController = {
  
         // Se o dia da semana está entre os dias procurados
         if (diasProcurados.includes(diaDaSemana)) {
- 
           // Verifica se o tipo de atendimento bate (1 = online, 2 = domiciliar)
-          const tipo = parseInt(disponibilidade.find(item => item.dia_semana === diaDaSemana)?.tipo_atendimento);
- 
-          if (tipo === parseInt(tipoAtendimento)) {
+          const disponibilidadeDoDia = disponibilidade.find(item => item.dia_semana === diaDaSemana);
+          
+          if (disponibilidadeDoDia && parseInt(disponibilidadeDoDia.tipo_atendimento) === parseInt(tipoAtendimento)) {
             const dia = String(data.getDate()).padStart(2, '0');
             const mes = String(data.getMonth() + 1).padStart(2, '0');
             const ano = data.getFullYear();
@@ -620,27 +646,113 @@ const usuarioController = {
           }
         }
       }
- 
-      if(tipoAtendimento ==1){
-      res.render('pages/agenda-online', {
-      especialista: idEspecialista,
-      tipo_atendimento: tipoAtendimento,
-      dias_disponiveis: proximos15Dias
-    });
-      }else if(tipoAtendimento ==2){
-      res.render('pages/agenda-domiciliar', {
-      especialista: idEspecialista,
-      tipo_atendimento: tipoAtendimento,
-      dias_disponiveis: proximos15Dias
-    });
-      }
       
+      console.log('Dias disponíveis gerados:', proximos15Dias);
+      console.log('=== FIM DEBUG GERAR DIAS ===');
+ 
+      if(tipoAtendimento == 1){
+        res.render('pages/agenda-online', {
+          especialista: idEspecialista,
+          tipo_atendimento: tipoAtendimento,
+          dias_disponiveis: proximos15Dias
+        });
+      } else if(tipoAtendimento == 2){
+        res.render('pages/agenda-domiciliar', {
+          especialista: idEspecialista,
+          tipo_atendimento: tipoAtendimento,
+          dias_disponiveis: proximos15Dias
+        });
+      }
  
     } catch (error) {
       console.error('Erro ao gerar os dias disponíveis:', error);
       return res.status(500).json({ message: 'Erro interno ao gerar os dias disponíveis.' });
     }
   },
+
+  /**Lógica para mostrar os blocos de hora */
+   gerarHorarios: async (req, res) => {
+  try {
+    const idEspecialista = req.query.id_especialista;
+    const tipoAtendimento = parseInt(req.query.tipo_atendimento);
+    const data = req.query.data;
+
+    console.log('=== DEBUG GERAR HORÁRIOS ===');
+    console.log('ID Especialista:', idEspecialista);
+    console.log('Tipo Atendimento:', tipoAtendimento);
+    console.log('Data recebida:', data);
+
+    if (!data || !idEspecialista || !tipoAtendimento) {
+      console.log('Parâmetros obrigatórios não informados');
+      return res.status(400).json({ erro: 'Parâmetros obrigatórios não informados.' });
+    }
+
+    // 1️⃣ Converte a data do formato DD/MM/YYYY para Date
+    let dataObj;
+    if (data.includes('/')) {
+      // Formato DD/MM/YYYY
+      const [dia, mes, ano] = data.split('/');
+      dataObj = new Date(ano, mes - 1, dia);
+    } else {
+      // Formato YYYY-MM-DD
+      dataObj = new Date(data + 'T00:00:00');
+    }
+    
+    const diaSemana = dataObj.getDay();
+    console.log('Dia da semana calculado:', diaSemana);
+
+    // 2️⃣ Busca as disponibilidades do especialista filtradas por tipo de atendimento
+    const disponibilidades = await usuarioModel.buscarDisponibilidadesPorTipo(idEspecialista, tipoAtendimento);
+    console.log('Disponibilidades encontradas:', disponibilidades);
+
+    // 3️⃣ Acha a disponibilidade correspondente ao dia da semana
+    const disponibilidadeDoDia = disponibilidades.find(d => d.dia_semana === diaSemana);
+    console.log('Disponibilidade do dia:', disponibilidadeDoDia);
+
+    if (!disponibilidadeDoDia) {
+      console.log('Nenhuma disponibilidade encontrada para este dia');
+      return res.json({ horarios_disponiveis: [] });
+    }
+
+    // 4️⃣ Busca as pausas dessa disponibilidade
+    const pausas = await usuarioModel.buscarPausas(disponibilidadeDoDia.id_disponibilidade_especialista);
+    console.log('Pausas encontradas:', pausas);
+
+    // 5️⃣ Define o intervalo conforme tipo de atendimento
+    const intervalo = tipoAtendimento === 1 ? 30 : 45;
+    console.log('Intervalo definido:', intervalo, 'minutos');
+
+    // 6️⃣ Gera os blocos de horário
+    const blocosTotais = gerarBlocos(disponibilidadeDoDia.hr_inicio, disponibilidadeDoDia.hr_fim, intervalo);
+    console.log('Blocos totais gerados:', blocosTotais);
+
+    // 7️⃣ Remove blocos que sobrepõem pausas
+    const blocosDisponiveis = removerBlocosDePausa(blocosTotais, pausas, intervalo);
+    console.log('Blocos disponíveis após remoção de pausas:', blocosDisponiveis);
+
+    console.log('=== FIM DEBUG GERAR HORÁRIOS ===');
+
+    // 8️⃣ Retorna os horários disponíveis com preço
+    const precoBase = disponibilidadeDoDia.preco_base || 100.00;
+    const taxaLocomocao = tipoAtendimento === 2 ? (disponibilidadeDoDia.taxa_locomocao || 50.00) : 0;
+    const precoTotal = parseFloat(precoBase) + parseFloat(taxaLocomocao);
+    
+    res.json({
+      dia_semana: disponibilidadeDoDia.dia_semana,
+      horario_total: blocosTotais,
+      pausas: pausas,
+      horarios_disponiveis: blocosDisponiveis,
+      preco_base: precoBase,
+      taxa_locomocao: taxaLocomocao,
+      preco_total: precoTotal
+    });
+
+  } catch (erro) {
+    console.error('Erro ao gerar horários:', erro);
+    res.status(500).json({ erro: 'Erro interno do servidor' });
+  }
+},
+
 
   perfilProfissional: async (req, res) => {
     try {
@@ -795,6 +907,36 @@ const usuarioController = {
     } catch (error) {
       console.error('Erro ao reenviar email:', error);
       res.status(500).json({ success: false, message: 'Erro interno do servidor' });
+    }
+  },
+
+  buscarPrecoConsulta: async (req, res) => {
+    try {
+      const { id_especialista, tipo_atendimento } = req.query;
+      
+      if (!id_especialista || !tipo_atendimento) {
+        return res.status(400).json({ erro: 'Parâmetros obrigatórios não informados' });
+      }
+      
+      const disponibilidades = await usuarioModel.buscarDisponibilidadesPorTipo(id_especialista, tipo_atendimento);
+      
+      if (!disponibilidades || disponibilidades.length === 0) {
+        return res.json({ preco_base: 100.00, taxa_locomocao: 0, preco_total: 100.00 });
+      }
+      
+      const precoBase = disponibilidades[0].preco_base || 100.00;
+      const taxaLocomocao = parseInt(tipo_atendimento) === 2 ? (disponibilidades[0].taxa_locomocao || 50.00) : 0;
+      const precoTotal = parseFloat(precoBase) + parseFloat(taxaLocomocao);
+      
+      res.json({
+        preco_base: precoBase,
+        taxa_locomocao: taxaLocomocao,
+        preco_total: precoTotal
+      });
+      
+    } catch (error) {
+      console.error('Erro ao buscar preço:', error);
+      res.status(500).json({ erro: 'Erro interno do servidor' });
     }
   }
 

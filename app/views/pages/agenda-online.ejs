@@ -162,16 +162,7 @@
                     <h2 class="primary-title"><i class="fas fa-clock"></i> Selecione o horário da consulta</h2>
 
                     <section class="horarios-disponiveis">
-                        <label><input type="radio" name="horario" value="08:00"><span>08:00</span></label>
-                        <label><input type="radio" name="horario" value="09:00"><span>09:00</span></label>
-                        <label><input type="radio" name="horario" value="10:00"><span>10:00</span></label>
-                        <label><input type="radio" name="horario" value="11:00"><span>11:00</span></label>
-                        <label><input type="radio" name="horario" value="12:00"><span>12:00</span></label>
-                        <label><input type="radio" name="horario" value="13:00"><span>13:00</span></label>
-                        <label><input type="radio" name="horario" value="14:00"><span>14:00</span></label>
-                        <label><input type="radio" name="horario" value="15:00"><span>15:00</span></label>
-                        <label><input type="radio" name="horario" value="16:00"><span>16:00</span></label>
-                        <label><input type="radio" name="horario" value="17:00"><span>17:00</span></label>
+                        <!-- Vai ser preenchido pelo JS -->
                     </section>
                 </section>
 
@@ -257,7 +248,20 @@
             const medico = document.getElementById("input-medico").value || "Consulta Online";
             const data = document.getElementById("input-data").value;
             const horario = document.getElementById("input-horario").value;
-            const preco = parseFloat(document.getElementById("input-preco").value) || 1.00;
+            const precoInput = document.getElementById("input-preco").value;
+            
+            console.log('=== DEBUG PAGAMENTO ===');
+            console.log('Preço do input:', precoInput);
+            console.log('Tipo do preço:', typeof precoInput);
+            
+            // Garantir que o preço seja um número válido
+            let preco = parseFloat(precoInput);
+            if (isNaN(preco) || preco <= 0) {
+                preco = parseFloat(precoConsulta) || 100.00;
+                console.log('Usando preço da variável global:', preco);
+            }
+            
+            console.log('Preço final:', preco);
 
             if (!data || !horario) {
                 alert("Selecione a data e o horário antes de confirmar!");
@@ -269,6 +273,8 @@
                 title: `${medico} - ${data} às ${horario}`,
                 price: preco,
             };
+            
+            console.log('Dados do pagamento:', dadosPagamento);
 
             try {
                 // Faz a requisição ao backend para criar a preferência de pagamento

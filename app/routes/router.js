@@ -3,7 +3,7 @@ var router = express.Router();
 const { body, validationResult } = require("express-validator")
 var  {validarCPF, validarCEP, validarConselho, validarUf, converterParaMysql,
     isValidDate,
-    isMaiorDeIdade} = require("../helpers/validacoes");
+    isMaiorDeIdade, gerarBlocos, removerBlocosDePausa} = require("../helpers/validacoes");
 
 
 
@@ -65,6 +65,14 @@ const { idEspecialista, tipoAtendimento } = req.query;
 });*/
 
 router.get('/agenda-online', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
+/**Fetch para enviar os dados do dia */
+router.get(
+  '/gerar-horarios', 
+  verificarUsuAutenticado, 
+  verificarEmailVerificado, 
+  usuarioController.gerarHorarios
+);
+
 router.get('/agenda-domiciliar', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
 
 /*router.get('/agenda-domiciliar', (req, res) => {
@@ -237,6 +245,9 @@ router.get("/receita", function (req, res) {
 router.get("/novo-exame", function (req, res) {
     res.render("pages/novo-exame.ejs");
 });
+
+/**Rota para buscar preço da consulta */
+router.get('/buscar-preco', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.buscarPrecoConsulta);
 
 module.exports = router;
 

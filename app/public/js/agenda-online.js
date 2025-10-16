@@ -4,77 +4,111 @@
 function ativarLabels(containerSelector) {
   const labels = document.querySelectorAll(containerSelector + ' label');
   labels.forEach(label => {
-      const input = label.querySelector('input[type="radio"]');
-      input.addEventListener('change', () => {
-          const groupName = input.name;
-          document.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
-              radio.parentElement.classList.remove('ativo');
-          });
-          if (input.checked) {
-              label.classList.add('ativo');
-          }
+    const input = label.querySelector('input[type="radio"]');
+    input.addEventListener('change', () => {
+      const groupName = input.name;
+      document.querySelectorAll(`input[name="${groupName}"]`).forEach(radio => {
+        radio.parentElement.classList.remove('ativo');
       });
+      if (input.checked) {
+        label.classList.add('ativo');
+      }
+    });
   });
 }
 
 // -----------------------------
-// Horários disponíveis por data
-// -----------------------------
-const horariosPorData = {
-  "2025-09-21": ["08:00", "09:00", "10:00"],
-  "2025-09-22": ["09:00", "11:00", "14:00", "16:00"],
-  "2025-09-23": ["08:00", "12:00", "15:00"],
-  "2025-09-24": ["10:00", "11:00", "13:00", "17:00"],
-  "2025-09-25": ["08:00", "09:00", "10:00", "12:00", "14:00"],
-  "2025-09-26": ["09:00", "10:00", "13:00"],
-  "2025-09-27": ["08:00", "09:00", "11:00", "16:00"],
-  "2025-09-28": ["08:00", "12:00", "15:00"],
-  "2025-09-29": ["10:00", "11:00", "14:00"],
-  "2025-09-30": ["09:00", "10:00", "13:00", "15:00", "17:00"]
-};
-
-// -----------------------------
-// Seleção de horários
+// Seleção de horários dinâmicos com FETCH
 // -----------------------------
 const horariosSection = document.querySelector('.form-section.horarios');
 const horariosContainer = horariosSection.querySelector('.horarios-disponiveis');
-
-// Inicialmente esconde horários
 horariosSection.style.display = 'none';
 
 // Ativa labels de datas
 ativarLabels('.datas-disponiveis');
 
+// Pega parâmetros da URL
+const urlParams = new URLSearchParams(window.location.search);
+const idEspecialista = urlParams.get('id_especialista');
+const tipoAtendimento = urlParams.get('tipo_atendimento');
+
 // Inputs de datas
 const dataInputs = document.querySelectorAll('.datas-disponiveis input[type="radio"]');
+
 dataInputs.forEach(input => {
-  input.addEventListener('change', () => {
-      const dataSelecionada = input.value;
+  input.addEventListener('change', async () => {
+    const dataSelecionada = input.value;
+    
+    console.log('=== DEBUG FRONTEND ===');
+    console.log('Data selecionada:', dataSelecionada);
+    console.log('ID Especialista:', idEspecialista);
+    console.log('Tipo Atendimento:', tipoAtendimento);
 
-      // Mostrar a seção de horários
-      horariosSection.style.display = 'block';
+    // Mostrar a seção de horários
+    horariosSection.style.display = 'block';
+    horariosContainer.innerHTML = '<p>Carregando horários...</p>';
 
-      // Limpar horários antigos
+    try {
+      // Converte data DD/MM/YYYY para YYYY-MM-DD para o backend
+      let dataFormatada = dataSelecionada;
+      if (dataSelecionada.includes('/')) {
+        const [dia, mes, ano] = dataSelecionada.split('/');
+        dataFormatada = `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+      }
+      
+      console.log('Data formatada para backend:', dataFormatada);
+      
+      // Chama o backend
+      const url = `/gerar-horarios?data=${encodeURIComponent(dataFormatada)}&id_especialista=${encodeURIComponent(idEspecialista)}&tipo_atendimento=${encodeURIComponent(tipoAtendimento)}`;
+      console.log('URL da requisição:', url);
+      
+      const response = await fetch(url);
+      const dados = await response.json();
+      
+      console.log('Resposta do backend:', dados);
+
+      // Limpa container
       horariosContainer.innerHTML = '';
 
-      // Criar novos horários para a data selecionada
-      horariosPorData[dataSelecionada].forEach(horario => {
-          const label = document.createElement('label');
-          const inputRadio = document.createElement('input');
-          inputRadio.type = 'radio';
-          inputRadio.name = 'horario';
-          inputRadio.value = horario;
+      // Caso não haja horários
+      if (!dados.horarios_disponiveis || dados.horarios_disponiveis.length === 0) {
+        horariosContainer.innerHTML = '<p>Nenhum horário disponível para esta data.</p>';
+        console.log('Nenhum horário disponível');
+        return;
+      }
 
-          const span = document.createElement('span');
-          span.textContent = horario;
+      // Atualiza o preço com base na resposta da API
+      if (dados.preco_total) {
+        precoConsulta = dados.preco_total;
+        console.log('Preço atualizado da API:', precoConsulta);
+      }
 
-          label.appendChild(inputRadio);
-          label.appendChild(span);
-          horariosContainer.appendChild(label);
+      // Cria os botões de horário dinamicamente
+      dados.horarios_disponiveis.forEach(horario => {
+        const label = document.createElement('label');
+        const inputRadio = document.createElement('input');
+        inputRadio.type = 'radio';
+        inputRadio.name = 'horario';
+        inputRadio.value = horario;
+
+        const span = document.createElement('span');
+        span.textContent = horario;
+
+        label.appendChild(inputRadio);
+        label.appendChild(span);
+        horariosContainer.appendChild(label);
       });
 
-      // Ativar labels de horários recém-criados
+      console.log('Horários criados com sucesso');
+      console.log('=== FIM DEBUG FRONTEND ===');
+
+      // Ativa labels de horários recém-criados
       ativarLabels('.horarios-disponiveis');
+
+    } catch (erro) {
+      console.error('Erro ao buscar horários:', erro);
+      horariosContainer.innerHTML = '<p>Erro ao carregar horários. Tente novamente.</p>';
+    }
   });
 });
 
@@ -92,9 +126,14 @@ const inputHorario = document.getElementById("input-horario");
 const inputPreco = document.getElementById("input-preco");
 
 // Pega os parâmetros da URL
-const urlParams = new URLSearchParams(window.location.search);
 const medicoSelecionado = urlParams.get('medico') || 'Profissional';
-const precoConsulta = urlParams.get('preco') || '00,01'; // preço vindo da URL ou padrão
+let precoConsulta = urlParams.get('preco') || '100.00'; // preço vindo da URL ou padrão
+
+// Converte preço para formato numérico se vier com vírgula
+if (typeof precoConsulta === 'string') {
+  precoConsulta = precoConsulta.replace(',', '.');
+}
+precoConsulta = parseFloat(precoConsulta) || 100.00;
 
 // Formata data para o padrão brasileiro
 function formatarData(data) {
@@ -110,21 +149,21 @@ btnAvancar.addEventListener("click", () => {
   const horarioSelecionado = document.querySelector('input[name="horario"]:checked')?.value;
 
   if (!dataSelecionada || !horarioSelecionado) {
-      alert("Por favor, selecione a data e o horário antes de confirmar.");
-      return;
+    alert("Por favor, selecione a data e o horário antes de confirmar.");
+    return;
   }
 
   // Preenche o modal visual
   document.getElementById("modal-medico").textContent = medicoSelecionado;
   document.getElementById("modal-data").textContent = formatarData(dataSelecionada);
   document.getElementById("modal-horario").textContent = horarioSelecionado;
-  document.getElementById("modal-preco").textContent = precoConsulta;
+  document.getElementById("modal-preco").textContent = `R$ ${parseFloat(precoConsulta).toFixed(2).replace('.', ',')}`;
 
   // Preenche os inputs ocultos do form
   inputMedico.value = medicoSelecionado;
   inputData.value = dataSelecionada; // YYYY-MM-DD
   inputHorario.value = horarioSelecionado;
-  inputPreco.value = precoConsulta;
+  inputPreco.value = parseFloat(precoConsulta).toFixed(2);
 
   // Exibe o modal
   modal.style.display = "flex";

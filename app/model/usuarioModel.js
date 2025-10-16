@@ -490,6 +490,79 @@ const usuarioModel = {
         }
       },
 
+      buscarDisponibilidades: async(idEspecialista) =>{
+        try{
+            const [linhas] = await pool.query(`
+      SELECT
+        id_disponibilidade_especialista,
+        dia_semana,
+        id_especialista,
+        hr_inicio,
+        hr_fim,
+        duracao_consulta,
+        preco_base,
+        taxa_locomocao,
+        tipo_atendimento
+      FROM disponibilidade_especialista
+      WHERE id_especialista = ?
+    `, [idEspecialista]);
+ 
+    return linhas; // devolve lista de disponibilidades
+
+        }catch(error){
+            console.error('Erro ao buscar agenda:', error);
+          throw error;
+        }
+      },
+
+      buscarDisponibilidadesPorTipo: async(idEspecialista, tipoAtendimento) =>{
+        try{
+            const [linhas] = await pool.query(`
+      SELECT
+        id_disponibilidade_especialista,
+        dia_semana,
+        id_especialista,
+        hr_inicio,
+        hr_fim,
+        duracao_consulta,
+        preco_base,
+        taxa_locomocao,
+        tipo_atendimento
+      FROM disponibilidade_especialista
+      WHERE id_especialista = ? AND tipo_atendimento = ?
+    `, [idEspecialista, tipoAtendimento]);
+ 
+    return linhas; // devolve lista de disponibilidades filtradas
+
+        }catch(error){
+            console.error('Erro ao buscar disponibilidades por tipo:', error);
+          throw error;
+        }
+      },
+ 
+// 🔹 
+
+
+buscarPausas: async (idDisponibilidade) =>{
+    try{
+        const [linhas] = await pool.query(`
+      SELECT
+        hr_inicio_pausa AS pausa_inicio,
+        hr_fim_pausa AS pausa_fim
+      FROM pausa
+      WHERE id_disponibilidade_especialista = ?
+    `, [idDisponibilidade]);
+ 
+    return linhas; // devolve lista de pausas
+
+    }catch(error){
+            console.error('Erro ao buscar agenda:', error);
+          throw error;
+        }
+      },
+ 
+
+
     /**Buscar informações profissionais do especialista */
     findInfoEspecialista: async (idEspecialista) => {
         try {

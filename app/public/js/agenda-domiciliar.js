@@ -18,22 +18,6 @@ function ativarLabels(containerSelector) {
 }
 
 // -----------------------------
-// Horários disponíveis por data
-// -----------------------------
-const horariosPorData = {
-    "2025-09-21": ["08:00", "09:00", "10:00"],
-    "2025-09-22": ["09:00", "11:00", "14:00", "16:00"],
-    "2025-09-23": ["08:00", "12:00", "15:00"],
-    "2025-09-24": ["10:00", "11:00", "13:00", "17:00"],
-    "2025-09-25": ["08:00", "09:00", "10:00", "12:00", "14:00"],
-    "2025-09-26": ["09:00", "10:00", "13:00"],
-    "2025-09-27": ["08:00", "09:00", "11:00", "16:00"],
-    "2025-09-28": ["08:00", "12:00", "15:00"],
-    "2025-09-29": ["10:00", "11:00", "14:00"],
-    "2025-09-30": ["09:00", "10:00", "13:00", "15:00", "17:00"]
-};
-
-// -----------------------------
 // Seção de horários
 // -----------------------------
 const horariosSection = document.querySelector('.form-section.horarios');
@@ -42,34 +26,58 @@ horariosSection.style.display = 'none'; // esconde inicialmente
 
 ativarLabels('.datas-disponiveis'); // ativa efeito de seleção das datas
 
+// Pega parâmetros da URL
+const urlParams = new URLSearchParams(window.location.search);
+const idEspecialista = urlParams.get('id_especialista');
+const tipoAtendimento = urlParams.get('tipo_atendimento');
+
 const dataInputs = document.querySelectorAll('.datas-disponiveis input[type="radio"]');
+
 dataInputs.forEach(input => {
-    input.addEventListener('change', () => {
+    input.addEventListener('change', async () => {
         const dataSelecionada = input.value;
         horariosSection.style.display = 'block';
-        horariosContainer.innerHTML = '';
+        horariosContainer.innerHTML = '<p>Carregando horários...</p>';
 
-        horariosPorData[dataSelecionada].forEach(horario => {
-            const label = document.createElement('label');
-            const inputRadio = document.createElement('input');
-            inputRadio.type = 'radio';
-            inputRadio.name = 'horario';
-            inputRadio.value = horario;
+        try {
+            // Fetch para o backend
+            const response = await fetch(`/gerar-horarios?data=${dataSelecionada}&id_especialista=${idEspecialista}&tipo_atendimento=${tipoAtendimento}`);
+            const dados = await response.json();
 
-            const span = document.createElement('span');
-            span.textContent = horario;
+            horariosContainer.innerHTML = '';
 
-            label.appendChild(inputRadio);
-            label.appendChild(span);
-            horariosContainer.appendChild(label);
-        });
+            if (!dados.horarios_disponiveis || dados.horarios_disponiveis.length === 0) {
+                horariosContainer.innerHTML = '<p>Nenhum horário disponível.</p>';
+                return;
+            }
 
-        ativarLabels('.horarios-disponiveis');
+            // Cria inputs radio para os horários recebidos
+            dados.horarios_disponiveis.forEach(horario => {
+                const label = document.createElement('label');
+                const inputRadio = document.createElement('input');
+                inputRadio.type = 'radio';
+                inputRadio.name = 'horario';
+                inputRadio.value = horario;
+
+                const span = document.createElement('span');
+                span.textContent = horario;
+
+                label.appendChild(inputRadio);
+                label.appendChild(span);
+                horariosContainer.appendChild(label);
+            });
+
+            ativarLabels('.horarios-disponiveis');
+
+        } catch (erro) {
+            console.error('Erro ao buscar horários:', erro);
+            horariosContainer.innerHTML = '<p>Erro ao carregar horários. Tente novamente.</p>';
+        }
     });
 });
 
 // -----------------------------
-// Modal e formulário
+// Modal e formulário (permanece igual)
 // -----------------------------
 const btnAvancar = document.querySelector(".btn-avancar");
 const modal = document.getElementById("modal");
@@ -98,21 +106,16 @@ const inputNumeroVisivel = document.getElementById("numero");
 const inputComplementoVisivel = document.getElementById("complemento");
 
 // Nome e preço do médico
-const urlParams = new URLSearchParams(window.location.search);
 const medicoSelecionado = urlParams.get('medico') || 'Profissional';
 const precoConsulta = "100,00"; // valor domiciliar
 
-// -----------------------------
 // Formata data para padrão brasileiro
-// -----------------------------
 function formatarData(data) {
     const partes = data.split('-');
     return `${partes[2]}/${partes[1]}/${partes[0]}`;
 }
 
-// -----------------------------
 // Campos de endereço bloqueados inicialmente
-// -----------------------------
 const inputsEndereco = [
     inputCepVisivel, inputUfVisivel, inputEnderecoVisivel, inputBairroVisivel,
     inputCidadeVisivel, inputNumeroVisivel, inputComplementoVisivel
@@ -128,9 +131,7 @@ if (btnAlterarEndereco) {
     });
 }
 
-// -----------------------------
 // Abrir modal ao clicar em confirmar
-// -----------------------------
 btnAvancar.addEventListener("click", () => {
     const dataSelecionada = document.querySelector('input[name="data"]:checked')?.value;
     const horarioSelecionado = document.querySelector('input[name="horario"]:checked')?.value;
@@ -187,9 +188,7 @@ btnAvancar.addEventListener("click", () => {
     inputsEndereco.forEach(inp => inp.disabled = true);
 });
 
-// -----------------------------
 // Botão Voltar → fecha modal
-// -----------------------------
 btnVoltarModal.addEventListener("click", () => {
     modal.style.display = "none";
 });
