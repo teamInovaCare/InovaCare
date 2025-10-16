@@ -1280,7 +1280,7 @@ a {
     .btn-mod .btn,
     .btn-mod .btn-domiciliar {
         flex-direction: column;
-        width: 90%;
+        width: 100%;
         flex: 1;
         justify-content: center;
         

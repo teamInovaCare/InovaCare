@@ -385,17 +385,19 @@
             }
 
             .small-rectangle {
-                min-height: 500px;
+                min-height: 535px;
                 padding: 15px;
             }
 
             .btn-mod {
                 flex-direction: column;
-                top: 75%;
+                top: 70%;
                 width: 100%;
                 bottom: 15px;
                 left: 15px;
                 right: 15px;
                 margin-bottom: 0;
+                align-items: center;
+                justify-content: center;
             }
         }
