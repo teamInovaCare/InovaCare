@@ -30,12 +30,12 @@
 
     <header>
 
-                <!--barra de navegação - início -->
+        <!--barra de navegação - início -->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/app/views/pages/index.ejs">
+                <a href="/logado-user-pac">
                     <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
@@ -52,23 +52,26 @@
                         <a href="#">FAQ</a>
                     </section>
                 </li>
-                <li><a class="agendamento" href="/">Agendamento</a></li>
-                <li><a class="consultas" href="/">Área de Consultas</a></li>
+                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
-                <article class="texto-icon"><!--perfil--></article>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/sair" class="btn-sair">Sair</a>
+                    </section>
+                </li>
             </ul>
 
         </nav>
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="//app/views/pages/index.ejs">
+                <a href="/logado-user-pac">
                     <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
                     <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
                     <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
@@ -76,8 +79,13 @@
             </section>
 
             <ul class="menu-actions">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button></li>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
@@ -91,11 +99,10 @@
                         <li><a href="#">FAQ</a></li>
                     </ul>
                 </li>
-                <li><a href="/">Agendamento</a></li>
-                <li><a href="/">Área de Consultas</a></li>
+                <li><a href="/especialidades">Agendamento</a></li>
+                <li><a href="/consultas">Área de Consultas</a></li>
             </ul>
         </nav>
-
 
         <script>
             function toggleMenu() {
@@ -114,7 +121,7 @@
     
 
     <section class="voltar">
-        <a href="/index">
+        <a href="/logado-user-pac">
             <img class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
         </a>
     </section>

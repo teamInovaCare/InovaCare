@@ -36,14 +36,15 @@
 
     <header>
 
+        <!--barra de navegação - início -->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
                 <a href="/logado-user-pac">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
@@ -52,20 +53,24 @@
                 <li class="dropdown">
                     <a class="sobre" href="#">Sobre</a>
                     <section class="dropdown-content">
-                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a>
-                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a>
-                        <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a>
+                        <a href="#">Quem somos</a>
+                        <a href="#">Contato</a>
+                        <a href="#">FAQ</a>
                     </section>
                 </li>
                 <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
                 <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
-                <li><a class="sou-profissional" href="/cadprof_inicial">Sou Profissional</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><a href="/cadastro_inicial" class="btn-entrar">Entrar</a></li>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/sair" class="btn-sair">Sair</a>
+                    </section>
+                </li>
             </ul>
 
         </nav>
@@ -73,31 +78,35 @@
         <nav class="mobile-menu">
             <section class="menu-logo">
                 <a href="/logado-user-pac">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
             <ul class="menu-actions">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
             <!-- Menu suspenso do hambúrguer -->
             <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li><a href="/cadastro_inicial" class="btn-entrar-mobile">Entrar</a></li>
                 <li class="dropdown">
                     <a href="#">Sobre</a>
                     <ul class="dropdown-content">
-                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a></li>
-                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a></li>
-                        <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a></li>
+                        <li><a href="#">Quem somos</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
                 </li>
                 <li><a href="/especialidades">Agendamento</a></li>
                 <li><a href="/consultas">Área de Consultas</a></li>
-                <li><a href="/cadprof_inicial">Sou Profissional</a></li>
             </ul>
         </nav>
 
@@ -108,6 +117,8 @@
             }
         </script>
 
+
+        <!--barra de navegação - fim ^^^ -->
     </header>
 
     <main>

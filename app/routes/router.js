@@ -44,8 +44,11 @@ router.get("/index", /*verificarUsuAutenticado,*/ function (req, res) {/*usuári
 
 
 
-router.get("/especialidades", function (req, res) {/**listagem das especialidades - botão agendamento */
-    res.render("pages/especialidades.ejs")
+router.get("/especialidades", 
+    verificarUsuAutenticado,
+    verificarUsuAutorizado([1], "pages/restrito"),
+    function (req, res) {/**listagem das especialidades - botão agendamento */
+    res.render("pages/especialidades.ejs", { autenticado: req.session.autenticado, login: req.session.logado, })
 });
 
 

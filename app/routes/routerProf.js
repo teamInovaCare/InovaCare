@@ -151,7 +151,7 @@ routerProf.get("/home_agenda_prof",
     function (req, res) {//cadastro do profissional-email e senha
     res.render("pages/home_agenda_prof.ejs",
         
-        {moment: moment, autenticado: req.session.autenticado, login: req.session.logado , agendas: [], semanadia:""});
+        {moment: moment, autenticado: req.session.autenticado, login: req.session.logado , agendas: [], semanadia: 0});
 });
 routerProf.post("/filtroAgenda", (req,res)=>{
     profissionalController.findAgendaProf(req,res);
