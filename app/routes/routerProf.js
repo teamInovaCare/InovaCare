@@ -22,10 +22,10 @@ routerProf.get("/homeprofs", function (req, res) {
 
 /* Home Profissional LOGADO */
 
-routerProf.get("/logado-user-prof", verificarUsuAutenticado, function (req, res) {
-    res.render("pages/logado-user-prof.ejs", {autenticado: req.session.autenticado, login:req.session.logado,});
+/**página logado especialista */
+routerProf.get("/homepro", verificarUsuAutenticado, function (req, res) {
+        res.render("pages/homepro.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
 });
-
 
 
 

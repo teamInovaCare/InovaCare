@@ -27,10 +27,7 @@ router.get("/logado-user-pac", verificarUsuAutenticado, verificarEmailVerificado
         res.render("pages/logado-user-pac.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
 });
 
-/**página logado especialista */
-router.get("/homepro", verificarUsuAutenticado, function (req, res) {
-        res.render("pages/homepro.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
-});
+
 
 
 
