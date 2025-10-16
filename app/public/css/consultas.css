@@ -309,7 +309,6 @@ main {
     min-height: 600px;
     background-color: white;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     position: relative;
     margin-top: 100px;
@@ -323,15 +322,23 @@ main {
 
 .tab {
     margin-right: 20px;
+    margin-left: 20px;
     cursor: pointer;
     font-weight: bold;
     font-size: 20px;
     display: inline-block;
+    color: #5c5c5c;
 }
 
 .tab.active-tab {
-    color: #073470;
-    text-decoration: underline;
+    all: unset; /* Remove todos os estilos padrão de botão do navegador (muito importante!) */
+    font-weight: bold; /* Deixa o texto em negrito */
+    padding: 5px 10px; /* Adiciona espaçamento interno ao redor do texto da aba */
+    cursor: pointer; /* Indica que é um elemento clicável */
+    font-size: 20px;
+
+    color: black; /* Define a cor do texto da aba ativa como preto */
+    border-bottom: 3px solid #f29434; /*Cria a linha de destaque Laranja abaixo da aba ativa */
 }
 
 .retangulo-container {
@@ -349,7 +356,7 @@ main {
 
 .retangCg {
     box-sizing: border-box;
-    background: #ebebeb;
+    background: white;
     border-radius: 16px;
     margin-top: 20px;
     width: 100%;
@@ -357,6 +364,8 @@ main {
     padding: 20px;
     overflow: hidden;
     transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 .content {
@@ -382,7 +391,7 @@ main {
 .expandable-content {
     display: none;
     padding: 20px;
-    background: #ebebeb;
+    background: white;
     border-top: 1px solid #ddd;
 }
 
@@ -573,3 +582,35 @@ main {
       cursor: pointer;
       color: #666;
     }
+
+
+
+
+form label {
+    font-size: 0.9em; /* Tamanho de fonte menor */
+    font-weight: bold; /* Deixa o label em negrito */
+    width: 100%; /* Faz o label ocupar 100% da largura, forçando o input para a próxima linha */
+    margin-bottom: 5px; /* Espaço abaixo do label */
+}
+
+form input[type="url"] {
+    font-family: var(--fonte-corpo); /* Usa a fonte 'Zen Maru Gothic' */
+    border: 1px solid #ccc; /* Borda cinza clara */
+    border-radius: 5px; /* Arredonda as bordas */
+    padding: 8px; /* Espaçamento interno */
+    flex-grow: 1; /* Permite que o input preencha o espaço disponível */
+    margin-right: 10px; /* Espaço entre o input e o botão */
+    box-sizing: border-box; /* Garante que padding e borda sejam incluídos na largura total */
+    min-width: 150px; /* Largura mínima para o campo */
+}
+
+form button {
+    font-family: var(--fonte-botao);/* Usa a fonte 'Kantumruy Pro' (Botões) [cite: 8] */
+    background-color: var(--cor-laranja-botao);/* Usa o Laranja definido para botões [cite: 14] */
+    color: white; /* Texto do botão branco */
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Arredonda as bordas */
+    padding: 8px 15px; /* Espaçamento interno (dimensão do botão) */
+    font-weight: 500; /* Peso da fonte */
+    cursor: pointer; /* Indica que é um elemento clicável */
+}
