@@ -21,78 +21,75 @@
 
     <header>
 
-        <!--barra de navegação - início -->
+            <!--barra de navegação - início -->
         <nav class="menu-desktop">
+        <!--Espaço para a logo-->
+        <section class="menu-logo">
+            <a href="/">
+            <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+            <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+            <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+            </a>
+        </section>
 
-            <!--Espaço para a logo-->
-            <section class="menu-logo">
-                <a href="#">
-                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
-                </a>
+        <!--Botão de pesquisa-->
+        <ul class="menu-list">
+            <li class="dropdown">
+            <a class="sobre" href="#">Sobre</a>
+            <section class="dropdown-content">
+                <a href="/quem-somos">Quem somos</a>
+                <a href="/quem-somos">Contato</a>
+                <a href="/quem-somos">FAQ</a>
             </section>
-
-            <!--Botão de pesquisa-->
-            <ul class="menu-list">
-                <li class="dropdown">
-                    <a class="sobre" href="#">Sobre</a>
-                    <section class="dropdown-content">
-                        <a href="#">Quem somos</a>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
-                    </section>
-                </li>
-                <li><a class="agendamento" href="/profissional/login-prof">Minha Agenda</a></li>
-                <li><a class="consultas" href="/">Área de Consultas</a></li>
-                <li><a class="sou-paciente" href="/index">Sou Paciente</a></li>
-            </ul>
+            </li>
+            <li><a class="agendamento" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+            <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
+            <li><a class="sou-paciente" href="/index">Sou Paciente</a></li>
+        </ul>
 
 
-            <ul class="menu-list-direita">
-                <li><a href="/profissional/login-prof" class="btn-entrar">Entrar</a></li>
-            </ul>
+        <ul class="menu-list-direita">
+            <li><a href="/profissional/login-prof" class="btn-entrar">Entrar</a></li>
+        </ul>
 
         </nav>
 
         <nav class="mobile-menu">
-            <section class="menu-logo">
-                <a href="#">
-                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
-                </a>
-            </section>
+        <section class="menu-logo">
+            <a href="/">
+            <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+            <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+            <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+            </a>
+        </section>
 
-            <ul class="menu-actions">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
-            </ul>
+        <ul class="menu-actions">
+            <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+        </ul>
 
-            <!-- Menu suspenso do hambúrguer -->
-            <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li><a href="/profissional/login-prof" class="btn-entrar-mobile">Entrar</a></li>
-                <li class="dropdown">
-                    <a href="#">Sobre</a>
-                    <ul class="dropdown-content">
-                        <li><a href="#">Quem somos</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </li>
-                <li><a href="/especialidades">Agendamento</a></li>
-                <li><a href="/consultas">Área de Consultas</a></li>
-                <li><a href="/">Sou Paciente</a></li>
+        <!-- Menu suspenso do hambúrguer -->
+        <ul id="hamburger-menu" class="hamburger-menu-content">
+            <li><a href="/profissional/login-prof" class="btn-entrar-mobile">Entrar</a></li>
+            <li class="dropdown">
+            <a href="#">Sobre</a>
+            <ul class="dropdown-content">
+                <li><a href="/quem-somos">Quem somos</a></li>
+                <li><a href="/quem-somos">Contato</a></li>
+                <li><a href="/quem-somos">FAQ</a></li>
             </ul>
+            </li>
+            <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+            <li><a href="/consultas">Área de Consultas</a></li>
+            <li><a href="/index">Sou Paciente</a></li>
+        </ul>
         </nav>
 
         <script>
-            function toggleMenu() {
-                const menu = document.getElementById("hamburger-menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-            }
+        function toggleMenu() {
+            const menu = document.getElementById("hamburger-menu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
         </script>
-
 
         <!--barra de navegação - fim ^^^ -->
 
@@ -207,22 +204,6 @@
                 <article class="testimonial-card b testimonial-solution">
                     <i class="fa-solid fa-check testimonial-icon"></i>
                     <p>Oferecemos acesso organizado e seguro a todo o histórico do paciente.</p>
-                </article>
-                <article class="testimonial-card c">
-                    <i class="fa-solid fa-xmark testimonial-icon"></i>
-                    <p>"Receber pagamentos é sempre uma dor de cabeça."</p>
-                </article>
-                <article class="testimonial-card c testimonial-solution">
-                    <i class="fa-solid fa-check testimonial-icon"></i>
-                    <p>Nossa plataforma garante pagamentos transparentes e claros.</p>
-                </article>
-                <article class="testimonial-card d">
-                    <i class="fa-solid fa-xmark testimonial-icon"></i>
-                    <p>"Não tenho o suporte necessário para continuar atuando."</p>
-                </article>
-                <article class="testimonial-card d testimonial-solution">
-                    <i class="fa-solid fa-check testimonial-icon"></i>
-                    <p>Aqui, você conta com o suporte humanizado e ágil da adiministração.</p>
                 </article>
             </section>
         </section>

@@ -2,7 +2,6 @@ BARRA DE NAVEGAÇÃO (SEM LOGIN): ______________________________________________
 
     <!--barra de navegação - início -->
     <nav class="menu-desktop">
-
       <!--Espaço para a logo-->
       <section class="menu-logo">
         <a href="/">

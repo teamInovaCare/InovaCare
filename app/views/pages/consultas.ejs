@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/css/barranav.css">
+
 
 
     <!--link do arquivo js-->
@@ -30,7 +32,8 @@
 <body>
 
     <header>
-        <!--barra de navegação-->
+
+        <!--barra de navegação - início -->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
@@ -47,21 +50,24 @@
                 <li class="dropdown">
                     <a class="sobre" href="#">Sobre</a>
                     <section class="dropdown-content">
-                        <a href="#">Quem somos</a>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
+                        <a href="/quem-somos">Quem somos</a>
+                        <a href="/quem-somos">Contato</a>
+                        <a href="/quem-somos">FAQ</a>
                     </section>
                 </li>
-                <li><a class="agendamento" href="/">Agendamento</a></li>
-                <li><a class="consultas" href="/">Área de Consultas</a></li>
+                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
-                <article class="texto-icon"><!--perfil--></article>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/sair" class="btn-sair">Sair</a>
+                    </section>
+                </li>
             </ul>
 
         </nav>
@@ -76,8 +82,13 @@
             </section>
 
             <ul class="menu-actions">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button></li>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
@@ -86,13 +97,13 @@
                 <li class="dropdown">
                     <a href="#">Sobre</a>
                     <ul class="dropdown-content">
-                        <li><a href="#">Quem somos</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="/quem-somos">Quem somos</a></li>
+                        <li><a href="/quem-somos">Contato</a></li>
+                        <li><a href="/quem-somos">FAQ</a></li>
                     </ul>
                 </li>
-                <li><a href="/">Agendamento</a></li>
-                <li><a href="/">Área de Consultas</a></li>
+                <li><a href="/especialidades">Agendamento</a></li>
+                <li><a href="/consultas">Área de Consultas</a></li>
             </ul>
         </nav>
 
@@ -105,7 +116,9 @@
 
 
         <!--barra de navegação - fim ^^^ -->
+
     </header>
+
 
     <section class="voltar">
         <img onclick="window.history.back()" class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
@@ -133,25 +146,27 @@
                             <div class="content">
                                 <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
                                 <div class="text-container">
-                                    <p class="nome">Cleber Jr.</p>
+                                    <p class="nome">Janaína Souza</p>
                                     <p class="idnt">CRM - SP 284692</p>
-                                    <p class="nota">4,9<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                    <p class="nota">5,0<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
                                 </div>
                             </div>
                             <div class="expandable-content" id="expandable-content-1">
                                 <h3>Informações da Consulta</h3>
                                 <div class="info-sections">
                                     <div class="info-coluna-esq">
-                                        <div class="info-item">
-                                            <p>O link da consulta ainda não está disponível</p>
-                                        </div>
+                                        <form method="post" action="/linkconsulta">
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
+                                            <label for="link-consulta-1">Link da consulta:</label>
+                                            <input type="url" id="link-consulta-1" name="link" placeholder="https://meet.google.com/rhu-hypz-xhx" readonly>
+                                        </form>
                                         <div class="info-item">
                                             <img src="imagens/pc-icon2.png" alt="Info 1" class="info-img">
                                             <p>Modalidade: Online</p>
                                         </div>
                                         <div class="info-item">
                                             <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
-                                            <p>Data: 22/08/2024</p>
+                                            <p>Data: 20/10/2025</p>
                                         </div>
                                         <div class="info-item">
                                             <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
@@ -184,15 +199,12 @@
                                 <div class="info-sections">
                                     <div class="info-coluna-esq">
                                         <div class="info-item">
-                                            <p>O link da consulta ainda não está disponível</p>
-                                        </div>
-                                        <div class="info-item">
                                             <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
                                             <p>Modalidade: Domiciliar</p>
                                         </div>
                                         <div class="info-item">
                                             <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
-                                            <p>Data: 27/08/2024</p>
+                                            <p>Data: 27/10/2025</p>
                                         </div>
                                         <div class="info-item">
                                             <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
@@ -221,18 +233,23 @@
                             <div class="content">
                                 <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
                                 <div class="text-container">
-                                    <p class="nome">Dr João A.</p>
-                                    <p class="idnt">CRM - RJ 987654</p>
-                                    <p class="nota">4,3<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                    <p class="nome">Dr Marcos da Silva</p>
+                                    <p class="idnt">CRM - SP 987654</p>
+                                    <p class="nota">5,0<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
                                 </div>
                             </div>
                             <div class="expandable-content" id="expandable-content-3">
                                 <h3>Informações da Consulta</h3>
                                 <div class="info-sections">
                                     <div class="info-coluna-esq">
+                                        <form method="post" action="/linkconsulta">
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
+                                            <label for="link-consulta-1">Link da consulta:</label>
+                                            <input type="url" id="link-consulta-1" name="link" placeholder="Expirado" readonly>
+                                        </form>
                                         <div class="info-item">
                                             <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
-                                            <p>Modalidade: Domiciliar</p>
+                                            <p>Modalidade: Online</p>
                                         </div>
                                         <div class="info-item">
                                             <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
@@ -338,8 +355,11 @@
                                         </div>
                                     </div>
                                     <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta" id="avaliar-btn"
+                                            onclick="abrirPopup()">Avaliar Profissional</button>
                                         <button class="cancelar-consulta">Agendar Retorno</button>
                                         <button class="cancelar-consulta">Acessar Receita</button>
+                                        <button class="cancelar-consulta">Acessar Pedidos</button>
                                     </div>
                                 </div>
 
@@ -353,33 +373,6 @@
 
         </section>
     </main>
-
-    <footer class="footer">
-
-        <section class="footer-logo">
-            <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
-            <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
-            <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
-                atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de saúde.
-            </p>
-        </section>
-
-        <section class="footer-links">
-            <h3 class="ttl-links">Explorar</h3>
-            <ul class="links">
-                <li><a href="#">Quem somos</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="/especialidades">Especialidades</a></li>
-                <li><a href="/consultas">Consultas</a></li>
-            </ul>
-        </section>
-
-        <section class="footer-contato">
-            <h3 class="ttl-contato">Contato</h3>
-            <p class="nmr-contato">(11) 4002-8922</p>
-        </section>
-
-    </footer>
 
 
     <script src="js/consultas.js"></script>

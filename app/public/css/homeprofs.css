@@ -226,8 +226,9 @@ img {
     display: flex;
     flex-wrap: nowrap;
     gap: 20px;
+    justify-content: center;
 }
- 
+
 .testimonial-card {
     background-color: var(--white);
     padding: 25px;
@@ -237,6 +238,7 @@ img {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
+
     gap: 15px;
     border-left: 5px solid var(--red);
     max-width: 150px;
