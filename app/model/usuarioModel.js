@@ -350,35 +350,43 @@ const usuarioModel = {
     findMedicoFiltro: async (cidade_local, nome_especialidade, nome_usuario, tipo_atendimento) => {
   try {
     let query = `
-      SELECT usuarios.id_usuario, nome_usuario, usuarios.foto_usuario, especialistas.id_especialista, num_registro_especialista, especialidades.id_especialidade, cidade_local, tipo_atendimento, preco_base, taxa_locomocao 
-      FROM usuarios
-      INNER JOIN especialistas ON usuarios.id_usuario = especialistas.id_usuario
-      INNER JOIN disponibilidade_especialista ON disponibilidade_especialista.id_especialista = especialistas.id_especialista
-      INNER JOIN especialidades ON especialidades.id_especialidade = especialistas.id_especialidade
-      INNER JOIN especialista_local ON especialista_local.id_especialista = especialistas.id_especialista
-      INNER JOIN locais ON locais.id_local = especialista_local.id_local
+      SELECT u.id_usuario, u.nome_usuario, u.foto_usuario, e.id_especialista, e.num_registro_especialista, 
+             esp.id_especialidade, '100.00' as preco_base, '150.00' as taxa_locomocao,
+             (SELECT l.cidade_local FROM especialista_local el 
+              INNER JOIN locais l ON el.id_local = l.id_local 
+              WHERE el.id_especialista = e.id_especialista LIMIT 1) as cidade_local,
+             (SELECT d.tipo_atendimento FROM disponibilidade_especialista d 
+              WHERE d.id_especialista = e.id_especialista LIMIT 1) as tipo_atendimento
+      FROM usuarios u
+      INNER JOIN especialistas e ON u.id_usuario = e.id_usuario
+      INNER JOIN especialidades esp ON e.id_especialidade = esp.id_especialidade
       WHERE 1 = 1
     `;
 
     const params = [];
 
     if (cidade_local) {
-      query += ` AND cidade_local = ?`;
+      query += ` AND e.id_especialista IN (
+        SELECT el.id_especialista FROM especialista_local el 
+        INNER JOIN locais l ON el.id_local = l.id_local 
+        WHERE l.cidade_local = ?)`;
       params.push(cidade_local);
     }
 
     if (nome_especialidade) {
-      query += ` AND especialistas.id_especialidade = ?`;
+      query += ` AND e.id_especialidade = ?`;
       params.push(nome_especialidade);
     }
 
     if (nome_usuario) {
-      query += ` AND UPPER(nome_usuario) LIKE ?`;
+      query += ` AND UPPER(u.nome_usuario) LIKE ?`;
       params.push(`%${nome_usuario.toUpperCase()}%`);
     }
 
     if (tipo_atendimento) {
-      query += ` AND tipo_atendimento = ?`;
+      query += ` AND e.id_especialista IN (
+        SELECT d.id_especialista FROM disponibilidade_especialista d 
+        WHERE d.tipo_atendimento = ?)`;
       params.push(tipo_atendimento);
     }
 

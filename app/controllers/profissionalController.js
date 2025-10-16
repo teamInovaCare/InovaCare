@@ -433,14 +433,6 @@ const profController = {
 
   /************************************************AGENDA INSERT DO PROFISSIONAL */
 
-
-  validaloginProf: [
-    body("email").isEmail().withMessage("Email inválido."),
-    body("senha").isStrongPassword().withMessage("Senha inválida!"),
-
-  ],
-
-
   validaAgendaInsert: [
 
     /**Hora de trabalho- validação */

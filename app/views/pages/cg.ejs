@@ -14,7 +14,6 @@
     <!--link do arquivo css-->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/cg.css">
-    <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/filtro.css">
 
 
@@ -33,15 +32,15 @@
 <body>
 
     <header>
-        <!--barra de navegação-->
+        <!--barra de navegação - início -->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/app/views/pages/index.ejs">
-                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+                <a href="/logado-user-pac">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
@@ -55,32 +54,40 @@
                         <a href="#">FAQ</a>
                     </section>
                 </li>
-                <li><a class="agendamento" href="/">Agendamento</a></li>
-                <li><a class="consultas" href="/">Área de Consultas</a></li>
+                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
-                <article class="texto-icon"><!--perfil--></article>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/sair" class="btn-sair">Sair</a>
+                    </section>
+                </li>
             </ul>
 
         </nav>
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/app/views/pages/index.ejs">
-                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+                <a href="/logado-user-pac">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
             <ul class="menu-actions">
-                <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-                <li><button class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></button></li>
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
@@ -94,8 +101,8 @@
                         <li><a href="#">FAQ</a></li>
                     </ul>
                 </li>
-                <li><a href="/">Agendamento</a></li>
-                <li><a href="/">Área de Consultas</a></li>
+                <li><a href="/especialidades">Agendamento</a></li>
+                <li><a href="/consultas">Área de Consultas</a></li>
             </ul>
         </nav>
 
@@ -181,7 +188,7 @@
 
     
 
-    <section class="perfis">
+    <section class="perfis" style="margin-bottom: 50px; clear: both;">
 
 
 
@@ -277,39 +284,7 @@
 
         </section>
 
-
-        </main>
-        <footer class="footer">
-
-            <section class="footer-logo">
-                <img class="footer-logo-desktop" src="imagens/logo-bblt.png" alt="Logo da Empresa">
-                <img class="footer-logo-mobile" src="imagens/logo-extenso.png" alt="Logo da Empresa">
-                <p class="footer-comentario">Oferecemos atendimento médico e terapêutico através das modalidades do
-                    atendimento online e domiciliar. Nosso objetivo é promover o acesso aos mais diversos serviços de
-                    saúde.
-                </p>
-            </section>
-
-            <section class="footer-links">
-                <h3 class="ttl-links">Explorar</h3>
-                <ul class="links">
-                    <li><a href="#">Quem somos</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="/especialidades">Especialidades</a></li>
-                    <li><a href="/consultas">Consultas</a></li>
-                </ul>
-            </section>
-
-            <section class="footer-contato">
-                <h3 class="ttl-contato">Contato</h3>
-                <p class="nmr-contato">(11) 4002-8922</p>
-            </section>
-
-        </footer>
-    </section>
-
-
-
+    </main>
 
 </body>
 

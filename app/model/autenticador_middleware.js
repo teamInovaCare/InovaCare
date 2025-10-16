@@ -24,6 +24,11 @@ gravarUsuAutenticado = async (req, res, next) => {
     erros = validationResult(req);
     var autenticado = { autenticado: null, id: null, tipo: null };
    
+    // Limpar sessões anteriores
+    req.session.emailNaoVerificado = null;
+    
+    console.log('=== DEBUG LOGIN ===');
+    console.log('Email digitado:', req.body.email);
     
     if (erros.isEmpty()) {
         const dadosForm = {
@@ -33,19 +38,30 @@ gravarUsuAutenticado = async (req, res, next) => {
         
         var results = await usuarioModel.findUserEmail(dadosForm);
         var total = Object.keys(results).length;
+        console.log('Total de usuários encontrados:', total);
         console.log('Resultado da busca:', results[0]);
 
         if(total == 1){
+            console.log('Comparando senhas...');
             if(bcrypt.compareSync(dadosForm.senha_usuario, results[0].senha_usuario)){
+                console.log('Senha correta!');
                 // Verificar se o email foi verificado
                 if (results[0].email_verificado == 0 || results[0].email_verificado === false) {
+                    console.log('Email não verificado para:', results[0].nome_usuario);
+                    // Limpar sessão anterior
+                    req.session.emailNaoVerificado = null;
+                    // Definir nova sessão com dados corretos
                     req.session.emailNaoVerificado = {
                         email: results[0].email_usuario,
                         nome: results[0].nome_usuario,
                         tipo: parseInt(results[0].tipo_usuario)
                     };
+                    console.log('Dados armazenados na sessão:', req.session.emailNaoVerificado);
                     var autenticado = { autenticado: null, id: null, tipo: null };
                 } else {
+                    console.log('Email verificado, criando sessão');
+                    // Limpar sessão de email não verificado se existir
+                    req.session.emailNaoVerificado = null;
                     var autenticado={
                         autenticado: results[0].nome_usuario,
                         id: results[0].id_usuario,
@@ -53,12 +69,19 @@ gravarUsuAutenticado = async (req, res, next) => {
                     };
                 }
                 console.log('Usuário autenticado:', autenticado);
+            } else {
+                console.log('Senha incorreta');
             }
+        } else {
+            console.log('Usuário não encontrado ou múltiplos usuários');
         }
         
+    } else {
+        console.log('Erros de validação:', erros.array());
     }
     req.session.autenticado = autenticado;
     req.session.logado = 0;
+    console.log('=== FIM DEBUG LOGIN ===');
     next();
 }
 
