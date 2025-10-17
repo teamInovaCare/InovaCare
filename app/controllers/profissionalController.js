@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 var { validarCPF, validarCEP, converterParaMysql,
   isValidDate,
   isMaiorDeIdade, limparValorReais } = require("../helpers/validacoes");
-  const moment = require('moment');
+const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const emailService = require('../util/emailService');
 const usuarioModel = require('../model/usuarioModel');
@@ -523,6 +523,11 @@ const profController = {
 
       /**Se deu tudo certo, renderizo a página de home de agenda do profissional */
       res.render("pages/home_agenda_prof", {
+        moment: moment,
+        autenticado: req.session.autenticado,
+        login: req.session.logado,
+        agendas: [],
+        semanadia: 0,
         erros: null,
         valores: req.body,
       });
@@ -531,15 +536,10 @@ const profController = {
     } catch (errors) {
       console.log("Erro na inserção" + errors);
       res.render("pages/config_agenda_prof", {
+        autenticado: req.session.autenticado,
+        login: req.session.logado,
         erros: null,
-        /*dadosNotificacao: {
-          titulo: "Erro ao inserir os dados!",
-          mensagem: "Verifique os valores digitados",
-          tipo: "error"
-        },*/
-
         valores: req.body,
-
       });
 
       return false
@@ -547,31 +547,7 @@ const profController = {
 
   },
 
-  /**FILTRO DA AGENDA **************************************** */
- 
-  /*findAgendaProf: async (req,res)=>{
- 
-    try {
- 
-      const id_especialista = await profModel.selectIdEspecialista(req);
-      semanadia= req.body.semanadia;
- 
-      if(semanadia==0){
- 
-      results = await profModel.findAllFiltroProf(id_especialista);
-      res.render("pages/home_agenda_prof", { agendas: results });
- 
-      }else{
-      results = await profModel.findFiltroProf(id_especialista, semanadia);
-      res.render("pages/home_agenda_prof", { agendas: results });
- 
-    }
- 
-    } catch (e) {
-      console.log(e); // exibir os erros no console do vs code
-      res.json({ erro: "Falha ao acessar dados" });
-    }
-  },*/
+  
 
   findAgendaProf: async (req, res) => {
   try {
@@ -620,39 +596,7 @@ const profController = {
  
  
  
-  /*
-  findAllAgendaProf: async (req, res) => {
-   
-    try {
- 
-      const id_especialista = await profModel.selectIdEspecialista(req);
- 
-      results = await profModel.findAllFiltroProf(id_especialista);
-      res.render("pages/home_agenda_prof", { agenda: results });
- 
-    } catch (e) {
-      console.log(e); // exibir os erros no console do vs code
-      res.json({ erro: "Falha ao acessar dados" });
-    }
-  },
- 
- 
-  findFiltroAgendaProf: async (req, res) => {
- 
-    const id_especialista = await profModel.selectIdEspecialista(req);
- 
-    let semanadia = req.body.semanadia
- 
- 
-    try {
-      results = await profModel.findFiltroProf(id_especialista, semanadia);
-      res.render("pages/home_agenda_prof", { agenda: results });
- 
-    } catch (e) {
-      console.log(e); // exibir os erros no console do vs code
-      res.json({ erro: "Falha ao acessar dados" });
-    }
-  },*/
+  
  
  
 };

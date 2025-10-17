@@ -630,7 +630,8 @@ const usuarioController = {
         const data = new Date();
         data.setDate(data.getDate() + i);
  
-        const diaDaSemana = data.getDay(); // 0 = domingo, 1 = segunda, etc.
+        const diaDaSemanaJS = data.getDay(); // 0 = domingo, 1 = segunda, etc.
+        const diaDaSemana = diaDaSemanaJS + 1; // Converte: domingo=1, segunda=2, etc.
  
         // Se o dia da semana está entre os dias procurados
         if (diasProcurados.includes(diaDaSemana)) {
@@ -669,6 +670,7 @@ const usuarioController = {
       return res.status(500).json({ message: 'Erro interno ao gerar os dias disponíveis.' });
     }
   },
+  
 
   /**Lógica para mostrar os blocos de hora */
    gerarHorarios: async (req, res) => {
@@ -698,7 +700,8 @@ const usuarioController = {
       dataObj = new Date(data + 'T00:00:00');
     }
     
-    const diaSemana = dataObj.getDay();
+    const diaSemanaJS = dataObj.getDay();
+    const diaSemana = diaSemanaJS + 1; // Converte: domingo=1, segunda=2, etc.
     console.log('Dia da semana calculado:', diaSemana);
 
     // 2️⃣ Busca as disponibilidades do especialista filtradas por tipo de atendimento
