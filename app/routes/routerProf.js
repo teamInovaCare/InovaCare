@@ -178,6 +178,23 @@ routerProf.get("/consultas-prof", function (req, res) {/**Minhas consultas */
 });
 
 
+routerProf.get("/prontuario", function (req, res) {
+    res.render("pages/prontuario.ejs");
+});
+
+routerProf.get("/novo-prontuario", function (req, res) {
+    res.render("pages/novo-prontuario.ejs");
+});
+
+routerProf.get("/receita", function (req, res) {
+    res.render("pages/receita.ejs");
+});
+
+routerProf.get("/novo-exame", function (req, res) {
+    res.render("pages/novo-exame.ejs");
+});
+
+
 
 
 

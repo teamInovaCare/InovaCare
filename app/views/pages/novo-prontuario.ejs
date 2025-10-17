@@ -14,69 +14,77 @@
 
 <body>
 
-  <header>
-    <!--barra de navegação - início -->
-    <nav class="menu-desktop">
+<header>
+        <!--barra de navegação - início -->
+        <nav class="menu-desktop">
 
-      <!--Espaço para a logo-->
-      <section class="menu-logo">
-        <a href="/homepro">
-          <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
-          <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
-          <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
-        </a>
-      </section>
-
-      <!--Menu profissional-->
-      <ul class="menu-list">
-        <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
-        <li><a class="consultas" href="/consultas">Consultas</a></li>
-        <li><a class="pacientes" href="/pacientes">Pacientes</a></li>
-      </ul>
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
 
 
-      <ul class="menu-list-direita">
-        <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
-        <li class="dropdown">
-          <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
-          <section class="dropdown-content">
-            <a href="/sair" class="btn-sair">Sair</a>
-          </section>
-        </li>
-      </ul>
 
-    </nav>
+                <a href="/profissional/homepro">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
 
-    <nav class="mobile-menu">
-      <section class="menu-logo">
-        <a href="/homepro">
-          <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-          <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-          <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-        </a>
-      </section>
 
-      <ul class="menu-actions">
-        <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
-        <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
-      </ul>
+                </a>
+            </section>
 
-      <!-- Menu suspenso do hambúrguer -->
-      <ul id="hamburger-menu" class="hamburger-menu-content">
-        <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
-        <li><a href="/consultas">Consultas</a></li>
-        <li><a href="/pacientes">Pacientes</a></li>
-        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
-      </ul>
-    </nav>
+            <!--Menu profissional-->
+            <ul class="menu-list">
+                <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+                <li><a class="consultas" href="/profissional/consultas-prof">Consultas</a></li>
+                <li><a class="pacientes" href="/profissional/prontuario">Prontuários</a></li>
+            </ul>
 
-    <script>
-      function toggleMenu() {
-        const menu = document.getElementById("hamburger-menu");
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-      }
-    </script>
-  </header>
+
+            <ul class="menu-list-direita">
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i
+                            class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/sair" class="btn-sair">Sair</a>
+                    </section>
+                </li>
+            </ul>
+
+        </nav>
+
+        <nav class="mobile-menu">
+            <section class="menu-logo">
+                <a href="/homepro">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-actions">
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i
+                            class="bi bi-person-circle"></i></a></li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+
+                <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+                <li><a href="/profissional/consultas-prof">Consultas</a></li>
+                <li><a href="/profissional/prontuario">Prontuários</a></li>
+                <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+    </header>
 
   <main>
 

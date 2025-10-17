@@ -29,6 +29,9 @@ router.get("/logado-user-pac", verificarUsuAutenticado, verificarEmailVerificado
 
 
 
+router.get("/logado-user-pac", verificarUsuAutenticado, verificarEmailVerificado, function (req, res) {
+        res.render("pages/logado-user-pac.ejs", {autenticado: req.session.autenticado, login: req.session.logado, } );
+});
 
 
 
@@ -46,13 +49,13 @@ router.get("/index", /*verificarUsuAutenticado,*/ function (req, res) {/*usuári
 
 router.get("/especialidades", 
     verificarUsuAutenticado,
-    verificarUsuAutorizado([1], "pages/restrito"),
+    verificarUsuAutorizado([1], "pages/aviso-login"),
     function (req, res) {/**listagem das especialidades - botão agendamento */
-    res.render("pages/especialidades.ejs", { autenticado: req.session.autenticado, login: req.session.logado, })
+    res.render("pages/especialidades.ejs", { autenticado: req.session.autenticado, login: req.session.logado })
 });
 
 
-router.get("/cg", usuarioController.listarTodosMedicos);
+router.get("/cg", verificarUsuAutenticado, verificarUsuAutorizado([1], "pages/aviso-login"), usuarioController.listarTodosMedicos);
 /**POST */
 router.post("/filtro-medicos", (req,res)=>{
     usuarioController.filtroMedicos(req,res);
@@ -67,7 +70,7 @@ const { idEspecialista, tipoAtendimento } = req.query;
   
 });*/
 
-router.get('/agenda-online', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
+router.get('/agenda-online', verificarUsuAutenticado, verificarUsuAutorizado([1], "pages/aviso-login"), verificarEmailVerificado, usuarioController.GerarProximosDias);
 /**Fetch para enviar os dados do dia */
 router.get(
   '/gerar-horarios', 
@@ -76,19 +79,17 @@ router.get(
   usuarioController.gerarHorarios
 );
 
-router.get('/agenda-domiciliar', verificarUsuAutenticado, verificarEmailVerificado, usuarioController.GerarProximosDias);
-
-/*router.get('/agenda-domiciliar', (req, res) => {
-  const { tipo_atendimento, id_especialista } = req.query;
-  console.log(tipo_atendimento, id_especialista);
-  res.render("pages/agenda-domiciliar.ejs")
-  // lógica para buscar os dados no banco
-});*/
+router.get('/agenda-domiciliar', verificarUsuAutenticado,verificarUsuAutorizado([1], "pages/aviso-login"), verificarEmailVerificado, usuarioController.GerarProximosDias);
 
 
 
-router.get("/consultas", function (req, res) {/**Minhas consultas */
-    res.render("pages/consultas.ejs")
+
+router.get("/consultas", 
+    verificarUsuAutenticado,
+    verificarUsuAutorizado([1], "pages/aviso-login"),
+    
+    function (req, res) {/**Minhas consultas */
+    res.render("pages/consultas.ejs",{ autenticado: req.session.autenticado, login: req.session.logado })
 });
 
 
@@ -101,15 +102,10 @@ router.get("/perfil", function (req, res) {
     res.redirect('/perfil/');
 });
 
-router.get("/agenda", function (req, res) {
-    res.render("pages/agenda.ejs");
-});
 
 
 
-router.get("/agenda-domiciliar", function (req, res) {
-    res.render("pages/agenda-domiciliar.ejs");
-});
+
 
 
 
@@ -213,9 +209,9 @@ router.post("/avaliar-profissional", usuarioController.criarAvaliacao);
 router.post("/atualizar-avaliacao", usuarioController.atualizarAvaliacao);
 
 /**Página home profissional sem login */
-router.get("/homeprofs", function (req, res) {
+/*router.get("/homeprofs", function (req, res) {
     res.render("pages/homeprofs.ejs");
-});
+});*/
 
 /**Rotas de verificação de email */
 router.get("/verificar-email", usuarioController.verificarEmail);
@@ -233,7 +229,7 @@ router.get("/sair", function (req, res) {
     });
 });
 
-router.get("/prontuario", function (req, res) {
+/*router.get("/prontuario", function (req, res) {
     res.render("pages/prontuario.ejs");
 });
 

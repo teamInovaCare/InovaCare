@@ -32,36 +32,34 @@
 <body>
 
     <header>
-
         <!--barra de navegação - início -->
         <nav class="menu-desktop">
 
             <!--Espaço para a logo-->
             <section class="menu-logo">
-                <a href="/logado-user-pac">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+
+
+
+                <a href="/profissional/homepro">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
+
+
                 </a>
             </section>
 
-            <!--Botão de pesquisa-->
+            <!--Menu profissional-->
             <ul class="menu-list">
-                <li class="dropdown">
-                    <a class="sobre" href="#">Sobre</a>
-                    <section class="dropdown-content">
-                        <a href="/quem-somos">Quem somos</a>
-                        <a href="/quem-somos">Contato</a>
-                        <a href="/quem-somos">FAQ</a>
-                    </section>
-                </li>
-                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
-                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
+                <li><a class="agenda" href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+                <li><a class="consultas" href="/profissional/consultas-prof">Consultas</a></li>
+                <li><a class="pacientes" href="/profissional/prontuario">Prontuários</a></li>
             </ul>
 
 
             <ul class="menu-list-direita">
-                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i
+                            class="bi bi-person-circle"></i></a></li>
                 <li class="dropdown">
                     <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
                     <section class="dropdown-content">
@@ -74,36 +72,26 @@
 
         <nav class="mobile-menu">
             <section class="menu-logo">
-                <a href="/logado-user-pac">
-                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                <a href="/homepro">
+                    <img class="logo logo-desktop" src="/imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="/imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="/imagens/logo-borboleta.png" alt="Logo InovaCare">
                 </a>
             </section>
 
             <ul class="menu-actions">
-                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
-                <li class="dropdown">
-                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
-                    <ul class="dropdown-content">
-                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
-                    </ul>
-                </li>
+                <li><a href="/perfil/prof" class="icon-perfil" aria-label="Perfil"><i
+                            class="bi bi-person-circle"></i></a></li>
                 <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
             </ul>
 
             <!-- Menu suspenso do hambúrguer -->
             <ul id="hamburger-menu" class="hamburger-menu-content">
-                <li class="dropdown">
-                    <a href="#">Sobre</a>
-                    <ul class="dropdown-content">
-                        <li><a href="/quem-somos">Quem somos</a></li>
-                        <li><a href="/quem-somos">Contato</a></li>
-                        <li><a href="/quem-somos">FAQ</a></li>
-                    </ul>
-                </li>
-                <li><a href="/especialidades">Agendamento</a></li>
-                <li><a href="/consultas">Área de Consultas</a></li>
+
+                <li><a href="/profissional/home_agenda_prof">Minha Agenda</a></li>
+                <li><a href="/profissional/consultas-prof">Consultas</a></li>
+                <li><a href="/profissional/prontuario">Prontuários</a></li>
+                <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
             </ul>
         </nav>
 
@@ -113,11 +101,9 @@
                 menu.style.display = menu.style.display === "block" ? "none" : "block";
             }
         </script>
-
-
-        <!--barra de navegação - fim ^^^ -->
-
     </header>
+
+
 
 
     <section class="voltar">
