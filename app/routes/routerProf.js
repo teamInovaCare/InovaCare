@@ -172,6 +172,13 @@ routerProf.get("/prontugeral", function (req, res) {//prontuario profissional
 
 
 
+/**Minhas consultas */
+routerProf.get("/consultas-prof", function (req, res) {/**Minhas consultas */
+    res.render("pages/consultas-prof.ejs")
+});
+
+
+
 
 
 

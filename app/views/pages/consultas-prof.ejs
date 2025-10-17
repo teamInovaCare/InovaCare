@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="imagens/logo-bblt.png" sizes="any">
+    <title> InovaCare</title>
+
+    <!--Link dos ícones da barra de navegação-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!--link do arquivo css-->
+    <link rel="stylesheet" href="../css/consultas.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/css/barranav.css">
+
+
+
+    <!--link do arquivo js-->
+    <script src="js/barra_nav.js"></script>
+    <!-- link do js -->
+
+    <!--link do js do carrossel 2 - redondo-->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.css'>
+
+</head>
+
+<body>
+
+    <header>
+
+        <!--barra de navegação - início -->
+        <nav class="menu-desktop">
+
+            <!--Espaço para a logo-->
+            <section class="menu-logo">
+                <a href="/logado-user-pac">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <!--Botão de pesquisa-->
+            <ul class="menu-list">
+                <li class="dropdown">
+                    <a class="sobre" href="#">Sobre</a>
+                    <section class="dropdown-content">
+                        <a href="/quem-somos">Quem somos</a>
+                        <a href="/quem-somos">Contato</a>
+                        <a href="/quem-somos">FAQ</a>
+                    </section>
+                </li>
+                <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
+                <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
+            </ul>
+
+
+            <ul class="menu-list-direita">
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <section class="dropdown-content">
+                        <a href="/sair" class="btn-sair">Sair</a>
+                    </section>
+                </li>
+            </ul>
+
+        </nav>
+
+        <nav class="mobile-menu">
+            <section class="menu-logo">
+                <a href="/logado-user-pac">
+                    <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
+                    <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
+                    <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
+                </a>
+            </section>
+
+            <ul class="menu-actions">
+                <li><a href="/perfil" class="icon-perfil" aria-label="Perfil"><i class="bi bi-person-circle"></i></a></li>
+                <li class="dropdown">
+                    <button class="icon-perfil" aria-label="Menu"><i class="bi bi-three-dots-vertical"></i></button>
+                    <ul class="dropdown-content">
+                        <li><a href="/sair" class="btn-sair-mobile">Sair</a></li>
+                    </ul>
+                </li>
+                <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
+            </ul>
+
+            <!-- Menu suspenso do hambúrguer -->
+            <ul id="hamburger-menu" class="hamburger-menu-content">
+                <li class="dropdown">
+                    <a href="#">Sobre</a>
+                    <ul class="dropdown-content">
+                        <li><a href="/quem-somos">Quem somos</a></li>
+                        <li><a href="/quem-somos">Contato</a></li>
+                        <li><a href="/quem-somos">FAQ</a></li>
+                    </ul>
+                </li>
+                <li><a href="/especialidades">Agendamento</a></li>
+                <li><a href="/consultas">Área de Consultas</a></li>
+            </ul>
+        </nav>
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById("hamburger-menu");
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            }
+        </script>
+
+
+        <!--barra de navegação - fim ^^^ -->
+
+    </header>
+
+
+    <section class="voltar">
+        <img onclick="window.history.back()" class="botao-voltar" src="imagens/seta-esquerda.png" alt="" srcset="">
+    </section>
+
+
+    <section class="ttl-consultas">
+        <section class="txt-consultas">
+            <h3>Minhas consultas</h3>
+        </section>
+    </section>
+
+
+    <main>
+        <section class="container">
+            <section class="tabs">
+                <section id="atuaisTab" class="tab active-tab">Atuais</section>
+                <section id="passadasTab" class="tab">Passadas</section>
+            </section>
+
+            <section id="atuais" class="retangulo-container">
+                <section class="retang1">
+                    <ul class="list-esp">
+                        <li class="retangCg" id="retangCg-1">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dra Janaína Souza</p>
+                                    <p class="idnt">CRM - SP 284692</p>
+                                    <p class="nota">5,0<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-1">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <form method="post" action="/linkconsulta">
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
+                                            <label for="link-consulta-1">Link da consulta:</label>
+                                            <input type="url" id="link-consulta-1" name="link" placeholder="https://meet.google.com/rhu-hypz-xhx" readonly>
+                                        </form>
+                                        <div class="info-item">
+                                            <img src="imagens/pc-icon2.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Online</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 20/10/2025</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 11:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 180,00</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta">Cancelar Consulta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li class="retangCg" id="retangCg-2">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dra Maria S.</p>
+                                    <p class="idnt">CRM - MG 654321</p>
+                                    <p class="nota">4,8<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-2">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <div class="info-item">
+                                            <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Domiciliar</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 27/10/2025</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 10:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 95,00</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta">Cancelar Consulta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="retangCg" id="retangCg-1">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dr Lucas Martins</p>
+                                    <p class="idnt">CRM - SP 284692</p>
+                                    <p class="nota">5,0<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-1">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <form method="post" action="/linkconsulta">
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
+                                            <label for="link-consulta-1">Link da consulta:</label>
+                                            <input type="url" id="link-consulta-1" name="link" placeholder="https://meet.google.com/rhu-hypz-xhx" readonly>
+                                        </form>
+                                        <div class="info-item">
+                                            <img src="imagens/pc-icon2.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Online</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 20/10/2025</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 11:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 180,00</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta">Cancelar Consulta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                        <li class="retangCg" id="retangCg-2">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dra Sandra Meireles</p>
+                                    <p class="idnt">CRM - MG 654321</p>
+                                    <p class="nota">4,8<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-2">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <div class="info-item">
+                                            <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Domiciliar</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 27/10/2025</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 10:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 95,00</p>
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta">Cancelar Consulta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </section>
+            </section>
+
+            <section id="passadas" class="retangulo-container">
+                <section class="retang1">
+                    <ul class="list-esp">
+                        <li class="retangCg" id="retangCg-3">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dr Marcos da Silva</p>
+                                    <p class="idnt">CRM - SP 987654</p>
+                                    <p class="nota">5,0<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-3">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <form method="post" action="/linkconsulta">
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
+                                            <label for="link-consulta-1">Link da consulta:</label>
+                                            <input type="url" id="link-consulta-1" name="link" placeholder="Expirado" readonly>
+                                        </form>
+                                        <div class="info-item">
+                                            <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Online</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 02/08/2024</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 12:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 75,00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/tempo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Duração: 00:28:30</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <p>Avaliação:</p>
+                                            <div></div>
+                                            <img src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star.webp" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star.webp" alt="Info 4" class="avalia-img">
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta" id="avaliar-btn"
+                                            onclick="abrirPopup()">Avaliar Profissional</button>
+                                        <button class="cancelar-consulta">Agendar Retorno</button>
+                                        <button class="cancelar-consulta">Acessar Receita</button>
+                                        <button class="cancelar-consulta">Acessar Pedidos</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="popup-overlay" id="popup">
+                                <form class="popup">
+                                    <span class="close-btn" onclick="fecharPopup()">×</span>
+                                    <h2>Como foi a sua consulta com o(a) Dr João A. ?</h2>
+                                    <p>Deixe sua avaliação.</p>
+                                    <div class="stars" id="estrelas">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+
+                                    <div class="comment-box" id="comment-box">
+                                        <h2>Conte como foi a sua experiência:</h2>
+                                        <textarea id="caixatexto" placeholder="Digite aqui..."
+                                            id="comentario"></textarea>
+                                        <button class="cancelar-consulta" onclick="enviar()">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+                        <li class="retangCg" id="retangCg-4">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dr Carlos Eduardo
+                                    </p>
+                                    <p class="idnt">CRM - PR 123987</p>
+                                    <p class="nota">4,7<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-4">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <div class="info-item">
+                                            <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Domiciliar</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 25/07/2024</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 17:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 110,00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/tempo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Duração: 01:12:47</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <p>Avaliação:</p>
+                                            <div></div>
+                                            <img src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star.webp" alt="Info 4" class="avalia-img">
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta" id="avaliar-btn"
+                                            onclick="abrirPopup()">Avaliar Profissional</button>
+                                        <button class="cancelar-consulta">Agendar Retorno</button>
+                                        <button class="cancelar-consulta">Acessar Receita</button>
+                                        <button class="cancelar-consulta">Acessar Pedidos</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                        </div>
+                        </li>
+
+                        <li class="retangCg" id="retangCg-3">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dr João Rocha</p>
+                                    <p class="idnt">CRM - SP 987654</p>
+                                    <p class="nota">5,0<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-3">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <form method="post" action="/linkconsulta">
+                                            <input type="hidden" name="id_consulta" id="id_consulta">
+                                            <label for="link-consulta-1">Link da consulta:</label>
+                                            <input type="url" id="link-consulta-1" name="link" placeholder="Expirado" readonly>
+                                        </form>
+                                        <div class="info-item">
+                                            <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Online</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 02/08/2024</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 12:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 75,00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/tempo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Duração: 00:28:30</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <p>Avaliação:</p>
+                                            <div></div>
+                                            <img src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star.webp" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star.webp" alt="Info 4" class="avalia-img">
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta" id="avaliar-btn"
+                                            onclick="abrirPopup()">Avaliar Profissional</button>
+                                        <button class="cancelar-consulta">Agendar Retorno</button>
+                                        <button class="cancelar-consulta">Acessar Receita</button>
+                                        <button class="cancelar-consulta">Acessar Pedidos</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="popup-overlay" id="popup">
+                                <form class="popup">
+                                    <span class="close-btn" onclick="fecharPopup()">×</span>
+                                    <h2>Como foi a sua consulta com o(a) Dr João Rocha ?</h2>
+                                    <p>Deixe sua avaliação.</p>
+                                    <div class="stars" id="estrelas">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+
+                                    <div class="comment-box" id="comment-box">
+                                        <h2>Conte como foi a sua experiência:</h2>
+                                        <textarea id="caixatexto" placeholder="Digite aqui..."
+                                            id="comentario"></textarea>
+                                        <button class="cancelar-consulta" onclick="enviar()">Enviar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+                        <li class="retangCg" id="retangCg-4">
+                            <div class="content">
+                                <img class="perfil1" src="imagens/perfil.png" alt="" srcset="">
+                                <div class="text-container">
+                                    <p class="nome">Dra Ana B.</p>
+                                    <p class="idnt">CRM - PR 123987</p>
+                                    <p class="nota">4,7<img src="imagens/star-l.png" alt="Estrela" class="nota-img"></p>
+                                </div>
+                            </div>
+                            <div class="expandable-content" id="expandable-content-4">
+                                <h3>Informações da Consulta</h3>
+                                <div class="info-sections">
+                                    <div class="info-coluna-esq">
+                                        <div class="info-item">
+                                            <img src="imagens/casa-icon.png" alt="Info 1" class="info-img">
+                                            <p>Modalidade: Domiciliar</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/calendario-icon.png" alt="Info 2" class="info-img">
+                                            <p>Data: 25/07/2024</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/relogio-icon.png" alt="Info 3" class="info-img">
+                                            <p>Horário: 17:00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/custo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Custo: R$ 110,00</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <img src="imagens/tempo-icon.png" alt="Info 4" class="info-img">
+                                            <p>Duração: 01:12:47</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <p>Avaliação:</p>
+                                            <div></div>
+                                            <img src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star-l.png" alt="Info 4" class="avalia-img"> <img
+                                                src="imagens/star.webp" alt="Info 4" class="avalia-img">
+                                        </div>
+                                    </div>
+                                    <div class="info-coluna-dir">
+                                        <button class="cancelar-consulta" id="avaliar-btn"
+                                            onclick="abrirPopup()">Avaliar Profissional</button>
+                                        <button class="cancelar-consulta">Agendar Retorno</button>
+                                        <button class="cancelar-consulta">Acessar Receita</button>
+                                        <button class="cancelar-consulta">Acessar Pedidos</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                        </div>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+
+        </section>
+    </main>
+
+
+    <script src="js/consultas.js"></script>
+</body>
+
+
+</html>
