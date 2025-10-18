@@ -606,10 +606,4 @@ const profController = {
  
  
 
-
-
-
-
-
-
 module.exports = profController
