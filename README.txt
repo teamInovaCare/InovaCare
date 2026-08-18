@@ -1,170 +1,156 @@
-Para adicionar as dependências abra o terminal no VS Code
-e digite:
+# InovaCare
 
-**** (npm config set strict-ssl false) para liberar o proxy
+Plataforma de assistência médica e terapêutica nas modalidades **online** e **domiciliar**, desenvolvida como Trabalho de Conclusão de Curso do Técnico em Informática para Internet do ITB Brasílio Flores de Azevedo.
 
-**** npm install
+---
 
-**** npm install express-session
+## 📌 Contexto e Problema
 
-**** npm install mysql2 --save
+Mais de **100 milhões de brasileiros** enfrentam dificuldades de acesso aos serviços de saúde, principalmente:
 
+- Longas filas de espera no SUS;
+- Altos custos de planos de saúde privados (especialmente para idosos);
+- Dificuldade de locomoção até unidades de saúde.
 
-**** npm install moment --save
+Com o envelhecimento populacional (idosos já representam **10,9%** da população brasileira), a demanda por atendimento acessível e humanizado cresce ainda mais.
 
+---
 
-index
+## 💡 Solução Proposta
 
-<!--barra de navegação - início -->
-    <nav class="menu-desktop">
+A **InovaCare** conecta **pacientes** a **profissionais da saúde** (médicos, psicólogos, fonoaudiólogos, etc.) por meio de uma plataforma web que permite:
 
-      <!--Espaço para a logo-->
-      <section class="menu-logo">
-        <a href="/">
-          <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-          <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-          <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-        </a>
-      </section>
+- Agendamento de consultas **online** ou **domiciliares**;
+- Pagamento integrado via **Mercado Pago**;
+- Disponibilização de **prontuários, receitas e pedidos de exames**;
+- Avaliação e feedback sobre os profissionais.
 
-      <!--Botão de pesquisa-->
-      <ul class="menu-list">
-        <li class="dropdown">
-          <a class="sobre" href="#">Sobre</a>
-          <section class="dropdown-content">
-            <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a>
-            <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a>
-            <a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a>
-          </section>
-        </li>
-        <li><a class="agendamento" href="/especialidades">Agendamento</a></li>
-        <li><a class="consultas" href="/consultas">Área de Consultas</a></li>
-        <li><a class="sou-profissional" href="/cadprof_inicial">Sou Profissional</a></li>
-      </ul>
+O modelo de negócio baseia-se em uma **taxa de intermediação de 15% a 20%** sobre o valor da consulta, cobrada do profissional.
 
+---
 
-      <ul class="menu-list-direita">
-        <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-        <li><a href="/cadastro_inicial" class="btn-entrar">Entrar</a></li>
-      </ul>
+## 🎯 Público-Alvo
 
-    </nav>
+- **Faixa etária:** 30 a 60 anos (população em idade mediana) e idosos;
+- **Classe social:** C (renda familiar entre R$ 2.005 e R$ 8.640);
+- **Região:** Grande São Paulo (cerca de 1,05 milhão de pessoas com esse perfil).
 
-    <nav class="mobile-menu">
-      <section class="menu-logo">
-        <a href="/">
-          <img class="logo logo-desktop" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-          <img class="logo logo-tablet" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-          <img class="logo logo-mobile" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-        </a>
-      </section>
+---
 
-      <ul class="menu-actions">
-        <li><button class="icon-lupa" aria-label="Pesquisar"><i class="bi bi-search"></i></button></li>
-        <li><button class="hamburguer" onclick="toggleMenu()" aria-label="Menu"></button></li>
-      </ul>
+## ⚙️ Funcionalidades Principais
 
-      <!-- Menu suspenso do hambúrguer -->
-      <ul id="hamburger-menu" class="hamburger-menu-content">
-        <li><a href="/cadastro_inicial" class="btn-entrar-mobile">Entrar</a></li>
-        <li class="dropdown">
-          <a href="#">Sobre</a>
-          <ul class="dropdown-content">
-            <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Quem somos</a></li>
-            <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">Contato</a></li>
-            <li><a href="https://fiebedu.sharepoint.com/sites/saudedomiciliar">FAQ</a></li>
-          </ul>
-        </li>
-        <li><a href="/especialidades">Agendamento</a></li>
-        <li><a href="/consultas">Área de Consultas</a></li>
-        <li><a href="/cadprof_inicial">Sou Profissional</a></li>
-      </ul>
-    </nav>
+### 👤 Paciente
+- Cadastro e login com verificação por e-mail;
+- Busca e filtro de profissionais por especialidade, modalidade de atendimento, localização;
+- Visualização de perfis e agendamento de consultas;
+- Pagamento online;
+- Acesso a histórico de consultas, receitas, exames e prontuários;
+- Avaliação de profissionais.
 
-    <script>
-      function toggleMenu() {
-        const menu = document.getElementById("hamburger-menu");
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-      }
-    </script>
+### 👨‍⚕️ Profissional de Saúde
+- Cadastro e configuração de perfil (especialidade, preços, modalidades, áreas de atuação);
+- Gerenciamento de agenda (dias, horários, pausas);
+- Visualização de consultas agendadas e passadas;
+- Registro de prontuários, receitas e pedidos de exames;
+- Recebimento de pagamentos (após a consulta).
 
-    <!--barra de navegação - fim ^^^ -->
+### 🛠️ Administração (Equipe InovaCare)
+- Gerenciamento de usuários, especialidades e avaliações;
+- Monitoramento de consultas e pagamentos;
+- Aplicação de taxas sobre as consultas;
+- Suspensão de contas, se necessário.
 
+---
 
+## 🧰 Tecnologias Utilizadas
 
-    newuser
+| Área          | Tecnologias |
+|---------------|-------------|
+| **Front-End** | HTML, CSS, JavaScript, jQuery, AJAX, EJS (templates) |
+| **Back-End**  | Node.js, Express, Multer |
+| **Banco de Dados** | MySQL |
+| **Pagamento** | Mercado Pago (gateway) |
+| **Modelagem** | BrModelo (conceitual/lógico), MySQL Workbench (físico) |
+| **Ferramentas** | Git, GitHub |
 
+---
 
-    <nav class="menu desktop">
+## 🗂️ Modelagem de Dados
 
-            <!--barra de navegação-->
+O banco de dados foi projetado com as principais entidades:
 
-            <!--Espaço para a logo-->
-            <section class="menu-logo">
-                <a href="/">
-                    <img class="logo" src="imagens/logo-bblt.png" alt="Logo InovaCare">
-                </a>
-            </section>
+- `usuarios` (tipo: paciente, profissional, administrador)
+- `pacientes`, `especialistas`
+- `especialidades`
+- `disponibilidade_especialista`
+- `agenda_paciente` (consultas)
+- `prontuario`, `receita`, `exame`
+- `avaliacoes`
 
-            <!--Botão de pesquisa-->
-            <ul class="menu-list">
-                <li class="dropdown">
-                    <a class="sobre" href="#">Sobre</a>
-                    <div class="dropdown-content">
-                        <a href="#">Quem somos</a>
-                        <a href="#">Contato</a>
-                        <a href="#">FAQ</a>
-                <li><a class="profissional" href="/homepro">Sou Profissional</a></li>
-                <li><a id="areas-link" class="agendamento" href="/cadastro_inicial">Agendamento</a></li>
-                <li><a class="areas" href="/cadastro_inicial">Área de consultas</a></li>
-            </ul>
+Os modelos conceitual, lógico e físico estão detalhados no documento original.
 
+---
 
-            <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="texto-icon"><!--perfil--></article>
-                <a href="/cadastro_inicial"><button class="entrar">Entrar</button></a>
-            </ul>
+## 🚀 Como Executar 
 
-        </nav>
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seu-usuario/inovacare.git
+   ```
 
-        <nav class="menu mobile">
-            <section class="menu-logo">
-                <a href="/">
-                    <img class="logo" src="imagens/logo-extenso.png" alt="Logo InovaCare">
-                </a>
-                <a href="/">
-                    <img class="logo3" src="imagens/logo-borboleta.png" alt="Logo InovaCare">
-                </a>
-            </section>
-    
-            <ul class="menu-list-direita">
-                <article class="icon-lupa"><i class="bi bi-search"></i></article>
-                <article class="texto-icon"><!--pesquisa--></article>
-                <article class="icon-perfil"><i class="bi bi-person-circle"></i></article>
-                <article class="texto-icon"><!--perfil--></article>
-                
-                <!-- Botão do menu hambúrguer -->
-                <button class="hamburguer" onclick="toggleMenu()">
-                    <div class="linha"></div>
-                    <div class="linha"></div>
-                    <div class="linha"></div>                  
-                </button>
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-                <a href="/cadastro_inicial"><button class="entrar">Entrar</button></a>
-                
-                <!-- Menu suspenso do hambúrguer -->
-                <div id="hamburger-menu" class="hamburger-menu-content">
-                    <a href="/cadastro_inicial">Agendamento</a>
-                    <a href="/cadastro_inicial">Área de consultas</a>
-                </div>
-            </ul>
-        </nav>
+3. Configure o banco de dados MySQL com o script disponível em `database.sql`.
 
-        <script>
-            function toggleMenu() {
-                const menu = document.getElementById("hamburger-menu");
-                menu.style.display = menu.style.display === "block" ? "none" : "block";
-            }
-        </script>
+4. Crie um arquivo `.env` com as variáveis de ambiente (porta, credenciais do banco, chave do Mercado Pago etc.).
+
+5. Inicie o servidor:
+   ```bash
+   node app.js
+   ```
+
+6. Acesse `http://localhost:3000` no navegador.
+
+---
+
+## 👥 Equipe
+
+- Arthur Cezar Tenorio da Silva  
+- Erick Barbosa Lima de Paiva  
+- Gabrielle Salustiano Putini  
+- Hebert Weky Filinto da Silva  
+- Lohany Martins da Silva  
+- Luisa Marques dos Santos  
+- Nicole Souza Matos  
+- Rayssa Silva Rodrigues  
+
+**Orientador:** Prof. Paulo Barcellos  
+**Instituição:** ITB Brasílio Flores de Azevedo – Barueri/SP, 2025
+
+---
+
+## 📄 Documentação Completa
+
+O relatório completo com todas as análises, diagramas, regras de negócio e capturas de tela está disponível no arquivo [`DOC-20251127-WA0283..pdf`](DOC-20251127-WA0283..pdf) (ou no link fornecido).
+
+---
+
+## 🔮 Próximos Passos (Sugestões)
+
+- Desenvolver um **aplicativo mobile** para ampliar o alcance;
+- Integrar com **planos de saúde populares** e sistemas públicos;
+- Adicionar **telemonitoramento** de pacientes crônicos;
+- Utilizar **inteligência artificial** para personalizar recomendações.
+
+---
+
+## 📝 Licença
+
+Este projeto foi desenvolvido para fins acadêmicos. Consulte os autores para uso comercial.
+
+---
+
+**InovaCare – tecnologia a serviço da saúde e humanização.** ❤️
