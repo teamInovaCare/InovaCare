@@ -116,7 +116,3 @@ Orientador: Prof. Paulo Barcellos
 Instituição: ITB Brasílio Flores de Azevedo – Barueri/SP, 2025
 
 Este projeto foi desenvolvido para fins acadêmicos. Consulte os autores para uso comercial.
-
----
-
-**InovaCare – tecnologia a serviço da saúde e humanização.** ❤️
